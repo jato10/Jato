@@ -1,3 +1,5 @@
+import { PaymentMethodType } from '../types/models';
+
 export interface BCVRateInfo {
   ratePerUSD: number;
   lastUpdated: Date;
@@ -29,6 +31,22 @@ export interface ZelleValidationRequest {
   senderName: string;
   referenceNumber: string;
   amountUSD: number;
+}
+
+export interface CardPaymentRequest {
+  rideId: string;
+  amount: number;
+  currency: 'USD' | 'VES';
+  paymentMethod: Extract<PaymentMethodType, 'CREDIT_CARD' | 'DEBIT_CARD' | 'APPLE_PAY' | 'GOOGLE_PAY'>;
+  paymentToken: string;
+  isInternational: boolean;
+}
+
+export interface CardPaymentResponse {
+  transactionId: string;
+  status: 'APPROVED' | 'DECLINED' | 'PENDING';
+  receiptUrl: string;
+  timestamp: Date;
 }
 
 export class VenezuelaPaymentProcessor {
@@ -86,6 +104,26 @@ export class VenezuelaPaymentProcessor {
       transactionId: txId,
       bankReference: bankRef,
       message: 'Pago Móvil C2P debitado exitosamente'
+    };
+  }
+
+  /**
+   * Processes card and digital wallet (Apple Pay, Google Pay) payments
+   */
+  public processCardPayment(req: CardPaymentRequest): CardPaymentResponse {
+    if (req.amount <= 0) {
+      throw new Error('Monto de pago con tarjeta debe ser mayor a 0');
+    }
+    if (!req.paymentToken || req.paymentToken.trim() === '') {
+      throw new Error('Token de pago no provisto');
+    }
+
+    const txId = `tx_card_${Math.floor(10000 + Math.random() * 90000)}`;
+    return {
+      transactionId: txId,
+      status: 'APPROVED',
+      receiptUrl: `https://jato.app/receipts/${txId.replace('tx_card_', '')}`,
+      timestamp: new Date()
     };
   }
 

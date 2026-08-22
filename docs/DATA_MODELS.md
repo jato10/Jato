@@ -31,7 +31,7 @@
 export type UserRole = 'RIDER' | 'DRIVER' | 'ADMIN' | 'DISPATCHER';
 export type KYCStatus = 'PENDING' | 'VERIFIED' | 'REJECTED' | 'SUSPENDED';
 export type ServiceType = 'EXPRESS' | 'COMFORT' | 'MOTO' | 'DELIVERY' | 'CARGO';
-export type PaymentMethodType = 'PAGO_MOVIL_C2P' | 'PAGO_MOVIL_P2P' | 'BINANCE_PAY' | 'ZELLE' | 'CASH_USD' | 'CASH_VES' | 'JATO_WALLET';
+export type PaymentMethodType = 'PAGO_MOVIL_C2P' | 'PAGO_MOVIL_P2P' | 'BINANCE_PAY' | 'ZELLE' | 'CASH_USD' | 'CASH_VES' | 'JATO_WALLET' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'APPLE_PAY' | 'GOOGLE_PAY';
 export type PaymentStatus = 'PENDING' | 'COMPLETED' | 'FAILED' | 'REFUNDED';
 export type RideStatus = 'REQUESTED' | 'SEARCHING_DRIVER' | 'ACCEPTED' | 'DRIVER_ARRIVED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
 
@@ -56,6 +56,8 @@ export interface Driver {
   userId: string;
   licenseNumber: string;
   licenseExpiry: Date;
+  backgroundCheckIssueDate: Date; // Fecha de emisión de antecedentes (MPPRIJP)
+  backgroundCheckExpiryDate: Date; // +365 días desde la emisión
   isOnline: boolean;
   currentLat?: number;
   currentLng?: number;

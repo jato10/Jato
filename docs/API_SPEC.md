@@ -85,6 +85,30 @@ Genera una orden de pago Binance Pay en USDT.
 }
 ```
 
+### `POST /api/v1/payments/card`
+Procesa pagos con tarjetas de débito o crédito (nacionales e internacionales), así como billeteras digitales (Apple Pay, Google Pay) mediante tokenización.
+
+- **Body:**
+```json
+{
+  "ride_id": "ride_7712a",
+  "amount": 4.50,
+  "currency": "USD",
+  "payment_method": "CREDIT_CARD", // "CREDIT_CARD" | "DEBIT_CARD" | "APPLE_PAY" | "GOOGLE_PAY"
+  "payment_token": "tok_1N3c...", // Token generado por la pasarela
+  "is_international": true
+}
+```
+- **Response (200 OK):**
+```json
+{
+  "transaction_id": "tx_card_99812",
+  "status": "APPROVED",
+  "receipt_url": "https://jato.app/receipts/99812",
+  "timestamp": "2026-03-30T14:25:00Z"
+}
+```
+
 ### `GET /api/v1/rates/bcv`
 Obtiene la tasa oficial vigente del Banco Central de Venezuela.
 

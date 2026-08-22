@@ -79,6 +79,21 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(res.bankReference).toBeDefined();
     });
 
+    test('Card and digital wallet payment processing (Credit, Debit, Apple Pay, Google Pay)', () => {
+      const res = paymentProcessor.processCardPayment({
+        rideId: 'ride_7712a',
+        amount: 4.5,
+        currency: 'USD',
+        paymentMethod: 'CREDIT_CARD',
+        paymentToken: 'tok_1N3cTestToken',
+        isInternational: true
+      });
+
+      expect(res.status).toBe('APPROVED');
+      expect(res.transactionId).toContain('tx_card_');
+      expect(res.receiptUrl).toContain('https://jato.app/receipts/');
+    });
+
     test('Binance Pay order creation in USDT', () => {
       const res = paymentProcessor.createBinancePayOrder({
         orderId: 'ord_7712',
@@ -107,8 +122,11 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(fare.fareVES).toBe(Number((fare.fareUSD * fare.bcvRate).toFixed(2)));
     });
 
-    test('Finding optimal verified driver nearby', () => {
+    test('Finding optimal verified driver nearby with non-expired background check', () => {
       const origin = { lat: 10.4806, lng: -66.9036 };
+      const futureDate = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000);
+      const expiredDate = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
+
       const drivers: AvailableDriver[] = [
         {
           driverId: 'drv_1',
@@ -118,17 +136,19 @@ describe('Jato SuperApp Core System Tests', () => {
           lng: -66.9030,
           rating: 4.9,
           isOnline: true,
-          kycVerified: true
+          kycVerified: true,
+          backgroundCheckExpiryDate: futureDate
         },
         {
           driverId: 'drv_2',
           name: 'Jose',
           serviceType: 'EXPRESS',
-          lat: 10.4820,
-          lng: -66.9020,
-          rating: 4.5,
+          lat: 10.4807,
+          lng: -66.9035,
+          rating: 5.0,
           isOnline: true,
-          kycVerified: false // Not verified
+          kycVerified: true,
+          backgroundCheckExpiryDate: expiredDate // Expired background check
         }
       ];
 

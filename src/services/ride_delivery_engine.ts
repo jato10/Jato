@@ -24,6 +24,7 @@ export interface AvailableDriver {
   rating: number;
   isOnline: boolean;
   kycVerified: boolean;
+  backgroundCheckExpiryDate?: Date;
 }
 
 export interface RideRequest {
@@ -126,12 +127,14 @@ export class RideAndDeliveryEngine {
   }
 
   /**
-   * Matches rider or delivery request to optimal verified driver
+   * Matches rider or delivery request to optimal verified driver with valid background check
    */
   public findOptimalDriver(requestOrigin: LocationCoordinates, serviceType: ServiceType, candidateDrivers: AvailableDriver[]): AvailableDriver | null {
-    const eligibleDrivers = candidateDrivers.filter(
-      (driver) => driver.isOnline && driver.kycVerified && driver.serviceType === serviceType
-    );
+    const now = new Date();
+    const eligibleDrivers = candidateDrivers.filter((driver) => {
+      const isBgCheckValid = !driver.backgroundCheckExpiryDate || driver.backgroundCheckExpiryDate > now;
+      return driver.isOnline && driver.kycVerified && isBgCheckValid && driver.serviceType === serviceType;
+    });
 
     if (eligibleDrivers.length === 0) {
       return null;
