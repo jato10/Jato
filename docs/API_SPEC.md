@@ -109,6 +109,31 @@ Procesa pagos con tarjetas de débito o crédito (nacionales e internacionales),
 }
 ```
 
+### `POST /api/v1/drivers/subscription/pay`
+Procesa el pago de la tarifa plana mensual del conductor. El monto es fijo en dólares ($35 para Motos, $45 para Autos) y se convierte a VES según la tasa del BCV al momento del pago.
+
+- **Body:**
+```json
+{
+  "driver_id": "drv_5512",
+  "vehicle_type": "MOTO", // "MOTO" = $35 | "AUTO" = $45
+  "payment_method": "PAGO_MOVIL_C2P",
+  "bank_code": "0105",
+  "phone_number": "04141234567",
+  "c2p_token": "891234"
+}
+```
+- **Response (200 OK):**
+```json
+{
+  "transaction_id": "tx_sub_88123",
+  "status": "APPROVED",
+  "amount_usd_charged": 35.00,
+  "amount_ves_charged": 2395.75, // Basado en tasa BCV
+  "new_subscription_expiry": "2026-09-22T23:59:59Z"
+}
+```
+
 ### `GET /api/v1/rates/bcv`
 Obtiene la tasa oficial vigente del Banco Central de Venezuela.
 
@@ -127,14 +152,14 @@ Obtiene la tasa oficial vigente del Banco Central de Venezuela.
 ## 3. Solicitud de Viajes y Envíos (Ride & Delivery)
 
 ### `POST /api/v1/rides/estimate`
-Calcula la tarifa estimada en USD y VES para diferentes modalidades.
+Calcula la tarifa estimada en USD y VES detallando opciones de pago en efectivo (sin recargo) versus pago electrónico (con recargo de $0.35 USD).
 
 - **Body:**
 ```json
 {
   "origin": {"lat": 10.4806, "lng": -66.9036, "address": "Plaza Venezuela, Caracas"},
   "destination": {"lat": 10.4910, "lng": -66.8520, "address": "Altamira, Caracas"},
-  "service_type": "EXPRESS" // "EXPRESS" | "COMFORT" | "MOTO" | "DELIVERY"
+  "service_type": "EXPRESS"
 }
 ```
 - **Response (200 OK):**
@@ -143,9 +168,17 @@ Calcula la tarifa estimada en USD y VES para diferentes modalidades.
   "distance_km": 6.2,
   "duration_mins": 14,
   "pricing": {
-    "amount_usd": 4.50,
-    "amount_ves": 308.02,
     "bcv_rate": 68.45,
+    "cash_payment": {
+      "total_amount_usd": 4.50,
+      "total_amount_ves": 308.02,
+      "jato_service_fee_usd": 0.00
+    },
+    "electronic_payment": {
+      "total_amount_usd": 4.85,
+      "total_amount_ves": 331.98,
+      "jato_service_fee_usd": 0.35
+    },
     "breakdown": {
       "base_fare_usd": 1.50,
       "distance_fare_usd": 2.00,

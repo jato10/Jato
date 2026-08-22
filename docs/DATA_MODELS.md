@@ -34,6 +34,7 @@ export type ServiceType = 'EXPRESS' | 'COMFORT' | 'MOTO' | 'DELIVERY' | 'CARGO';
 export type PaymentMethodType = 'PAGO_MOVIL_C2P' | 'PAGO_MOVIL_P2P' | 'BINANCE_PAY' | 'ZELLE' | 'CASH_USD' | 'CASH_VES' | 'JATO_WALLET' | 'CREDIT_CARD' | 'DEBIT_CARD' | 'APPLE_PAY' | 'GOOGLE_PAY';
 export type PaymentStatus = 'PENDING' | 'COMPLETED' | 'FAILED' | 'REFUNDED';
 export type RideStatus = 'REQUESTED' | 'SEARCHING_DRIVER' | 'ACCEPTED' | 'DRIVER_ARRIVED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+export type SubscriptionStatus = 'ACTIVE' | 'EXPIRED' | 'PENDING_PAYMENT';
 
 export interface User {
   id: string;
@@ -58,6 +59,8 @@ export interface Driver {
   licenseExpiry: Date;
   backgroundCheckIssueDate: Date; // Fecha de emisión de antecedentes (MPPRIJP)
   backgroundCheckExpiryDate: Date; // +365 días desde la emisión
+  subscriptionStatus: SubscriptionStatus;
+  subscriptionExpiryDate: Date; // Fecha límite del mes pagado ($35 motos, $45 autos)
   isOnline: boolean;
   currentLat?: number;
   currentLng?: number;

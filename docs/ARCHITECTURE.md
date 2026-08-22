@@ -55,15 +55,23 @@ La arquitectura de **Jato** está diseñada sobre un modelo de microservicios di
 
 ---
 
-## 3. Arquitectura del Motor de Pagos Venezolano (Jato Pay Engine)
+## 3. Arquitectura del Motor de Pagos Venezolano y Modelo Económico
 
-El motor de pagos resuelve los desafíos específicos de la economía monetaria mixta en Venezuela:
+### 3.1. Modelo de Tarifa Plana Mensual para Conductores
+- **Cero Comisión Por Viaje**: El conductor no paga porcentajes por viaje a la plataforma.
+- **Suscripción Fija Mensual**:
+  - Motocicletas (`MOTO` / `DELIVERY`): **$35 USD / mes**.
+  - Automóviles (`EXPRESS` / `COMFORT` / `CARGO`): **$45 USD / mes**.
 
-### 3.1. Orquestador de Pago Móvil C2P & P2P
+### 3.2. Recargo Tecnológico Condicional ($0.35 USD)
+- **Métodos Electrónicos**: Cuando el cliente paga vía Pago Móvil (C2P/P2P), Binance Pay (USDT), Zelle, Tarjeta de Crédito/Débito, Apple Pay, Google Pay o Jato Wallet, se aplica un recargo tecnológico de **$0.35 USD** directamente al cliente final.
+- **Excepción de Pago en Efectivo**: Si el usuario selecciona **Efectivo USD** (`CASH_USD`) o **Efectivo VES** (`CASH_VES`), **NO aplica** el recargo de $0.35 USD. El conductor retiene el 100% del efectivo cobrado y no se realiza ningún débito a su Jato Wallet por dicho viaje.
+
+### 3.3. Orquestador de Pago Móvil C2P & P2P
 - **Canal Directo C2P**: Integración API REST/SOAP con sucursales bancarias nacionales para realizar débitos directos enviando Cédula, Teléfono, Banco Origen y Token SMS de pago generado por el usuario.
 - **Conciliación Inteligente P2P**: Los pagos de usuario a las cuentas jurídicas de Jato se concilian en tiempo real escuchando los webhooks y notificadores bancarios (Banesco, Mercantil, BDV) matcheando: `Monto + Teléfono Emisor + Referencia Única`.
 
-### 3.2. Cotización y Gestión Multimoneda (USD / VES / USDT)
+### 3.4. Cotización y Gestión Multimoneda (USD / VES / USDT)
 - **Tasa BCV Sync**: Microservicio con redundancia triple que consulta la tasa oficial del Banco Central de Venezuela en intervalos de 5 minutos y actualiza las cotizaciones en tiempo real en Redis Cache.
 - **Sincronización Binance Pay**: Integración con API Binance Merchant para cobro instantáneo en USDT mediante QR o Deep Link con confirmación en subsegundo via WebSockets.
 
@@ -83,3 +91,17 @@ El motor de pagos resuelve los desafíos específicos de la economía monetaria 
   1. Apertura de canal de audio bidireccional encriptado con el Centro de Operaciones de Seguridad de Jato.
   2. Notificación push a contactos de confianza predefinidos por el usuario con enlace de rastreo en vivo.
   3. Despacho directo a unidades de patrullaje o autoridades locales registradas según la geocerca actual.
+
+---
+
+## 5. Limitación de Responsabilidad y Estatus Legal
+
+### 5.1. Estatus de Intermediario Tecnológico
+Jato SuperApp opera exclusivamente como una plataforma tecnológica de intermediación digital que conecta a usuarios solicitantes de transporte o logística con conductores independientes. Jato SuperApp no es una empresa de transporte público o privado, ni actúa como patrono o empleador de los conductores registrados.
+
+### 5.2. Responsabilidad Operativa del Conductor
+- El conductor es un contratista independiente totalmente responsable del mantenimiento mecánico y preventivo de su vehículo, consumo de combustible, peajes y pago de eventuales sanciones o multas de tránsito emitidas por las autoridades (INTT, policías municipales, etc.).
+
+### 5.3. Póliza de Seguro Vehicular Obligatoria
+- Es condición obligatoria para la activación de la cuenta de conductor el registro y vigencia de una póliza de seguro de responsabilidad civil (RCV) y/o cobertura amplia que garantice la atención de cualquier siniestro, accidente de tránsito o daño a terceros y ocupantes del vehículo.
+- **Exoneración de Responsabilidad Civil**: Jato SuperApp queda expresamente eximida de cualquier responsabilidad civil, penal o mercantil derivada de siniestros, colisiones, robos o incidentes ocurridos durante la prestación del servicio por parte del conductor independiente.

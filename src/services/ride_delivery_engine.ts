@@ -1,4 +1,4 @@
-import { ServiceType, RideStatus, PaymentMethodType } from '../types/models';
+import { ServiceType, RideStatus, PaymentMethodType, SubscriptionStatus } from '../types/models';
 import { VenezuelaPaymentProcessor } from '../payments/venezuela_payments';
 
 export interface LocationCoordinates {
@@ -10,6 +10,7 @@ export interface LocationCoordinates {
 export interface FareEstimate {
   distanceKm: number;
   estimatedDurationMins: number;
+  techFeeUSD: number;
   fareUSD: number;
   fareVES: number;
   bcvRate: number;
@@ -25,6 +26,8 @@ export interface AvailableDriver {
   isOnline: boolean;
   kycVerified: boolean;
   backgroundCheckExpiryDate?: Date;
+  subscriptionStatus?: SubscriptionStatus;
+  subscriptionExpiryDate?: Date;
 }
 
 export interface RideRequest {
@@ -46,6 +49,7 @@ export interface ActiveTrip {
   origin: LocationCoordinates;
   destination: LocationCoordinates;
   status: RideStatus;
+  techFeeUSD: number;
   fareUSD: number;
   fareVES: number;
   paymentMethod: PaymentMethodType;
@@ -78,14 +82,20 @@ export class RideAndDeliveryEngine {
   }
 
   /**
-   * Estimates trip or delivery fare in both USD and VES
+   * Estimates trip or delivery fare in both USD and VES.
+   * A conditional $0.35 USD tech fee is added ONLY for electronic payment methods.
+   * Cash payments (CASH_USD, CASH_VES) exempt the rider from this $0.35 USD tech fee.
    */
-  public estimateFare(origin: LocationCoordinates, destination: LocationCoordinates, serviceType: ServiceType): FareEstimate {
+  public estimateFare(
+    origin: LocationCoordinates,
+    destination: LocationCoordinates,
+    serviceType: ServiceType,
+    paymentMethod: PaymentMethodType = 'PAGO_MOVIL_C2P'
+  ): FareEstimate {
     const distanceKm = this.calculateDistanceKm(origin, destination);
-    // Estimated duration based on urban traffic in Venezuela (average 25 km/h)
     const estimatedDurationMins = Math.max(Math.ceil((distanceKm / 25) * 60), 5);
 
-    let baseFare = 1.5; // Base fare USD
+    let baseFare = 1.5;
     let ratePerKm = 0.5;
     let ratePerMin = 0.1;
 
@@ -113,13 +123,19 @@ export class RideAndDeliveryEngine {
         break;
     }
 
-    const fareUSD = Number((baseFare + distanceKm * ratePerKm + estimatedDurationMins * ratePerMin).toFixed(2));
+    // $0.35 USD tech fee is only applied on non-cash (electronic) payments
+    const isCashPayment = paymentMethod === 'CASH_USD' || paymentMethod === 'CASH_VES';
+    const techFeeUSD = isCashPayment ? 0.0 : 0.35;
+
+    const baseDistanceTimeFare = baseFare + distanceKm * ratePerKm + estimatedDurationMins * ratePerMin;
+    const fareUSD = Number((baseDistanceTimeFare + techFeeUSD).toFixed(2));
     const bcvRate = this.paymentProcessor.getBCVRate();
     const fareVES = this.paymentProcessor.convertUSDToVES(fareUSD);
 
     return {
       distanceKm,
       estimatedDurationMins,
+      techFeeUSD,
       fareUSD,
       fareVES,
       bcvRate
@@ -127,20 +143,20 @@ export class RideAndDeliveryEngine {
   }
 
   /**
-   * Matches rider or delivery request to optimal verified driver with valid background check
+   * Matches rider or delivery request to optimal verified driver with valid background check and active monthly subscription
    */
   public findOptimalDriver(requestOrigin: LocationCoordinates, serviceType: ServiceType, candidateDrivers: AvailableDriver[]): AvailableDriver | null {
     const now = new Date();
     const eligibleDrivers = candidateDrivers.filter((driver) => {
       const isBgCheckValid = !driver.backgroundCheckExpiryDate || driver.backgroundCheckExpiryDate > now;
-      return driver.isOnline && driver.kycVerified && isBgCheckValid && driver.serviceType === serviceType;
+      const isSubscriptionActive = !driver.subscriptionExpiryDate || driver.subscriptionExpiryDate > now;
+      return driver.isOnline && driver.kycVerified && isBgCheckValid && isSubscriptionActive && driver.serviceType === serviceType;
     });
 
     if (eligibleDrivers.length === 0) {
       return null;
     }
 
-    // Sort drivers by highest composite score (proximity + rating)
     eligibleDrivers.sort((a, b) => {
       const distA = this.calculateDistanceKm(requestOrigin, { lat: a.lat, lng: a.lng });
       const distB = this.calculateDistanceKm(requestOrigin, { lat: b.lat, lng: b.lng });
@@ -165,7 +181,7 @@ export class RideAndDeliveryEngine {
    * Creates an active ride or delivery dispatch session
    */
   public createTrip(req: RideRequest, matchedDriver: AvailableDriver): ActiveTrip {
-    const fare = this.estimateFare(req.origin, req.destination, req.serviceType);
+    const fare = this.estimateFare(req.origin, req.destination, req.serviceType, req.paymentMethod);
     const pin = this.generateBoardingPin();
 
     return {
@@ -177,6 +193,7 @@ export class RideAndDeliveryEngine {
       origin: req.origin,
       destination: req.destination,
       status: 'ACCEPTED',
+      techFeeUSD: fare.techFeeUSD,
       fareUSD: fare.fareUSD,
       fareVES: fare.fareVES,
       paymentMethod: req.paymentMethod,

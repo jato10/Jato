@@ -49,6 +49,23 @@ export interface CardPaymentResponse {
   timestamp: Date;
 }
 
+export interface DriverSubscriptionPaymentRequest {
+  driverId: string;
+  vehicleType: 'MOTO' | 'AUTO';
+  paymentMethod: PaymentMethodType;
+  bankCode?: string;
+  phoneNumber?: string;
+  c2pToken?: string;
+}
+
+export interface DriverSubscriptionPaymentResponse {
+  transactionId: string;
+  status: 'APPROVED';
+  amountUSDCharged: number;
+  amountVESCharged: number;
+  newSubscriptionExpiry: Date;
+}
+
 export class VenezuelaPaymentProcessor {
   private currentBCVRate: number = 68.45; // Default fallback rate
 
@@ -124,6 +141,26 @@ export class VenezuelaPaymentProcessor {
       status: 'APPROVED',
       receiptUrl: `https://jato.app/receipts/${txId.replace('tx_card_', '')}`,
       timestamp: new Date()
+    };
+  }
+
+  /**
+   * Processes flat monthly driver subscription payment ($35 for MOTO, $45 for AUTO)
+   */
+  public processDriverSubscriptionPayment(req: DriverSubscriptionPaymentRequest): DriverSubscriptionPaymentResponse {
+    const amountUSDCharged = req.vehicleType === 'MOTO' ? 35.0 : 45.0;
+    const amountVESCharged = this.convertUSDToVES(amountUSDCharged);
+
+    // Calculate +30 days subscription expiry
+    const newSubscriptionExpiry = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+    const txId = `tx_sub_${Math.floor(10000 + Math.random() * 90000)}`;
+
+    return {
+      transactionId: txId,
+      status: 'APPROVED',
+      amountUSDCharged,
+      amountVESCharged,
+      newSubscriptionExpiry
     };
   }
 

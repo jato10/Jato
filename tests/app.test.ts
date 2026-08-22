@@ -79,6 +79,24 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(res.bankReference).toBeDefined();
     });
 
+    test('Driver flat monthly subscription payment processing ($35 MOTO, $45 AUTO)', () => {
+      paymentProcessor.updateBCVRate(68.45);
+      const res = paymentProcessor.processDriverSubscriptionPayment({
+        driverId: 'drv_5512',
+        vehicleType: 'MOTO',
+        paymentMethod: 'PAGO_MOVIL_C2P',
+        bankCode: '0105',
+        phoneNumber: '04141234567',
+        c2pToken: '891234'
+      });
+
+      expect(res.status).toBe('APPROVED');
+      expect(res.transactionId).toContain('tx_sub_');
+      expect(res.amountUSDCharged).toBe(35.0);
+      expect(res.amountVESCharged).toBe(Number((35.0 * 68.45).toFixed(2)));
+      expect(res.newSubscriptionExpiry).toBeDefined();
+    });
+
     test('Card and digital wallet payment processing (Credit, Debit, Apple Pay, Google Pay)', () => {
       const res = paymentProcessor.processCardPayment({
         rideId: 'ride_7712a',
@@ -112,17 +130,21 @@ describe('Jato SuperApp Core System Tests', () => {
   });
 
   describe('Ride & Delivery Engine', () => {
-    test('Fare estimation in USD and VES', () => {
-      const origin = { lat: 10.4806, lng: -66.9036 }; // Plaza Venezuela
-      const destination = { lat: 10.4910, lng: -66.8520 }; // Altamira
+    test('Fare estimation with conditional $0.35 USD tech fee (Applied on electronic payment, waived on cash)', () => {
+      const origin = { lat: 10.4806, lng: -66.9036 };
+      const destination = { lat: 10.4910, lng: -66.8520 };
 
-      const fare = rideEngine.estimateFare(origin, destination, 'EXPRESS');
-      expect(fare.distanceKm).toBeGreaterThan(0);
-      expect(fare.fareUSD).toBeGreaterThan(0);
-      expect(fare.fareVES).toBe(Number((fare.fareUSD * fare.bcvRate).toFixed(2)));
+      // Electronic payment (Pago Móvil C2P) -> includes $0.35 tech fee
+      const electronicFare = rideEngine.estimateFare(origin, destination, 'EXPRESS', 'PAGO_MOVIL_C2P');
+      expect(electronicFare.techFeeUSD).toBe(0.35);
+
+      // Cash payment (CASH_USD) -> waives $0.35 tech fee
+      const cashFare = rideEngine.estimateFare(origin, destination, 'EXPRESS', 'CASH_USD');
+      expect(cashFare.techFeeUSD).toBe(0.0);
+      expect(electronicFare.fareUSD).toBe(Number((cashFare.fareUSD + 0.35).toFixed(2)));
     });
 
-    test('Finding optimal verified driver nearby with non-expired background check', () => {
+    test('Finding optimal verified driver nearby with non-expired background check and active subscription', () => {
       const origin = { lat: 10.4806, lng: -66.9036 };
       const futureDate = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000);
       const expiredDate = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
@@ -137,7 +159,8 @@ describe('Jato SuperApp Core System Tests', () => {
           rating: 4.9,
           isOnline: true,
           kycVerified: true,
-          backgroundCheckExpiryDate: futureDate
+          backgroundCheckExpiryDate: futureDate,
+          subscriptionExpiryDate: futureDate
         },
         {
           driverId: 'drv_2',
@@ -181,6 +204,7 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(trip.rideId).toBeDefined();
       expect(trip.boardingPin.length).toBe(4);
       expect(trip.status).toBe('ACCEPTED');
+      expect(trip.techFeeUSD).toBe(0.35);
     });
 
     test('Triggering Jato Shield SOS alert', () => {
@@ -193,6 +217,7 @@ describe('Jato SuperApp Core System Tests', () => {
         origin: { lat: 10.4806, lng: -66.9036 },
         destination: { lat: 10.4910, lng: -66.8520 },
         status: 'IN_PROGRESS' as const,
+        techFeeUSD: 0.35,
         fareUSD: 5.0,
         fareVES: 342.25,
         paymentMethod: 'PAGO_MOVIL_C2P' as const,
