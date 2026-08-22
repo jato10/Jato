@@ -26,6 +26,8 @@ export interface AvailableDriver {
   isOnline: boolean;
   kycVerified: boolean;
   backgroundCheckExpiryDate?: Date;
+  inttPermitExpiryDate?: Date;
+  ipostelLicenseExpiryDate?: Date;
   subscriptionStatus?: SubscriptionStatus;
   subscriptionExpiryDate?: Date;
 }
@@ -143,14 +145,25 @@ export class RideAndDeliveryEngine {
   }
 
   /**
-   * Matches rider or delivery request to optimal verified driver with valid background check and active monthly subscription
+   * Matches rider or delivery request to optimal driver with valid INTT transport permit, IPOSTEL postal license (if delivery), background check, and active monthly subscription.
    */
   public findOptimalDriver(requestOrigin: LocationCoordinates, serviceType: ServiceType, candidateDrivers: AvailableDriver[]): AvailableDriver | null {
     const now = new Date();
     const eligibleDrivers = candidateDrivers.filter((driver) => {
       const isBgCheckValid = !driver.backgroundCheckExpiryDate || driver.backgroundCheckExpiryDate > now;
       const isSubscriptionActive = !driver.subscriptionExpiryDate || driver.subscriptionExpiryDate > now;
-      return driver.isOnline && driver.kycVerified && isBgCheckValid && isSubscriptionActive && driver.serviceType === serviceType;
+      const isInttValid = !driver.inttPermitExpiryDate || driver.inttPermitExpiryDate > now;
+      const isIpostelValid = serviceType !== 'DELIVERY' && serviceType !== 'CARGO' ? true : (!driver.ipostelLicenseExpiryDate || driver.ipostelLicenseExpiryDate > now);
+
+      return (
+        driver.isOnline &&
+        driver.kycVerified &&
+        isBgCheckValid &&
+        isSubscriptionActive &&
+        isInttValid &&
+        isIpostelValid &&
+        driver.serviceType === serviceType
+      );
     });
 
     if (eligibleDrivers.length === 0) {

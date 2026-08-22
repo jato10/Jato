@@ -144,7 +144,7 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(electronicFare.fareUSD).toBe(Number((cashFare.fareUSD + 0.35).toFixed(2)));
     });
 
-    test('Finding optimal verified driver nearby with non-expired background check and active subscription', () => {
+    test('Finding optimal verified driver nearby with valid INTT and IPOSTEL legal permits', () => {
       const origin = { lat: 10.4806, lng: -66.9036 };
       const futureDate = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000);
       const expiredDate = new Date(Date.now() - 10 * 24 * 60 * 60 * 1000);
@@ -153,29 +153,33 @@ describe('Jato SuperApp Core System Tests', () => {
         {
           driverId: 'drv_1',
           name: 'Pedro',
-          serviceType: 'EXPRESS',
+          serviceType: 'DELIVERY',
           lat: 10.4810,
           lng: -66.9030,
           rating: 4.9,
           isOnline: true,
           kycVerified: true,
           backgroundCheckExpiryDate: futureDate,
+          inttPermitExpiryDate: futureDate,
+          ipostelLicenseExpiryDate: futureDate,
           subscriptionExpiryDate: futureDate
         },
         {
           driverId: 'drv_2',
           name: 'Jose',
-          serviceType: 'EXPRESS',
+          serviceType: 'DELIVERY',
           lat: 10.4807,
           lng: -66.9035,
           rating: 5.0,
           isOnline: true,
           kycVerified: true,
-          backgroundCheckExpiryDate: expiredDate // Expired background check
+          backgroundCheckExpiryDate: futureDate,
+          inttPermitExpiryDate: futureDate,
+          ipostelLicenseExpiryDate: expiredDate // Expired IPOSTEL license for delivery
         }
       ];
 
-      const optimalDriver = rideEngine.findOptimalDriver(origin, 'EXPRESS', drivers);
+      const optimalDriver = rideEngine.findOptimalDriver(origin, 'DELIVERY', drivers);
       expect(optimalDriver).not.toBeNull();
       expect(optimalDriver?.driverId).toBe('drv_1');
     });

@@ -18,7 +18,7 @@ La arquitectura de **Jato** está diseñada sobre un modelo de microservicios di
          ┌──────────────────────┬───────────────┴───────────────┬──────────────────────┐
          ▼                      ▼                               ▼                      ▼
 ┌──────────────────┐  ┌──────────────────┐             ┌──────────────────┐  ┌──────────────────┐
-│ Auth & Security  │  │ Real-Time Engine │             │ Payment Service  │  │ Safety & SOS     │
+│ Auth & Security  │  │ Real-Time Engine │             │ Payment Service  │  │ Safety & RegTech │
 │ Service (mTLS)   │  │ (Geo / Dispatch) │             │ (VE & Crypto)    │  │ Service (Shield) │
 └────────┬─────────┘  └────────┬─────────┘             └────────┬─────────┘  └────────┬─────────┘
          │                     │                                │                     │
@@ -94,14 +94,19 @@ La arquitectura de **Jato** está diseñada sobre un modelo de microservicios di
 
 ---
 
-## 5. Limitación de Responsabilidad y Estatus Legal
+## 5. Limitación de Responsabilidad, RegTech y Estatus Legal
+
+Para el detalle normativo completo consulte [docs/LEGAL_COMPLIANCE.md](LEGAL_COMPLIANCE.md).
 
 ### 5.1. Estatus de Intermediario Tecnológico
 Jato SuperApp opera exclusivamente como una plataforma tecnológica de intermediación digital que conecta a usuarios solicitantes de transporte o logística con conductores independientes. Jato SuperApp no es una empresa de transporte público o privado, ni actúa como patrono o empleador de los conductores registrados.
 
-### 5.2. Responsabilidad Operativa del Conductor
-- El conductor es un contratista independiente totalmente responsable del mantenimiento mecánico y preventivo de su vehículo, consumo de combustible, peajes y pago de eventuales sanciones o multas de tránsito emitidas por las autoridades (INTT, policías municipales, etc.).
+### 5.2. Módulo RegTech de Verificación de Permisos Nacionales
+El motor de despacho valida automáticamente antes de asignar cada viaje:
+1. **Permiso INTT de Transporte Privado**: Verificación de vigencia del registro INTT del conductor.
+2. **Habilitación Postal IPOSTEL**: Validación de licencia de operador postal para envíos `DELIVERY` y `CARGO`.
+3. **Póliza RCV Vigente**: Seguro de Responsabilidad Civil de Vehículos obligatorio.
 
-### 5.3. Póliza de Seguro Vehicular Obligatoria
-- Es condición obligatoria para la activación de la cuenta de conductor el registro y vigencia de una póliza de seguro de responsabilidad civil (RCV) y/o cobertura amplia que garantice la atención de cualquier siniestro, accidente de tránsito o daño a terceros y ocupantes del vehículo.
-- **Exoneración de Responsabilidad Civil**: Jato SuperApp queda expresamente eximida de cualquier responsabilidad civil, penal o mercantil derivada de siniestros, colisiones, robos o incidentes ocurridos durante la prestación del servicio por parte del conductor independiente.
+### 5.3. Exoneración de Responsabilidad Civil
+- El conductor es un contratista independiente totalmente responsable del mantenimiento mecánico de su vehículo, consumo de combustible, peajes y multas de tránsito.
+- Jato SuperApp queda expresamente eximida de cualquier responsabilidad civil, penal o mercantil derivada de siniestros, colisiones, robos o incidentes ocurridos durante la prestación del servicio.

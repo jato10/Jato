@@ -59,8 +59,18 @@ export interface Driver {
   licenseExpiry: Date;
   backgroundCheckIssueDate: Date; // Fecha de emisión de antecedentes (MPPRIJP)
   backgroundCheckExpiryDate: Date; // +365 días desde la emisión
+
+  // Marco Legal Venezolano
+  inttPermitNumber: string; // Registro INTT Transporte Privado de Personas/Carga
+  inttPermitExpiryDate: Date;
+  ipostelLicenseNumber?: string; // Mención de operador postal / motorizado (IPOSTEL)
+  ipostelLicenseExpiryDate?: Date;
+  seniatRifNumber: string; // RIF Personal del Conductor (V-XXXXXXXX-X / E-XXXXXXXX-X)
+
+  // Suscripción Mensual ($35 Motos / $45 Autos)
   subscriptionStatus: SubscriptionStatus;
-  subscriptionExpiryDate: Date; // Fecha límite del mes pagado ($35 motos, $45 autos)
+  subscriptionExpiryDate: Date;
+
   isOnline: boolean;
   currentLat?: number;
   currentLng?: number;
@@ -77,9 +87,10 @@ export interface Vehicle {
   model: string;
   year: number;
   color: string;
-  licensePlate: string; // Chapa venezolana
+  licensePlate: string; // Chapa nacional INTT
   serviceType: ServiceType;
-  insurancePolicyNumber: string;
+  insurancePolicyNumber: string; // Póliza de RCV obligatoria (Ley de Tránsito Terrestre)
+  insuranceExpiryDate: Date;
   isVerified: boolean;
 }
 
@@ -111,6 +122,7 @@ export interface Ride {
   destLng: number;
   destAddress: string;
   boardingPin: string; // PIN de 4 dígitos para abordar
+  techFeeUSD: number; // $0.35 USD en pago electrónico ($0.00 en efectivo)
   fareUSD: number;
   fareVES: number;
   paymentMethod: PaymentMethodType;

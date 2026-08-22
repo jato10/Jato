@@ -29,8 +29,18 @@ export interface Driver {
   licenseExpiry: Date;
   backgroundCheckIssueDate: Date;
   backgroundCheckExpiryDate: Date;
+
+  // Marco Legal Venezolano
+  inttPermitNumber: string; // Registro INTT Transporte Privado de Personas/Carga
+  inttPermitExpiryDate: Date;
+  ipostelLicenseNumber?: string; // Mención de operador postal / motorizado (IPOSTEL)
+  ipostelLicenseExpiryDate?: Date;
+  seniatRifNumber: string; // RIF Personal del Conductor (V-XXXXXXXX-X / E-XXXXXXXX-X)
+
+  // Suscripción Mensual
   subscriptionStatus: SubscriptionStatus;
   subscriptionExpiryDate: Date;
+
   isOnline: boolean;
   currentLat?: number;
   currentLng?: number;
@@ -47,9 +57,10 @@ export interface Vehicle {
   model: string;
   year: number;
   color: string;
-  licensePlate: string;
+  licensePlate: string; // Chapa nacional INTT
   serviceType: ServiceType;
-  insurancePolicyNumber: string;
+  insurancePolicyNumber: string; // Póliza de RCV obligatoria
+  insuranceExpiryDate: Date;
   isVerified: boolean;
 }
 
@@ -81,6 +92,7 @@ export interface Ride {
   destLng: number;
   destAddress: string;
   boardingPin: string;
+  techFeeUSD: number;
   fareUSD: number;
   fareVES: number;
   paymentMethod: PaymentMethodType;
