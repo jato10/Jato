@@ -7,13 +7,18 @@
     "build": "tsc",
     "test": "jest"
   },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.3"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.19.43",
     "jest": "^29.7.0",
-    "jsonwebtoken": "^9.0.3",
     "ts-jest": "^29.4.12",
     "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
