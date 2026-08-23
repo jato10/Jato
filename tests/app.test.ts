@@ -21,15 +21,27 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(SecurityService.verifySignature(payload, signature, secret)).toBe(true);
     });
 
-    test('AES-256-GCM encryption and decryption of sensitive national ID', () => {
+    test('AES-256-GCM encryption and decryption of sensitive national ID (with per-record salt)', () => {
       const secretKey = 'my_secure_encryption_key';
       const nationalId = 'V-19876543';
 
       const encrypted = SecurityService.encryptAES256(nationalId, secretKey);
       expect(encrypted.ciphertext).toBeDefined();
+      expect(encrypted.salt).toBeDefined();
 
       const decrypted = SecurityService.decryptAES256(encrypted, secretKey);
       expect(decrypted).toBe(nationalId);
+    });
+
+    test('Two encryptions of the same plaintext use different salts and ciphertexts', () => {
+      const secretKey = 'my_secure_encryption_key';
+      const nationalId = 'V-19876543';
+
+      const encryptedA = SecurityService.encryptAES256(nationalId, secretKey);
+      const encryptedB = SecurityService.encryptAES256(nationalId, secretKey);
+
+      expect(encryptedA.salt).not.toBe(encryptedB.salt);
+      expect(encryptedA.ciphertext).not.toBe(encryptedB.ciphertext);
     });
 
     test('Anti-GPS Spoofing & Telemetry validation', () => {
@@ -54,6 +66,12 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(decoded.userId).toBe('usr_123');
       expect(decoded.role).toBe('DRIVER');
     });
+
+    test('Secure PIN generation produces the requested number of digits', () => {
+      const pin = SecurityService.generateSecurePin(4);
+      expect(pin.length).toBe(4);
+      expect(Number.isNaN(Number(pin))).toBe(false);
+    });
   });
 
   describe('Venezuelan Payment Processor', () => {
@@ -71,12 +89,30 @@ describe('Jato SuperApp Core System Tests', () => {
         phoneNumber: '04141234567',
         nationalId: 'V19876543',
         c2pToken: '998123',
-        amountVES: 350.0
+        amountVES: 350.0,
+        idempotencyKey: 'idem_pm_001'
       });
 
       expect(res.success).toBe(true);
       expect(res.transactionId).toContain('tx_pm_');
       expect(res.bankReference).toBeDefined();
+    });
+
+    test('Pago Móvil C2P is idempotent under retry with the same key', () => {
+      const req = {
+        bankCode: '0105',
+        phoneNumber: '04141234567',
+        nationalId: 'V19876543',
+        c2pToken: '998123',
+        amountVES: 350.0,
+        idempotencyKey: 'idem_pm_retry_001'
+      };
+
+      const first = paymentProcessor.processPagoMovilC2P(req);
+      const retry = paymentProcessor.processPagoMovilC2P(req);
+
+      expect(retry.transactionId).toBe(first.transactionId);
+      expect(retry.idempotent).toBe(true);
     });
 
     test('Driver flat monthly subscription payment processing ($35 MOTO, $45 AUTO)', () => {
@@ -87,7 +123,8 @@ describe('Jato SuperApp Core System Tests', () => {
         paymentMethod: 'PAGO_MOVIL_C2P',
         bankCode: '0105',
         phoneNumber: '04141234567',
-        c2pToken: '891234'
+        c2pToken: '891234',
+        idempotencyKey: 'idem_sub_001'
       });
 
       expect(res.status).toBe('APPROVED');
@@ -104,7 +141,8 @@ describe('Jato SuperApp Core System Tests', () => {
         currency: 'USD',
         paymentMethod: 'CREDIT_CARD',
         paymentToken: 'tok_1N3cTestToken',
-        isInternational: true
+        isInternational: true,
+        idempotencyKey: 'idem_card_001'
       });
 
       expect(res.status).toBe('APPROVED');
@@ -115,7 +153,8 @@ describe('Jato SuperApp Core System Tests', () => {
     test('Binance Pay order creation in USDT', () => {
       const res = paymentProcessor.createBinancePayOrder({
         orderId: 'ord_7712',
-        amountUSDT: 5.5
+        amountUSDT: 5.5,
+        idempotencyKey: 'idem_binance_001'
       });
 
       expect(res.success).toBe(true);
@@ -184,7 +223,7 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(optimalDriver?.driverId).toBe('drv_1');
     });
 
-    test('Creation of ride session with 4-digit security PIN', () => {
+    test('Creation of ride session with cryptographically secure 4-digit PIN', () => {
       const req: RideRequest = {
         riderId: 'usr_88',
         origin: { lat: 10.4806, lng: -66.9036 },
@@ -211,7 +250,7 @@ describe('Jato SuperApp Core System Tests', () => {
       expect(trip.techFeeUSD).toBe(0.35);
     });
 
-    test('Triggering Jato Shield SOS alert', () => {
+    test('Triggering Jato Shield SOS alert persists the trigger reason and coordinates', () => {
       const trip = {
         rideId: 'ride_9912',
         riderId: 'usr_88',
@@ -232,6 +271,9 @@ describe('Jato SuperApp Core System Tests', () => {
       const sosRes = rideEngine.triggerSOSAlert(trip, 10.4850, -66.8950, 'ROUTE_DEVIATION');
       expect(sosRes.alertId).toContain('sos_ride_9912');
       expect(sosRes.notifiedSecurityCenter).toBe(true);
+      expect(sosRes.reason).toBe('ROUTE_DEVIATION');
+      expect(sosRes.lat).toBe(10.4850);
+      expect(sosRes.lng).toBe(-66.8950);
     });
   });
 });

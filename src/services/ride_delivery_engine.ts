@@ -1,5 +1,7 @@
+import crypto from 'crypto';
 import { ServiceType, RideStatus, PaymentMethodType, SubscriptionStatus } from '../types/models';
 import { VenezuelaPaymentProcessor } from '../payments/venezuela_payments';
+import { SecurityService } from '../security/auth';
 
 export interface LocationCoordinates {
   lat: number;
@@ -184,10 +186,10 @@ export class RideAndDeliveryEngine {
   }
 
   /**
-   * Generates a 4-digit boarding security PIN
+   * Generates a cryptographically secure 4-digit boarding security PIN
    */
   public generateBoardingPin(): string {
-    return Math.floor(1000 + Math.random() * 9000).toString();
+    return SecurityService.generateSecurePin(4);
   }
 
   /**
@@ -198,7 +200,7 @@ export class RideAndDeliveryEngine {
     const pin = this.generateBoardingPin();
 
     return {
-      rideId: `ride_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+      rideId: `ride_${crypto.randomUUID()}`,
       riderId: req.riderId,
       driverId: matchedDriver.driverId,
       boardingPin: pin,
@@ -218,12 +220,20 @@ export class RideAndDeliveryEngine {
   /**
    * Triggers Emergency Panic Alert (Jato Shield)
    */
-  public triggerSOSAlert(trip: ActiveTrip, currentLat: number, currentLng: number, reason: string): { alertId: string; status: string; notifiedSecurityCenter: boolean } {
-    const alertId = `sos_${trip.rideId}_${Date.now()}`;
+  public triggerSOSAlert(
+    trip: ActiveTrip,
+    currentLat: number,
+    currentLng: number,
+    reason: string
+  ): { alertId: string; status: string; notifiedSecurityCenter: boolean; reason: string; lat: number; lng: number } {
+    const alertId = `sos_${trip.rideId}_${crypto.randomUUID()}`;
     return {
       alertId,
       status: 'DISPATCHED_TO_SECURITY_CENTER',
-      notifiedSecurityCenter: true
+      notifiedSecurityCenter: true,
+      reason,
+      lat: currentLat,
+      lng: currentLng
     };
   }
 }
