@@ -20,11 +20,17 @@ export class SecurityService {
   }
 
   /**
-   * Verifies an incoming HMAC-SHA256 payload signature
+   * Verifies an incoming HMAC-SHA256 payload signature safely
    */
   public static verifySignature(payload: string, signature: string, secret: string): boolean {
     const expectedSignature = this.generateSignature(payload, secret);
-    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature));
+    const sigBuffer = Buffer.from(signature, 'hex');
+    const expectedBuffer = Buffer.from(expectedSignature, 'hex');
+
+    if (sigBuffer.length !== expectedBuffer.length) {
+      return false;
+    }
+    return crypto.timingSafeEqual(sigBuffer, expectedBuffer);
   }
 
   /**
