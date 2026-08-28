@@ -1,0 +1,55 @@
+{
+  "_comentario": "Parametros exactos de cada llamada a los modelos de Higgsfield. Reproduce los clips y la voz desde cero.",
+  "referencias_subidas": {
+    "foto_sofa":  "89cce16b-9a6e-4f4f-814a-704307d9f903",
+    "logo_gb":    "ae643bd4-a4fc-43d8-95b7-719acfe9e182",
+    "javier_medio":  "ca0c7d95-9f3a-4af8-8699-5ee64b77f94d",
+    "yudenis_medio": "77226f35-cde0-4290-a749-2367459b6126",
+    "javier_cerca":  "40ca866f-fafa-4b3f-adcd-f7d9dc2b4c8a",
+    "yudenis_cerca": "647b4b64-c957-4551-af1e-120b5a8370d0"
+  },
+  "clips": {
+    "_herramienta": "generate_video_batch",
+    "_comunes": {
+      "model": "kling3_0",
+      "mode": "pro",
+      "sound": "off",
+      "aspect_ratio": "16:9",
+      "use_unlim": false,
+      "_nota_costo": "1.75 creditos/segundo sin audio, frente a 2.5 con audio"
+    },
+    "_prompt_base": "Cinematic corporate ad, warm and trustworthy. Soft studio lighting, shallow depth of field, beige sofa, dark navy console, modern warm living room. ... Very slow gentle push-in. No on-screen text, no captions, no subtitles, no lettering, no signage, no invented letters or words anywhere in the frame.",
+    "planos": [
+      {"indice": 1, "duration": 3, "start_image": "javier_medio",  "encuadre": "plano medio, hablando a camara"},
+      {"indice": 2, "duration": 4, "start_image": "yudenis_medio", "encuadre": "plano medio, hablando a camara"},
+      {"indice": 3, "duration": 3, "start_image": "javier_cerca",  "encuadre": "primer plano, mirada directa"},
+      {"indice": 4, "duration": 3, "start_image": "yudenis_cerca", "encuadre": "primer plano, sonrisa calida"}
+    ]
+  },
+  "voz": {
+    "_herramienta": "generate_audio_batch",
+    "_comunes": {
+      "model": "seed_audio",
+      "voice_type": "preset",
+      "use_unlim": false,
+      "_nota_costo": "0.1 creditos por linea",
+      "_nota_speech_rate": "debe ser ENTERO. Rango -50..100, 0 = velocidad normal, positivo = mas rapido. Un float devuelve 422."
+    },
+    "voces": {
+      "javier":  "3c7d32be-0182-5c5e-aa6a-663409bfbb26",
+      "yudenis": "984ddbed-83d3-5388-84ce-02fe6c24befa"
+    },
+    "lineas": [
+      {"indice": 1, "voz": "javier",  "speech_rate": 25, "prompt": "Somos Javier y Yudenis, de Global Beyond.",  "habla_medida_s": 2.745},
+      {"indice": 2, "voz": "yudenis", "speech_rate": 10, "prompt": "Buscamos cincuenta y dos mil dolares.",      "habla_medida_s": 3.183},
+      {"indice": 3, "voz": "javier",  "speech_rate": 0,  "prompt": "Cada dolar se reporta.",                     "habla_medida_s": 1.942},
+      {"indice": 4, "voz": "yudenis", "speech_rate": 20, "prompt": "Dona o comparte. Gracias.",                  "habla_medida_s": 2.424}
+    ]
+  },
+  "_por_que_no_un_solo_render": [
+    "Kling con sound:on genera el audio por su cuenta y no lee el guion: produjo 'Global Biondoles' y 'compadre en Lach', y se comio 'se reporta' y 'Gracias'.",
+    "Kling ignoro la estructura de 5 planos y entrego una sola toma continua: cero cortes detectados con umbral 0.04.",
+    "Los modelos de video no escriben texto de forma fiable; los rotulos van quemados en post.",
+    "El guion original medía 18.9 s de habla natural contra ~12 s de ventana, lo que forzaba el atropello."
+  ]
+}
