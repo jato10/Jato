@@ -29,3 +29,20 @@ Push-in lento, cortes suaves. Música corporativa inspiradora por debajo de la v
 | 0:07–0:09 | Primer plano de Javier, mirada directa | Javier: "Cada dólar se reporta." |
 | 0:09–0:12 | Primer plano de Yudenis, sonrisa cálida · texto: **DONA O COMPARTE EL ENLACE** | Yudenis: "Dona o comparte el enlace. Gracias." |
 | 0:12–0:15 | Tarjeta final: logo metálico GB, destello de luz sobre el metal, "Global Beyond LLC" | sin diálogo, música de cierre, fade out |
+
+## Entrega
+
+- Render: Kling v3.0 `pro`, 15 s, 1920x1080, `sound: on`, 16:9
+- `start_image`: foto del sofá (fotograma inicial, fija rostros y set)
+- `end_image`: logo GB metálico (tarjeta de cierre)
+- Costo: 37.5 créditos
+- MP4: `hf_20260828_172713_00100d52-279e-461f-b76a-42d5b342c4d7.mp4`
+
+### Notas de revisión
+
+- El modelo resolvió los cinco planos desde la descripción del prompt, no con
+  cortes marcados por parámetro (`multi_shots: false`), así que los cortes
+  pueden no caer exactamente en 0:03 / 0:07 / 0:09 / 0:12.
+- Los textos en pantalla ($52,000 y DONA O COMPARTE EL ENLACE) se pidieron en
+  el prompt. Si salen deformados, conviene sobreponerlos en post en vez de
+  re-generar.
