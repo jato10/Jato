@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timeboxer</title>
+<style>
+  :root{
+    --bg:#f7f7f5; --panel:#ffffff; --ink:#1b1b18; --muted:#6b6b63;
+    --line:#e3e3dd; --line-strong:#c9c9c0; --accent:#3e63dd; --free:#efefe9;
+    --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#16161a; --panel:#1e1e23; --ink:#ececeb; --muted:#9a9a94;
+      --line:#2c2c33; --line-strong:#3d3d45; --accent:#7d95f0; --free:#26262c;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:14px/1.45 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  button,input{font:inherit;color:inherit}
+  button{cursor:pointer}
+
+  .wrap{max-width:1020px;margin:0 auto;padding:20px 20px 48px}
+
+  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  h1{font-size:19px;margin:0;letter-spacing:-.02em}
+  h1 span{color:var(--muted);font-weight:400}
+  .spacer{flex:1}
+  .datenav{display:flex;align-items:center;gap:6px}
+  .datenav .day{min-width:190px;text-align:center;font-variant-numeric:tabular-nums}
+  .datenav .day b{font-weight:600}
+  .btn{
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:5px 10px;box-shadow:var(--shadow);
+  }
+  .btn:hover{border-color:var(--line-strong)}
+  .btn.ghost{background:transparent;box-shadow:none}
+
+  /* NOW strip */
+  .now{
+    display:flex;align-items:center;gap:14px;margin-bottom:16px;padding:12px 16px;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+    border-left:4px solid var(--nowcolor,var(--line-strong));
+  }
+  .now .tag{
+    font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  }
+  .now .what{font-size:17px;font-weight:600;letter-spacing:-.01em;flex:1;min-width:0;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .now .left{font-variant-numeric:tabular-nums;font-size:22px;font-weight:650;letter-spacing:-.02em}
+  .now .left small{font-size:12px;font-weight:500;color:var(--muted);margin-left:4px}
+  .now.idle .what{color:var(--muted);font-weight:500}
+
+  .cols{display:grid;grid-template-columns:262px 1fr;gap:18px;align-items:start}
+  @media (max-width:760px){.cols{grid-template-columns:1fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:12px}
+  .card h2{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:2px 0 10px}
+
+  #newtask{
+    width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;
+    background:var(--bg);outline:none;
+  }
+  #newtask:focus{border-color:var(--accent)}
+
+  ul.tasks{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+  ul.tasks li{
+    display:flex;align-items:center;gap:6px;padding:6px 6px 6px 8px;border-radius:8px;
+    border:1px solid transparent;cursor:pointer;user-select:none;
+  }
+  ul.tasks li:hover{background:var(--free)}
+  ul.tasks li.sel{border-color:var(--dot);background:color-mix(in srgb,var(--dot) 10%,transparent)}
+  ul.tasks li .swatch{width:12px;height:12px;border-radius:4px;background:var(--dot);flex:none}
+  ul.tasks li .name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  ul.tasks li .hrs{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}
+  ul.tasks li .kill{
+    border:0;background:transparent;color:var(--muted);padding:0 2px;line-height:1;
+    font-size:15px;opacity:0;
+  }
+  ul.tasks li:hover .kill{opacity:1}
+  ul.tasks li .kill:hover{color:#e5484d}
+  ul.tasks li .key{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;
+    border:1px solid var(--line);border-radius:4px;padding:0 4px}
+  .eraser{margin-top:8px}
+  .eraser.on{border-color:var(--accent);color:var(--accent)}
+  .empty{color:var(--muted);font-size:13px;padding:6px 2px}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:58px repeat(4,1fr);gap:0;user-select:none;touch-action:none}
+  .grid .time{
+    font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;
+    padding:0 8px 0 0;text-align:right;line-height:30px;border-top:1px solid var(--line-strong);
+  }
+  .cell{
+    height:30px;border-top:1px solid var(--line);border-right:1px solid var(--line);
+    background:var(--free);cursor:crosshair;position:relative;
+    display:flex;align-items:center;overflow:hidden;
+  }
+  .cell:nth-child(5n+2){border-top-color:var(--line-strong)}
+  .cell:nth-child(5n+5){border-right-color:var(--line-strong)}
+  .grid .row-last{border-bottom:1px solid var(--line-strong)}
+  .cell.filled{background:var(--c);color:#fff;border-top-color:transparent;border-right-color:transparent}
+  .cell.filled.rs{border-top-left-radius:6px;border-bottom-left-radius:6px}
+  .cell.filled.re{border-top-right-radius:6px;border-bottom-right-radius:6px}
+  .cell .lab{
+    font-size:11.5px;font-weight:600;padding:0 6px;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;
+  }
+  .cell.past{opacity:.55}
+  .cell.now{outline:2px solid var(--ink);outline-offset:-2px;z-index:2;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{outline-color:var(--ink)}50%{outline-color:transparent}}
+
+  .gridfoot{display:flex;gap:10px;align-items:center;margin-top:12px;color:var(--muted);font-size:12px;flex-wrap:wrap}
+  .gridfoot .spacer{flex:1}
+  kbd{
+    font:inherit;font-size:11px;border:1px solid var(--line-strong);border-bottom-width:2px;
+    border-radius:4px;padding:0 4px;background:var(--bg);
+  }
+  .hint{margin-top:14px;color:var(--muted);font-size:12px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Timeboxer <span>— block out the day, 15 minutes at a time</span></h1>
+    <div class="spacer"></div>
+    <div class="datenav">
+      <button class="btn ghost" id="prev" title="Previous day (←)">‹</button>
+      <div class="day" id="daylabel"></div>
+      <button class="btn ghost" id="next" title="Next day (→)">›</button>
+      <button class="btn" id="today" title="Jump to today (T)">Today</button>
+    </div>
+  </header>
+
+  <div class="now" id="now">
+    <div class="tag">Now</div>
+    <div class="what" id="nowwhat">—</div>
+    <div class="left" id="nowleft"></div>
+  </div>
+
+  <div class="cols">
+    <aside class="card">
+      <h2>Tasks</h2>
+      <input id="newtask" placeholder="Add a task + Enter" autocomplete="off">
+      <ul class="tasks" id="tasklist"></ul>
+      <button class="btn eraser" id="eraser" title="Eraser (E)">Eraser</button>
+      <div class="hint">
+        <b>Click a task</b>, then drag across the grid to
+        block out time. Drag over its own blocks to clear them.
+      </div>
+    </aside>
+
+    <section class="card">
+      <div class="grid" id="grid"></div>
+      <div class="gridfoot">
+        <span id="planned"></span>
+        <div class="spacer"></div>
+        <button class="btn ghost" id="copyprev" title="Copy the previous day's plan into this one">Copy previous day</button>
+        <button class="btn ghost" id="clear">Clear day</button>
+        <button class="btn ghost" id="hours">Day hours…</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="hint">
+    <kbd>1</kbd>–<kbd>9</kbd> pick task · <kbd>E</kbd> eraser · <kbd>←</kbd> <kbd>→</kbd> change day ·
+    <kbd>T</kbd> today · double-click a task to rename. Everything saves in this browser automatically.
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const KEY = "jato.timeboxer.v1";
+  const PER_HOUR = 4, MINS = 15;
+  // Curated so white text always sits at readable contrast.
+  const PALETTE = ["#3e63dd","#2b7c3b","#a35829","#8e4ec6","#0d74ce",
+                   "#c2354a","#067a6f","#8b6f00","#d6409f","#5b6472"];
+
+  /* ---------- state ---------- */
+  const fresh = () => ({ startHour:7, endHour:22, seq:1, tasks:[], days:{} });
+  let state = load();
+
+  function load(){
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (!raw) return fresh();
+      const s = JSON.parse(raw);
+      return Object.assign(fresh(), s);
+    } catch (e) { return fresh(); }
+  }
+  function save(){
+    try { localStorage.setItem(KEY, JSON.stringify(state)); }
+    catch (e) { /* private mode / full quota — the UI still works this session */ }
+  }
+
+  const blocksPerDay = () => (state.endHour - state.startHour) * PER_HOUR;
+
+  function dateKey(d){
+    return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" +
+           String(d.getDate()).padStart(2,"0");
+  }
+  function keyToDate(k){
+    const [y,m,d] = k.split("-").map(Number);
+    return new Date(y, m-1, d);
+  }
+
+  let viewKey = dateKey(new Date());
+  let selected = state.tasks.length ? state.tasks[0].id : null;
+  let erasing = false;
+
+  function day(k){
+    const n = blocksPerDay();
+    let arr = state.days[k];
+    if (!Array.isArray(arr)) arr = state.days[k] = new Array(n).fill(null);
+    if (arr.length !== n) {                 // day-hours changed: keep what fits
+      const next = new Array(n).fill(null);
+      for (let i = 0; i < Math.min(n, arr.length); i++) next[i] = arr[i];
+      state.days[k] = next;
+    }
+    return state.days[k];
+  }
+  const taskById = id => state.tasks.find(t => t.id === id) || null;
+
+  /* ---------- time helpers ---------- */
+  const blockStartMin = i => state.startHour*60 + i*MINS;
+  function hhmm(mins){
+    const h = Math.floor(mins/60) % 24, m = mins % 60;
+    return String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0");
+  }
+  function human(mins){
+    const h = Math.floor(mins/60), m = mins % 60;
+    if (h && m) return h + "h " + m + "m";
+    if (h) return h + "h";
+    return m + "m";
+  }
+  function clock(ms){
+    const total = Math.max(0, Math.ceil(ms/1000));
+    const h = Math.floor(total/3600), m = Math.floor(total%3600/60), s = total%60;
+    const mm = String(m).padStart(2,"0"), ss = String(s).padStart(2,"0");
+    return h ? h + ":" + mm + ":" + ss : mm + ":" + ss;
+  }
+
+  /* ---------- tasks ---------- */
+  function addTask(name){
+    name = name.trim();
+    if (!name) return;
+    const t = { id: state.seq++, name, color: PALETTE[state.tasks.length % PALETTE.length] };
+    state.tasks.push(t);
+    selected = t.id; erasing = false;
+    save(); render();
+  }
+  function removeTask(id){
+    const t = taskById(id);
+    if (!t) return;
+    if (!confirm('Delete "' + t.name + '"? Its blocks are removed from every day.')) return;
+    state.tasks = state.tasks.filter(x => x.id !== id);
+    for (const k in state.days) {
+      const arr = state.days[k];
+      for (let i = 0; i < arr.length; i++) if (arr[i] === id) arr[i] = null;
+    }
+    if (selected === id) selected = state.tasks.length ? state.tasks[0].id : null;
+    save(); render();
+  }
+  function renameTask(id){
+    const t = taskById(id);
+    if (!t) return;
+    const name = prompt("Rename task", t.name);
+    if (name && name.trim()) { t.name = name.trim(); save(); render(); }
+  }
+
+  /* ---------- painting ---------- */
+  let drag = null;   // { mode:"paint"|"erase", anchor:index, snap:[...] }
+
+  // A drag fills the whole span between the anchor and the cursor, so a sloppy
+  // diagonal sweep still blocks out every quarter-hour in between.
+  function applyRange(i){
+    if (!drag || i < 0) return;
+    const arr = day(viewKey);
+    if (i >= arr.length) return;
+    const lo = Math.min(drag.anchor, i), hi = Math.max(drag.anchor, i);
+    const fill = drag.mode === "erase" ? null : selected;
+    let changed = false;
+    for (let j = 0; j < arr.length; j++){
+      const v = (j >= lo && j <= hi) ? fill : drag.snap[j];
+      if (arr[j] !== v){ arr[j] = v; changed = true; }
+    }
+    if (changed){ save(); paintGrid(); }
+  }
+  function beginDrag(i){
+    const arr = day(viewKey);
+    let mode;
+    if (erasing || selected === null) mode = "erase";
+    // dragging out from a block that already holds the selected task clears it
+    else mode = arr[i] === selected ? "erase" : "paint";
+    drag = { mode, anchor: i, snap: arr.slice() };
+    applyRange(i);
+  }
+
+  /* ---------- rendering ---------- */
+  const $ = id => document.getElementById(id);
+  const gridEl = $("grid");
+  let cellEls = [];
+
+  function buildGrid(){
+    gridEl.textContent = "";
+    cellEls = [];
+    const hours = state.endHour - state.startHour;
+    for (let h = 0; h < hours; h++){
+      const lab = document.createElement("div");
+      lab.className = "time";
+      lab.textContent = hhmm((state.startHour + h) * 60);
+      if (h === hours - 1) lab.classList.add("row-last");
+      gridEl.appendChild(lab);
+      for (let q = 0; q < PER_HOUR; q++){
+        const i = h*PER_HOUR + q;
+        const c = document.createElement("div");
+        c.className = "cell";
+        c.dataset.i = i;
+        if (h === hours - 1) c.classList.add("row-last");
+        const lb = document.createElement("span");
+        lb.className = "lab";
+        c.appendChild(lb);
+        gridEl.appendChild(c);
+        cellEls[i] = c;
+      }
+    }
+  }
+
+  function nowBlockIndex(){
+    if (viewKey !== dateKey(new Date())) return -1;
+    const d = new Date();
+    const mins = d.getHours()*60 + d.getMinutes();
+    const i = Math.floor((mins - state.startHour*60) / MINS);
+    return (i >= 0 && i < blocksPerDay()) ? i : -1;
+  }
+
+  function paintGrid(){
+    const arr = day(viewKey);
+    const nowI = nowBlockIndex();
+    const isToday = viewKey === dateKey(new Date());
+    for (let i = 0; i < arr.length; i++){
+      const c = cellEls[i], t = taskById(arr[i]);
+      const prevSame = i % PER_HOUR !== 0 && arr[i-1] === arr[i];
+      const nextSame = i % PER_HOUR !== PER_HOUR-1 && arr[i+1] === arr[i];
+      c.className = "cell" + (t ? " filled" : "") +
+        (t && !prevSame ? " rs" : "") + (t && !nextSame ? " re" : "") +
+        (i % PER_HOUR === PER_HOUR-1 ? "" : "") +
+        (Math.floor(i/PER_HOUR) === (state.endHour-state.startHour-1) ? " row-last" : "") +
+        (isToday && nowI >= 0 && i < nowI ? " past" : "") +
+        (i === nowI ? " now" : "");
+      c.style.setProperty("--c", t ? t.color : "");
+      c.title = t ? t.name + " · " + hhmm(blockStartMin(i)) : hhmm(blockStartMin(i));
+      c.firstChild.textContent = (t && !prevSame) ? t.name : "";
+    }
+    renderPlanned();
+  }
+
+  function renderTasks(){
+    const list = $("tasklist");
+    list.textContent = "";
+    if (!state.tasks.length){
+      const p = document.createElement("div");
+      p.className = "empty";
+      p.textContent = "No tasks yet — add one above.";
+      list.appendChild(p);
+      return;
+    }
+    const arr = day(viewKey);
+    state.tasks.forEach((t, n) => {
+      const count = arr.reduce((a, v) => a + (v === t.id ? 1 : 0), 0);
+      const li = document.createElement("li");
+      li.style.setProperty("--dot", t.color);
+      if (t.id === selected && !erasing) li.classList.add("sel");
+
+      const sw = document.createElement("span"); sw.className = "swatch";
+      const nm = document.createElement("span"); nm.className = "name"; nm.textContent = t.name;
+      nm.title = t.name;
+      const hrs = document.createElement("span"); hrs.className = "hrs";
+      hrs.textContent = count ? human(count * MINS) : "";
+      li.append(sw, nm, hrs);
+
+      if (n < 9){
+        const k = document.createElement("span"); k.className = "key"; k.textContent = n + 1;
+        li.appendChild(k);
+      }
+      const kill = document.createElement("button");
+      kill.className = "kill"; kill.textContent = "×"; kill.title = "Delete task";
+      kill.addEventListener("click", e => { e.stopPropagation(); removeTask(t.id); });
+      li.appendChild(kill);
+
+      li.addEventListener("click", () => { selected = t.id; erasing = false; renderTasks(); });
+      li.addEventListener("dblclick", () => renameTask(t.id));
+      list.appendChild(li);
+    });
+    $("eraser").classList.toggle("on", erasing);
+  }
+
+  function renderPlanned(){
+    const arr = day(viewKey);
+    const used = arr.reduce((a, v) => a + (v ? 1 : 0), 0);
+    $("planned").textContent = used
+      ? human(used * MINS) + " planned · " + human((arr.length - used) * MINS) + " open"
+      : "Nothing planned yet";
+  }
+
+  function renderDayLabel(){
+    const d = keyToDate(viewKey), t = dateKey(new Date());
+    const rel = viewKey === t ? "Today"
+      : viewKey === dateKey(new Date(Date.now() + 864e5)) ? "Tomorrow"
+      : viewKey === dateKey(new Date(Date.now() - 864e5)) ? "Yesterday" : "";
+    const nice = d.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric" });
+    $("daylabel").innerHTML = rel ? "<b>" + rel + "</b> · " + nice : "<b>" + nice + "</b>";
+  }
+
+  function renderNow(){
+    const el = $("now"), what = $("nowwhat"), left = $("nowleft");
+    const today = dateKey(new Date());
+    left.textContent = "";
+
+    if (viewKey !== today){
+      el.classList.add("idle");
+      el.style.setProperty("--nowcolor", "var(--line-strong)");
+      what.textContent = "Viewing another day — jump back with Today";
+      document.title = "Timeboxer";
+      return;
+    }
+
+    const now = new Date();
+    const i = nowBlockIndex();
+    const arr = day(today);
+
+    if (i < 0){
+      el.classList.add("idle");
+      el.style.setProperty("--nowcolor", "var(--line-strong)");
+      const mins = now.getHours()*60 + now.getMinutes();
+      what.textContent = mins < state.startHour*60
+        ? "Before your day starts (" + hhmm(state.startHour*60) + ")"
+        : "Your day is done (" + hhmm(state.endHour*60) + ")";
+      document.title = "Timeboxer";
+      return;
+    }
+
+    const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const t = taskById(arr[i]);
+
+    if (t){
+      let end = i;
+      while (end + 1 < arr.length && arr[end+1] === t.id) end++;
+      const endMs = midnight + blockStartMin(end + 1) * 60000;
+      const rem = clock(endMs - now.getTime());
+      el.classList.remove("idle");
+      el.style.setProperty("--nowcolor", t.color);
+      what.textContent = t.name;
+      left.innerHTML = rem + "<small>left</small>";
+      document.title = rem + " · " + t.name;
+    } else {
+      let next = i;
+      while (next < arr.length && arr[next] === null) next++;
+      el.classList.add("idle");
+      el.style.setProperty("--nowcolor", "var(--line-strong)");
+      if (next < arr.length){
+        const nt = taskById(arr[next]);
+        const startMs = midnight + blockStartMin(next) * 60000;
+        what.textContent = "Free — " + (nt ? nt.name : "next block") + " at " + hhmm(blockStartMin(next));
+        left.innerHTML = clock(startMs - now.getTime()) + "<small>until</small>";
+        document.title = "Free · " + clock(startMs - now.getTime());
+      } else {
+        what.textContent = "Free for the rest of the day";
+        document.title = "Timeboxer";
+      }
+    }
+  }
+
+  function render(){
+    if (gridEl.children.length !== (state.endHour - state.startHour) * (PER_HOUR + 1)) buildGrid();
+    renderDayLabel(); renderTasks(); paintGrid(); renderNow();
+  }
+
+  /* ---------- events ---------- */
+  function cellIndexAt(x, y){
+    const el = document.elementFromPoint(x, y);
+    const cell = el && el.closest ? el.closest(".cell") : null;
+    return cell ? Number(cell.dataset.i) : -1;
+  }
+
+  gridEl.addEventListener("pointerdown", e => {
+    const i = cellIndexAt(e.clientX, e.clientY);
+    if (i < 0) return;
+    e.preventDefault();
+    gridEl.setPointerCapture(e.pointerId);
+    beginDrag(i);
+  });
+  gridEl.addEventListener("pointermove", e => {
+    if (!drag) return;
+    const i = cellIndexAt(e.clientX, e.clientY);
+    applyRange(i);
+  });
+  const endDrag = () => { if (drag){ drag = null; renderTasks(); renderNow(); } };
+  gridEl.addEventListener("pointerup", endDrag);
+  gridEl.addEventListener("pointercancel", endDrag);
+  window.addEventListener("pointerup", endDrag);
+
+  $("newtask").addEventListener("keydown", e => {
+    if (e.key === "Enter"){ addTask(e.target.value); e.target.value = ""; }
+  });
+  $("eraser").addEventListener("click", () => { erasing = !erasing; renderTasks(); });
+
+  function shiftDay(n){
+    const d = keyToDate(viewKey);
+    d.setDate(d.getDate() + n);
+    viewKey = dateKey(d);
+    render();
+  }
+  $("prev").addEventListener("click", () => shiftDay(-1));
+  $("next").addEventListener("click", () => shiftDay(1));
+  $("today").addEventListener("click", () => { viewKey = dateKey(new Date()); render(); });
+
+  $("clear").addEventListener("click", () => {
+    if (!day(viewKey).some(Boolean)) return;
+    if (!confirm("Clear every block on this day?")) return;
+    state.days[viewKey] = new Array(blocksPerDay()).fill(null);
+    save(); render();
+  });
+
+  $("copyprev").addEventListener("click", () => {
+    const d = keyToDate(viewKey); d.setDate(d.getDate() - 1);
+    const src = state.days[dateKey(d)];
+    if (!src || !src.some(Boolean)) { alert("The previous day has no plan to copy."); return; }
+    if (day(viewKey).some(Boolean) && !confirm("Overwrite this day with the previous day's plan?")) return;
+    state.days[viewKey] = src.slice(0, blocksPerDay());
+    save(); render();
+  });
+
+  $("hours").addEventListener("click", () => {
+    const a = prompt("Day starts at (hour, 0–23)", String(state.startHour));
+    if (a === null) return;
+    const b = prompt("Day ends at (hour, 1–24)", String(state.endHour));
+    if (b === null) return;
+    const s = Math.max(0, Math.min(23, parseInt(a, 10)));
+    const e = Math.max(1, Math.min(24, parseInt(b, 10)));
+    if (!Number.isFinite(s) || !Number.isFinite(e) || e <= s){
+      alert("End hour has to be after the start hour."); return;
+    }
+    state.startHour = s; state.endHour = e;
+    for (const k in state.days) day(k);   // re-fit every stored day
+    save(); buildGrid(); render();
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.target.tagName === "INPUT" || e.metaKey || e.ctrlKey || e.altKey) return;
+    const k = e.key;
+    if (k >= "1" && k <= "9"){
+      const t = state.tasks[Number(k) - 1];
+      if (t){ selected = t.id; erasing = false; renderTasks(); }
+    } else if (k === "e" || k === "E"){ erasing = !erasing; renderTasks(); }
+    else if (k === "ArrowLeft"){ shiftDay(-1); }
+    else if (k === "ArrowRight"){ shiftDay(1); }
+    else if (k === "t" || k === "T"){ viewKey = dateKey(new Date()); render(); }
+  });
+
+  /* first run: a couple of starter tasks so the grid is usable immediately */
+  if (!state.tasks.length){
+    ["Deep work","Email & admin","Break"].forEach(addTask);
+  }
+
+  render();
+  setInterval(() => { renderNow(); paintGrid(); }, 1000);
+})();
+</script>
+</body>
+</html>
