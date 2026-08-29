@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "jato": {
+      "command": "node",
+      "args": ["dist/index.js"]
+    }
+  }
+}
