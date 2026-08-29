@@ -1,4 +1,7 @@
 import { chromium } from 'playwright';
+import { readFile, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 const b = await chromium.launch();
 const p = await b.newPage({ viewport:{width:1100,height:900} });
@@ -104,6 +107,71 @@ await p.waitForTimeout(1100);
 const idleTxt = await p.textContent('#nowwhat');
 T('free-time message points at next block', /Free — Deep work at 17:00/.test(idleTxt));
 T('free countdown counts down to 17:00', (await p.textContent('#nowleft')).startsWith('6:52'));
+
+// --- week strip -------------------------------------------------------------
+const wdays = await p.$$eval('.wday .dow', e => e.map(x => x.textContent));
+T('week strip is Mon-first, 7 days', JSON.stringify(wdays) === '["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]');
+T('today is marked in the strip', (await p.$$eval('.wday.today .num', e => e.map(x => x.textContent))).join() === '29');
+T('viewed day is marked current', await p.$eval('.wday.on', e => e.classList.contains('today')));
+T('strip shows the day total', (await p.textContent('.wday.on .h')).trim() === '15m');
+await p.click('.wday:nth-child(1)');            // Monday Aug 24
+T('clicking a week day navigates', (await p.textContent('#daylabel')).includes('Aug 24'));
+await p.keyboard.press('t');
+
+// --- shift-drag moves a block ------------------------------------------------
+await p.keyboard.down('Shift');
+const from = await box(40), to = await box(44);
+await p.mouse.move(from.x, from.y); await p.mouse.down();
+await p.mouse.move(to.x, to.y, { steps: 8 }); await p.mouse.up();
+await p.keyboard.up('Shift');
+await p.waitForTimeout(120);
+T('shift-drag moved the block 17:00 -> 18:00',
+  JSON.stringify(await p.$$eval('.cell.filled', e => e.map(x => Number(x.dataset.i)))) === '[44]');
+
+// a multi-cell run keeps its length and the grab point under the cursor
+const a2 = await box(8), b2 = await box(11);
+await p.mouse.move(a2.x, a2.y); await p.mouse.down();
+await p.mouse.move(b2.x, b2.y, { steps: 6 }); await p.mouse.up();
+await p.waitForTimeout(120);
+await p.keyboard.down('Shift');
+const g = await box(9), t2 = await box(13);     // grabbed 1 cell into the run
+await p.mouse.move(g.x, g.y); await p.mouse.down();
+await p.mouse.move(t2.x, t2.y, { steps: 8 }); await p.mouse.up();
+await p.keyboard.up('Shift');
+await p.waitForTimeout(120);
+T('4-block run slides to 12..15 (grab offset preserved)',
+  JSON.stringify(await p.$$eval('.cell.filled', e => e.map(x => Number(x.dataset.i)))) === '[12,13,14,15,44]');
+T('week strip total updated after the move', (await p.textContent('.wday.on .h')).trim() === '1h 15m');
+
+// --- export / import ---------------------------------------------------------
+const [dl] = await Promise.all([ p.waitForEvent('download'), p.click('#export') ]);
+T('export filename is dated', dl.suggestedFilename() === 'timeboxer-2026-08-29.json');
+const dump = JSON.parse(await readFile(await dl.path(), 'utf8'));
+T('export carries tasks and days', Array.isArray(dump.tasks) && dump.tasks.length === 3 && !!dump.days['2026-08-29']);
+
+const backup = join(tmpdir(), 'tb-backup.json');
+await writeFile(backup, JSON.stringify(dump));
+p.once('dialog', d => d.accept());
+await p.click('#clear'); await p.waitForTimeout(120);
+T('day cleared before import', (await p.$$eval('.cell.filled', e => e.length)) === 0);
+p.once('dialog', d => d.accept());
+await p.setInputFiles('#importfile', backup);
+await p.waitForTimeout(250);
+T('import restores the plan',
+  JSON.stringify(await p.$$eval('.cell.filled', e => e.map(x => Number(x.dataset.i)))) === '[12,13,14,15,44]');
+T('import restores tasks', (await p.$$eval('#tasklist li .name', e => e.length)) === 3);
+await p.reload(); await p.waitForTimeout(200);
+T('imported state persisted', (await p.$$eval('.cell.filled', e => e.length)) === 5);
+
+// a junk file is rejected without wrecking state
+const junk = join(tmpdir(), 'tb-junk.json');
+await writeFile(junk, '{"nope":1}');
+let rejected = '';
+p.once('dialog', d => { rejected = d.message(); d.accept(); });
+await p.setInputFiles('#importfile', junk);
+await p.waitForTimeout(200);
+T('non-Timeboxer JSON is rejected', /doesn.t look like a Timeboxer export/.test(rejected));
+T('state survived the bad import', (await p.$$eval('.cell.filled', e => e.length)) === 5);
 
 // no horizontal overflow / no errors
 T('no horizontal scroll', await p.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1));
