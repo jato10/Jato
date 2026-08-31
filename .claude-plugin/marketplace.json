@@ -12,7 +12,7 @@
       "version": "0.6.8",
       "source": {
         "source": "github",
-        "repo": "addyosmani/agent-skills"
+        "repo": "jato10/jato"
       },
       "description": "Production-grade engineering skills covering every phase of software development: spec, plan, build, verify, review, and ship.",
       "homepage": "https://github.com/addyosmani/agent-skills",
