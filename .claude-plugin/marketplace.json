@@ -15,7 +15,7 @@
         "repo": "jato10/jato"
       },
       "description": "Production-grade engineering skills covering every phase of software development: spec, plan, build, verify, review, and ship.",
-      "homepage": "https://github.com/addyosmani/agent-skills",
+      "homepage": "https://github.com/jato10/Jato",
       "license": "MIT",
       "keywords": ["skills", "agents", "engineering", "spec", "tdd", "review", "ship"]
     }
