@@ -1,8 +1,46 @@
 name: Test Plugin Installation
 
+# Scoped to the vendored addyosmani/agent-skills tree. Upstream runs this on
+# every push because the plugin is the whole repository; here it shares a repo
+# with unrelated Jato code, so the paths filter keeps it to changes that can
+# actually affect the plugin.
 on:
   push:
+    paths:
+      - '.agents/**'
+      - '.claude/**'
+      - '.claude-plugin/**'
+      - '.codex-plugin/**'
+      - '.gemini/**'
+      - '.opencode/**'
+      - 'agents/**'
+      - 'commands/**'
+      - 'docs/**'
+      - 'evals/**'
+      - 'hooks/**'
+      - 'references/**'
+      - 'scripts/**'
+      - 'skills/**'
+      - 'plugin.json'
+      - '.github/workflows/test-plugin-install.yml'
   pull_request:
+    paths:
+      - '.agents/**'
+      - '.claude/**'
+      - '.claude-plugin/**'
+      - '.codex-plugin/**'
+      - '.gemini/**'
+      - '.opencode/**'
+      - 'agents/**'
+      - 'commands/**'
+      - 'docs/**'
+      - 'evals/**'
+      - 'hooks/**'
+      - 'references/**'
+      - 'scripts/**'
+      - 'skills/**'
+      - 'plugin.json'
+      - '.github/workflows/test-plugin-install.yml'
   workflow_dispatch:
 
 jobs:

@@ -4,9 +4,11 @@
 > v0.6.8), vendored so the skills, commands, and agents can be edited and
 > customized in place. Original work is MIT licensed, Copyright (c) 2025 Addy
 > Osmani — see [LICENSE](LICENSE). To pull in upstream changes, diff against
-> the source repository. Two release-tag steps in
-> `.github/workflows/test-plugin-install.yml` are omitted (they compare
-> `plugin.json` against upstream's `git describe --tags` release tag); every
+> the source repository. `.github/workflows/test-plugin-install.yml` carries
+> two changes: two release-tag steps are omitted (they compare `plugin.json`
+> against upstream's `git describe --tags` release tag), and its `push` /
+> `pull_request` triggers are scoped with a `paths` filter to the vendored
+> tree, so unrelated changes elsewhere in this repository don't run it. Every
 > other file is a verbatim copy. The original README follows.
 
 ---
