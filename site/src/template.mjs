@@ -139,7 +139,7 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
     );
   }
   if (links.hasEmail) {
-    contactLinks.push(`<li><a href="${esc(links.mailto(c.meta.title))}">${esc(links.email)}</a></li>`);
+    contactLinks.push(`<li><a href="${esc(links.mailto(c.contact.emailSubject))}">${esc(links.email)}</a></li>`);
   }
   if (links.hasInstagram) {
     contactLinks.push(
@@ -382,7 +382,7 @@ function contactSection({ c, links }) {
   };
 
   cards.push(card('whatsapp', links.whatsapp(c.contact.presets[0].message), { title: ch.whatsapp.label, i: 0 }));
-  cards.push(card('email', links.mailto(c.meta.title, c.contact.presets[0].message), { title: ch.email.label, i: 1 }));
+  cards.push(card('email', links.mailto(c.contact.emailSubject, c.contact.presets[0].message), { title: ch.email.label, i: 1 }));
   cards.push(card('instagram', links.hasInstagram ? links.instagram : null, { title: ch.instagram.label, i: 2 }));
 
   const hasDirectChannel = links.hasWhatsapp || links.hasEmail;

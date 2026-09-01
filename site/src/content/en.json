@@ -225,7 +225,8 @@
         "message": "Hello Global Beyond, I am looking for a specific product and would like to check availability and pricing."
       }
     ],
-    "unconfigured": "Details coming shortly."
+    "unconfigured": "Details coming shortly.",
+    "emailSubject": "Catalog request — Global Beyond LLC"
   },
   "footer": {
     "tagline": "Connecting products, people, and opportunities.",
