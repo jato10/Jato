@@ -13,30 +13,20 @@ const attr = (name, value) => (value ? ` ${name}="${esc(value)}"` : '');
 /* ------------------------------------------------------------- contact */
 export function makeLinks(site) {
   const wa = String(site.channels.whatsapp || '').replace(/[^\d]/g, '');
-  const email = String(site.channels.email || '').trim();
   const instagram = String(site.channels.instagram || '').trim();
 
   return {
     hasWhatsapp: Boolean(wa),
-    hasEmail: Boolean(email),
     hasInstagram: Boolean(instagram),
-    email,
     instagram,
     whatsapp(message) {
       if (!wa) return null;
       return `https://wa.me/${wa}?text=${encodeURIComponent(message)}`;
     },
-    mailto(subject, body) {
-      if (!email) return null;
-      const q = [];
-      if (subject) q.push(`subject=${encodeURIComponent(subject)}`);
-      if (body) q.push(`body=${encodeURIComponent(body)}`);
-      return `mailto:${email}${q.length ? `?${q.join('&')}` : ''}`;
-    },
     /* Best available destination for a request; always resolves to something
-       that works, falling back to the on-page contact section. */
+       that works, falling back to the on-page contact form. */
     request(message) {
-      return this.whatsapp(message) || this.mailto(message, message) || '#contact';
+      return this.whatsapp(message) || '#contact';
     },
     isExternal(href) {
       return Boolean(href) && /^(https?:|mailto:)/.test(href);
@@ -137,9 +127,6 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
     contactLinks.push(
       `<li><a href="${esc(links.whatsapp(c.contact.presets[0].message))}" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>`
     );
-  }
-  if (links.hasEmail) {
-    contactLinks.push(`<li><a href="${esc(links.mailto(c.contact.emailSubject))}">${esc(links.email)}</a></li>`);
   }
   if (links.hasInstagram) {
     contactLinks.push(
@@ -369,29 +356,64 @@ function valuesSection({ c }) {
 
 function contactSection({ c, links }) {
   const ch = c.contact.channels;
-  const cards = [];
+  const f = c.contact.form;
 
-  const card = (key, href, meta) => {
-    const label = ch[key].label;
-    const inner = `<h3 class="h-card">${esc(label)}</h3>
-              <p>${esc(ch[key].body)}</p>
-              <span class="channel__action">${esc(href ? ch[key].action : c.contact.unconfigured)}</span>`;
+  const card = (key, href, i) => {
+    const inner = `<h3 class="h-card">${esc(ch[key].label)}</h3>
+                <p>${esc(ch[key].body)}</p>
+                <span class="channel__action">${esc(href ? ch[key].action : c.contact.unconfigured)}</span>`;
     return href
-      ? `<a class="channel" href="${esc(href)}"${externalAttrs(links, href)} data-reveal data-delay="${meta.i}">${inner}</a>`
-      : `<div class="channel channel--pending" data-reveal data-delay="${meta.i}">${inner}</div>`;
+      ? `<a class="channel" href="${esc(href)}"${externalAttrs(links, href)} data-reveal data-delay="${i}">${inner}</a>`
+      : `<div class="channel channel--pending" data-reveal data-delay="${i}">${inner}</div>`;
   };
 
-  cards.push(card('whatsapp', links.whatsapp(c.contact.presets[0].message), { title: ch.whatsapp.label, i: 0 }));
-  cards.push(card('email', links.mailto(c.contact.emailSubject, c.contact.presets[0].message), { title: ch.email.label, i: 1 }));
-  cards.push(card('instagram', links.hasInstagram ? links.instagram : null, { title: ch.instagram.label, i: 2 }));
+  const cards = [
+    card('whatsapp', links.whatsapp(c.contact.presets[0].message), 0),
+    card('instagram', links.hasInstagram ? links.instagram : null, 1),
+  ].join('\n              ');
 
-  const hasDirectChannel = links.hasWhatsapp || links.hasEmail;
-  const presets = c.contact.presets
-    .map((preset) => {
-      const href = links.request(preset.message);
-      return `<a class="btn btn--ghost btn--small" href="${esc(href)}"${externalAttrs(links, href)}>${esc(preset.label)}</a>`;
-    })
-    .join('\n            ');
+  /* Posts to the site's own endpoint, so it works with JavaScript disabled;
+     main.js upgrades it to an inline submit when JavaScript is available. */
+  const form = `<form class="form" action="/api/contact" method="post" data-contact-form novalidate>
+              <input type="hidden" name="lang" value="${c.lang}">
+              <p class="form__trap" aria-hidden="true">
+                <label>${esc(f.name)}<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+              </p>
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="cf-name">${esc(f.name)}</label>
+                  <input class="field__input" id="cf-name" name="name" type="text" required
+                    maxlength="120" autocomplete="name" placeholder="${esc(f.namePlaceholder)}">
+                </div>
+              </div>
+              <div class="form__row form__row--split">
+                <div class="field">
+                  <label class="field__label" for="cf-email">${esc(f.email)}</label>
+                  <input class="field__input" id="cf-email" name="email" type="email"
+                    maxlength="200" autocomplete="email" placeholder="${esc(f.emailPlaceholder)}">
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cf-phone">${esc(f.phone)} <span class="field__hint">${esc(f.optional)}</span></label>
+                  <input class="field__input" id="cf-phone" name="phone" type="tel"
+                    maxlength="60" autocomplete="tel" placeholder="${esc(f.phonePlaceholder)}">
+                </div>
+              </div>
+              <p class="field__note" id="cf-contact-hint">${esc(f.contactHint)}</p>
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="cf-message">${esc(f.message)}</label>
+                  <textarea class="field__input field__input--area" id="cf-message" name="message" rows="5"
+                    required maxlength="4000" placeholder="${esc(f.messagePlaceholder)}"></textarea>
+                </div>
+              </div>
+              <div class="form__foot">
+                <button class="btn btn--primary" type="submit" data-submit
+                  data-idle="${esc(f.submit)}" data-busy="${esc(f.sending)}">${esc(f.submit)}</button>
+                <p class="form__privacy">${esc(f.privacy)}</p>
+              </div>
+              <p class="form__status" data-form-status role="status" aria-live="polite"
+                data-success="${esc(f.success)}" data-error="${esc(f.error)}" data-invalid="${esc(f.invalid)}"></p>
+            </form>`;
 
   return `<section class="section section--dark" id="contact" aria-labelledby="contact-title">
         <div class="shell">
@@ -400,23 +422,27 @@ function contactSection({ c, links }) {
             <h2 class="h-section" id="contact-title">${esc(c.contact.title)}</h2>
             <p class="lede">${esc(c.contact.lede)}</p>
           </div>
-          <div class="channels">
-            ${cards.join('\n            ')}
-          </div>
-          ${hasDirectChannel ? `<div class="presets" data-reveal>
-            <p class="presets__heading">${esc(c.contact.presetHeading)}</p>
-            <div class="presets__list">
-            ${presets}
+          <div class="contact-grid">
+            <div class="panel contact-form" data-reveal>
+              <h3 class="contact-form__heading">${esc(f.heading)}</h3>
+              <p class="contact-form__lede">${esc(f.lede)}</p>
+              ${form}
             </div>
-          </div>` : ''}
-          <div class="facts">
-            <div data-reveal>
-              <p class="fact__label">${esc(c.contact.locationLabel)}</p>
-              <p class="fact__value">${esc(c.contact.location)}</p>
-            </div>
-            <div data-reveal data-delay="1">
-              <p class="fact__label">${esc(c.contact.hoursLabel)}</p>
-              <p class="fact__value">${esc(c.contact.hours)}</p>
+            <div class="contact-aside" data-reveal data-delay="1">
+              <p class="presets__heading">${esc(c.contact.channelsHeading)}</p>
+              <div class="channels channels--stacked">
+              ${cards}
+              </div>
+              <div class="facts facts--aside">
+                <div>
+                  <p class="fact__label">${esc(c.contact.locationLabel)}</p>
+                  <p class="fact__value">${esc(c.contact.location)}</p>
+                </div>
+                <div>
+                  <p class="fact__label">${esc(c.contact.hoursLabel)}</p>
+                  <p class="fact__value">${esc(c.contact.hours)}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -539,6 +565,41 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
       </div>
     </main>
     <script src="/assets/js/lang-redirect.js" defer></script>
+  </body>
+</html>
+`;
+}
+
+export function renderSent({ c, site, ogImage, links, path }) {
+  const wa = links.whatsapp(c.contact.presets[0].message);
+  return `<!doctype html>
+<html lang="${c.lang}" dir="${c.dir}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>${esc(c.sent.title)}</title>
+    <meta name="description" content="${esc(c.sent.body)}">
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#070b14">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="${esc(site.origin.replace(/\/$/, '') + path)}">
+    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+    <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script>${INLINE_BOOT}</script>
+  </head>
+  <body>
+    <main class="error-page">
+      <div>
+        <img src="/assets/img/logo.svg" alt="${esc(site.legalName)}" width="300" height="153">
+        <h1>${esc(c.sent.heading)}</h1>
+        <p>${esc(c.sent.body)}</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/${c.lang}/">${esc(c.sent.cta)}</a>
+          ${wa ? `<a class="btn btn--ghost" href="${esc(wa)}" target="_blank" rel="noopener noreferrer">${esc(c.sent.cta2)}</a>` : ''}
+        </div>
+      </div>
+    </main>
   </body>
 </html>
 `;

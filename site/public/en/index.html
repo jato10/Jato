@@ -30,7 +30,7 @@
 <meta name="twitter:description" content="Discover Global Beyond LLC and request the latest product catalog, availability, pricing, ordering, and shipping details directly from our team in Miami.">
 <meta name="twitter:image" content="https://globalbeyondllc.com/assets/img/og.png">
 <link rel="stylesheet" href="/assets/css/styles.css">
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://globalbeyondllc.com/#organization","name":"Global Beyond LLC","legalName":"Global Beyond LLC","url":"https://globalbeyondllc.com/en/","logo":"https://globalbeyondllc.com/assets/img/logo.svg","image":"https://globalbeyondllc.com/assets/img/og.png","description":"Discover Global Beyond LLC and request the latest product catalog, availability, pricing, ordering, and shipping details directly from our team in Miami.","slogan":"Beyond Borders. Beyond Possibilities.","address":{"@type":"PostalAddress","addressLocality":"Miami","addressRegion":"FL","addressCountry":"US"},"knowsLanguage":["en","es"],"sameAs":["https://www.instagram.com/globalbeyondllc/"],"contactPoint":[{"@type":"ContactPoint","contactType":"sales","email":"info@globalbeyondllc.com","availableLanguage":["en","es"]}]},{"@context":"https://schema.org","@type":"WebSite","@id":"https://globalbeyondllc.com/en/#website","url":"https://globalbeyondllc.com/en/","name":"Global Beyond LLC","inLanguage":"en","publisher":{"@id":"https://globalbeyondllc.com/#organization"}}]</script>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://globalbeyondllc.com/#organization","name":"Global Beyond LLC","legalName":"Global Beyond LLC","url":"https://globalbeyondllc.com/en/","logo":"https://globalbeyondllc.com/assets/img/logo.svg","image":"https://globalbeyondllc.com/assets/img/og.png","description":"Discover Global Beyond LLC and request the latest product catalog, availability, pricing, ordering, and shipping details directly from our team in Miami.","slogan":"Beyond Borders. Beyond Possibilities.","address":{"@type":"PostalAddress","addressLocality":"Miami","addressRegion":"FL","addressCountry":"US"},"knowsLanguage":["en","es"],"sameAs":["https://www.instagram.com/globalbeyondllc/"],"contactPoint":[{"@type":"ContactPoint","contactType":"sales","url":"https://globalbeyondllc.com/en/#contact","availableLanguage":["en","es"]}]},{"@context":"https://schema.org","@type":"WebSite","@id":"https://globalbeyondllc.com/en/#website","url":"https://globalbeyondllc.com/en/","name":"Global Beyond LLC","inLanguage":"en","publisher":{"@id":"https://globalbeyondllc.com/#organization"}}]</script>
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
   </head>
   <body>
@@ -266,33 +266,71 @@
             <h2 class="h-section" id="contact-title">Talk to us directly.</h2>
             <p class="lede">Send us your request and we will reply with the current catalog, availability, pricing, ordering, and shipping details for it.</p>
           </div>
-          <div class="channels">
-            <a class="channel" href="https://wa.me/17863344556?text=Hello%20Global%20Beyond%2C%20I%20would%20like%20to%20receive%20your%20current%20product%20catalog." target="_blank" rel="noopener noreferrer" data-reveal data-delay="0"><h3 class="h-card">WhatsApp</h3>
-              <p>The fastest way to reach us.</p>
-              <span class="channel__action">Message us</span></a>
-            <a class="channel" href="mailto:info@globalbeyondllc.com?subject=Catalog%20request%20%E2%80%94%20Global%20Beyond%20LLC&amp;body=Hello%20Global%20Beyond%2C%20I%20would%20like%20to%20receive%20your%20current%20product%20catalog." data-reveal data-delay="1"><h3 class="h-card">Email</h3>
-              <p>For catalogs, wholesale, and detailed requests.</p>
-              <span class="channel__action">Write to us</span></a>
-            <a class="channel" href="https://www.instagram.com/globalbeyondllc/" target="_blank" rel="noopener noreferrer" data-reveal data-delay="2"><h3 class="h-card">Instagram</h3>
-              <p>A look at what we are working on.</p>
-              <span class="channel__action">Follow along</span></a>
-          </div>
-          <div class="presets" data-reveal>
-            <p class="presets__heading">Prefer to start with a ready message?</p>
-            <div class="presets__list">
-            <a class="btn btn--ghost btn--small" href="https://wa.me/17863344556?text=Hello%20Global%20Beyond%2C%20I%20would%20like%20to%20receive%20your%20current%20product%20catalog." target="_blank" rel="noopener noreferrer">Ask for the current catalog</a>
-            <a class="btn btn--ghost btn--small" href="https://wa.me/17863344556?text=Hello%20Global%20Beyond%2C%20I%20am%20interested%20in%20a%20wholesale%20order%20and%20would%20like%20to%20discuss%20quantities%20and%20availability." target="_blank" rel="noopener noreferrer">Ask about a wholesale order</a>
-            <a class="btn btn--ghost btn--small" href="https://wa.me/17863344556?text=Hello%20Global%20Beyond%2C%20I%20am%20looking%20for%20a%20specific%20product%20and%20would%20like%20to%20check%20availability%20and%20pricing." target="_blank" rel="noopener noreferrer">Ask about a specific product</a>
+          <div class="contact-grid">
+            <div class="panel contact-form" data-reveal>
+              <h3 class="contact-form__heading">Send us a message</h3>
+              <p class="contact-form__lede">Leave your details and a short message. We reply personally, usually within one business day.</p>
+              <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
+              <input type="hidden" name="lang" value="en">
+              <p class="form__trap" aria-hidden="true">
+                <label>Your name<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+              </p>
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="cf-name">Your name</label>
+                  <input class="field__input" id="cf-name" name="name" type="text" required
+                    maxlength="120" autocomplete="name" placeholder="Name and company, if you have one">
+                </div>
+              </div>
+              <div class="form__row form__row--split">
+                <div class="field">
+                  <label class="field__label" for="cf-email">Email</label>
+                  <input class="field__input" id="cf-email" name="email" type="email"
+                    maxlength="200" autocomplete="email" placeholder="you@example.com">
+                </div>
+                <div class="field">
+                  <label class="field__label" for="cf-phone">Phone or WhatsApp <span class="field__hint">optional</span></label>
+                  <input class="field__input" id="cf-phone" name="phone" type="tel"
+                    maxlength="60" autocomplete="tel" placeholder="Optional if you leave an email">
+                </div>
+              </div>
+              <p class="field__note" id="cf-contact-hint">Leave at least one of the two, so we know where to reply.</p>
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="cf-message">Your message</label>
+                  <textarea class="field__input field__input--area" id="cf-message" name="message" rows="5"
+                    required maxlength="4000" placeholder="What you are looking for: a product, a category, a quantity, or simply the current catalog."></textarea>
+                </div>
+              </div>
+              <div class="form__foot">
+                <button class="btn btn--primary" type="submit" data-submit
+                  data-idle="Send message" data-busy="Sending…">Send message</button>
+                <p class="form__privacy">We use what you send only to answer your request. Nothing else.</p>
+              </div>
+              <p class="form__status" data-form-status role="status" aria-live="polite"
+                data-success="Message sent. We will reply to the details you left." data-error="The message could not be sent. Please write to us on WhatsApp instead." data-invalid="Please add your name, a way to reach you, and a message."></p>
+            </form>
             </div>
-          </div>
-          <div class="facts">
-            <div data-reveal>
-              <p class="fact__label">Based in</p>
-              <p class="fact__value">Miami, Florida, United States</p>
-            </div>
-            <div data-reveal data-delay="1">
-              <p class="fact__label">Replies</p>
-              <p class="fact__value">Written personally by our team — usually within one business day.</p>
+            <div class="contact-aside" data-reveal data-delay="1">
+              <p class="presets__heading">Or reach us directly</p>
+              <div class="channels channels--stacked">
+              <a class="channel" href="https://wa.me/17863344556?text=Hello%20Global%20Beyond%2C%20I%20would%20like%20to%20receive%20your%20current%20product%20catalog." target="_blank" rel="noopener noreferrer" data-reveal data-delay="0"><h3 class="h-card">WhatsApp</h3>
+                <p>The fastest way to reach us.</p>
+                <span class="channel__action">Message us</span></a>
+              <a class="channel" href="https://www.instagram.com/globalbeyondllc/" target="_blank" rel="noopener noreferrer" data-reveal data-delay="1"><h3 class="h-card">Instagram</h3>
+                <p>A look at what we are working on.</p>
+                <span class="channel__action">Follow along</span></a>
+              </div>
+              <div class="facts facts--aside">
+                <div>
+                  <p class="fact__label">Based in</p>
+                  <p class="fact__value">Miami, Florida, United States</p>
+                </div>
+                <div>
+                  <p class="fact__label">Replies</p>
+                  <p class="fact__value">Written personally by our team — usually within one business day.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -320,7 +358,6 @@
             <h2>Contact</h2>
             <ul class="footer__list">
             <li><a href="https://wa.me/17863344556?text=Hello%20Global%20Beyond%2C%20I%20would%20like%20to%20receive%20your%20current%20product%20catalog." target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-            <li><a href="mailto:info@globalbeyondllc.com?subject=Catalog%20request%20%E2%80%94%20Global%20Beyond%20LLC">info@globalbeyondllc.com</a></li>
             <li><a href="https://www.instagram.com/globalbeyondllc/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
             <li><span>Miami, Florida, United States</span></li>
             </ul>

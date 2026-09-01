@@ -9,7 +9,6 @@
   },
   "channels": {
     "whatsapp": "17863344556",
-    "email": "info@globalbeyondllc.com",
     "instagram": "https://www.instagram.com/globalbeyondllc/"
   },
   "defaultLang": "en",
@@ -24,5 +23,9 @@
       "label": "Español",
       "short": "ES"
     }
-  ]
+  ],
+  "sentPath": {
+    "en": "/en/message-sent/",
+    "es": "/es/mensaje-enviado/"
+  }
 }
