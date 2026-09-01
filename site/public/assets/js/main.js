@@ -145,6 +145,84 @@
     }
   }
 
+
+  /* ------------------------------------------------------- contact form */
+  /* The form posts normally without this: the endpoint redirects to a
+     confirmation page. Here we submit in place and keep the visitor put. */
+  var form = document.querySelector('[data-contact-form]');
+  if (form && window.fetch && window.FormData) {
+    var status = form.querySelector('[data-form-status]');
+    var submit = form.querySelector('[data-submit]');
+
+    var say = function (state) {
+      if (!status) return;
+      status.setAttribute('data-state', state);
+      status.textContent = status.getAttribute('data-' + state) || '';
+    };
+
+    var busy = function (isBusy) {
+      if (!submit) return;
+      submit.disabled = isBusy;
+      submit.textContent = submit.getAttribute(isBusy ? 'data-busy' : 'data-idle');
+    };
+
+    var fields = {
+      name: form.querySelector('[name="name"]'),
+      email: form.querySelector('[name="email"]'),
+      phone: form.querySelector('[name="phone"]'),
+      message: form.querySelector('[name="message"]'),
+    };
+
+    var flag = function (field, invalid) {
+      if (field) field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+    };
+
+    form.addEventListener('submit', function (event) {
+      var name = fields.name && fields.name.value.trim();
+      var email = fields.email && fields.email.value.trim();
+      var phone = fields.phone && fields.phone.value.trim();
+      var message = fields.message && fields.message.value.trim();
+
+      flag(fields.name, !name);
+      flag(fields.message, !message);
+      flag(fields.email, !email && !phone);
+      flag(fields.phone, !email && !phone);
+
+      if (!name || !message || (!email && !phone)) {
+        event.preventDefault();
+        say('invalid');
+        var firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      event.preventDefault();
+      say('');
+      busy(true);
+
+      fetch(form.getAttribute('action'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'fetch' },
+        body: JSON.stringify({
+          lang: form.querySelector('[name="lang"]').value,
+          name: name,
+          email: email,
+          phone: phone,
+          message: message,
+          company: form.querySelector('[name="company"]').value,
+        }),
+      })
+        .then(function (response) { return response.json().catch(function () { return { ok: response.ok }; }); })
+        .then(function (result) {
+          busy(false);
+          if (!result || !result.ok) return say('error');
+          form.reset();
+          say('success');
+        })
+        .catch(function () { busy(false); say('error'); });
+    });
+  }
+
   /* ---------------------------------------------------------- footer year */
   var year = document.querySelector('[data-year]');
   if (year) year.textContent = String(new Date().getFullYear());

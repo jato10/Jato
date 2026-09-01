@@ -149,10 +149,10 @@
         "name": "Javier Rafael Torres Gil"
       },
       {
-        "name": "Yudenis V. M."
+        "name": "Yudenis V. Martínez"
       }
     ],
-    "photoAlt": "Javier Rafael Torres Gil and Yudenis V. M., the founders of Global Beyond LLC, seated in the company's Miami office beneath the Global Beyond logo.",
+    "photoAlt": "Javier Rafael Torres Gil and Yudenis V. Martínez, the founders of Global Beyond LLC, seated in the company's Miami office beneath the Global Beyond logo.",
     "photoCaption": "Miami, Florida."
   },
   "values": {
@@ -225,7 +225,28 @@
         "message": "Hello Global Beyond, I am looking for a specific product and would like to check availability and pricing."
       }
     ],
-    "unconfigured": "Details coming shortly."
+    "unconfigured": "Details coming shortly.",
+    "form": {
+      "heading": "Send us a message",
+      "lede": "Leave your details and a short message. We reply personally, usually within one business day.",
+      "name": "Your name",
+      "namePlaceholder": "Name and company, if you have one",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone or WhatsApp",
+      "phonePlaceholder": "Optional if you leave an email",
+      "contactHint": "Leave at least one of the two, so we know where to reply.",
+      "message": "Your message",
+      "messagePlaceholder": "What you are looking for: a product, a category, a quantity, or simply the current catalog.",
+      "optional": "optional",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "privacy": "We use what you send only to answer your request. Nothing else.",
+      "success": "Message sent. We will reply to the details you left.",
+      "error": "The message could not be sent. Please write to us on WhatsApp instead.",
+      "invalid": "Please add your name, a way to reach you, and a message."
+    },
+    "channelsHeading": "Or reach us directly"
   },
   "footer": {
     "tagline": "Connecting products, people, and opportunities.",
@@ -242,5 +263,12 @@
     "body": "The page you were looking for does not exist, or it has moved. Everything else is one step away.",
     "cta": "Back to the homepage",
     "cta2": "Contact us"
+  },
+  "sent": {
+    "title": "Message sent | Global Beyond LLC",
+    "heading": "Your message is on its way.",
+    "body": "Thank you for writing to Global Beyond LLC. We read every message ourselves and will reply to the details you left, usually within one business day.",
+    "cta": "Back to the homepage",
+    "cta2": "Message us on WhatsApp"
   }
 }

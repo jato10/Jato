@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { renderPage, renderNotFound, renderGateway, makeLinks, INLINE_BOOT } from './template.mjs';
+import { renderPage, renderNotFound, renderGateway, renderSent, makeLinks, INLINE_BOOT } from './template.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(here, '..', 'public');
@@ -26,15 +26,14 @@ const langHrefs = Object.fromEntries(contents.map((c) => [c.lang, `/${c.lang}/`]
 
 function jsonLdFor(c) {
   const sameAs = links.hasInstagram ? [links.instagram] : [];
-  const contactPoint = [];
-  if (links.hasEmail) {
-    contactPoint.push({
+  const contactPoint = [
+    {
       '@type': 'ContactPoint',
       contactType: 'sales',
-      email: links.email,
+      url: `${origin}/${c.lang}/#contact`,
       availableLanguage: ['en', 'es'],
-    });
-  }
+    },
+  ];
 
   const organization = {
     '@context': 'https://schema.org',
@@ -68,7 +67,9 @@ function jsonLdFor(c) {
     publisher: { '@id': `${origin}/#organization` },
   };
 
-  return JSON.stringify([organization, website]);
+  /* Escaped so a "</script>" ever appearing in the content can never close the
+     script element early; JSON.stringify does not escape "<" on its own. */
+  return JSON.stringify([organization, website]).replace(/</g, '\\u003c');
 }
 
 /* ------------------------------------------------------------- pages */
@@ -95,6 +96,13 @@ for (const c of contents) {
       jsonLd: jsonLdFor(c),
     })
   );
+}
+
+/* One confirmation page per language: the contact form posts to a real
+   endpoint, which redirects here, so it works without JavaScript too. */
+for (const c of contents) {
+  const path = site.sentPath[c.lang];
+  write(`${path.replace(/^\/|\/$/g, '')}/index.html`, renderSent({ c, site, ogImage, links, path }));
 }
 
 write('index.html', renderGateway({ contents, site, ogImage, alternates }));
@@ -253,12 +261,8 @@ fs.writeFileSync(
 );
 
 console.log(`Built ${written.length} files:\n  ${written.join('\n  ')}`);
-if (!links.hasWhatsapp || !links.hasEmail || !links.hasInstagram) {
-  const missing = [
-    !links.hasWhatsapp && 'whatsapp',
-    !links.hasEmail && 'email',
-    !links.hasInstagram && 'instagram',
-  ].filter(Boolean);
+if (!links.hasWhatsapp || !links.hasInstagram) {
+  const missing = [!links.hasWhatsapp && 'whatsapp', !links.hasInstagram && 'instagram'].filter(Boolean);
   console.log(
     `\nNote: contact channels not yet configured in src/content/site.json → ${missing.join(', ')}.` +
       `\nThose cards render in a "being set up" state until the values are filled in.`

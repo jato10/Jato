@@ -149,10 +149,10 @@
         "name": "Javier Rafael Torres Gil"
       },
       {
-        "name": "Yudenis V. M."
+        "name": "Yudenis V. Martínez"
       }
     ],
-    "photoAlt": "Javier Rafael Torres Gil y Yudenis V. M., fundadores de Global Beyond LLC, sentados en la oficina de la empresa en Miami bajo el logotipo de Global Beyond.",
+    "photoAlt": "Javier Rafael Torres Gil y Yudenis V. Martínez, fundadores de Global Beyond LLC, sentados en la oficina de la empresa en Miami bajo el logotipo de Global Beyond.",
     "photoCaption": "Miami, Florida."
   },
   "values": {
@@ -225,7 +225,28 @@
         "message": "Hola Global Beyond, estoy buscando un producto específico y quisiera consultar disponibilidad y precio."
       }
     ],
-    "unconfigured": "Detalles muy pronto."
+    "unconfigured": "Detalles muy pronto.",
+    "form": {
+      "heading": "Envíanos un mensaje",
+      "lede": "Déjanos tus datos y un mensaje breve. Respondemos personalmente, normalmente en un día hábil.",
+      "name": "Tu nombre",
+      "namePlaceholder": "Nombre y empresa, si la tienes",
+      "email": "Correo",
+      "emailPlaceholder": "tu@ejemplo.com",
+      "phone": "Teléfono o WhatsApp",
+      "phonePlaceholder": "Opcional si dejas un correo",
+      "contactHint": "Déjanos al menos uno de los dos, para saber por dónde responderte.",
+      "message": "Tu mensaje",
+      "messagePlaceholder": "Qué estás buscando: un producto, una categoría, una cantidad o simplemente el catálogo actual.",
+      "optional": "opcional",
+      "submit": "Enviar mensaje",
+      "sending": "Enviando…",
+      "privacy": "Usamos lo que nos envías únicamente para responder tu solicitud. Nada más.",
+      "success": "Mensaje enviado. Te responderemos a los datos que dejaste.",
+      "error": "No se pudo enviar el mensaje. Escríbenos por WhatsApp.",
+      "invalid": "Falta tu nombre, una forma de contactarte o el mensaje."
+    },
+    "channelsHeading": "O contáctanos directamente"
   },
   "footer": {
     "tagline": "Conectamos productos, personas y oportunidades.",
@@ -242,5 +263,12 @@
     "body": "La página que buscabas no existe o cambió de lugar. Todo lo demás está a un paso.",
     "cta": "Volver al inicio",
     "cta2": "Contáctanos"
+  },
+  "sent": {
+    "title": "Mensaje enviado | Global Beyond LLC",
+    "heading": "Tu mensaje va en camino.",
+    "body": "Gracias por escribir a Global Beyond LLC. Leemos cada mensaje nosotros mismos y te responderemos a los datos que dejaste, normalmente en un día hábil.",
+    "cta": "Volver al inicio",
+    "cta2": "Escribirnos por WhatsApp"
   }
 }

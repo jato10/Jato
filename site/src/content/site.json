@@ -8,9 +8,8 @@
     "country": "US"
   },
   "channels": {
-    "whatsapp": "",
-    "email": "",
-    "instagram": ""
+    "whatsapp": "17863344556",
+    "instagram": "https://www.instagram.com/globalbeyondllc/"
   },
   "defaultLang": "en",
   "languages": [
@@ -24,5 +23,9 @@
       "label": "Español",
       "short": "ES"
     }
-  ]
+  ],
+  "sentPath": {
+    "en": "/en/message-sent/",
+    "es": "/es/mensaje-enviado/"
+  }
 }
