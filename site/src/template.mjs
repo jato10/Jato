@@ -175,7 +175,7 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
             <ul class="footer__list">
             ${contactLinks.join('\n            ')}
             </ul>
-            <h2 style="margin-top:32px">${esc(c.footer.langHeading)}</h2>
+            <h2 class="footer__heading--gap">${esc(c.footer.langHeading)}</h2>
             <ul class="footer__list">
             ${langLinks}
             </ul>
@@ -202,14 +202,14 @@ function heroSection({ c, assets, links }) {
         <div class="shell hero__inner">
           <img class="hero__logo" src="${assets}assets/img/logo.svg" width="430" height="220"
             alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async" data-reveal>
-          <p class="eyebrow hero__eyebrow" data-reveal style="--reveal-delay:1">${esc(c.hero.eyebrow)}</p>
-          <h1 class="h-display" id="hero-title" data-reveal style="--reveal-delay:2">${c.hero.title}</h1>
-          <p class="lede" data-reveal style="--reveal-delay:3">${esc(c.hero.lede)}</p>
-          <div class="btn-row" data-reveal style="--reveal-delay:4">
+          <p class="eyebrow hero__eyebrow" data-reveal data-delay="1">${esc(c.hero.eyebrow)}</p>
+          <h1 class="h-display" id="hero-title" data-reveal data-delay="2">${c.hero.title}</h1>
+          <p class="lede" data-reveal data-delay="3">${esc(c.hero.lede)}</p>
+          <div class="btn-row" data-reveal data-delay="4">
             <a class="btn btn--primary" href="${esc(primary)}"${externalAttrs(links, primary)}>${esc(c.hero.ctaPrimary)}</a>
             <a class="btn btn--ghost" href="#contact">${esc(c.hero.ctaSecondary)}</a>
           </div>
-          <p class="hero__note" data-reveal style="--reveal-delay:5">${esc(c.hero.note)}</p>
+          <p class="hero__note" data-reveal data-delay="5">${esc(c.hero.note)}</p>
         </div>
         <span class="hero__scroll" aria-hidden="true"></span>
       </section>`;
@@ -218,7 +218,7 @@ function heroSection({ c, assets, links }) {
 function servicesSection({ c }) {
   const cards = c.services.items
     .map(
-      (item, i) => `<article class="card" data-reveal style="--reveal-delay:${i}">
+      (item, i) => `<article class="card" data-reveal data-delay="${i}">
               <span class="card__rule" aria-hidden="true"></span>
               <h3 class="h-card">${esc(item.title)}</h3>
               <p>${esc(item.body)}</p>
@@ -272,13 +272,13 @@ function catalogSection({ c, links }) {
           <div data-reveal>
             <p class="eyebrow">${esc(c.catalog.eyebrow)}</p>
             <h2 class="h-section" id="catalog-title">${esc(c.catalog.title)}</h2>
-            ${c.catalog.body.map((p) => `<p class="body-text" style="margin-top:22px">${esc(p)}</p>`).join('\n            ')}
+            ${c.catalog.body.map((p) => `<p class="body-text">${esc(p)}</p>`).join('\n            ')}
             <div class="btn-row">
               <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.catalog.cta)}</a>
             </div>
           </div>
-          <div class="panel" data-reveal style="--reveal-delay:1">
-            <ul class="ticks" style="margin-top:0">
+          <div class="panel" data-reveal data-delay="1">
+            <ul class="ticks ticks--flush">
               ${c.catalog.points.map((p) => `<li>${esc(p)}</li>`).join('\n              ')}
             </ul>
           </div>
@@ -290,7 +290,7 @@ function wholesaleSection({ c, links }) {
   const href = links.request(c.contact.presets[1].message);
   const items = c.wholesale.items
     .map(
-      (item, i) => `<article class="card card--dark" data-reveal style="--reveal-delay:${i}">
+      (item, i) => `<article class="card card--dark" data-reveal data-delay="${i}">
               <span class="card__index">${String(i + 1).padStart(2, '0')}</span>
               <h3 class="h-card">${esc(item.title)}</h3>
               <p>${esc(item.body)}</p>
@@ -320,7 +320,7 @@ function aboutSection({ c, assets }) {
   return `<section class="section section--light" id="about" aria-labelledby="about-title">
         <div class="shell split">
           <div data-reveal>
-            <figure style="margin:0">
+            <figure class="about__figure">
               <div class="about__media" data-media>
                 <img src="${assets}assets/img/team.jpg" alt="${esc(c.about.photoAlt)}"
                   width="1600" height="1000" loading="lazy" decoding="async">
@@ -332,10 +332,10 @@ function aboutSection({ c, assets }) {
               <figcaption class="about__caption">${esc(c.about.photoCaption)}</figcaption>
             </figure>
           </div>
-          <div data-reveal style="--reveal-delay:1">
+          <div data-reveal data-delay="1">
             <p class="eyebrow">${esc(c.about.eyebrow)}</p>
             <h2 class="h-section" id="about-title">${esc(c.about.title)}</h2>
-            ${c.about.body.map((p) => `<p class="body-text" style="margin-top:22px">${esc(p)}</p>`).join('\n            ')}
+            ${c.about.body.map((p) => `<p class="body-text">${esc(p)}</p>`).join('\n            ')}
             <ul class="people">
               ${people}
             </ul>
@@ -347,7 +347,7 @@ function aboutSection({ c, assets }) {
 function valuesSection({ c }) {
   const values = c.values.items
     .map(
-      (item, i) => `<div class="value" data-reveal style="--reveal-delay:${i % 3}">
+      (item, i) => `<div class="value" data-reveal data-delay="${i % 3}">
               <h3 class="h-card"><span>${String(i + 1).padStart(2, '0')}</span>${esc(item.title)}</h3>
               <p>${esc(item.body)}</p>
             </div>`
@@ -377,8 +377,8 @@ function contactSection({ c, links }) {
               <p>${esc(ch[key].body)}</p>
               <span class="channel__action">${esc(href ? ch[key].action : c.contact.unconfigured)}</span>`;
     return href
-      ? `<a class="channel" href="${esc(href)}"${externalAttrs(links, href)} data-reveal style="--reveal-delay:${meta.i}">${inner}</a>`
-      : `<div class="channel channel--pending" data-reveal style="--reveal-delay:${meta.i}">${inner}</div>`;
+      ? `<a class="channel" href="${esc(href)}"${externalAttrs(links, href)} data-reveal data-delay="${meta.i}">${inner}</a>`
+      : `<div class="channel channel--pending" data-reveal data-delay="${meta.i}">${inner}</div>`;
   };
 
   cards.push(card('whatsapp', links.whatsapp(c.contact.presets[0].message), { title: ch.whatsapp.label, i: 0 }));
@@ -414,7 +414,7 @@ function contactSection({ c, links }) {
               <p class="fact__label">${esc(c.contact.locationLabel)}</p>
               <p class="fact__value">${esc(c.contact.location)}</p>
             </div>
-            <div data-reveal style="--reveal-delay:1">
+            <div data-reveal data-delay="1">
               <p class="fact__label">${esc(c.contact.hoursLabel)}</p>
               <p class="fact__value">${esc(c.contact.hours)}</p>
             </div>
@@ -457,9 +457,9 @@ ${head(options)}
 export function renderNotFound({ contents, site, ogImage }) {
   const blocks = contents
     .map(
-      (c) => `<section class="shell" lang="${c.lang}" style="padding-block:clamp(40px,7vw,64px)">
-        <p class="eyebrow" style="justify-content:center">${esc(c.brand.name)}</p>
-        <h1 class="h-section" style="max-width:100%;margin-inline:auto">${esc(c.notFound.title)}</h1>
+      (c) => `<section class="shell error-page__block" lang="${c.lang}">
+        <p class="eyebrow eyebrow--center">${esc(c.brand.name)}</p>
+        <h1 class="h-section error-page__title">${esc(c.notFound.title)}</h1>
         <p>${esc(c.notFound.body)}</p>
         <div class="btn-row">
           <a class="btn btn--primary" href="/${c.lang}/">${esc(c.notFound.cta)}</a>
@@ -532,7 +532,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
       <div>
         <img src="/assets/img/logo.svg" alt="${esc(site.legalName)}" width="360" height="184">
         <p lang="en">Choose your language</p>
-        <p lang="es" style="opacity:.7">Elige tu idioma</p>
+        <p lang="es" class="gate__alt">Elige tu idioma</p>
         <div class="gate__links">
           ${links}
         </div>

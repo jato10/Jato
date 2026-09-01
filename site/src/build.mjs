@@ -68,7 +68,9 @@ function jsonLdFor(c) {
     publisher: { '@id': `${origin}/#organization` },
   };
 
-  return JSON.stringify([organization, website]);
+  /* Escaped so a "</script>" ever appearing in the content can never close the
+     script element early; JSON.stringify does not escape "<" on its own. */
+  return JSON.stringify([organization, website]).replace(/</g, '\\u003c');
 }
 
 /* ------------------------------------------------------------- pages */
