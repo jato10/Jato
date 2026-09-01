@@ -220,11 +220,19 @@ ${Object.entries(securityHeaders)
 `
 );
 
+/* Written at the repository root: Vercel reads vercel.json from the root of the
+   deployed repository, and `outputDirectory` is what points it at site/public
+   without anyone having to set a Root Directory in the dashboard. Empty build
+   and install commands tell Vercel this is pre-built static output. */
 fs.writeFileSync(
-  path.join(publicDir, '..', 'vercel.json'),
+  path.join(publicDir, '..', '..', 'vercel.json'),
   JSON.stringify(
     {
       $schema: 'https://openapi.vercel.sh/vercel.json',
+      framework: null,
+      buildCommand: '',
+      installCommand: '',
+      outputDirectory: 'site/public',
       cleanUrls: true,
       trailingSlash: true,
       headers: [

@@ -18,8 +18,14 @@ site/
 │   ├── template.mjs          the HTML (one source for both languages)
 │   ├── content/{en,es,site}.json   all copy and configuration
 │   └── brand/make-logo.mjs   regenerates the logo SVGs from glyph outlines
-└── vercel.json          security headers for Vercel-style hosts
+└── (../vercel.json)     written at the repository root by the build
 ```
+
+The build writes `vercel.json` at the **repository root**, not inside `site/`:
+Vercel reads it from the root of the deployed repository, and its
+`outputDirectory: "site/public"` is what points the deployment at this folder,
+so no Root Directory has to be set in the Vercel dashboard. Empty build and
+install commands mark the folder as pre-built static output.
 
 ## Before going live — three things to fill in
 
@@ -59,8 +65,10 @@ npm install       # only needed to regenerate the logo
 npm run build     # renders public/
 ```
 
-Deploy `site/public` as a static site. `_headers` (Netlify / Cloudflare Pages)
-and `vercel.json` both set Content-Security-Policy, X-Content-Type-Options,
+Deploy `site/public` as a static site. On Vercel the root `vercel.json` does
+this for you; on Netlify or Cloudflare Pages set the publish directory to
+`site/public` with no build command. `_headers` (Netlify / Cloudflare Pages)
+and the root `vercel.json` both set Content-Security-Policy, X-Content-Type-Options,
 Referrer-Policy, Permissions-Policy, X-Frame-Options and HSTS, plus long-lived
 caching for `/assets/*`. The CSP allows only same-origin resources and the one
 inline bootstrap script, which is pinned by SHA-256 hash — if you edit that
