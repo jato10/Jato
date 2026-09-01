@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.globalbeyondllc.com/sitemap.xml
+Sitemap: https://globalbeyondllc.com/sitemap.xml
