@@ -1,0 +1,246 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "locale": "en_US",
+  "path": "/en/",
+  "meta": {
+    "title": "Global Beyond LLC | E-Commerce, Retail & Wholesale in Miami",
+    "description": "Discover Global Beyond LLC and request the latest product catalog, availability, pricing, ordering, and shipping details directly from our team in Miami.",
+    "ogAlt": "Global Beyond LLC — Beyond Borders. Beyond Possibilities."
+  },
+  "brand": {
+    "name": "Global Beyond LLC",
+    "short": "Global Beyond"
+  },
+  "a11y": {
+    "skip": "Skip to main content",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "primaryNav": "Primary",
+    "langNav": "Language",
+    "home": "Global Beyond LLC — home"
+  },
+  "nav": [
+    {
+      "id": "services",
+      "label": "What we do"
+    },
+    {
+      "id": "process",
+      "label": "How it works"
+    },
+    {
+      "id": "catalog",
+      "label": "Catalog"
+    },
+    {
+      "id": "wholesale",
+      "label": "Wholesale"
+    },
+    {
+      "id": "about",
+      "label": "About"
+    },
+    {
+      "id": "contact",
+      "label": "Contact"
+    }
+  ],
+  "navCta": "Request the catalog",
+  "hero": {
+    "eyebrow": "Miami, Florida — United States",
+    "title": "Beyond Borders.<br>Beyond Possibilities.",
+    "titlePlain": "Beyond Borders. Beyond Possibilities.",
+    "lede": "Global Beyond LLC is an e-commerce company connecting products, people, and opportunities — through thoughtful selection, clear information, and direct human service.",
+    "ctaPrimary": "Request the current catalog",
+    "ctaSecondary": "Talk to our team",
+    "note": "Our selection evolves, so availability, pricing, and shipping details are always confirmed for your specific request."
+  },
+  "services": {
+    "eyebrow": "What we do",
+    "title": "Three ways to work with us.",
+    "lede": "Retail, wholesale, and catalog requests — each one answered by a person, not a queue.",
+    "items": [
+      {
+        "title": "Retail",
+        "body": "Individual orders, handled personally. Tell us what you are looking for and we confirm what is currently available, what it costs, and how it ships."
+      },
+      {
+        "title": "Wholesale",
+        "body": "Volume requests reviewed case by case. Share quantities, specifications, and timelines, and we come back with availability and pricing for that request."
+      },
+      {
+        "title": "Catalog requests",
+        "body": "Our selection changes over time. Ask for the current catalog and you receive what is genuinely available now — not an outdated page."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "title": "A short, transparent path from question to order.",
+    "lede": "Four steps. The same people with you through all of them.",
+    "steps": [
+      {
+        "title": "Send your request",
+        "body": "Write to us with what you need — a product, a category, a quantity, or simply the current catalog."
+      },
+      {
+        "title": "We review availability",
+        "body": "We check what is in the selection right now and confirm the details that matter for your request."
+      },
+      {
+        "title": "You receive the specifics",
+        "body": "Availability, pricing, ordering, and shipping details, written clearly, for your request only."
+      },
+      {
+        "title": "We stay with your order",
+        "body": "From the first message to the delivery details, you keep talking to the same team."
+      }
+    ]
+  },
+  "catalog": {
+    "eyebrow": "The selection",
+    "title": "A catalog that evolves.",
+    "body": [
+      "We do not publish a fixed product grid, because that is not how our selection works. What we offer is curated and it changes — new items arrive, others move on.",
+      "So instead of showing you a page that might already be out of date, we send you the current catalog when you ask for it, with the availability and pricing that apply on that day."
+    ],
+    "points": [
+      "Curated, not exhaustive — we select before we list.",
+      "Availability confirmed at the moment of your request.",
+      "Pricing, ordering, and shipping details in writing.",
+      "One conversation, from question to delivery details."
+    ],
+    "cta": "Request the current catalog"
+  },
+  "wholesale": {
+    "eyebrow": "Wholesale & bulk orders",
+    "title": "Larger orders, reviewed properly.",
+    "lede": "Bulk and wholesale requests are quoted individually. To give you an accurate answer on the first reply, it helps to include:",
+    "items": [
+      {
+        "title": "Quantities",
+        "body": "How many units, and whether the volume is one-time or recurring."
+      },
+      {
+        "title": "Specifications",
+        "body": "Products, categories, variants, or references you already have in mind."
+      },
+      {
+        "title": "Timeline",
+        "body": "When you need it, and how flexible those dates are."
+      },
+      {
+        "title": "Destination",
+        "body": "Where the order is going, so we can confirm shipping details for it."
+      }
+    ],
+    "cta": "Start a wholesale inquiry"
+  },
+  "about": {
+    "eyebrow": "The people behind the company",
+    "title": "A company you can actually reach.",
+    "body": [
+      "Global Beyond LLC is based in Miami, Florida, and is run directly by the two people who founded it. When you write to us, you are writing to them.",
+      "We are early in our growth, and we prefer to say so. What we can promise today is careful selection, clear and honest information, and answers that come from a person who knows your request."
+    ],
+    "people": [
+      {
+        "name": "Javier Rafael Torres Gil"
+      },
+      {
+        "name": "Yudenis V. M."
+      }
+    ],
+    "photoAlt": "Javier Rafael Torres Gil and Yudenis V. M., the founders of Global Beyond LLC, seated in the company's Miami office beneath the Global Beyond logo.",
+    "photoCaption": "Miami, Florida."
+  },
+  "values": {
+    "eyebrow": "What we stand for",
+    "title": "Six commitments, kept simple.",
+    "items": [
+      {
+        "title": "Trust",
+        "body": "We would rather tell you what we do not have than promise what we cannot deliver."
+      },
+      {
+        "title": "Careful selection",
+        "body": "Everything in the catalog is there because we chose it, not because it filled a shelf."
+      },
+      {
+        "title": "Transparency",
+        "body": "Availability, pricing, and shipping details are stated plainly, in writing, before you commit."
+      },
+      {
+        "title": "Opportunity",
+        "body": "Retail or wholesale, a first order or a recurring one — the door is the same size for everyone."
+      },
+      {
+        "title": "Thoughtful growth",
+        "body": "We grow at the pace at which we can still answer every message ourselves."
+      },
+      {
+        "title": "Global vision",
+        "body": "Miami is where we are. Connecting products, people, and opportunities is where we are going."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Talk to us directly.",
+    "lede": "Send us your request and we will reply with the current catalog, availability, pricing, ordering, and shipping details for it.",
+    "channels": {
+      "whatsapp": {
+        "label": "WhatsApp",
+        "body": "The fastest way to reach us.",
+        "action": "Message us"
+      },
+      "email": {
+        "label": "Email",
+        "body": "For catalogs, wholesale, and detailed requests.",
+        "action": "Write to us"
+      },
+      "instagram": {
+        "label": "Instagram",
+        "body": "A look at what we are working on.",
+        "action": "Follow along"
+      }
+    },
+    "locationLabel": "Based in",
+    "location": "Miami, Florida, United States",
+    "hoursLabel": "Replies",
+    "hours": "Written personally by our team — usually within one business day.",
+    "presetHeading": "Prefer to start with a ready message?",
+    "presets": [
+      {
+        "label": "Ask for the current catalog",
+        "message": "Hello Global Beyond, I would like to receive your current product catalog."
+      },
+      {
+        "label": "Ask about a wholesale order",
+        "message": "Hello Global Beyond, I am interested in a wholesale order and would like to discuss quantities and availability."
+      },
+      {
+        "label": "Ask about a specific product",
+        "message": "Hello Global Beyond, I am looking for a specific product and would like to check availability and pricing."
+      }
+    ],
+    "unconfigured": "Details coming shortly."
+  },
+  "footer": {
+    "tagline": "Connecting products, people, and opportunities.",
+    "rights": "All rights reserved.",
+    "legal": "Global Beyond LLC is a limited liability company registered in the State of Florida, United States.",
+    "disclaimer": "Product availability, pricing, and shipping details are confirmed individually for each request.",
+    "navHeading": "Explore",
+    "contactHeading": "Contact",
+    "langHeading": "Language"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "This page is beyond our map.",
+    "body": "The page you were looking for does not exist, or it has moved. Everything else is one step away.",
+    "cta": "Back to the homepage",
+    "cta2": "Contact us"
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "lang": "es",
+  "dir": "ltr",
+  "locale": "es_ES",
+  "path": "/es/",
+  "meta": {
+    "title": "Global Beyond LLC | Comercio electrónico, venta al detal y al mayor en Miami",
+    "description": "Conoce Global Beyond LLC y solicita a nuestro equipo en Miami el catálogo actual, disponibilidad, precios, pedidos y detalles de envío.",
+    "ogAlt": "Global Beyond LLC — Más allá de las fronteras. Más allá de lo posible."
+  },
+  "brand": {
+    "name": "Global Beyond LLC",
+    "short": "Global Beyond"
+  },
+  "a11y": {
+    "skip": "Ir al contenido principal",
+    "menuOpen": "Abrir menú",
+    "menuClose": "Cerrar menú",
+    "primaryNav": "Principal",
+    "langNav": "Idioma",
+    "home": "Global Beyond LLC — inicio"
+  },
+  "nav": [
+    {
+      "id": "services",
+      "label": "Qué hacemos"
+    },
+    {
+      "id": "process",
+      "label": "Cómo funciona"
+    },
+    {
+      "id": "catalog",
+      "label": "Catálogo"
+    },
+    {
+      "id": "wholesale",
+      "label": "Al mayor"
+    },
+    {
+      "id": "about",
+      "label": "Nosotros"
+    },
+    {
+      "id": "contact",
+      "label": "Contacto"
+    }
+  ],
+  "navCta": "Solicitar catálogo",
+  "hero": {
+    "eyebrow": "Miami, Florida — Estados Unidos",
+    "title": "Más allá de las fronteras.<br>Más allá de lo posible.",
+    "titlePlain": "Más allá de las fronteras. Más allá de lo posible.",
+    "lede": "Global Beyond LLC es una empresa de comercio electrónico que conecta productos, personas y oportunidades — con una selección cuidada, información clara y atención humana directa.",
+    "ctaPrimary": "Solicitar el catálogo actual",
+    "ctaSecondary": "Hablar con el equipo",
+    "note": "Nuestra selección cambia con el tiempo, por eso la disponibilidad, los precios y los detalles de envío siempre se confirman para cada solicitud."
+  },
+  "services": {
+    "eyebrow": "Qué hacemos",
+    "title": "Tres formas de trabajar con nosotros.",
+    "lede": "Detal, mayor y solicitudes de catálogo — cada una la responde una persona, no una fila de espera.",
+    "items": [
+      {
+        "title": "Detal",
+        "body": "Pedidos individuales, atendidos de forma personal. Cuéntanos qué buscas y te confirmamos qué hay disponible, cuánto cuesta y cómo se envía."
+      },
+      {
+        "title": "Al mayor",
+        "body": "Solicitudes por volumen evaluadas caso por caso. Indícanos cantidades, especificaciones y plazos, y te respondemos con disponibilidad y precios para esa solicitud."
+      },
+      {
+        "title": "Solicitudes de catálogo",
+        "body": "Nuestra selección cambia con el tiempo. Pide el catálogo actual y recibirás lo que realmente está disponible hoy, no una página desactualizada."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Cómo funciona",
+    "title": "Un camino corto y transparente, de la pregunta al pedido.",
+    "lede": "Cuatro pasos. Las mismas personas contigo en todos ellos.",
+    "steps": [
+      {
+        "title": "Envía tu solicitud",
+        "body": "Escríbenos con lo que necesitas: un producto, una categoría, una cantidad o simplemente el catálogo actual."
+      },
+      {
+        "title": "Revisamos disponibilidad",
+        "body": "Verificamos qué hay en la selección en este momento y confirmamos los detalles que importan para tu solicitud."
+      },
+      {
+        "title": "Recibes la información",
+        "body": "Disponibilidad, precios, forma de pedido y detalles de envío, explicados con claridad y solo para tu caso."
+      },
+      {
+        "title": "Acompañamos tu pedido",
+        "body": "Desde el primer mensaje hasta los detalles de entrega, sigues hablando con el mismo equipo."
+      }
+    ]
+  },
+  "catalog": {
+    "eyebrow": "La selección",
+    "title": "Un catálogo que evoluciona.",
+    "body": [
+      "No publicamos una cuadrícula fija de productos, porque no es así como funciona nuestra selección. Lo que ofrecemos es curado y cambia: llegan artículos nuevos y otros siguen su camino.",
+      "Por eso, en lugar de mostrarte una página que podría estar desactualizada, te enviamos el catálogo vigente cuando lo pides, con la disponibilidad y los precios que aplican ese día."
+    ],
+    "points": [
+      "Curado, no exhaustivo: seleccionamos antes de ofrecer.",
+      "Disponibilidad confirmada en el momento de tu solicitud.",
+      "Precios, pedidos y detalles de envío por escrito.",
+      "Una sola conversación, de la pregunta a la entrega."
+    ],
+    "cta": "Solicitar el catálogo actual"
+  },
+  "wholesale": {
+    "eyebrow": "Mayor y pedidos por volumen",
+    "title": "Pedidos grandes, evaluados como corresponde.",
+    "lede": "Las solicitudes al mayor se cotizan de forma individual. Para darte una respuesta precisa desde el primer mensaje, ayuda mucho incluir:",
+    "items": [
+      {
+        "title": "Cantidades",
+        "body": "Cuántas unidades y si el volumen es puntual o recurrente."
+      },
+      {
+        "title": "Especificaciones",
+        "body": "Productos, categorías, variantes o referencias que ya tengas en mente."
+      },
+      {
+        "title": "Plazos",
+        "body": "Para cuándo lo necesitas y qué tan flexibles son esas fechas."
+      },
+      {
+        "title": "Destino",
+        "body": "A dónde va el pedido, para confirmarte los detalles de envío correspondientes."
+      }
+    ],
+    "cta": "Iniciar una solicitud al mayor"
+  },
+  "about": {
+    "eyebrow": "Las personas detrás de la empresa",
+    "title": "Una empresa a la que sí puedes llegar.",
+    "body": [
+      "Global Beyond LLC tiene su base en Miami, Florida, y la dirigen directamente las dos personas que la fundaron. Cuando nos escribes, les escribes a ellos.",
+      "Estamos en una etapa temprana de crecimiento y preferimos decirlo. Lo que sí podemos prometer hoy es una selección cuidada, información clara y honesta, y respuestas de una persona que conoce tu solicitud."
+    ],
+    "people": [
+      {
+        "name": "Javier Rafael Torres Gil"
+      },
+      {
+        "name": "Yudenis V. M."
+      }
+    ],
+    "photoAlt": "Javier Rafael Torres Gil y Yudenis V. M., fundadores de Global Beyond LLC, sentados en la oficina de la empresa en Miami bajo el logotipo de Global Beyond.",
+    "photoCaption": "Miami, Florida."
+  },
+  "values": {
+    "eyebrow": "Lo que defendemos",
+    "title": "Seis compromisos, dichos con sencillez.",
+    "items": [
+      {
+        "title": "Confianza",
+        "body": "Preferimos decirte lo que no tenemos antes que prometer lo que no podemos cumplir."
+      },
+      {
+        "title": "Selección cuidada",
+        "body": "Todo lo que está en el catálogo está porque lo elegimos, no porque había que llenar un estante."
+      },
+      {
+        "title": "Transparencia",
+        "body": "Disponibilidad, precios y detalles de envío se explican con claridad y por escrito, antes de que te comprometas."
+      },
+      {
+        "title": "Oportunidad",
+        "body": "Detal o mayor, un primer pedido o uno recurrente: la puerta es del mismo tamaño para todos."
+      },
+      {
+        "title": "Crecimiento consciente",
+        "body": "Crecemos al ritmo que nos permite seguir respondiendo cada mensaje nosotros mismos."
+      },
+      {
+        "title": "Visión global",
+        "body": "Miami es donde estamos. Conectar productos, personas y oportunidades es hacia dónde vamos."
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "title": "Habla con nosotros directamente.",
+    "lede": "Envíanos tu solicitud y te responderemos con el catálogo actual, la disponibilidad, los precios, la forma de pedido y los detalles de envío.",
+    "channels": {
+      "whatsapp": {
+        "label": "WhatsApp",
+        "body": "La forma más rápida de contactarnos.",
+        "action": "Escríbenos"
+      },
+      "email": {
+        "label": "Correo",
+        "body": "Para catálogos, mayor y solicitudes detalladas.",
+        "action": "Enviar correo"
+      },
+      "instagram": {
+        "label": "Instagram",
+        "body": "Un vistazo a lo que estamos haciendo.",
+        "action": "Seguirnos"
+      }
+    },
+    "locationLabel": "Ubicación",
+    "location": "Miami, Florida, Estados Unidos",
+    "hoursLabel": "Respuestas",
+    "hours": "Escritas personalmente por nuestro equipo, normalmente en un día hábil.",
+    "presetHeading": "¿Prefieres empezar con un mensaje listo?",
+    "presets": [
+      {
+        "label": "Pedir el catálogo actual",
+        "message": "Hola Global Beyond, me gustaría recibir su catálogo de productos actual."
+      },
+      {
+        "label": "Consultar un pedido al mayor",
+        "message": "Hola Global Beyond, estoy interesado en un pedido al mayor y quisiera conversar sobre cantidades y disponibilidad."
+      },
+      {
+        "label": "Consultar un producto específico",
+        "message": "Hola Global Beyond, estoy buscando un producto específico y quisiera consultar disponibilidad y precio."
+      }
+    ],
+    "unconfigured": "Detalles muy pronto."
+  },
+  "footer": {
+    "tagline": "Conectamos productos, personas y oportunidades.",
+    "rights": "Todos los derechos reservados.",
+    "legal": "Global Beyond LLC es una compañía de responsabilidad limitada registrada en el estado de Florida, Estados Unidos.",
+    "disclaimer": "La disponibilidad, los precios y los detalles de envío se confirman de forma individual para cada solicitud.",
+    "navHeading": "Explorar",
+    "contactHeading": "Contacto",
+    "langHeading": "Idioma"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Esta página quedó más allá de nuestro mapa.",
+    "body": "La página que buscabas no existe o cambió de lugar. Todo lo demás está a un paso.",
+    "cta": "Volver al inicio",
+    "cta2": "Contáctanos"
+  }
+}
