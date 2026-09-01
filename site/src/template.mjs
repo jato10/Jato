@@ -310,7 +310,7 @@ function aboutSection({ c, assets }) {
             <figure class="about__figure">
               <div class="about__media" data-media>
                 <img src="${assets}assets/img/team.jpg" alt="${esc(c.about.photoAlt)}"
-                  width="1600" height="1000" loading="lazy" decoding="async">
+                  width="1800" height="1014" loading="lazy" decoding="async">
                 <div class="about__fallback" aria-hidden="true">
                   <img src="${assets}assets/img/logo.svg" alt="" width="260" height="133">
                   <p>${esc(c.about.photoCaption)}</p>

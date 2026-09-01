@@ -659,7 +659,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border: 1px solid var(--line-light);
   background:
     radial-gradient(90% 80% at 50% 20%, #1a2438 0%, #0a1120 60%, #06090f 100%);
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   display: grid;
   place-items: center;
 }
@@ -667,7 +667,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 32%;
+  object-position: center;
 }
 .about__media.is-missing > img { display: none; }
 .about__fallback { display: none; padding: 12% 10%; text-align: center; }
