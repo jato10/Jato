@@ -252,23 +252,26 @@ function processSection({ c }) {
       </section>`;
 }
 
-function catalogSection({ c, links }) {
+function catalogSection({ c, links, assets }) {
   const href = links.request(c.contact.presets[0].message);
   return `<section class="section section--light-alt" id="catalog" aria-labelledby="catalog-title">
         <div class="shell split split--wide-first">
           <div data-reveal>
             <p class="eyebrow">${esc(c.catalog.eyebrow)}</p>
             <h2 class="h-section" id="catalog-title">${esc(c.catalog.title)}</h2>
-            ${c.catalog.body.map((p) => `<p class="body-text">${esc(p)}</p>`).join('\n            ')}
+            ${c.catalog.body.map((para) => `<p class="body-text">${esc(para)}</p>`).join('\n            ')}
+            <ul class="ticks">
+              ${c.catalog.points.map((p) => `<li>${esc(p)}</li>`).join('\n              ')}
+            </ul>
             <div class="btn-row">
               <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.catalog.cta)}</a>
             </div>
           </div>
-          <div class="panel" data-reveal data-delay="1">
-            <ul class="ticks ticks--flush">
-              ${c.catalog.points.map((p) => `<li>${esc(p)}</li>`).join('\n              ')}
-            </ul>
-          </div>
+          <figure class="catalog__figure" data-reveal data-delay="1">
+            <img class="catalog__photo" src="${assets}assets/img/catalog.webp" alt="${esc(c.catalog.photoAlt)}"
+              width="1400" height="950" loading="lazy" decoding="async">
+            <figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>
+          </figure>
         </div>
       </section>`;
 }
@@ -467,7 +470,7 @@ ${head(options)}
       ${heroSection({ c, assets, links })}
       ${servicesSection({ c })}
       ${processSection({ c })}
-      ${catalogSection({ c, links })}
+      ${catalogSection({ c, links, assets })}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
       ${valuesSection({ c })}
