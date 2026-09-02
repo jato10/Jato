@@ -107,6 +107,17 @@ caching for `/assets/*`. The CSP allows only same-origin resources and the one
 inline bootstrap script, which is pinned by SHA-256 hash — if you edit that
 snippet in `template.mjs`, re-run the build so the hash is regenerated.
 
+`/assets/*` is cached `immutable` for a year, so `styles.css`, `main.js` and
+every image referenced from the page templates carry a `?v=<hash>` query
+string — `assetVersion()` in `template.mjs` computes it from the file's own
+bytes at build time. This is what makes the immutable caching safe: edit
+`styles.css` and rebuild, and every page gets a new URL for it automatically,
+with no version number to remember to bump by hand. If you add a new asset
+under `/assets/` and reference it from a template, route it through
+`assetVersion('assets/...')` the same way — a plain hardcoded path would sit
+outside this and could go stale in visitors' caches for up to a year after
+you change it.
+
 ## Privacy Policy and Terms of Use
 
 `/en/privacy/`, `/es/privacy/`, `/en/terms/` and `/es/terms/` are real pages, built

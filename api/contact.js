@@ -62,7 +62,11 @@ function parseBody(req) {
 
 module.exports = async function handler(req, res) {
   const body = parseBody(req);
-  const lang = LANGS[body.lang] ? body.lang : 'en';
+  /* hasOwnProperty, not a bare LANGS[body.lang] lookup: "lang":"toString" or
+     "__proto__" would otherwise resolve through the prototype chain to a
+     truthy value, then crash a few lines down when the code reads a field
+     (like .errors.missing) that only the real per-language objects have. */
+  const lang = Object.prototype.hasOwnProperty.call(LANGS, body.lang) ? body.lang : 'en';
   const copy = LANGS[lang];
   const json = wantsJson(req);
 
