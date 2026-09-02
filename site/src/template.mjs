@@ -1,6 +1,11 @@
 /* HTML templates for the Global Beyond LLC site.
    One source of truth for both languages, so EN and ES can never drift apart. */
 
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+
 export const esc = (value) =>
   String(value)
     .replace(/&/g, '&amp;')
@@ -9,6 +14,23 @@ export const esc = (value) =>
     .replace(/"/g, '&quot;');
 
 const attr = (name, value) => (value ? ` ${name}="${esc(value)}"` : '');
+
+/* /assets/* is served with a one-year immutable Cache-Control, and every file
+   under it keeps a fixed name — so without this, a browser or CDN edge that
+   already has the previous bytes would keep serving them for up to a year
+   after any future edit to the CSS, the JS, or one of these images. Appending
+   a short hash of the file's own content to its URL means the URL changes the
+   moment the bytes do: the old, still-cached URL stays valid forever, and the
+   new one is fetched fresh. No manual cache-busting to remember on a deploy. */
+const publicDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
+const versionCache = new Map();
+export function assetVersion(relPath) {
+  if (!versionCache.has(relPath)) {
+    const bytes = fs.readFileSync(path.join(publicDir, relPath));
+    versionCache.set(relPath, crypto.createHash('sha256').update(bytes).digest('hex').slice(0, 8));
+  }
+  return `/${relPath}?v=${versionCache.get(relPath)}`;
+}
 
 /* ------------------------------------------------------------- contact */
 export function makeLinks(site) {
@@ -49,8 +71,8 @@ ${noindex ? '<meta name="robots" content="noindex, follow">\n' : '<meta name="ro
 ${alternates.map((a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
 <meta name="theme-color" content="#070b14">
 <meta name="color-scheme" content="dark">
-<link rel="icon" href="${assets}assets/img/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="${assets}assets/img/apple-touch-icon.png">
+<link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
+<link rel="apple-touch-icon" href="${assetVersion('assets/img/apple-touch-icon.png')}">
 <link rel="manifest" href="${assets}site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.legalName)}">
@@ -66,7 +88,7 @@ ${alternates.map((a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${
 <meta name="twitter:title" content="${esc(c.meta.title)}">
 <meta name="twitter:description" content="${esc(c.meta.description)}">
 <meta name="twitter:image" content="${esc(ogImage)}">
-<link rel="stylesheet" href="${assets}assets/css/styles.css">
+<link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
 ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ''}`;
 }
 
@@ -91,7 +113,7 @@ function siteHeader({ c, site, assets, langHrefs }) {
   return `<header class="header" data-header>
       <div class="header__inner">
         <a class="brand" href="${assets}${c.lang}/" aria-label="${esc(c.a11y.home)}">
-          <img src="${assets}assets/img/logo-mark.webp" alt="" width="420" height="166" decoding="async">
+          <img src="${assetVersion('assets/img/logo-mark.webp')}" alt="" width="420" height="166" decoding="async">
           <span class="brand__name">${esc(site.legalName)}</span>
         </a>
         <nav class="nav" data-nav aria-label="${esc(c.a11y.primaryNav)}">
@@ -148,7 +170,7 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
       <div class="shell">
         <div class="footer__top">
           <div class="footer__brand">
-            <img src="${assets}assets/img/logo.webp" alt="${esc(site.legalName)}" width="900" height="440" loading="lazy" decoding="async">
+            <img src="${assetVersion('assets/img/logo.webp')}" alt="${esc(site.legalName)}" width="900" height="440" loading="lazy" decoding="async">
             <p class="footer__tagline">${esc(c.footer.tagline)}</p>
           </div>
           <div>
@@ -193,7 +215,7 @@ function heroSection({ c, assets, links }) {
         <div class="hero__glow" aria-hidden="true"></div>
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="shell hero__inner">
-          <img class="hero__logo" src="${assets}assets/img/logo.webp" width="900" height="440"
+          <img class="hero__logo" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
             alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async" data-reveal>
           <p class="eyebrow hero__eyebrow" data-reveal data-delay="1">${esc(c.hero.eyebrow)}</p>
           <h1 class="h-display" id="hero-title" data-reveal data-delay="2">${c.hero.title}</h1>
@@ -274,7 +296,7 @@ function catalogSection({ c, links, assets }) {
             </div>
           </div>
           <figure class="catalog__figure" data-reveal data-delay="1">
-            <img class="catalog__photo" src="${assets}assets/img/catalog.webp" alt="${esc(c.catalog.photoAlt)}"
+            <img class="catalog__photo" src="${assetVersion('assets/img/catalog.webp')}" alt="${esc(c.catalog.photoAlt)}"
               width="1400" height="950" loading="lazy" decoding="async">
             <figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>
           </figure>
@@ -318,10 +340,10 @@ function aboutSection({ c, assets }) {
           <div data-reveal>
             <figure class="about__figure">
               <div class="about__media" data-media>
-                <img src="${assets}assets/img/team.jpg" alt="${esc(c.about.photoAlt)}"
+                <img src="${assetVersion('assets/img/team.jpg')}" alt="${esc(c.about.photoAlt)}"
                   width="1800" height="1014" loading="lazy" decoding="async">
                 <div class="about__fallback" aria-hidden="true">
-                  <img src="${assets}assets/img/logo.webp" alt="" width="900" height="440">
+                  <img src="${assetVersion('assets/img/logo.webp')}" alt="" width="900" height="440">
                   <p>${esc(c.about.photoCaption)}</p>
                 </div>
               </div>
@@ -483,7 +505,7 @@ ${head(options)}
       ${contactSection({ c, links, assets })}
     </main>
     ${siteFooter({ ...options })}
-    <script src="${assets}assets/js/main.js" defer></script>
+    <script src="${assetVersion('assets/js/main.js')}" defer></script>
   </body>
 </html>
 `;
@@ -514,15 +536,15 @@ export function renderNotFound({ contents, site, ogImage }) {
     <meta name="robots" content="noindex, follow">
     <meta name="theme-color" content="#070b14">
     <meta name="color-scheme" content="dark">
-    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
     <meta property="og:image" content="${esc(ogImage)}">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
   </head>
   <body>
     <main class="error-page">
       <div>
-        <img src="/assets/img/logo.webp" alt="${esc(site.legalName)}" width="900" height="440">
+        <img src="${assetVersion('assets/img/logo.webp')}" alt="${esc(site.legalName)}" width="900" height="440">
         <p class="error-page__code">404</p>
       ${blocks}
       </div>
@@ -552,20 +574,20 @@ export function renderGateway({ contents, site, ogImage, alternates }) {
     <meta name="robots" content="noindex, follow">
     <meta name="theme-color" content="#070b14">
     <meta name="color-scheme" content="dark">
-    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
     <link rel="manifest" href="/site.webmanifest">
 ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
     <meta property="og:type" content="website">
     <meta property="og:title" content="${esc(contents[0].meta.title)}">
     <meta property="og:description" content="${esc(contents[0].meta.description)}">
     <meta property="og:image" content="${esc(ogImage)}">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
   </head>
   <body>
     <main class="gate">
       <div>
-        <img src="/assets/img/logo.webp" alt="${esc(site.legalName)}" width="900" height="440">
+        <img src="${assetVersion('assets/img/logo.webp')}" alt="${esc(site.legalName)}" width="900" height="440">
         <p lang="en">Choose your language</p>
         <p lang="es" class="gate__alt">Elige tu idioma</p>
         <div class="gate__links">
@@ -573,7 +595,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
         </div>
       </div>
     </main>
-    <script src="/assets/js/lang-redirect.js" defer></script>
+    <script src="${assetVersion('assets/js/lang-redirect.js')}" defer></script>
   </body>
 </html>
 `;
@@ -592,15 +614,15 @@ export function renderSent({ c, site, ogImage, links, path }) {
     <meta name="theme-color" content="#070b14">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="${esc(site.origin.replace(/\/$/, '') + path)}">
-    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
     <meta property="og:image" content="${esc(ogImage)}">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
   </head>
   <body>
     <main class="error-page">
       <div>
-        <img src="/assets/img/logo.webp" alt="${esc(site.legalName)}" width="900" height="440">
+        <img src="${assetVersion('assets/img/logo.webp')}" alt="${esc(site.legalName)}" width="900" height="440">
         <h1>${esc(c.sent.heading)}</h1>
         <p>${esc(c.sent.body)}</p>
         <div class="btn-row">
@@ -647,14 +669,14 @@ export function renderLegal({ c, site, assets, links, alternates, langHrefs, can
 ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
     <meta name="theme-color" content="#070b14">
     <meta name="color-scheme" content="dark">
-    <link rel="icon" href="${assets}assets/img/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="${assets}assets/img/apple-touch-icon.png">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
+    <link rel="apple-touch-icon" href="${assetVersion('assets/img/apple-touch-icon.png')}">
     <link rel="manifest" href="${assets}site.webmanifest">
     <meta property="og:type" content="website">
     <meta property="og:title" content="${esc(d.title)}">
     <meta property="og:description" content="${esc(d.metaDescription)}">
     <meta property="og:image" content="${esc(ogImage)}">
-    <link rel="stylesheet" href="${assets}assets/css/styles.css">
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
   </head>
   <body>
@@ -664,7 +686,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
       ${legalPage({ c, site, assets, doc })}
     </main>
     ${siteFooter({ c, site, assets, links, langHrefs })}
-    <script src="${assets}assets/js/main.js" defer></script>
+    <script src="${assetVersion('assets/js/main.js')}" defer></script>
   </body>
 </html>
 `;
