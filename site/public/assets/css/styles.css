@@ -651,6 +651,23 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: radial-gradient(80% 60% at 20% 0%, rgba(120, 165, 215, 0.10), transparent 70%);
 }
 
+/* ------------------------------------------------------- 7b. Catalogue */
+.catalog__figure { margin: 0; }
+.catalog__photo {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-light);
+  box-shadow: 0 24px 60px rgba(12, 20, 32, 0.10);
+}
+.catalog__caption {
+  margin-top: 16px;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+}
+
 /* --------------------------------------------------------- 8. About */
 .about__media {
   position: relative;

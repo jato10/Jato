@@ -111,7 +111,9 @@
       "Pricing, ordering, and shipping details in writing.",
       "One conversation, from question to delivery details."
     ],
-    "cta": "Request the current catalog"
+    "cta": "Request the current catalog",
+    "photoAlt": "Yudenis V. Martínez photographing a product for the current Global Beyond LLC catalog, the camera framing the item on a lit set.",
+    "photoCaption": "Photographing what goes into the current catalog."
   },
   "wholesale": {
     "eyebrow": "Wholesale & bulk orders",

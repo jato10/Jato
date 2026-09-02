@@ -42,7 +42,7 @@ function jsonLdFor(c) {
     name: site.legalName,
     legalName: site.legalName,
     url: `${origin}/${c.lang}/`,
-    logo: `${origin}/assets/img/logo.svg`,
+    logo: `${origin}/assets/img/logo.webp`,
     image: ogImage,
     description: c.meta.description,
     slogan: c.hero.titlePlain,
@@ -144,7 +144,7 @@ write(
       theme_color: '#070b14',
       lang: site.defaultLang,
       icons: [
-        { src: '/assets/img/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+        { src: '/assets/img/favicon.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
         { src: '/assets/img/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
         { src: '/assets/img/icon-512.png', sizes: '512x512', type: 'image/png' },
       ],
