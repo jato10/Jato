@@ -49,7 +49,7 @@ ${noindex ? '<meta name="robots" content="noindex, follow">\n' : '<meta name="ro
 ${alternates.map((a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
 <meta name="theme-color" content="#070b14">
 <meta name="color-scheme" content="dark">
-<link rel="icon" href="${assets}assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="${assets}assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="${assets}assets/img/apple-touch-icon.png">
 <link rel="manifest" href="${assets}site.webmanifest">
 <meta property="og:type" content="website">
@@ -91,7 +91,7 @@ function siteHeader({ c, site, assets, langHrefs }) {
   return `<header class="header" data-header>
       <div class="header__inner">
         <a class="brand" href="${assets}${c.lang}/" aria-label="${esc(c.a11y.home)}">
-          <img src="${assets}assets/img/logo-mark.svg" alt="" width="163" height="80" decoding="async">
+          <img src="${assets}assets/img/logo-mark.webp" alt="" width="420" height="166" decoding="async">
           <span class="brand__name">${esc(site.legalName)}</span>
         </a>
         <nav class="nav" data-nav aria-label="${esc(c.a11y.primaryNav)}">
@@ -148,7 +148,7 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
       <div class="shell">
         <div class="footer__top">
           <div class="footer__brand">
-            <img src="${assets}assets/img/logo.svg" alt="${esc(site.legalName)}" width="190" height="97" loading="lazy" decoding="async">
+            <img src="${assets}assets/img/logo.webp" alt="${esc(site.legalName)}" width="900" height="440" loading="lazy" decoding="async">
             <p class="footer__tagline">${esc(c.footer.tagline)}</p>
           </div>
           <div>
@@ -187,7 +187,7 @@ function heroSection({ c, assets, links }) {
         <div class="hero__glow" aria-hidden="true"></div>
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="shell hero__inner">
-          <img class="hero__logo" src="${assets}assets/img/logo.svg" width="430" height="220"
+          <img class="hero__logo" src="${assets}assets/img/logo.webp" width="900" height="440"
             alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async" data-reveal>
           <p class="eyebrow hero__eyebrow" data-reveal data-delay="1">${esc(c.hero.eyebrow)}</p>
           <h1 class="h-display" id="hero-title" data-reveal data-delay="2">${c.hero.title}</h1>
@@ -312,7 +312,7 @@ function aboutSection({ c, assets }) {
                 <img src="${assets}assets/img/team.jpg" alt="${esc(c.about.photoAlt)}"
                   width="1800" height="1014" loading="lazy" decoding="async">
                 <div class="about__fallback" aria-hidden="true">
-                  <img src="${assets}assets/img/logo.svg" alt="" width="260" height="133">
+                  <img src="${assets}assets/img/logo.webp" alt="" width="900" height="440">
                   <p>${esc(c.about.photoCaption)}</p>
                 </div>
               </div>
@@ -505,7 +505,7 @@ export function renderNotFound({ contents, site, ogImage }) {
     <meta name="robots" content="noindex, follow">
     <meta name="theme-color" content="#070b14">
     <meta name="color-scheme" content="dark">
-    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
     <meta property="og:image" content="${esc(ogImage)}">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <script>${INLINE_BOOT}</script>
@@ -513,7 +513,7 @@ export function renderNotFound({ contents, site, ogImage }) {
   <body>
     <main class="error-page">
       <div>
-        <img src="/assets/img/logo.svg" alt="${esc(site.legalName)}" width="300" height="153">
+        <img src="/assets/img/logo.webp" alt="${esc(site.legalName)}" width="900" height="440">
         <p class="error-page__code">404</p>
       ${blocks}
       </div>
@@ -543,7 +543,7 @@ export function renderGateway({ contents, site, ogImage, alternates }) {
     <meta name="robots" content="noindex, follow">
     <meta name="theme-color" content="#070b14">
     <meta name="color-scheme" content="dark">
-    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
     <link rel="manifest" href="/site.webmanifest">
 ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
     <meta property="og:type" content="website">
@@ -556,7 +556,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
   <body>
     <main class="gate">
       <div>
-        <img src="/assets/img/logo.svg" alt="${esc(site.legalName)}" width="360" height="184">
+        <img src="/assets/img/logo.webp" alt="${esc(site.legalName)}" width="900" height="440">
         <p lang="en">Choose your language</p>
         <p lang="es" class="gate__alt">Elige tu idioma</p>
         <div class="gate__links">
@@ -583,7 +583,7 @@ export function renderSent({ c, site, ogImage, links, path }) {
     <meta name="theme-color" content="#070b14">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="${esc(site.origin.replace(/\/$/, '') + path)}">
-    <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/img/favicon.png" type="image/png">
     <meta property="og:image" content="${esc(ogImage)}">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <script>${INLINE_BOOT}</script>
@@ -591,7 +591,7 @@ export function renderSent({ c, site, ogImage, links, path }) {
   <body>
     <main class="error-page">
       <div>
-        <img src="/assets/img/logo.svg" alt="${esc(site.legalName)}" width="300" height="153">
+        <img src="/assets/img/logo.webp" alt="${esc(site.legalName)}" width="900" height="440">
         <h1>${esc(c.sent.heading)}</h1>
         <p>${esc(c.sent.body)}</p>
         <div class="btn-row">

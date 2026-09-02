@@ -16,8 +16,7 @@ site/
 ├── src/
 │   ├── build.mjs             renders every page from content + template
 │   ├── template.mjs          the HTML (one source for both languages)
-│   ├── content/{en,es,site}.json   all copy and configuration
-│   └── brand/make-logo.mjs   regenerates the logo SVGs from glyph outlines
+│   └── content/{en,es,site}.json   all copy and configuration
 └── (../vercel.json)     written at the repository root by the build
 ```
 
@@ -47,11 +46,12 @@ site is honest and fully usable in either state.
 
 ## The two brand assets
 
-* **Logo** — `public/assets/img/logo.svg` (full lockup), `logo-mark.svg` (monogram),
-  `favicon.svg`, plus generated `og.png`, `icon-512.png`, `apple-touch-icon.png`.
-  These are the only logo files the site uses. They are real vector outlines, so
-  they stay sharp at any size and need no webfont. Regenerate with `npm run brand`
-  (requires `opentype.js`; the source faces live in `src/brand/`).
+* **Logo** — the brand artwork, cut out of its dark backdrop with a luminance
+  matte so it sits on any of the site's dark surfaces: `logo.webp` (full lockup,
+  900px), `logo-mark.webp` (monogram and arc, for the header), `favicon.png`,
+  `icon-512.png`, `apple-touch-icon.png` and the social `og.png`. These are the
+  only logo files the site uses. WebP keeps the lockup at 88 kB against 340 kB
+  as PNG, with the transparency intact.
 * **Team photograph** — drop the final edited photo of Javier Rafael Torres Gil and
   Yudenis V. M. at **`public/assets/img/team.jpg`** (landscape, ~1600×1000 or larger,
   both people fully in frame). Until that file exists, the About section shows a
@@ -95,8 +95,7 @@ visitor is pointed at WhatsApp; nothing else on the site is affected.
 
 ```bash
 cd site
-npm install       # only needed to regenerate the logo
-npm run build     # renders public/
+npm run build     # renders public/ — no dependencies to install
 ```
 
 Deploy `site/public` as a static site. On Vercel the root `vercel.json` does
