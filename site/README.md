@@ -107,6 +107,17 @@ caching for `/assets/*`. The CSP allows only same-origin resources and the one
 inline bootstrap script, which is pinned by SHA-256 hash — if you edit that
 snippet in `template.mjs`, re-run the build so the hash is regenerated.
 
+## Privacy Policy and Terms of Use
+
+`/en/privacy/`, `/es/privacy/`, `/en/terms/` and `/es/terms/` are real pages, built
+from `legal.privacy` / `legal.terms` in the two content files, listed in the
+footer and linked from the contact form's consent notice. They describe
+exactly what this site does today — no cookies, no analytics, the contact
+form's data going to Resend for delivery only — so if the site's data
+practices change (analytics, a mailing list, a new integration), update these
+pages in the same change. This is not a substitute for legal review; it
+reflects the site's actual behavior, written by an engineer, not a lawyer.
+
 ## Editing copy
 
 All text is in `src/content/en.json` and `src/content/es.json`, key for key.

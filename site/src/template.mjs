@@ -173,7 +173,13 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
             <p>${esc(c.footer.legal)}</p>
             <p>${esc(c.footer.disclaimer)}</p>
           </div>
-          <p>&copy; <span data-year>${new Date().getFullYear()}</span> ${esc(site.legalName)}. ${esc(c.footer.rights)}</p>
+          <div class="footer__bottom-right">
+            <nav class="footer__legalnav" aria-label="${esc(c.footer.legalHeading)}">
+              <a href="${assets}${c.lang}/privacy/">${esc(c.footer.privacyLink)}</a>
+              <a href="${assets}${c.lang}/terms/">${esc(c.footer.termsLink)}</a>
+            </nav>
+            <p>&copy; <span data-year>${new Date().getFullYear()}</span> ${esc(site.legalName)}. ${esc(c.footer.rights)}</p>
+          </div>
         </div>
       </div>
     </footer>`;
@@ -357,7 +363,7 @@ function valuesSection({ c }) {
       </section>`;
 }
 
-function contactSection({ c, links }) {
+function contactSection({ c, links, assets }) {
   const ch = c.contact.channels;
   const f = c.contact.form;
 
@@ -412,7 +418,7 @@ function contactSection({ c, links }) {
               <div class="form__foot">
                 <button class="btn btn--primary" type="submit" data-submit
                   data-idle="${esc(f.submit)}" data-busy="${esc(f.sending)}">${esc(f.submit)}</button>
-                <p class="form__privacy">${esc(f.privacy)}</p>
+                <p class="form__privacy">${f.privacy.replace('{href}', `${assets}${c.lang}/privacy/`)}</p>
               </div>
               <p class="form__status" data-form-status role="status" aria-live="polite"
                 data-success="${esc(f.success)}" data-error="${esc(f.error)}" data-invalid="${esc(f.invalid)}"></p>
@@ -474,9 +480,9 @@ ${head(options)}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
       ${valuesSection({ c })}
-      ${contactSection({ c, links })}
+      ${contactSection({ c, links, assets })}
     </main>
-    ${siteFooter(options)}
+    ${siteFooter({ ...options })}
     <script src="${assets}assets/js/main.js" defer></script>
   </body>
 </html>
@@ -607,3 +613,60 @@ export function renderSent({ c, site, ogImage, links, path }) {
 </html>
 `;
 }
+
+function legalPage({ c, site, assets, doc }) {
+  const d = c.legal[doc];
+  return `<article class="legal">
+      <div class="shell legal__shell">
+        <p class="legal__updated">${esc(d.updated)}</p>
+        <h1 class="h-section legal__title">${esc(d.heading)}</h1>
+        <p class="lede legal__intro">${esc(d.intro)}</p>
+        ${d.sections
+          .map(
+            (s) => `<section class="legal__section">
+          <h2>${esc(s.h)}</h2>
+          ${s.p.map((para) => `<p>${esc(para)}</p>`).join('\n          ')}
+        </section>`
+          )
+          .join('\n        ')}
+      </div>
+    </article>`;
+}
+
+export function renderLegal({ c, site, assets, links, alternates, langHrefs, canonical, ogImage, doc }) {
+  const d = c.legal[doc];
+  return `<!doctype html>
+<html lang="${c.lang}" dir="${c.dir}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>${esc(d.title)}</title>
+    <meta name="description" content="${esc(d.metaDescription)}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${esc(canonical)}">
+${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
+    <meta name="theme-color" content="#070b14">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="${assets}assets/img/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="${assets}assets/img/apple-touch-icon.png">
+    <link rel="manifest" href="${assets}site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="${esc(d.title)}">
+    <meta property="og:description" content="${esc(d.metaDescription)}">
+    <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="stylesheet" href="${assets}assets/css/styles.css">
+    <script>${INLINE_BOOT}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
+    ${siteHeader({ c, site, assets, langHrefs })}
+    <main id="main" class="legal-page">
+      ${legalPage({ c, site, assets, doc })}
+    </main>
+    ${siteFooter({ c, site, assets, links, langHrefs })}
+    <script src="${assets}assets/js/main.js" defer></script>
+  </body>
+</html>
+`;
+}
+

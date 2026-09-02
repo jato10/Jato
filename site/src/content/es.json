@@ -243,7 +243,7 @@
       "optional": "opcional",
       "submit": "Enviar mensaje",
       "sending": "Enviando…",
-      "privacy": "Usamos lo que nos envías únicamente para responder tu solicitud. Nada más.",
+      "privacy": "Usamos lo que nos envías únicamente para responder tu solicitud. Consulta nuestra <a href=\"{href}\">Política de Privacidad</a>.",
       "success": "Mensaje enviado. Te responderemos a los datos que dejaste.",
       "error": "No se pudo enviar el mensaje. Escríbenos por WhatsApp.",
       "invalid": "Falta tu nombre, una forma de contactarte o el mensaje."
@@ -257,7 +257,10 @@
     "disclaimer": "La disponibilidad, los precios y los detalles de envío se confirman de forma individual para cada solicitud.",
     "navHeading": "Explorar",
     "contactHeading": "Contacto",
-    "langHeading": "Idioma"
+    "langHeading": "Idioma",
+    "legalHeading": "Legal",
+    "privacyLink": "Política de Privacidad",
+    "termsLink": "Términos de Uso"
   },
   "notFound": {
     "code": "404",
@@ -272,5 +275,123 @@
     "body": "Gracias por escribir a Global Beyond LLC. Leemos cada mensaje nosotros mismos y te responderemos a los datos que dejaste, normalmente en un día hábil.",
     "cta": "Volver al inicio",
     "cta2": "Escribirnos por WhatsApp"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Política de Privacidad | Global Beyond LLC",
+      "metaDescription": "Cómo Global Beyond LLC recopila, usa y protege la información enviada a través de este sitio web.",
+      "heading": "Política de Privacidad",
+      "updated": "Última actualización: 2 de septiembre de 2026",
+      "intro": "Esta página explica qué información recopila Global Beyond LLC (“nosotros”) a través de globalbeyondllc.com, para qué la usamos y qué puedes hacer al respecto. La redactamos para que coincida exactamente con lo que este sitio hace — nada más.",
+      "sections": [
+        {
+          "h": "Qué información recopilamos",
+          "p": [
+            "La única información que recopilamos es la que tú decides darnos: tu nombre, un correo y/o teléfono, y el mensaje que escribes, al enviar el formulario de contacto de este sitio.",
+            "Este sitio no usa cookies, no ejecuta rastreadores de analítica ni de publicidad, y no construye un perfil de los visitantes. Lo único que tu navegador guarda localmente es un pequeño indicador técnico que recuerda que ya elegiste un idioma, para no redirigirte dos veces en la misma visita; no contiene información personal y no se nos envía."
+          ]
+        },
+        {
+          "h": "Cómo la usamos",
+          "p": [
+            "Usamos la información que envías para un solo propósito: leer tu mensaje y responderte — sobre el catálogo, un pedido, o lo que sea que nos escribiste. No la usamos para marketing, no armamos listas de correo con ella, y no la vendemos ni la alquilamos a nadie."
+          ]
+        },
+        {
+          "h": "Quién más la ve",
+          "p": [
+            "Al enviar el formulario, tu mensaje nos llega por correo a través de Resend, el servicio que lo entrega a nuestra bandeja. Resend procesa el mensaje solo para entregarlo y no lo usa para sus propios fines. No compartimos tu información con ningún otro tercero.",
+            "Si nos escribes por WhatsApp o Instagram en lugar del formulario, esa conversación queda sujeta a las propias prácticas de privacidad de WhatsApp e Instagram, no a esta — son productos de Meta y no controlamos cómo manejan los datos en sus plataformas."
+          ]
+        },
+        {
+          "h": "Cuánto tiempo la conservamos",
+          "p": [
+            "Conservamos los mensajes solo el tiempo que necesitamos para responderte y, cuando aplica, para llevar un registro de un pedido o solicitud. Todavía no tenemos un calendario de retención automatizado; si quieres que eliminemos tu información, escríbenos y la eliminamos."
+          ]
+        },
+        {
+          "h": "Tus opciones",
+          "p": [
+            "Puedes pedirnos que te digamos qué información tenemos sobre ti, que la corrijamos, o que la eliminemos, en cualquier momento — escríbenos por el formulario de contacto o WhatsApp y lo atendemos personalmente, normalmente en un día hábil."
+          ]
+        },
+        {
+          "h": "Menores de edad",
+          "p": [
+            "Este sitio está dirigido a empresas y personas que buscan productos al detal o al mayor, no a menores. No recopilamos a sabiendas información de personas menores de 13 años."
+          ]
+        },
+        {
+          "h": "Cambios a esta política",
+          "p": [
+            "Si esta política cambia, actualizaremos esta página y la fecha de arriba. Seguir usando el sitio después de un cambio significa que aceptas la política actualizada."
+          ]
+        },
+        {
+          "h": "Contacto",
+          "p": [
+            "Las preguntas sobre esta política van al mismo lugar que todo lo demás — el formulario de contacto de este sitio, o WhatsApp."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Términos de Uso | Global Beyond LLC",
+      "metaDescription": "Los términos que aplican al uso del sitio web de Global Beyond LLC.",
+      "heading": "Términos de Uso",
+      "updated": "Última actualización: 2 de septiembre de 2026",
+      "intro": "Estos términos cubren tu uso de globalbeyondllc.com, operado por Global Beyond LLC, una compañía de responsabilidad limitada registrada en el estado de Florida, Estados Unidos. Al usar este sitio, los aceptas.",
+      "sections": [
+        {
+          "h": "Qué es este sitio",
+          "p": [
+            "Este sitio presenta a Global Beyond LLC y te permite solicitar nuestro catálogo actual, consultar sobre pedidos al detal o al mayor, y contactarnos directamente. No es una tienda: nada aquí se puede comprar directamente a través del sitio, y ningún pedido, precio o disponibilidad es definitivo hasta que te lo confirmemos individualmente."
+          ]
+        },
+        {
+          "h": "La información en este sitio",
+          "p": [
+            "Mantenemos el contenido de este sitio preciso según nuestro mejor conocimiento, pero nuestra selección de productos cambia con el tiempo, y los precios, la disponibilidad y los detalles de envío se confirman por solicitud, no se publican aquí. Nada en este sitio debe tratarse como una oferta vinculante."
+          ]
+        },
+        {
+          "h": "Uso aceptable",
+          "p": [
+            "Usa este sitio para su propósito: conocer a Global Beyond LLC y contactarnos. No intentes interrumpirlo, extraer su contenido a gran escala, enviar información falsa o maliciosa a través del formulario de contacto, ni usarlo para distribuir contenido ilegal."
+          ]
+        },
+        {
+          "h": "Propiedad intelectual",
+          "p": [
+            "El nombre Global Beyond LLC, el logotipo, y el texto, las fotografías y el diseño de este sitio pertenecen a Global Beyond LLC o se usan con permiso. Puedes ver y compartir las páginas de este sitio; no puedes reproducir el logotipo o los materiales de marca para tu propio uso sin pedirnos permiso antes."
+          ]
+        },
+        {
+          "h": "Enlaces a terceros",
+          "p": [
+            "Este sitio enlaza a WhatsApp e Instagram, ambos operados por Meta, y al correo electrónico. Una vez que sales de este sitio por uno de esos enlaces, aplican los términos propios de esa plataforma — no somos responsables de su contenido ni de sus prácticas."
+          ]
+        },
+        {
+          "h": "Sin garantía",
+          "p": [
+            "Este sitio se ofrece tal como está. Hacemos lo posible por mantenerlo preciso y disponible, pero no garantizamos que esté libre de errores, ininterrumpido, o accesible de forma permanente."
+          ]
+        },
+        {
+          "h": "Ley aplicable",
+          "p": [
+            "Estos términos se rigen por las leyes del estado de Florida, Estados Unidos, sin considerar sus principios de conflicto de leyes."
+          ]
+        },
+        {
+          "h": "Cambios a estos términos",
+          "p": [
+            "Podemos actualizar estos términos a medida que el sitio y el negocio evolucionan. La fecha de arriba refleja la última revisión."
+          ]
+        }
+      ]
+    }
   }
 }

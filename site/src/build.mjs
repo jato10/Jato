@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { renderPage, renderNotFound, renderGateway, renderSent, makeLinks, INLINE_BOOT } from './template.mjs';
+import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, makeLinks, INLINE_BOOT } from './template.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(here, '..', 'public');
@@ -105,6 +105,28 @@ for (const c of contents) {
   write(`${path.replace(/^\/|\/$/g, '')}/index.html`, renderSent({ c, site, ogImage, links, path }));
 }
 
+/* Privacy Policy and Terms of Use, one pair per language. */
+for (const c of contents) {
+  for (const doc of ['privacy', 'terms']) {
+    write(
+      `${c.lang}/${doc}/index.html`,
+      renderLegal({
+        c,
+        site,
+        assets,
+        links,
+        alternates: contents.map((cc) => ({ hreflang: cc.lang, href: `${origin}/${cc.lang}/${doc}/` })).concat([
+          { hreflang: 'x-default', href: `${origin}/${site.defaultLang}/${doc}/` },
+        ]),
+        langHrefs: Object.fromEntries(contents.map((cc) => [cc.lang, `/${cc.lang}/${doc}/`])),
+        canonical: `${origin}/${c.lang}/${doc}/`,
+        ogImage,
+        doc,
+      })
+    );
+  }
+}
+
 write('index.html', renderGateway({ contents, site, ogImage, alternates }));
 write('404.html', renderNotFound({ contents, site, ogImage }));
 
@@ -181,6 +203,18 @@ ${alternates
   .map((a) => `    <xhtml:link rel="alternate" hreflang="${a.hreflang}" href="${a.href}"/>`)
   .join('\n')}
   </url>`
+  )
+  .join('\n')}
+${contents
+  .flatMap((c) =>
+    ['privacy', 'terms'].map(
+      (doc) => `  <url>
+    <loc>${origin}/${c.lang}/${doc}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>`
+    )
   )
   .join('\n')}
 </urlset>

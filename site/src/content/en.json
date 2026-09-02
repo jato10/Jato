@@ -243,7 +243,7 @@
       "optional": "optional",
       "submit": "Send message",
       "sending": "Sending…",
-      "privacy": "We use what you send only to answer your request. Nothing else.",
+      "privacy": "We use what you send only to answer your request. See our <a href=\"{href}\">Privacy Policy</a>.",
       "success": "Message sent. We will reply to the details you left.",
       "error": "The message could not be sent. Please write to us on WhatsApp instead.",
       "invalid": "Please add your name, a way to reach you, and a message."
@@ -257,7 +257,10 @@
     "disclaimer": "Product availability, pricing, and shipping details are confirmed individually for each request.",
     "navHeading": "Explore",
     "contactHeading": "Contact",
-    "langHeading": "Language"
+    "langHeading": "Language",
+    "legalHeading": "Legal",
+    "privacyLink": "Privacy Policy",
+    "termsLink": "Terms of Use"
   },
   "notFound": {
     "code": "404",
@@ -272,5 +275,123 @@
     "body": "Thank you for writing to Global Beyond LLC. We read every message ourselves and will reply to the details you left, usually within one business day.",
     "cta": "Back to the homepage",
     "cta2": "Message us on WhatsApp"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy Policy | Global Beyond LLC",
+      "metaDescription": "How Global Beyond LLC collects, uses, and protects the information submitted through this website.",
+      "heading": "Privacy Policy",
+      "updated": "Last updated: September 2, 2026",
+      "intro": "This page explains what information Global Beyond LLC (“we,” “us”) collects through globalbeyondllc.com, why, and what you can do about it. We wrote it to match exactly what this website does — nothing more.",
+      "sections": [
+        {
+          "h": "Information we collect",
+          "p": [
+            "The only information we collect is what you choose to give us: your name, and an email address and/or phone number, and the message you write, when you submit the contact form on this site.",
+            "This site does not use cookies, does not run analytics or advertising trackers, and does not build a profile of visitors. The one thing your browser stores locally is a small technical flag that remembers you already chose a language, so you are not redirected twice in the same visit; it contains no personal information and is not sent to us."
+          ]
+        },
+        {
+          "h": "How we use it",
+          "p": [
+            "We use the information you submit for one purpose: to read your message and reply to you — about the catalog, an order, or whatever you wrote to us about. We do not use it for marketing, do not build mailing lists from it, and do not sell or rent it to anyone."
+          ]
+        },
+        {
+          "h": "Who else sees it",
+          "p": [
+            "Submitting the form sends your message to us by email through Resend, the service that delivers it to our inbox. Resend processes the message only to deliver it and does not use it for its own purposes. We do not share your information with any other third party.",
+            "If you write to us on WhatsApp or Instagram instead of the form, that conversation is subject to WhatsApp's and Instagram's own privacy practices, not this one — those are Meta products and we do not control how they handle data on their platforms."
+          ]
+        },
+        {
+          "h": "How long we keep it",
+          "p": [
+            "We keep messages only for as long as we need them to respond to you and, where relevant, to keep a record of an order or request. We do not have an automated retention schedule yet; if you would like your information deleted, contact us and we will remove it."
+          ]
+        },
+        {
+          "h": "Your choices",
+          "p": [
+            "You can ask us what information we have about you, ask us to correct it, or ask us to delete it, at any time — write to us through the contact form or WhatsApp and we will handle it personally, usually within a business day."
+          ]
+        },
+        {
+          "h": "Children",
+          "p": [
+            "This site is intended for businesses and individuals seeking retail or wholesale products, not for children. We do not knowingly collect information from anyone under 13."
+          ]
+        },
+        {
+          "h": "Changes to this policy",
+          "p": [
+            "If this policy changes, we will update this page and the date above. Continued use of the site after a change means you accept the updated policy."
+          ]
+        },
+        {
+          "h": "Contact",
+          "p": [
+            "Questions about this policy can go to the same place as everything else — the contact form on this site, or WhatsApp."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms of Use | Global Beyond LLC",
+      "metaDescription": "The terms that apply to using the Global Beyond LLC website.",
+      "heading": "Terms of Use",
+      "updated": "Last updated: September 2, 2026",
+      "intro": "These terms cover your use of globalbeyondllc.com, operated by Global Beyond LLC, a limited liability company registered in the State of Florida, United States. By using this site, you agree to them.",
+      "sections": [
+        {
+          "h": "What this site is",
+          "p": [
+            "This site presents Global Beyond LLC and lets you request our current product catalog, ask about retail or wholesale orders, and reach us directly. It is not a store: nothing here can be purchased directly through the site, and no order, price, or availability is final until we confirm it to you individually."
+          ]
+        },
+        {
+          "h": "The information on this site",
+          "p": [
+            "We keep the content on this site accurate to the best of our knowledge, but our product selection changes over time, and pricing, availability, and shipping details are confirmed per request, not published here. Nothing on this site should be treated as a binding offer."
+          ]
+        },
+        {
+          "h": "Acceptable use",
+          "p": [
+            "Use this site for its intended purpose: learning about Global Beyond LLC and reaching us. Do not attempt to disrupt it, scrape it at scale, submit false or malicious information through the contact form, or use it to distribute unlawful content."
+          ]
+        },
+        {
+          "h": "Intellectual property",
+          "p": [
+            "The Global Beyond LLC name, logo, and the text, photographs, and design on this site belong to Global Beyond LLC or are used with permission. You may view and share this site's pages; you may not reproduce the logo or brand assets for your own use without asking us first."
+          ]
+        },
+        {
+          "h": "Third-party links",
+          "p": [
+            "This site links to WhatsApp and Instagram, both operated by Meta, and to email. Once you leave this site through one of those links, that platform's own terms apply — we are not responsible for their content or practices."
+          ]
+        },
+        {
+          "h": "No warranty",
+          "p": [
+            "This site is provided as is. We do our best to keep it accurate and available, but we do not guarantee it will be error-free, uninterrupted, or permanently accessible."
+          ]
+        },
+        {
+          "h": "Governing law",
+          "p": [
+            "These terms are governed by the laws of the State of Florida, United States, without regard to conflict-of-law principles."
+          ]
+        },
+        {
+          "h": "Changes to these terms",
+          "p": [
+            "We may update these terms as the site and the business evolve. The date above reflects the latest revision."
+          ]
+        }
+      ]
+    }
   }
 }
