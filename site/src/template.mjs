@@ -15,6 +15,20 @@ export const esc = (value) =>
 
 const attr = (name, value) => (value ? ` ${name}="${esc(value)}"` : '');
 
+/* Recognizable glyphs for the two real, external channels the site links to.
+   Used in place of the words "WhatsApp"/"Instagram" wherever the icon alone
+   is unambiguous; the name is kept for assistive tech via a visually-hidden
+   span next to it, never dropped outright. */
+const CHANNEL_ICONS = {
+  whatsapp:
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.36a9.9 9.9 0 0 0 4.62 1.13h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2Zm5.8 14.02c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.66-.6-2.92-1.26-4.83-4.2-4.98-4.4-.15-.19-1.19-1.58-1.19-3.02s.75-2.14 1.02-2.43c.26-.29.57-.36.76-.36h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.54.33.07.13.07.72-.17 1.4Z"/></svg>',
+  instagram:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg>',
+};
+
+const ARROW_ICON =
+  '<svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+
 /* /assets/* is served with a one-year immutable Cache-Control, and every file
    under it keeps a fixed name — so without this, a browser or CDN edge that
    already has the previous bytes would keep serving them for up to a year
@@ -120,13 +134,13 @@ function siteHeader({ c, site, assets, langHrefs }) {
           <ul class="nav__list">
             ${navItems}
           </ul>
-          <a class="btn btn--primary btn--small nav__cta" href="#contact">${esc(c.navCta)}</a>
+          <a class="btn btn--primary btn--small nav__cta" href="#contact">${esc(c.navCta)}${ARROW_ICON}</a>
         </nav>
         <div class="header__actions">
           <nav class="lang" aria-label="${esc(c.a11y.langNav)}">
             ${langItems}
           </nav>
-          <a class="btn btn--primary btn--small header__cta" href="#contact">${esc(c.navCta)}</a>
+          <a class="btn btn--primary btn--small header__cta" href="#contact">${esc(c.navCta)}${ARROW_ICON}</a>
           <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false"
             aria-controls="site-nav" aria-label="${esc(c.a11y.menuOpen)}"
             data-label-open="${esc(c.a11y.menuOpen)}" data-label-close="${esc(c.a11y.menuClose)}">
@@ -147,12 +161,16 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
   const contactLinks = [];
   if (links.hasWhatsapp) {
     contactLinks.push(
-      `<li><a href="${esc(links.whatsapp(c.contact.presets[0].message))}" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>`
+      `<li><a href="${esc(links.whatsapp(c.contact.presets[0].message))}" target="_blank" rel="noopener noreferrer">` +
+        `<span class="footer__contact-icon">${CHANNEL_ICONS.whatsapp}</span>` +
+        `<span class="visually-hidden">WhatsApp</span></a></li>`
     );
   }
   if (links.hasInstagram) {
     contactLinks.push(
-      `<li><a href="${esc(links.instagram)}" target="_blank" rel="noopener noreferrer">Instagram</a></li>`
+      `<li><a href="${esc(links.instagram)}" target="_blank" rel="noopener noreferrer">` +
+        `<span class="footer__contact-icon">${CHANNEL_ICONS.instagram}</span>` +
+        `<span class="visually-hidden">Instagram</span></a></li>`
     );
   }
   contactLinks.push(`<li><span>${esc(c.contact.location)}</span></li>`);
@@ -221,7 +239,7 @@ function heroSection({ c, assets, links }) {
           <h1 class="h-display" id="hero-title" data-reveal data-delay="2">${c.hero.title}</h1>
           <p class="lede" data-reveal data-delay="3">${esc(c.hero.lede)}</p>
           <div class="btn-row" data-reveal data-delay="4">
-            <a class="btn btn--primary" href="${esc(primary)}"${externalAttrs(links, primary)}>${esc(c.hero.ctaPrimary)}</a>
+            <a class="btn btn--primary" href="${esc(primary)}"${externalAttrs(links, primary)}>${esc(c.hero.ctaPrimary)}${ARROW_ICON}</a>
             <a class="btn btn--ghost" href="#contact">${esc(c.hero.ctaSecondary)}</a>
           </div>
           <p class="hero__note" data-reveal data-delay="5">${esc(c.hero.note)}</p>
@@ -292,7 +310,7 @@ function catalogSection({ c, links, assets }) {
               ${c.catalog.points.map((p) => `<li>${esc(p)}</li>`).join('\n              ')}
             </ul>
             <div class="btn-row">
-              <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.catalog.cta)}</a>
+              <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.catalog.cta)}${ARROW_ICON}</a>
             </div>
           </div>
           <figure class="catalog__figure" data-reveal data-delay="1">
@@ -327,7 +345,7 @@ function wholesaleSection({ c, links }) {
             ${items}
           </div>
           <div class="btn-row" data-reveal>
-            <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.wholesale.cta)}</a>
+            <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.wholesale.cta)}${ARROW_ICON}</a>
           </div>
         </div>
       </section>`;
@@ -390,7 +408,8 @@ function contactSection({ c, links, assets }) {
   const f = c.contact.form;
 
   const card = (key, href, i) => {
-    const inner = `<h3 class="h-card">${esc(ch[key].label)}</h3>
+    const inner = `<span class="channel__icon">${CHANNEL_ICONS[key]}</span>
+                <h3 class="h-card"><span class="visually-hidden">${esc(ch[key].label)}</span></h3>
                 <p>${esc(ch[key].body)}</p>
                 <span class="channel__action">${esc(href ? ch[key].action : c.contact.unconfigured)}</span>`;
     return href
@@ -519,7 +538,7 @@ export function renderNotFound({ contents, site, ogImage }) {
         <h1 class="h-section error-page__title">${esc(c.notFound.title)}</h1>
         <p>${esc(c.notFound.body)}</p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="/${c.lang}/">${esc(c.notFound.cta)}</a>
+          <a class="btn btn--primary" href="/${c.lang}/">${esc(c.notFound.cta)}${ARROW_ICON}</a>
           <a class="btn btn--ghost" href="/${c.lang}/#contact">${esc(c.notFound.cta2)}</a>
         </div>
       </section>`
@@ -626,7 +645,7 @@ export function renderSent({ c, site, ogImage, links, path }) {
         <h1>${esc(c.sent.heading)}</h1>
         <p>${esc(c.sent.body)}</p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="/${c.lang}/">${esc(c.sent.cta)}</a>
+          <a class="btn btn--primary" href="/${c.lang}/">${esc(c.sent.cta)}${ARROW_ICON}</a>
           ${wa ? `<a class="btn btn--ghost" href="${esc(wa)}" target="_blank" rel="noopener noreferrer">${esc(c.sent.cta2)}</a>` : ''}
         </div>
       </div>
