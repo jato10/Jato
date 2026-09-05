@@ -115,6 +115,7 @@ for (const c of contents) {
       canonical: `${origin}/${c.lang}/`,
       ogImage,
       jsonLd: jsonLdFor(c),
+      otherLocales: contents.filter((cc) => cc.lang !== c.lang).map((cc) => cc.locale),
     })
   );
 }
