@@ -99,7 +99,7 @@ const externalAttrs = (links, href) =>
     : '';
 
 /* --------------------------------------------------------------- head */
-function head({ c, site, assets, alternates, canonical, ogImage, noindex, jsonLd }) {
+function head({ c, site, assets, alternates, canonical, ogImage, noindex, jsonLd, otherLocales }) {
   return `<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(c.meta.title)}</title>
@@ -114,6 +114,7 @@ ${alternates.map((a) => `<link rel="alternate" hreflang="${a.hreflang}" href="${
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.legalName)}">
 <meta property="og:locale" content="${esc(c.locale)}">
+${(otherLocales || []).map((l) => `<meta property="og:locale:alternate" content="${esc(l)}">`).join('\n')}
 <meta property="og:title" content="${esc(c.meta.title)}">
 <meta property="og:description" content="${esc(c.meta.description)}">
 <meta property="og:url" content="${esc(canonical)}">
@@ -681,6 +682,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <meta property="og:type" content="website">
     <meta property="og:title" content="${esc(d.title)}">
     <meta property="og:description" content="${esc(d.metaDescription)}">
+    <meta property="og:url" content="${esc(canonical)}">
     <meta property="og:image" content="${esc(ogImage)}">
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
