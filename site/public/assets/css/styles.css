@@ -558,23 +558,17 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .card {
   position: relative;
-  padding: clamp(28px, 3.4vw, 42px);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--line-light);
-  background: var(--paper-50);
-  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out),
-    border-color 0.45s var(--ease);
+  padding-top: 26px;
+  border-top: 1px solid var(--line-light);
+  transition: border-color 0.4s var(--ease);
   height: 100%;
 }
-.card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(12, 20, 32, 0.10); border-color: rgba(12, 20, 32, 0.16); }
+.card:hover { border-color: rgba(12, 20, 32, 0.28); }
 .card p { margin-top: 14px; color: var(--on-light-muted); }
 
-.card--dark {
-  background: linear-gradient(170deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
-  border-color: var(--line-dark);
-}
+.card--dark { border-color: var(--line-dark); }
 .card--dark p { color: var(--on-dark-muted); }
-.card--dark:hover { box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.2); }
+.card--dark:hover { border-color: rgba(255, 255, 255, 0.3); }
 
 .card__index {
   display: block;
@@ -586,36 +580,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .card--dark .card__index { color: var(--on-dark-dim); }
 
-.card__rule {
-  width: 44px;
-  height: 2px;
-  margin-bottom: 22px;
-  border-radius: 2px;
-  background: var(--steel);
+/* Compact "how it works" flow, folded into the services section */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 8px;
+  margin-top: clamp(40px, 5vw, 64px);
+  padding-top: 28px;
+  border-top: 1px solid var(--line-light-soft);
+  color: var(--on-light-muted);
+  font-size: 0.92rem;
 }
-
-/* Steps */
-.steps { counter-reset: step; }
-.step {
-  position: relative;
-  padding: clamp(26px, 3vw, 36px) 0;
-  border-top: 1px solid var(--line-dark-soft);
-  display: grid;
-  gap: 6px 32px;
-  grid-template-columns: 1fr;
-}
-.step:last-child { border-bottom: 1px solid var(--line-dark-soft); }
-.step__num {
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--on-dark-dim);
-}
-.step__body { color: var(--on-dark-muted); max-width: 62ch; }
-@media (min-width: 860px) {
-  .step { grid-template-columns: 90px minmax(220px, 300px) 1fr; align-items: start; }
-  .step__num { padding-top: 5px; }
-}
+.flow li { display: flex; align-items: baseline; gap: 8px; }
+.flow li:not(:last-child)::after { content: "\2192"; margin-left: 20px; color: var(--slate-400); }
+.flow__num { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; color: var(--slate-500); }
 
 /* Bulleted feature list */
 .ticks { display: grid; gap: 14px; margin-top: 32px; }
@@ -741,14 +719,17 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .people li + li::before { display: none; }
 }
 
-/* --------------------------------------------------------- 9. Values */
-.values { display: grid; gap: 0; border-top: 1px solid var(--line-light-soft); }
-@media (min-width: 720px) { .values { grid-template-columns: repeat(2, 1fr); column-gap: clamp(30px, 5vw, 80px); } }
-@media (min-width: 1100px) { .values { grid-template-columns: repeat(3, 1fr); } }
-.value { padding: clamp(26px, 3vw, 38px) 0; border-bottom: 1px solid var(--line-light-soft); }
-.value h3 { display: flex; align-items: baseline; gap: 12px; }
-.value h3 span { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--slate-500); font-weight: 600; }
-.value p { margin-top: 12px; color: var(--on-light-muted); max-width: 46ch; }
+/* --------------------------------------------------------- 9. Commitments */
+.commitments {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-light-soft);
+  display: grid;
+  gap: 12px;
+  max-width: 56ch;
+}
+.commitments li { color: var(--on-light-muted); }
+.commitments strong { color: var(--on-light); font-weight: 600; }
 
 /* -------------------------------------------------------- 10. Contact */
 .channels { display: grid; gap: clamp(16px, 2vw, 22px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
@@ -756,13 +737,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: clamp(26px, 3vw, 36px);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--line-dark);
-  background: linear-gradient(170deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012));
-  transition: transform 0.45s var(--ease-out), border-color 0.4s var(--ease), box-shadow 0.45s var(--ease-out);
+  padding-top: clamp(22px, 2.6vw, 28px);
+  border-top: 1px solid var(--line-dark);
+  transition: border-color 0.4s var(--ease);
 }
-a.channel:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.24); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42); }
+a.channel:hover { border-color: rgba(255, 255, 255, 0.3); }
 .channel__label { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--on-dark-dim); }
 .channel__icon {
   display: inline-flex;

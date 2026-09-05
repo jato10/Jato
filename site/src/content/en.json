@@ -26,10 +26,6 @@
       "label": "What we do"
     },
     {
-      "id": "process",
-      "label": "How it works"
-    },
-    {
       "id": "catalog",
       "label": "Catalog"
     },
@@ -73,29 +69,13 @@
         "title": "Catalog requests",
         "body": "Our selection changes over time. Ask for the current catalog and you receive what is genuinely available now — not an outdated page."
       }
-    ]
-  },
-  "process": {
-    "eyebrow": "How it works",
-    "title": "A short, transparent path from question to order.",
-    "lede": "Four steps. The same people with you through all of them.",
-    "steps": [
-      {
-        "title": "Send your request",
-        "body": "Write to us with what you need — a product, a category, a quantity, or simply the current catalog."
-      },
-      {
-        "title": "We review availability",
-        "body": "We check what is in the selection right now and confirm the details that matter for your request."
-      },
-      {
-        "title": "You receive the specifics",
-        "body": "Availability, pricing, ordering, and shipping details, written clearly, for your request only."
-      },
-      {
-        "title": "We stay with your order",
-        "body": "From the first message to the delivery details, you keep talking to the same team."
-      }
+    ],
+    "flowLabel": "How it works",
+    "flow": [
+      "Send your request",
+      "We review availability",
+      "You receive the specifics",
+      "We stay with your order"
     ]
   },
   "catalog": {
@@ -153,35 +133,19 @@
       }
     ],
     "photoAlt": "Javier Rafael Torres Gil and Yudenis V. Martínez, the founders of Global Beyond LLC, seated in the company's Miami office beneath the Global Beyond logo.",
-    "photoCaption": "Miami, Florida."
-  },
-  "values": {
-    "eyebrow": "What we stand for",
-    "title": "Six commitments, kept simple.",
-    "items": [
+    "photoCaption": "Miami, Florida.",
+    "commitments": [
       {
         "title": "Trust",
         "body": "We'd rather say what we don't have than promise what we can't deliver."
-      },
-      {
-        "title": "Careful selection",
-        "body": "Everything in the catalog is there because we chose it — not just to fill a shelf."
       },
       {
         "title": "Transparency",
         "body": "Availability, pricing, and shipping — stated plainly, in writing, before you commit."
       },
       {
-        "title": "Opportunity",
-        "body": "Retail or wholesale, first order or recurring — the door is the same size for everyone."
-      },
-      {
         "title": "Thoughtful growth",
         "body": "We grow only as fast as we can still answer every message ourselves."
-      },
-      {
-        "title": "Global vision",
-        "body": "Miami is where we are. Beyond it is where we're going."
       }
     ]
   },

@@ -26,10 +26,6 @@
       "label": "Qué hacemos"
     },
     {
-      "id": "process",
-      "label": "Cómo funciona"
-    },
-    {
       "id": "catalog",
       "label": "Catálogo"
     },
@@ -73,29 +69,13 @@
         "title": "Solicitudes de catálogo",
         "body": "Nuestra selección cambia con el tiempo. Pide el catálogo actual y recibirás lo que realmente está disponible hoy, no una página desactualizada."
       }
-    ]
-  },
-  "process": {
-    "eyebrow": "Cómo funciona",
-    "title": "Un camino corto y transparente, de la pregunta al pedido.",
-    "lede": "Cuatro pasos. Las mismas personas contigo en todos ellos.",
-    "steps": [
-      {
-        "title": "Envía tu solicitud",
-        "body": "Escríbenos con lo que necesitas: un producto, una categoría, una cantidad o simplemente el catálogo actual."
-      },
-      {
-        "title": "Revisamos disponibilidad",
-        "body": "Verificamos qué hay en la selección en este momento y confirmamos los detalles que importan para tu solicitud."
-      },
-      {
-        "title": "Recibes la información",
-        "body": "Disponibilidad, precios, forma de pedido y detalles de envío, explicados con claridad y solo para tu caso."
-      },
-      {
-        "title": "Acompañamos tu pedido",
-        "body": "Desde el primer mensaje hasta los detalles de entrega, sigues hablando con el mismo equipo."
-      }
+    ],
+    "flowLabel": "Cómo funciona",
+    "flow": [
+      "Envía tu solicitud",
+      "Revisamos disponibilidad",
+      "Recibes la información",
+      "Acompañamos tu pedido"
     ]
   },
   "catalog": {
@@ -153,35 +133,19 @@
       }
     ],
     "photoAlt": "Javier Rafael Torres Gil y Yudenis V. Martínez, fundadores de Global Beyond LLC, sentados en la oficina de la empresa en Miami bajo el logotipo de Global Beyond.",
-    "photoCaption": "Miami, Florida."
-  },
-  "values": {
-    "eyebrow": "Lo que defendemos",
-    "title": "Seis compromisos, dichos con sencillez.",
-    "items": [
+    "photoCaption": "Miami, Florida.",
+    "commitments": [
       {
         "title": "Confianza",
         "body": "Preferimos decirte lo que no tenemos antes que prometer lo que no podemos cumplir."
-      },
-      {
-        "title": "Selección cuidada",
-        "body": "Todo lo que está en el catálogo está porque lo elegimos — no solo para llenar un estante."
       },
       {
         "title": "Transparencia",
         "body": "Disponibilidad, precios y envío: dichos con claridad, por escrito, antes de que te comprometas."
       },
       {
-        "title": "Oportunidad",
-        "body": "Detal o mayor, primer pedido o recurrente: la puerta es del mismo tamaño para todos."
-      },
-      {
         "title": "Crecimiento consciente",
         "body": "Crecemos solo tan rápido como podemos seguir respondiendo cada mensaje nosotros mismos."
-      },
-      {
-        "title": "Visión global",
-        "body": "Miami es donde estamos. Más allá es hacia dónde vamos."
       }
     ]
   },
