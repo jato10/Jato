@@ -51,7 +51,7 @@
     "eyebrow": "Miami, Florida — United States",
     "title": "Beyond Borders.<br>Beyond Possibilities.",
     "titlePlain": "Beyond Borders. Beyond Possibilities.",
-    "lede": "Global Beyond LLC is an e-commerce company connecting products, people, and opportunities — through thoughtful selection, clear information, and direct human service.",
+    "lede": "Global Beyond LLC connects products, people, and opportunities — through careful selection and direct, human service.",
     "ctaPrimary": "Request the current catalog",
     "ctaSecondary": "Talk to our team",
     "note": "Our selection evolves, so availability, pricing, and shipping details are always confirmed for your specific request."
@@ -102,8 +102,7 @@
     "eyebrow": "The selection",
     "title": "A catalog that evolves.",
     "body": [
-      "We do not publish a fixed product grid, because that is not how our selection works. What we offer is curated and it changes — new items arrive, others move on.",
-      "So instead of showing you a page that might already be out of date, we send you the current catalog when you ask for it, with the availability and pricing that apply on that day."
+      "We don't publish a fixed product grid — our selection is curated and constantly changing. Ask for the current catalog and we send what's genuinely available today, with pricing and shipping details for your request."
     ],
     "points": [
       "Curated, not exhaustive — we select before we list.",
@@ -118,7 +117,7 @@
   "wholesale": {
     "eyebrow": "Wholesale & bulk orders",
     "title": "Larger orders, reviewed properly.",
-    "lede": "Bulk and wholesale requests are quoted individually. To give you an accurate answer on the first reply, it helps to include:",
+    "lede": "Bulk and wholesale requests are quoted individually. For an accurate answer right away, it helps to include:",
     "items": [
       {
         "title": "Quantities",
@@ -143,8 +142,7 @@
     "eyebrow": "The people behind the company",
     "title": "A company you can actually reach.",
     "body": [
-      "Global Beyond LLC is based in Miami, Florida, and is run directly by the two people who founded it. When you write to us, you are writing to them.",
-      "We are early in our growth, and we prefer to say so. What we can promise today is careful selection, clear and honest information, and answers that come from a person who knows your request."
+      "Global Beyond LLC is based in Miami, Florida, and run directly by its two founders — when you write to us, you're writing to them. We're early in our growth and prefer to say so: careful selection, honest information, and answers from someone who knows your request."
     ],
     "people": [
       {
@@ -163,27 +161,27 @@
     "items": [
       {
         "title": "Trust",
-        "body": "We would rather tell you what we do not have than promise what we cannot deliver."
+        "body": "We'd rather say what we don't have than promise what we can't deliver."
       },
       {
         "title": "Careful selection",
-        "body": "Everything in the catalog is there because we chose it, not because it filled a shelf."
+        "body": "Everything in the catalog is there because we chose it — not just to fill a shelf."
       },
       {
         "title": "Transparency",
-        "body": "Availability, pricing, and shipping details are stated plainly, in writing, before you commit."
+        "body": "Availability, pricing, and shipping — stated plainly, in writing, before you commit."
       },
       {
         "title": "Opportunity",
-        "body": "Retail or wholesale, a first order or a recurring one — the door is the same size for everyone."
+        "body": "Retail or wholesale, first order or recurring — the door is the same size for everyone."
       },
       {
         "title": "Thoughtful growth",
-        "body": "We grow at the pace at which we can still answer every message ourselves."
+        "body": "We grow only as fast as we can still answer every message ourselves."
       },
       {
         "title": "Global vision",
-        "body": "Miami is where we are. Connecting products, people, and opportunities is where we are going."
+        "body": "Miami is where we are. Beyond it is where we're going."
       }
     ]
   },
