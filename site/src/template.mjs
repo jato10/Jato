@@ -275,12 +275,15 @@ function servicesSection({ c }) {
   const cards = c.services.items
     .map(
       (item, i) => `<article class="card" data-reveal data-delay="${i}">
-              <span class="card__rule" aria-hidden="true"></span>
               <h3 class="h-card">${esc(item.title)}</h3>
               <p>${esc(item.body)}</p>
             </article>`
     )
     .join('\n            ');
+
+  const flow = c.services.flow
+    .map((step, i) => `<li><span class="flow__num">${String(i + 1).padStart(2, '0')}</span>${esc(step)}</li>`)
+    .join('\n              ');
 
   return `<section class="section section--light" id="services" aria-labelledby="services-title">
         <div class="shell">
@@ -292,30 +295,8 @@ function servicesSection({ c }) {
           <div class="grid grid--3">
             ${cards}
           </div>
-        </div>
-      </section>`;
-}
-
-function processSection({ c }) {
-  const steps = c.process.steps
-    .map(
-      (step, i) => `<li class="step" data-reveal>
-              <span class="step__num">${String(i + 1).padStart(2, '0')}</span>
-              <h3 class="h-card">${esc(step.title)}</h3>
-              <p class="step__body">${esc(step.body)}</p>
-            </li>`
-    )
-    .join('\n            ');
-
-  return `<section class="section section--dark" id="process" aria-labelledby="process-title">
-        <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.process.eyebrow)}</p>
-            <h2 class="h-section" id="process-title">${esc(c.process.title)}</h2>
-            <p class="lede">${esc(c.process.lede)}</p>
-          </div>
-          <ol class="steps">
-            ${steps}
+          <ol class="flow" aria-label="${esc(c.services.flowLabel)}" data-reveal>
+              ${flow}
           </ol>
         </div>
       </section>`;
@@ -376,6 +357,11 @@ function wholesaleSection({ c, links }) {
 
 function aboutSection({ c, assets }) {
   const people = c.about.people.map((p) => `<li>${esc(p.name)}</li>`).join('\n              ');
+  const commitments = c.about.commitments
+    .map(
+      (item) => `<li><strong>${esc(item.title)}.</strong> ${esc(item.body)}</li>`
+    )
+    .join('\n              ');
   return `<section class="section section--light" id="about" aria-labelledby="about-title">
         <div class="shell split">
           <div data-reveal>
@@ -398,29 +384,9 @@ function aboutSection({ c, assets }) {
             <ul class="people">
               ${people}
             </ul>
-          </div>
-        </div>
-      </section>`;
-}
-
-function valuesSection({ c }) {
-  const values = c.values.items
-    .map(
-      (item, i) => `<div class="value" data-reveal data-delay="${i % 3}">
-              <h3 class="h-card"><span>${String(i + 1).padStart(2, '0')}</span>${esc(item.title)}</h3>
-              <p>${esc(item.body)}</p>
-            </div>`
-    )
-    .join('\n            ');
-
-  return `<section class="section section--light-alt" id="values" aria-labelledby="values-title">
-        <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.values.eyebrow)}</p>
-            <h2 class="h-section" id="values-title">${esc(c.values.title)}</h2>
-          </div>
-          <div class="values">
-            ${values}
+            <ul class="commitments">
+              ${commitments}
+            </ul>
           </div>
         </div>
       </section>`;
@@ -539,11 +505,9 @@ ${head(options)}
     <main id="main">
       ${heroSection({ c, assets, links })}
       ${servicesSection({ c })}
-      ${processSection({ c })}
       ${catalogSection({ c, links, assets })}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
-      ${valuesSection({ c })}
       ${contactSection({ c, links, assets })}
     </main>
     ${siteFooter({ ...options })}
