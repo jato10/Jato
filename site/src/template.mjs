@@ -15,16 +15,39 @@ export const esc = (value) =>
 
 const attr = (name, value) => (value ? ` ${name}="${esc(value)}"` : '');
 
-/* Recognizable glyphs for the two real, external channels the site links to.
-   Used in place of the words "WhatsApp"/"Instagram" wherever the icon alone
-   is unambiguous; the name is kept for assistive tech via a visually-hidden
-   span next to it, never dropped outright. */
+/* Recognizable glyphs for the two real, external channels the site links to,
+   in their own brand colors rather than the page's text color. Used in place
+   of the words "WhatsApp"/"Instagram" wherever the icon alone is unambiguous;
+   the name is kept for assistive tech via a visually-hidden span next to it,
+   never dropped outright.
+   Instagram's icon needs its own gradient per instance: an <svg> injected
+   more than once into the same document (here, once in a contact card and
+   once in the footer) would otherwise share one gradient id across duplicate
+   elements, which is invalid HTML and unreliable in some browsers. */
+let instagramIconSeq = 0;
 const CHANNEL_ICONS = {
   whatsapp:
-    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.36a9.9 9.9 0 0 0 4.62 1.13h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2Zm5.8 14.02c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.66-.6-2.92-1.26-4.83-4.2-4.98-4.4-.15-.19-1.19-1.58-1.19-3.02s.75-2.14 1.02-2.43c.26-.29.57-.36.76-.36h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.54.33.07.13.07.72-.17 1.4Z"/></svg>',
-  instagram:
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="#25D366" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.36a9.9 9.9 0 0 0 4.62 1.13h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2Zm5.8 14.02c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.66-.6-2.92-1.26-4.83-4.2-4.98-4.4-.15-.19-1.19-1.58-1.19-3.02s.75-2.14 1.02-2.43c.26-.29.57-.36.76-.36h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.54.33.07.13.07.72-.17 1.4Z"/></svg>',
+  instagram() {
+    const id = `ig-grad-${++instagramIconSeq}`;
+    return `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="${id}" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#FEDA75"/>
+          <stop offset="0.35" stop-color="#D62976"/>
+          <stop offset="0.68" stop-color="#962FBF"/>
+          <stop offset="1" stop-color="#4F5BD5"/>
+        </linearGradient>
+      </defs>
+      <rect x="3" y="3" width="18" height="18" rx="5" stroke="url(#${id})" stroke-width="1.7"/>
+      <circle cx="12" cy="12" r="4.2" stroke="url(#${id})" stroke-width="1.7"/>
+      <circle cx="17.2" cy="6.8" r="1.15" fill="url(#${id})"/>
+    </svg>`;
+  },
 };
+
+const renderChannelIcon = (key) =>
+  typeof CHANNEL_ICONS[key] === 'function' ? CHANNEL_ICONS[key]() : CHANNEL_ICONS[key];
 
 const ARROW_ICON =
   '<svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
@@ -162,14 +185,14 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
   if (links.hasWhatsapp) {
     contactLinks.push(
       `<li><a href="${esc(links.whatsapp(c.contact.presets[0].message))}" target="_blank" rel="noopener noreferrer">` +
-        `<span class="footer__contact-icon">${CHANNEL_ICONS.whatsapp}</span>` +
+        `<span class="footer__contact-icon">${renderChannelIcon('whatsapp')}</span>` +
         `<span class="visually-hidden">WhatsApp</span></a></li>`
     );
   }
   if (links.hasInstagram) {
     contactLinks.push(
       `<li><a href="${esc(links.instagram)}" target="_blank" rel="noopener noreferrer">` +
-        `<span class="footer__contact-icon">${CHANNEL_ICONS.instagram}</span>` +
+        `<span class="footer__contact-icon">${renderChannelIcon('instagram')}</span>` +
         `<span class="visually-hidden">Instagram</span></a></li>`
     );
   }
@@ -408,7 +431,7 @@ function contactSection({ c, links, assets }) {
   const f = c.contact.form;
 
   const card = (key, href, i) => {
-    const inner = `<span class="channel__icon">${CHANNEL_ICONS[key]}</span>
+    const inner = `<span class="channel__icon">${renderChannelIcon(key)}</span>
                 <h3 class="h-card"><span class="visually-hidden">${esc(ch[key].label)}</span></h3>
                 <p>${esc(ch[key].body)}</p>
                 <span class="channel__action">${esc(href ? ch[key].action : c.contact.unconfigured)}</span>`;
