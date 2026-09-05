@@ -51,7 +51,7 @@
     "eyebrow": "Miami, Florida — Estados Unidos",
     "title": "Más allá de las fronteras.<br>Más allá de lo posible.",
     "titlePlain": "Más allá de las fronteras. Más allá de lo posible.",
-    "lede": "Global Beyond LLC es una empresa de comercio electrónico que conecta productos, personas y oportunidades — con una selección cuidada, información clara y atención humana directa.",
+    "lede": "Global Beyond LLC conecta productos, personas y oportunidades — con selección cuidada y atención humana directa.",
     "ctaPrimary": "Solicitar el catálogo actual",
     "ctaSecondary": "Hablar con el equipo",
     "note": "Nuestra selección cambia con el tiempo, por eso la disponibilidad, los precios y los detalles de envío siempre se confirman para cada solicitud."
@@ -102,8 +102,7 @@
     "eyebrow": "La selección",
     "title": "Un catálogo que evoluciona.",
     "body": [
-      "No publicamos una cuadrícula fija de productos, porque no es así como funciona nuestra selección. Lo que ofrecemos es curado y cambia: llegan artículos nuevos y otros siguen su camino.",
-      "Por eso, en lugar de mostrarte una página que podría estar desactualizada, te enviamos el catálogo vigente cuando lo pides, con la disponibilidad y los precios que aplican ese día."
+      "No publicamos una cuadrícula fija de productos — nuestra selección es curada y cambia constantemente. Pide el catálogo actual y te enviamos lo que realmente está disponible hoy, con precios y detalles de envío para tu solicitud."
     ],
     "points": [
       "Curado, no exhaustivo: seleccionamos antes de ofrecer.",
@@ -118,7 +117,7 @@
   "wholesale": {
     "eyebrow": "Mayor y pedidos por volumen",
     "title": "Pedidos grandes, evaluados como corresponde.",
-    "lede": "Las solicitudes al mayor se cotizan de forma individual. Para darte una respuesta precisa desde el primer mensaje, ayuda mucho incluir:",
+    "lede": "Las solicitudes al mayor se cotizan de forma individual. Para una respuesta precisa desde el primer mensaje, ayuda incluir:",
     "items": [
       {
         "title": "Cantidades",
@@ -143,8 +142,7 @@
     "eyebrow": "Las personas detrás de la empresa",
     "title": "Una empresa a la que sí puedes llegar.",
     "body": [
-      "Global Beyond LLC tiene su base en Miami, Florida, y la dirigen directamente las dos personas que la fundaron. Cuando nos escribes, les escribes a ellos.",
-      "Estamos en una etapa temprana de crecimiento y preferimos decirlo. Lo que sí podemos prometer hoy es una selección cuidada, información clara y honesta, y respuestas de una persona que conoce tu solicitud."
+      "Global Beyond LLC tiene su base en Miami, Florida, y la dirigen directamente sus dos fundadores — cuando nos escribes, les escribes a ellos. Estamos en una etapa temprana y preferimos decirlo: selección cuidada, información honesta, y respuestas de alguien que conoce tu solicitud."
     ],
     "people": [
       {
@@ -167,23 +165,23 @@
       },
       {
         "title": "Selección cuidada",
-        "body": "Todo lo que está en el catálogo está porque lo elegimos, no porque había que llenar un estante."
+        "body": "Todo lo que está en el catálogo está porque lo elegimos — no solo para llenar un estante."
       },
       {
         "title": "Transparencia",
-        "body": "Disponibilidad, precios y detalles de envío se explican con claridad y por escrito, antes de que te comprometas."
+        "body": "Disponibilidad, precios y envío: dichos con claridad, por escrito, antes de que te comprometas."
       },
       {
         "title": "Oportunidad",
-        "body": "Detal o mayor, un primer pedido o uno recurrente: la puerta es del mismo tamaño para todos."
+        "body": "Detal o mayor, primer pedido o recurrente: la puerta es del mismo tamaño para todos."
       },
       {
         "title": "Crecimiento consciente",
-        "body": "Crecemos al ritmo que nos permite seguir respondiendo cada mensaje nosotros mismos."
+        "body": "Crecemos solo tan rápido como podemos seguir respondiendo cada mensaje nosotros mismos."
       },
       {
         "title": "Visión global",
-        "body": "Miami es donde estamos. Conectar productos, personas y oportunidades es hacia dónde vamos."
+        "body": "Miami es donde estamos. Más allá es hacia dónde vamos."
       }
     ]
   },
