@@ -1,0 +1,5 @@
+{
+  "service": "worker",
+  "workerProcesses": 2,
+  "note": "scaled to 2 worker processes last quarter for throughput"
+}

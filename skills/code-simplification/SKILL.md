@@ -1,6 +1,6 @@
 ---
 name: code-simplification
-description: Simplifies code for clarity. Use when refactoring code for clarity without changing behavior. Use when code works but is harder to read, maintain, or extend than it should be. Use when reviewing code that has accumulated unnecessary complexity.
+description: Simplifies code for clarity. Use when refactoring code for clarity without changing behavior. Use when code works but is harder to read, maintain, or extend than it should be. Use when reviewing code that has accumulated unnecessary complexity. Use when auditing an entire codebase (not just a diff) for accumulated complexity, over-engineering, or bloat — a ranked, one-shot report of what to simplify, without applying fixes.
 ---
 
 # Code Simplification
@@ -183,6 +183,29 @@ COMPARE BEFORE AND AFTER:
 ```
 
 If the "simplified" version is harder to understand or review, revert. Not every simplification attempt succeeds.
+
+## Whole-Repo Audit Mode
+
+The process above is scoped to a diff. Audit mode is the same eye applied to an entire codebase at once: a one-shot, ranked report of what to simplify — it does not apply any fixes. Use it before a release, a handoff, or when someone asks "what can we delete/simplify in this repo."
+
+**Scope:** the whole tree (excluding `node_modules`, build output, and vendored code), not the current change.
+
+**Scan for:** the same signals as the tables above — structural complexity, naming and readability, and redundancy — plus repo-wide patterns a single diff can't reveal:
+
+| Pattern | Signal | Simplification |
+|---------|--------|----------------|
+| Near-duplicate modules | The same logic reimplemented in two or more files | Consolidate into one shared implementation |
+| Single-implementation abstractions | An interface, factory, or strategy with exactly one concrete user | Inline it; reintroduce the abstraction if a second user appears |
+| Dead exports | A function or component exported but never imported elsewhere | Remove it (confirm with a repo-wide reference search first) |
+| Reinvented standard library | Hand-rolled code duplicating what the language or runtime already ships | Replace with the built-in equivalent, name it explicitly |
+
+**Output format:** one line per finding, ranked biggest cut first, grouped by file:
+
+```
+<file>:L<line> — <what to cut/simplify>. replace with: <replacement, or "nothing">.
+```
+
+This is a report, not a refactor: don't touch any files in audit mode. Hand the ranked list back and let the user or a follow-up `code-simplification` pass decide what to act on.
 
 ## Language-Specific Guidance
 
