@@ -115,6 +115,15 @@ Global store (Zustand, Redux)    → Complex client state shared app-wide
 
 ## Design System Adherence
 
+### Locate the Project's Design System First
+
+Before writing any component, look for the project's actual source of truth instead of guessing at colors, spacing, or type:
+
+1. Search the repo root and `docs/` for `DESIGN.md`, `design-system.md`, or a design-tokens file (`tokens.json`, `theme.css`, `tailwind.config.*`).
+2. If one exists, pull the color palette, type scale, spacing scale, and component conventions from it before writing any styles — don't re-derive them from scratch.
+3. If none exists and the UI needs to match a specific brand, ask for the source (existing site, Figma, brand guidelines) rather than defaulting to a generic palette.
+4. If the project has no documented system and will need one repeatedly, propose adding a `DESIGN.md` at the repo root: a plain-markdown spec of the color palette (hex + semantic name), type scale, spacing scale, component patterns, and breakpoints. A markdown file both humans and agents can read consistently is more durable than re-deriving the system on every task.
+
 ### Avoid the AI Aesthetic
 
 AI-generated UI has recognizable patterns. Avoid all of them:
