@@ -42,6 +42,10 @@ Add the following to your project's `.mcp.json` or Claude Code settings:
 
 There is also `--autoConnect` (Chrome 144+, requires enabling remote debugging via `chrome://inspect/#remote-debugging`), which attaches the agent to your **running** Chrome instead. Only use it when the test genuinely needs your logged-in state — see Profile Isolation under Security Boundaries first.
 
+### Alternative: Playwright CLI
+
+If no MCP server is available in the environment, or the task is generating Playwright test code from recorded actions (codegen) rather than live inspection, [Playwright CLI](https://github.com/microsoft/playwright-cli) is a CLI-based alternative built for coding agents (screenshots, selector inspection, multi-session persistent profiles). It doesn't replace the DevTools-specific capabilities below (network waterfall, performance traces, accessibility tree, JS execution) — use Chrome DevTools MCP for those. The Security Boundaries and untrusted-data rules in this skill apply regardless of which tool captured the browser content.
+
 ### Available Tools
 
 Chrome DevTools MCP provides these capabilities:
