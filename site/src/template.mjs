@@ -152,7 +152,7 @@ function siteHeader({ c, site, assets, langHrefs }) {
       <div class="header__inner">
         <a class="brand" href="${assets}${c.lang}/" aria-label="${esc(c.a11y.home)}">
           <img src="${assetVersion('assets/img/logo-mark.webp')}" alt="" width="240" height="95" decoding="async">
-          <span class="brand__name">${esc(site.legalName)}</span>
+          <span class="brand__name" translate="no">${esc(site.legalName)}</span>
         </a>
         <nav class="nav" data-nav aria-label="${esc(c.a11y.primaryNav)}">
           <ul class="nav__list">
@@ -244,7 +244,7 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
               <a href="${assets}${c.lang}/privacy/">${esc(c.footer.privacyLink)}</a>
               <a href="${assets}${c.lang}/terms/">${esc(c.footer.termsLink)}</a>
             </nav>
-            <p>&copy; <span data-year>${new Date().getFullYear()}</span> ${esc(site.legalName)}. ${esc(c.footer.rights)}</p>
+            <p>&copy; <span data-year>${new Date().getFullYear()}</span> <span translate="no">${esc(site.legalName)}</span>. ${esc(c.footer.rights)}</p>
           </div>
         </div>
       </div>
@@ -429,27 +429,34 @@ function contactSection({ c, links, assets }) {
                 <div class="field">
                   <label class="field__label" for="cf-name">${esc(f.name)}</label>
                   <input class="field__input" id="cf-name" name="name" type="text" required
-                    maxlength="120" autocomplete="name" placeholder="${esc(f.namePlaceholder)}">
+                    maxlength="120" autocomplete="name" placeholder="${esc(f.namePlaceholder)}"
+                    aria-describedby="cf-name-error">
+                  <p class="field__error" id="cf-name-error" data-message="${esc(f.errorName)}"></p>
                 </div>
               </div>
               <div class="form__row form__row--split">
                 <div class="field">
                   <label class="field__label" for="cf-email">${esc(f.email)}</label>
-                  <input class="field__input" id="cf-email" name="email" type="email"
-                    maxlength="200" autocomplete="email" placeholder="${esc(f.emailPlaceholder)}">
+                  <input class="field__input" id="cf-email" name="email" type="email" spellcheck="false"
+                    maxlength="200" autocomplete="email" placeholder="${esc(f.emailPlaceholder)}"
+                    aria-describedby="cf-contact-hint cf-contact-error">
                 </div>
                 <div class="field">
                   <label class="field__label" for="cf-phone">${esc(f.phone)} <span class="field__hint">${esc(f.optional)}</span></label>
                   <input class="field__input" id="cf-phone" name="phone" type="tel"
-                    maxlength="60" autocomplete="tel" placeholder="${esc(f.phonePlaceholder)}">
+                    maxlength="60" autocomplete="tel" placeholder="${esc(f.phonePlaceholder)}"
+                    aria-describedby="cf-contact-hint cf-contact-error">
                 </div>
               </div>
               <p class="field__note" id="cf-contact-hint">${esc(f.contactHint)}</p>
+              <p class="field__error" id="cf-contact-error" data-message="${esc(f.errorContact)}"></p>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="cf-message">${esc(f.message)}</label>
                   <textarea class="field__input field__input--area" id="cf-message" name="message" rows="5"
-                    required maxlength="4000" placeholder="${esc(f.messagePlaceholder)}"></textarea>
+                    required maxlength="4000" placeholder="${esc(f.messagePlaceholder)}"
+                    aria-describedby="cf-message-error"></textarea>
+                  <p class="field__error" id="cf-message-error" data-message="${esc(f.errorMessage)}"></p>
                 </div>
               </div>
               <div class="form__foot">
