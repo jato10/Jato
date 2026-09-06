@@ -54,7 +54,7 @@
     "eyebrow": "Qué hacemos",
     "tabsLabel": "Formas de trabajar con nosotros",
     "title": "Tres formas de trabajar con nosotros.",
-    "lede": "Detal, mayor y solicitudes de catálogo — cada una la responde una persona, no una fila de espera.",
+    "lede": "Detal, mayor y solicitudes de catálogo — cada mensaje lo responde directamente una persona real.",
     "items": [
       {
         "title": "Detal",
@@ -66,7 +66,7 @@
       },
       {
         "title": "Solicitudes de catálogo",
-        "body": "Nuestra selección cambia con el tiempo. Pide el catálogo actual y recibirás lo que realmente está disponible hoy, no una página desactualizada."
+        "body": "Nuestra selección cambia con el tiempo. Pide el catálogo actual y recibirás información actualizada, con disponibilidad real de hoy."
       }
     ],
     "flowLabel": "Cómo funciona",
@@ -81,10 +81,10 @@
     "eyebrow": "La selección",
     "title": "Un catálogo que evoluciona.",
     "body": [
-      "No publicamos una cuadrícula fija de productos — nuestra selección es curada y cambia constantemente. Pide el catálogo actual y te enviamos lo que realmente está disponible hoy, con precios y detalles de envío para tu solicitud."
+      "Actualizamos constantemente nuestra selección curada de productos. Pide el catálogo actual y te enviamos lo que realmente está disponible hoy, con precios y detalles de envío para tu solicitud."
     ],
     "points": [
-      "Curado, no exhaustivo: seleccionamos antes de ofrecer.",
+      "Curado y selectivo: seleccionamos antes de ofrecer.",
       "Disponibilidad confirmada en el momento de tu solicitud.",
       "Precios, pedidos y detalles de envío por escrito.",
       "Una sola conversación, de la pregunta a la entrega."
@@ -136,7 +136,7 @@
     "commitments": [
       {
         "title": "Confianza",
-        "body": "Preferimos decirte lo que no tenemos antes que prometer lo que no podemos cumplir."
+        "body": "Preferimos la claridad total sobre nuestra disponibilidad real antes de hacer cualquier promesa."
       },
       {
         "title": "Transparencia",
@@ -206,7 +206,7 @@
       "sending": "Enviando…",
       "privacy": "Usamos lo que nos envías únicamente para responder tu solicitud. Consulta nuestra <a href=\"{href}\">Política de Privacidad</a>.",
       "success": "Mensaje enviado. Te responderemos a los datos que dejaste.",
-      "error": "No se pudo enviar el mensaje. Escríbenos por WhatsApp.",
+      "error": "Escríbenos directo por WhatsApp para una respuesta más rápida.",
       "invalid": "Falta tu nombre, una forma de contactarte o el mensaje.",
       "errorName": "Agrega tu nombre.",
       "errorContact": "Agrega un correo o teléfono.",
@@ -229,7 +229,7 @@
   "notFound": {
     "code": "404",
     "title": "Esta página quedó más allá de nuestro mapa.",
-    "body": "La página que buscabas no existe o cambió de lugar. Todo lo demás está a un paso.",
+    "body": "La página que buscabas cambió de lugar. Encuentra todo lo demás a un paso de aquí.",
     "cta": "Volver al inicio",
     "cta2": "Contáctanos"
   },

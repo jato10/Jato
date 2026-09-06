@@ -54,7 +54,7 @@
     "eyebrow": "What we do",
     "tabsLabel": "Ways to work with us",
     "title": "Three ways to work with us.",
-    "lede": "Retail, wholesale, and catalog requests — each one answered by a person, not a queue.",
+    "lede": "Retail, wholesale, and catalog requests — each one answered directly by a real person.",
     "items": [
       {
         "title": "Retail",
@@ -66,7 +66,7 @@
       },
       {
         "title": "Catalog requests",
-        "body": "Our selection changes over time. Ask for the current catalog and you receive what is genuinely available now — not an outdated page."
+        "body": "Our selection changes over time. Ask for the current catalog and you receive genuinely current information, with real availability today."
       }
     ],
     "flowLabel": "How it works",
@@ -81,10 +81,10 @@
     "eyebrow": "The selection",
     "title": "A catalog that evolves.",
     "body": [
-      "We don't publish a fixed product grid — our selection is curated and constantly changing. Ask for the current catalog and we send what's genuinely available today, with pricing and shipping details for your request."
+      "Our selection is curated and constantly evolving. Ask for the current catalog and we send what's genuinely available today, with pricing and shipping details for your request."
     ],
     "points": [
-      "Curated, not exhaustive — we select before we list.",
+      "Curated and selective — we choose before we list.",
       "Availability confirmed at the moment of your request.",
       "Pricing, ordering, and shipping details in writing.",
       "One conversation, from question to delivery details."
@@ -136,7 +136,7 @@
     "commitments": [
       {
         "title": "Trust",
-        "body": "We'd rather say what we don't have than promise what we can't deliver."
+        "body": "We'd rather stay fully honest about what's really available before making any promise."
       },
       {
         "title": "Transparency",
@@ -206,7 +206,7 @@
       "sending": "Sending…",
       "privacy": "We use what you send only to answer your request. See our <a href=\"{href}\">Privacy Policy</a>.",
       "success": "Message sent. We will reply to the details you left.",
-      "error": "The message could not be sent. Please write to us on WhatsApp instead.",
+      "error": "Reach us directly on WhatsApp for a faster response.",
       "invalid": "Please add your name, a way to reach you, and a message.",
       "errorName": "Add your name.",
       "errorContact": "Add an email or phone number.",
@@ -229,7 +229,7 @@
   "notFound": {
     "code": "404",
     "title": "This page is beyond our map.",
-    "body": "The page you were looking for does not exist, or it has moved. Everything else is one step away.",
+    "body": "The page you were looking for has moved. Find everything else one step away.",
     "cta": "Back to the homepage",
     "cta2": "Contact us"
   },
