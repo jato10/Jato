@@ -257,16 +257,16 @@ function heroSection({ c, assets, links }) {
         <div class="hero__glow" aria-hidden="true"></div>
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="shell hero__inner">
-          <img class="hero__logo" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
+          <img class="hero__logo is-visible-instant" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
             alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async" data-reveal>
-          <p class="eyebrow hero__eyebrow" data-reveal data-delay="1">${esc(c.hero.eyebrow)}</p>
-          <h1 class="h-display" id="hero-title" data-reveal data-delay="2">${c.hero.title}</h1>
-          <p class="lede" data-reveal data-delay="3">${esc(c.hero.lede)}</p>
-          <div class="btn-row" data-reveal data-delay="4">
+          <p class="eyebrow hero__eyebrow is-visible-instant" data-reveal>${esc(c.hero.eyebrow)}</p>
+          <h1 class="h-display is-visible-instant" id="hero-title" data-reveal>${c.hero.title}</h1>
+          <p class="lede is-visible-instant" data-reveal>${esc(c.hero.lede)}</p>
+          <div class="btn-row is-visible-instant" data-reveal>
             <a class="btn btn--primary" href="${esc(primary)}"${externalAttrs(links, primary)}>${esc(c.hero.ctaPrimary)}${ARROW_ICON}</a>
             <a class="btn btn--ghost" href="#contact">${esc(c.hero.ctaSecondary)}</a>
           </div>
-          <p class="hero__note" data-reveal data-delay="5">${esc(c.hero.note)}</p>
+          <p class="hero__note is-visible-instant" data-reveal>${esc(c.hero.note)}</p>
         </div>
         <span class="hero__scroll" aria-hidden="true"></span>
       </section>`;

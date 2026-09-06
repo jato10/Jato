@@ -979,6 +979,11 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
 }
 .js [data-reveal].is-visible { opacity: 1; transform: none; }
 
+/* Content that's already in view on load (the hero) is revealed on the very
+   first frame anyway — see main.js's sweep() — so animating it in only adds
+   a needless ~900ms delay before the page's LCP element visibly paints. */
+.js [data-reveal].is-visible-instant { transition: none; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
