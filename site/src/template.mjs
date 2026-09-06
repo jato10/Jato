@@ -151,7 +151,7 @@ function siteHeader({ c, site, assets, langHrefs }) {
   return `<header class="header" data-header>
       <div class="header__inner">
         <a class="brand" href="${assets}${c.lang}/" aria-label="${esc(c.a11y.home)}">
-          <img src="${assetVersion('assets/img/logo-mark.webp')}" alt="" width="420" height="166" decoding="async">
+          <img src="${assetVersion('assets/img/logo-mark.webp')}" alt="" width="240" height="95" decoding="async">
           <span class="brand__name">${esc(site.legalName)}</span>
         </a>
         <nav class="nav" data-nav aria-label="${esc(c.a11y.primaryNav)}">
@@ -212,7 +212,9 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
       <div class="shell">
         <div class="footer__top">
           <div class="footer__brand">
-            <img src="${assetVersion('assets/img/logo.webp')}" alt="${esc(site.legalName)}" width="900" height="440" loading="lazy" decoding="async">
+            <img src="${assetVersion('assets/img/logo.webp')}" alt="${esc(site.legalName)}" width="900" height="440"
+              srcset="${assetVersion('assets/img/logo-540.webp')} 540w, ${assetVersion('assets/img/logo.webp')} 900w"
+              sizes="190px" loading="lazy" decoding="async">
             <p class="footer__tagline">${esc(c.footer.tagline)}</p>
           </div>
           <div>
@@ -258,6 +260,8 @@ function heroSection({ c, assets, links }) {
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="shell hero__inner">
           <img class="hero__logo is-visible-instant" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
+            srcset="${assetVersion('assets/img/logo-540.webp')} 540w, ${assetVersion('assets/img/logo.webp')} 900w"
+            sizes="(min-width: 581px) 430px, 74vw"
             alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async" data-reveal>
           <p class="eyebrow hero__eyebrow is-visible-instant" data-reveal>${esc(c.hero.eyebrow)}</p>
           <h1 class="h-display is-visible-instant" id="hero-title" data-reveal>${c.hero.title}</h1>
@@ -371,7 +375,9 @@ function aboutSection({ c, assets }) {
                 <img src="${assetVersion('assets/img/team.jpg')}" alt="${esc(c.about.photoAlt)}"
                   width="1800" height="1014" loading="lazy" decoding="async">
                 <div class="about__fallback" aria-hidden="true">
-                  <img src="${assetVersion('assets/img/logo.webp')}" alt="" width="900" height="440">
+                  <img src="${assetVersion('assets/img/logo.webp')}" alt="" width="900" height="440"
+                    srcset="${assetVersion('assets/img/logo-540.webp')} 540w, ${assetVersion('assets/img/logo.webp')} 900w"
+                    sizes="260px" loading="lazy">
                   <p>${esc(c.about.photoCaption)}</p>
                 </div>
               </div>
