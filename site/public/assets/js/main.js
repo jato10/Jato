@@ -134,6 +134,39 @@
     sections.forEach(function (item) { spy.observe(item.section); });
   }
 
+  /* ------------------------------------------------------------- tabs */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-tabs]'), function (root) {
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    var panels = Array.prototype.slice.call(root.querySelectorAll('[role="tabpanel"]'));
+    if (!tabs.length || !panels.length) return;
+
+    var activate = function (tab, moveFocus) {
+      tabs.forEach(function (t) {
+        var selected = t === tab;
+        t.setAttribute('aria-selected', String(selected));
+        t.tabIndex = selected ? 0 : -1;
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('is-active', p.id === tab.getAttribute('aria-controls'));
+      });
+      if (moveFocus) tab.focus();
+    };
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { activate(tab, false); });
+      tab.addEventListener('keydown', function (event) {
+        var target = null;
+        if (event.key === 'ArrowRight') target = tabs[(i + 1) % tabs.length];
+        else if (event.key === 'ArrowLeft') target = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (event.key === 'Home') target = tabs[0];
+        else if (event.key === 'End') target = tabs[tabs.length - 1];
+        if (!target) return;
+        event.preventDefault();
+        activate(target, true);
+      });
+    });
+  });
+
   /* --------------------------------------------------- team photo state */
   var media = document.querySelector('[data-media]');
   if (media) {

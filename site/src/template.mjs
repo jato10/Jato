@@ -252,8 +252,7 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
 }
 
 /* ------------------------------------------------------------- sections */
-function heroSection({ c, assets, links }) {
-  const primary = links.request(c.contact.presets[0].message);
+function heroSection({ c }) {
   return `<section class="hero" aria-labelledby="hero-title">
         <div class="hero__bg" aria-hidden="true"></div>
         <div class="hero__glow" aria-hidden="true"></div>
@@ -266,10 +265,6 @@ function heroSection({ c, assets, links }) {
           <p class="eyebrow hero__eyebrow is-visible-instant" data-reveal>${esc(c.hero.eyebrow)}</p>
           <h1 class="h-display is-visible-instant" id="hero-title" data-reveal>${c.hero.title}</h1>
           <p class="lede is-visible-instant" data-reveal>${esc(c.hero.lede)}</p>
-          <div class="btn-row is-visible-instant" data-reveal>
-            <a class="btn btn--primary" href="${esc(primary)}"${externalAttrs(links, primary)}>${esc(c.hero.ctaPrimary)}${ARROW_ICON}</a>
-            <a class="btn btn--ghost" href="#contact">${esc(c.hero.ctaSecondary)}</a>
-          </div>
           <p class="hero__note is-visible-instant" data-reveal>${esc(c.hero.note)}</p>
         </div>
         <span class="hero__scroll" aria-hidden="true"></span>
@@ -277,9 +272,22 @@ function heroSection({ c, assets, links }) {
 }
 
 function servicesSection({ c }) {
-  const cards = c.services.items
+  /* Rendered as a tablist only once JS confirms it can drive it (see
+     .js .tabs__list in styles.css and the tabs handler in main.js); every
+     panel below is plain, visible content by default, so with JavaScript
+     disabled this reads as the same three sections it always has. */
+  const tabs = c.services.items
     .map(
-      (item, i) => `<article class="card" data-reveal data-delay="${i}">
+      (item, i) => `<button class="tabs__tab" type="button" role="tab" id="services-tab-${i}"
+              aria-controls="services-panel-${i}" aria-selected="${i === 0}" tabindex="${i === 0 ? '0' : '-1'}"
+              data-tab="${i}">${esc(item.title)}</button>`
+    )
+    .join('\n              ');
+
+  const panels = c.services.items
+    .map(
+      (item, i) => `<article class="tabs__panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="services-panel-${i}"
+              aria-labelledby="services-tab-${i}" data-panel="${i}" data-reveal data-delay="${i}">
               <h3 class="h-card">${esc(item.title)}</h3>
               <p>${esc(item.body)}</p>
             </article>`
@@ -297,8 +305,13 @@ function servicesSection({ c }) {
             <h2 class="h-section" id="services-title">${esc(c.services.title)}</h2>
             <p class="lede">${esc(c.services.lede)}</p>
           </div>
-          <div class="grid grid--3">
-            ${cards}
+          <div class="tabs" data-tabs>
+            <div class="tabs__list" role="tablist" aria-label="${esc(c.services.tabsLabel)}">
+              ${tabs}
+            </div>
+            <div class="tabs__panels">
+            ${panels}
+            </div>
           </div>
           <ol class="flow" aria-label="${esc(c.services.flowLabel)}" data-reveal>
               ${flow}
@@ -322,7 +335,7 @@ function catalogSection({ c, links, assets }) {
               <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.catalog.cta)}${ARROW_ICON}</a>
             </div>
           </div>
-          <figure class="catalog__figure" data-reveal data-delay="1">
+          <figure class="catalog__figure catalog__figure--sticky" data-reveal data-delay="1">
             <img class="catalog__photo" src="${assetVersion('assets/img/catalog.webp')}" alt="${esc(c.catalog.photoAlt)}"
               width="1400" height="950" loading="lazy" decoding="async">
             <figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>
@@ -333,13 +346,18 @@ function catalogSection({ c, links, assets }) {
 
 function wholesaleSection({ c, links }) {
   const href = links.request(c.contact.presets[1].message);
+  /* <details>/<summary> — expand/collapse with zero JavaScript, keyboard
+     support and screen-reader semantics included by the browser for free. */
   const items = c.wholesale.items
     .map(
-      (item, i) => `<article class="card card--dark" data-reveal data-delay="${i}">
-              <span class="card__index">${String(i + 1).padStart(2, '0')}</span>
-              <h3 class="h-card">${esc(item.title)}</h3>
-              <p>${esc(item.body)}</p>
-            </article>`
+      (item, i) => `<details class="accordion__item" data-reveal data-delay="${i}"${i === 0 ? ' open' : ''}>
+              <summary class="accordion__summary">
+                <span class="card__index">${String(i + 1).padStart(2, '0')}</span>
+                <span class="h-card accordion__title">${esc(item.title)}</span>
+                <span class="accordion__icon" aria-hidden="true"></span>
+              </summary>
+              <p class="accordion__body">${esc(item.body)}</p>
+            </details>`
     )
     .join('\n            ');
 
@@ -350,7 +368,7 @@ function wholesaleSection({ c, links }) {
             <h2 class="h-section" id="wholesale-title">${esc(c.wholesale.title)}</h2>
             <p class="lede">${esc(c.wholesale.lede)}</p>
           </div>
-          <div class="grid grid--4">
+          <div class="accordion">
             ${items}
           </div>
           <div class="btn-row" data-reveal>
@@ -369,7 +387,7 @@ function aboutSection({ c, assets }) {
     .join('\n              ');
   return `<section class="section section--light" id="about" aria-labelledby="about-title">
         <div class="shell split">
-          <div data-reveal>
+          <div class="about__figure--sticky" data-reveal>
             <figure class="about__figure">
               <div class="about__media" data-media>
                 <img src="${assetVersion('assets/img/team.jpg')}" alt="${esc(c.about.photoAlt)}"
@@ -517,7 +535,7 @@ ${head(options)}
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
     ${siteHeader(options)}
     <main id="main">
-      ${heroSection({ c, assets, links })}
+      ${heroSection({ c })}
       ${servicesSection({ c })}
       ${catalogSection({ c, links, assets })}
       ${wholesaleSection({ c, links })}

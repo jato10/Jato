@@ -30,7 +30,7 @@
 <meta name="twitter:title" content="Global Beyond LLC | Comercio, detal y mayor en Miami">
 <meta name="twitter:description" content="Conoce Global Beyond LLC y solicita a nuestro equipo en Miami el catálogo actual, disponibilidad, precios, pedidos y detalles de envío.">
 <meta name="twitter:image" content="https://globalbeyondllc.com/assets/img/og.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=fae42668">
+<link rel="stylesheet" href="/assets/css/styles.css?v=8ffaf6b7">
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://globalbeyondllc.com/#organization","name":"Global Beyond LLC","legalName":"Global Beyond LLC","url":"https://globalbeyondllc.com/es/","logo":"https://globalbeyondllc.com/assets/img/logo.webp","image":"https://globalbeyondllc.com/assets/img/og.png","description":"Conoce Global Beyond LLC y solicita a nuestro equipo en Miami el catálogo actual, disponibilidad, precios, pedidos y detalles de envío.","slogan":"Más allá de las fronteras. Más allá de lo posible.","address":{"@type":"PostalAddress","addressLocality":"Miami","addressRegion":"FL","addressCountry":"US"},"knowsLanguage":["en","es"],"sameAs":["https://www.instagram.com/globalbeyondllc/"],"contactPoint":[{"@type":"ContactPoint","contactType":"sales","url":"https://globalbeyondllc.com/es/#contact","availableLanguage":["en","es"]}]},{"@context":"https://schema.org","@type":"WebSite","@id":"https://globalbeyondllc.com/es/#website","url":"https://globalbeyondllc.com/es/","name":"Global Beyond LLC","inLanguage":"es","publisher":{"@id":"https://globalbeyondllc.com/#organization"}}]</script>
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
   </head>
@@ -80,10 +80,6 @@
           <p class="eyebrow hero__eyebrow is-visible-instant" data-reveal>Miami, Florida — Estados Unidos</p>
           <h1 class="h-display is-visible-instant" id="hero-title" data-reveal>Más allá de las fronteras.<br>Más allá de lo posible.</h1>
           <p class="lede is-visible-instant" data-reveal>Global Beyond LLC conecta productos, personas y oportunidades — con selección cuidada y atención humana directa.</p>
-          <div class="btn-row is-visible-instant" data-reveal>
-            <a class="btn btn--primary" href="https://wa.me/17863344556?text=Hola%20Global%20Beyond%2C%20me%20gustar%C3%ADa%20recibir%20su%20cat%C3%A1logo%20de%20productos%20actual." target="_blank" rel="noopener noreferrer">Solicitar el catálogo actual<svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-            <a class="btn btn--ghost" href="#contact">Hablar con el equipo</a>
-          </div>
           <p class="hero__note is-visible-instant" data-reveal>Nuestra selección cambia con el tiempo, por eso la disponibilidad, los precios y los detalles de envío siempre se confirman para cada solicitud.</p>
         </div>
         <span class="hero__scroll" aria-hidden="true"></span>
@@ -95,19 +91,35 @@
             <h2 class="h-section" id="services-title">Tres formas de trabajar con nosotros.</h2>
             <p class="lede">Detal, mayor y solicitudes de catálogo — cada una la responde una persona, no una fila de espera.</p>
           </div>
-          <div class="grid grid--3">
-            <article class="card" data-reveal data-delay="0">
+          <div class="tabs" data-tabs>
+            <div class="tabs__list" role="tablist" aria-label="Formas de trabajar con nosotros">
+              <button class="tabs__tab" type="button" role="tab" id="services-tab-0"
+              aria-controls="services-panel-0" aria-selected="true" tabindex="0"
+              data-tab="0">Detal</button>
+              <button class="tabs__tab" type="button" role="tab" id="services-tab-1"
+              aria-controls="services-panel-1" aria-selected="false" tabindex="-1"
+              data-tab="1">Al mayor</button>
+              <button class="tabs__tab" type="button" role="tab" id="services-tab-2"
+              aria-controls="services-panel-2" aria-selected="false" tabindex="-1"
+              data-tab="2">Solicitudes de catálogo</button>
+            </div>
+            <div class="tabs__panels">
+            <article class="tabs__panel is-active" role="tabpanel" id="services-panel-0"
+              aria-labelledby="services-tab-0" data-panel="0" data-reveal data-delay="0">
               <h3 class="h-card">Detal</h3>
               <p>Pedidos individuales, atendidos de forma personal. Cuéntanos qué buscas y te confirmamos qué hay disponible, cuánto cuesta y cómo se envía.</p>
             </article>
-            <article class="card" data-reveal data-delay="1">
+            <article class="tabs__panel" role="tabpanel" id="services-panel-1"
+              aria-labelledby="services-tab-1" data-panel="1" data-reveal data-delay="1">
               <h3 class="h-card">Al mayor</h3>
               <p>Solicitudes por volumen evaluadas caso por caso. Indícanos cantidades, especificaciones y plazos, y te respondemos con disponibilidad y precios para esa solicitud.</p>
             </article>
-            <article class="card" data-reveal data-delay="2">
+            <article class="tabs__panel" role="tabpanel" id="services-panel-2"
+              aria-labelledby="services-tab-2" data-panel="2" data-reveal data-delay="2">
               <h3 class="h-card">Solicitudes de catálogo</h3>
               <p>Nuestra selección cambia con el tiempo. Pide el catálogo actual y recibirás lo que realmente está disponible hoy, no una página desactualizada.</p>
             </article>
+            </div>
           </div>
           <ol class="flow" aria-label="Cómo funciona" data-reveal>
               <li><span class="flow__num">01</span>Envía tu solicitud</li>
@@ -133,7 +145,7 @@
               <a class="btn btn--primary" href="https://wa.me/17863344556?text=Hola%20Global%20Beyond%2C%20me%20gustar%C3%ADa%20recibir%20su%20cat%C3%A1logo%20de%20productos%20actual." target="_blank" rel="noopener noreferrer">Solicitar el catálogo actual<svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
             </div>
           </div>
-          <figure class="catalog__figure" data-reveal data-delay="1">
+          <figure class="catalog__figure catalog__figure--sticky" data-reveal data-delay="1">
             <img class="catalog__photo" src="/assets/img/catalog.webp?v=8bdb220e" alt="Yudenis V. Martínez fotografiando un producto para el catálogo actual de Global Beyond LLC, con la cámara encuadrando el artículo en un set iluminado."
               width="1400" height="950" loading="lazy" decoding="async">
             <figcaption class="catalog__caption">Fotografiando lo que entra en el catálogo actual.</figcaption>
@@ -147,27 +159,39 @@
             <h2 class="h-section" id="wholesale-title">Pedidos grandes, evaluados como corresponde.</h2>
             <p class="lede">Las solicitudes al mayor se cotizan de forma individual. Para una respuesta precisa desde el primer mensaje, ayuda incluir:</p>
           </div>
-          <div class="grid grid--4">
-            <article class="card card--dark" data-reveal data-delay="0">
-              <span class="card__index">01</span>
-              <h3 class="h-card">Cantidades</h3>
-              <p>Cuántas unidades y si el volumen es puntual o recurrente.</p>
-            </article>
-            <article class="card card--dark" data-reveal data-delay="1">
-              <span class="card__index">02</span>
-              <h3 class="h-card">Especificaciones</h3>
-              <p>Productos, categorías, variantes o referencias que ya tengas en mente.</p>
-            </article>
-            <article class="card card--dark" data-reveal data-delay="2">
-              <span class="card__index">03</span>
-              <h3 class="h-card">Plazos</h3>
-              <p>Para cuándo lo necesitas y qué tan flexibles son esas fechas.</p>
-            </article>
-            <article class="card card--dark" data-reveal data-delay="3">
-              <span class="card__index">04</span>
-              <h3 class="h-card">Destino</h3>
-              <p>A dónde va el pedido, para confirmarte los detalles de envío correspondientes.</p>
-            </article>
+          <div class="accordion">
+            <details class="accordion__item" data-reveal data-delay="0" open>
+              <summary class="accordion__summary">
+                <span class="card__index">01</span>
+                <span class="h-card accordion__title">Cantidades</span>
+                <span class="accordion__icon" aria-hidden="true"></span>
+              </summary>
+              <p class="accordion__body">Cuántas unidades y si el volumen es puntual o recurrente.</p>
+            </details>
+            <details class="accordion__item" data-reveal data-delay="1">
+              <summary class="accordion__summary">
+                <span class="card__index">02</span>
+                <span class="h-card accordion__title">Especificaciones</span>
+                <span class="accordion__icon" aria-hidden="true"></span>
+              </summary>
+              <p class="accordion__body">Productos, categorías, variantes o referencias que ya tengas en mente.</p>
+            </details>
+            <details class="accordion__item" data-reveal data-delay="2">
+              <summary class="accordion__summary">
+                <span class="card__index">03</span>
+                <span class="h-card accordion__title">Plazos</span>
+                <span class="accordion__icon" aria-hidden="true"></span>
+              </summary>
+              <p class="accordion__body">Para cuándo lo necesitas y qué tan flexibles son esas fechas.</p>
+            </details>
+            <details class="accordion__item" data-reveal data-delay="3">
+              <summary class="accordion__summary">
+                <span class="card__index">04</span>
+                <span class="h-card accordion__title">Destino</span>
+                <span class="accordion__icon" aria-hidden="true"></span>
+              </summary>
+              <p class="accordion__body">A dónde va el pedido, para confirmarte los detalles de envío correspondientes.</p>
+            </details>
           </div>
           <div class="btn-row" data-reveal>
             <a class="btn btn--primary" href="https://wa.me/17863344556?text=Hola%20Global%20Beyond%2C%20estoy%20interesado%20en%20un%20pedido%20al%20mayor%20y%20quisiera%20conversar%20sobre%20cantidades%20y%20disponibilidad." target="_blank" rel="noopener noreferrer">Iniciar una solicitud al mayor<svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
@@ -176,7 +200,7 @@
       </section>
       <section class="section section--light" id="about" aria-labelledby="about-title">
         <div class="shell split">
-          <div data-reveal>
+          <div class="about__figure--sticky" data-reveal>
             <figure class="about__figure">
               <div class="about__media" data-media>
                 <img src="/assets/img/team.jpg?v=9f80f310" alt="Javier Rafael Torres Gil y Yudenis V. Martínez, fundadores de Global Beyond LLC, sentados en la oficina de la empresa en Miami bajo el logotipo de Global Beyond."
@@ -365,6 +389,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=eae51a45" defer></script>
+    <script src="/assets/js/main.js?v=8a6d5171" defer></script>
   </body>
 </html>
