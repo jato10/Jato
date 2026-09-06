@@ -1,0 +1,63 @@
+{
+  "skill_name": "code-simplification",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "This function works but it is way too clever, simplify it without changing behavior",
+        "top_k": 3
+      },
+      {
+        "prompt": "Reduce the complexity of this module so juniors can maintain it",
+        "top_k": 3
+      },
+      {
+        "prompt": "Clean up this working code, it has grown hard to follow",
+        "top_k": 3
+      },
+      {
+        "prompt": "Audit this whole repo for over-engineering and bloat, give me a ranked list of what to cut",
+        "top_k": 3
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Add a feature flag system to the app"
+      },
+      {
+        "prompt": "Diagnose why the build broke overnight",
+        "owner": "debugging-and-error-recovery"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Simplify the provided 80-line function that parses config files, preserving exact behavior.",
+      "expected_output": "A simpler implementation with identical behavior and a summary of what was removed and why",
+      "files": [
+        "code-simplification"
+      ],
+      "expectations": [
+        "Behavior is preserved (tests unchanged and passing, or equivalence argued concretely)",
+        "Complexity is reduced rather than relocated",
+        "The response explains what was removed and why it was safe",
+        "No new features are added during the simplification"
+      ]
+    },
+    {
+      "id": 2,
+      "kind": "execution",
+      "prompt": "Run a whole-repo simplification audit on this project. Give me a ranked, one-shot report of what to simplify — don't apply any fixes yet.",
+      "expected_output": "A ranked report, ordered biggest cut first, one line per finding in the form '<file>:L<line> — <what to cut/simplify>. replace with: <replacement>', with no files modified",
+      "files": [
+        "code-simplification"
+      ],
+      "expectations": [
+        "parseConfig's deeply nested conditionals in config-parser.js are surfaced as a finding (structural complexity, 3+ levels of nesting)",
+        "Findings are reported one line per finding in a scannable, ranked format rather than as narrative prose",
+        "No file in the fixture is edited — this is a report-only audit, not an applied refactor",
+        "The response does not claim to have run or changed the test suite, since no code was touched"
+      ]
+    }
+  ]
+}

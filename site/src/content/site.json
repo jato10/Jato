@@ -1,0 +1,31 @@
+{
+  "origin": "https://globalbeyondllc.com",
+  "legalName": "Global Beyond LLC",
+  "foundingLocation": {
+    "city": "Miami",
+    "region": "FL",
+    "regionName": "Florida",
+    "country": "US"
+  },
+  "channels": {
+    "whatsapp": "17863344556",
+    "instagram": "https://www.instagram.com/globalbeyondllc/"
+  },
+  "defaultLang": "en",
+  "languages": [
+    {
+      "code": "en",
+      "label": "English",
+      "short": "EN"
+    },
+    {
+      "code": "es",
+      "label": "Español",
+      "short": "ES"
+    }
+  ],
+  "sentPath": {
+    "en": "/en/message-sent/",
+    "es": "/es/mensaje-enviado/"
+  }
+}

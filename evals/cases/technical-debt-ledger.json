@@ -1,0 +1,47 @@
+{
+  "skill_name": "technical-debt-ledger",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "What did we defer while shipping this feature? Give me the list of shortcuts.",
+        "top_k": 3
+      },
+      {
+        "prompt": "Before we hand this repo off to the other team, build a debt ledger of every deliberate shortcut left in the code",
+        "top_k": 3
+      },
+      {
+        "prompt": "I need to check if any of our marked corner-cuts have already hit the limit we said was safe",
+        "top_k": 3
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "This function works but it is way too clever, simplify it without changing behavior",
+        "owner": "code-simplification"
+      },
+      {
+        "prompt": "We're sunsetting the old auth service, plan the migration and remove the dead code once users are off it",
+        "owner": "deprecation-and-migration"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "kind": "execution",
+      "prompt": "Build the technical debt ledger for this repo: harvest every DEBT marker, render one ledger row per entry, and flag any entry whose stated upgrade trigger has already fired based on other files in the repo.",
+      "expected_output": "A ledger with one row per DEBT marker (queue.js and lookup.py), each showing what/ceiling/upgrade, with the queue.js entry flagged as due because deploy.config.json shows workerProcesses: 2 already matches its upgrade trigger, while the lookup.py entry is left as active debt because users_seed.json shows row_count well under its 500-row ceiling",
+      "files": [
+        "technical-debt-ledger"
+      ],
+      "expectations": [
+        "Both DEBT markers (queue.js and lookup.py) are found and reported, each with its what/ceiling/upgrade fields intact",
+        "The queue.js entry is identified as due/fired: deploy.config.json's workerProcesses: 2 satisfies its stated upgrade trigger of running behind a second worker process, and the response calls this out distinctly from ordinary debt",
+        "The lookup.py entry is correctly left as still-valid debt: users_seed.json's row_count of 42 is well under its ~500-row ceiling, so it is not flagged as due",
+        "No unmarked code in the fixture (e.g. drain() in queue.js or the module exports) is reported as a debt entry — only actual DEBT: markers are harvested",
+        "The response does not silently fix or remove either marker; this is a report, not a refactor"
+      ]
+    }
+  ]
+}
