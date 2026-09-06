@@ -30,7 +30,7 @@
 <meta name="twitter:title" content="Global Beyond LLC | E-Commerce, Retail &amp; Wholesale in Miami">
 <meta name="twitter:description" content="Discover Global Beyond LLC and request the latest product catalog, availability, pricing, ordering, and shipping details directly from our team in Miami.">
 <meta name="twitter:image" content="https://globalbeyondllc.com/assets/img/og.png">
-<link rel="stylesheet" href="/assets/css/styles.css?v=d5f949ac">
+<link rel="stylesheet" href="/assets/css/styles.css?v=fae42668">
 <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","@id":"https://globalbeyondllc.com/#organization","name":"Global Beyond LLC","legalName":"Global Beyond LLC","url":"https://globalbeyondllc.com/en/","logo":"https://globalbeyondllc.com/assets/img/logo.webp","image":"https://globalbeyondllc.com/assets/img/og.png","description":"Discover Global Beyond LLC and request the latest product catalog, availability, pricing, ordering, and shipping details directly from our team in Miami.","slogan":"Beyond Borders. Beyond Possibilities.","address":{"@type":"PostalAddress","addressLocality":"Miami","addressRegion":"FL","addressCountry":"US"},"knowsLanguage":["en","es"],"sameAs":["https://www.instagram.com/globalbeyondllc/"],"contactPoint":[{"@type":"ContactPoint","contactType":"sales","url":"https://globalbeyondllc.com/en/#contact","availableLanguage":["en","es"]}]},{"@context":"https://schema.org","@type":"WebSite","@id":"https://globalbeyondllc.com/en/#website","url":"https://globalbeyondllc.com/en/","name":"Global Beyond LLC","inLanguage":"en","publisher":{"@id":"https://globalbeyondllc.com/#organization"}}]</script>
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
   </head>
@@ -40,7 +40,7 @@
       <div class="header__inner">
         <a class="brand" href="/en/" aria-label="Global Beyond LLC — home">
           <img src="/assets/img/logo-mark.webp?v=3f134fff" alt="" width="240" height="95" decoding="async">
-          <span class="brand__name">Global Beyond LLC</span>
+          <span class="brand__name" translate="no">Global Beyond LLC</span>
         </a>
         <nav class="nav" data-nav aria-label="Primary">
           <ul class="nav__list">
@@ -227,27 +227,34 @@
                 <div class="field">
                   <label class="field__label" for="cf-name">Your name</label>
                   <input class="field__input" id="cf-name" name="name" type="text" required
-                    maxlength="120" autocomplete="name" placeholder="Name and company, if you have one">
+                    maxlength="120" autocomplete="name" placeholder="Name and company, if you have one…"
+                    aria-describedby="cf-name-error">
+                  <p class="field__error" id="cf-name-error" data-message="Add your name."></p>
                 </div>
               </div>
               <div class="form__row form__row--split">
                 <div class="field">
                   <label class="field__label" for="cf-email">Email</label>
-                  <input class="field__input" id="cf-email" name="email" type="email"
-                    maxlength="200" autocomplete="email" placeholder="you@example.com">
+                  <input class="field__input" id="cf-email" name="email" type="email" spellcheck="false"
+                    maxlength="200" autocomplete="email" placeholder="you@example.com"
+                    aria-describedby="cf-contact-hint cf-contact-error">
                 </div>
                 <div class="field">
                   <label class="field__label" for="cf-phone">Phone or WhatsApp <span class="field__hint">optional</span></label>
                   <input class="field__input" id="cf-phone" name="phone" type="tel"
-                    maxlength="60" autocomplete="tel" placeholder="Optional if you leave an email">
+                    maxlength="60" autocomplete="tel" placeholder="Optional if you leave an email…"
+                    aria-describedby="cf-contact-hint cf-contact-error">
                 </div>
               </div>
               <p class="field__note" id="cf-contact-hint">Leave at least one of the two, so we know where to reply.</p>
+              <p class="field__error" id="cf-contact-error" data-message="Add an email or phone number."></p>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="cf-message">Your message</label>
                   <textarea class="field__input field__input--area" id="cf-message" name="message" rows="5"
-                    required maxlength="4000" placeholder="What you are looking for: a product, a category, a quantity, or simply the current catalog."></textarea>
+                    required maxlength="4000" placeholder="What you are looking for: a product, a category, a quantity, or simply the current catalog…"
+                    aria-describedby="cf-message-error"></textarea>
+                  <p class="field__error" id="cf-message-error" data-message="Add a message."></p>
                 </div>
               </div>
               <div class="form__foot">
@@ -353,11 +360,11 @@
               <a href="/en/privacy/">Privacy Policy</a>
               <a href="/en/terms/">Terms of Use</a>
             </nav>
-            <p>&copy; <span data-year>2026</span> Global Beyond LLC. All rights reserved.</p>
+            <p>&copy; <span data-year>2026</span> <span translate="no">Global Beyond LLC</span>. All rights reserved.</p>
           </div>
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=97a1a1d1" defer></script>
+    <script src="/assets/js/main.js?v=eae51a45" defer></script>
   </body>
 </html>

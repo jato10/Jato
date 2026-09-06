@@ -173,8 +173,15 @@
       message: form.querySelector('[name="message"]'),
     };
 
-    var flag = function (field, invalid) {
+    var errors = {
+      name: form.querySelector('#cf-name-error'),
+      contact: form.querySelector('#cf-contact-error'),
+      message: form.querySelector('#cf-message-error'),
+    };
+
+    var flag = function (field, invalid, errorEl) {
       if (field) field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+      if (errorEl) errorEl.textContent = invalid ? (errorEl.getAttribute('data-message') || '') : '';
     };
 
     form.addEventListener('submit', function (event) {
@@ -182,11 +189,12 @@
       var email = fields.email && fields.email.value.trim();
       var phone = fields.phone && fields.phone.value.trim();
       var message = fields.message && fields.message.value.trim();
+      var contactMissing = !email && !phone;
 
-      flag(fields.name, !name);
-      flag(fields.message, !message);
-      flag(fields.email, !email && !phone);
-      flag(fields.phone, !email && !phone);
+      flag(fields.name, !name, errors.name);
+      flag(fields.message, !message, errors.message);
+      flag(fields.email, contactMissing, errors.contact);
+      flag(fields.phone, contactMissing, errors.contact);
 
       if (!name || !message || (!email && !phone)) {
         event.preventDefault();
