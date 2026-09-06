@@ -1,0 +1,13 @@
+{
+  "name": "agent-skills",
+  "version": "0.6.8",
+  "description": "Production-grade engineering skills for AI coding agents — covering the full software development lifecycle from spec to ship.",
+  "author": {
+    "name": "Addy Osmani"
+  },
+  "homepage": "https://github.com/jato10/Jato",
+  "repository": "https://github.com/jato10/Jato",
+  "license": "MIT",
+  "commands": ["./.claude/commands", "./commands"],
+  "skills": "./skills"
+}

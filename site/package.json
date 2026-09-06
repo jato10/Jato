@@ -1,0 +1,11 @@
+{
+  "name": "global-beyond-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Bilingual marketing site for Global Beyond LLC (Miami, Florida).",
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "serve": "node --run build && python3 -m http.server 8080 --directory public"
+  }
+}

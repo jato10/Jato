@@ -2,3 +2,13 @@ node_modules/
 dist/
 coverage/
 .env
+graphify-out/
+.DS_Store
+node_modules/
+.env
+.env.*
+*.log
+.claude/.simplify-ignore-cache/
+.claude/sdd-cache/
+evals/results/
+__pycache__/
