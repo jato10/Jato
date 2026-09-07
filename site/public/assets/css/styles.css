@@ -795,6 +795,12 @@ a, button, input, textarea, select {
   .people { flex-direction: column; gap: 8px; }
   .people li + li::before { display: none; }
 }
+.people__role {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--on-light-muted);
+}
 
 /* --------------------------------------------------------- 9. Commitments */
 .commitments {
@@ -807,6 +813,12 @@ a, button, input, textarea, select {
 }
 .commitments li { color: var(--on-light-muted); }
 .commitments strong { color: var(--on-light); font-weight: 600; }
+.about__tagline {
+  margin-top: 24px;
+  font-size: clamp(1rem, 1.3vw, 1.08rem);
+  font-style: italic;
+  color: var(--on-light);
+}
 
 /* -------------------------------------------------------- 10. Contact */
 .channels { display: grid; gap: clamp(16px, 2vw, 22px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }

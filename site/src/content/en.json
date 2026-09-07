@@ -119,9 +119,9 @@
   },
   "about": {
     "eyebrow": "The people behind the company",
-    "title": "A company you can actually reach.",
+    "title": "Global Beyond — beyond buying.",
     "body": [
-      "Global Beyond LLC is based in Miami, Florida, and run directly by its two founders — when you write to us, you're writing to them. We're early in our growth and prefer to say so: careful selection, honest information, and answers from someone who knows your request."
+      "Global Beyond LLC was born in Miami, Florida, from a simple idea: doing business in a way that's closer, more responsible, and more personal."
     ],
     "people": [
       {
@@ -131,22 +131,24 @@
         "name": "Yudenis V. Martínez"
       }
     ],
+    "peopleRole": "Founders of Global Beyond LLC",
     "photoAlt": "Javier Rafael Torres Gil and Yudenis V. Martínez, the founders of Global Beyond LLC, seated in the company's Miami office beneath the Global Beyond logo.",
     "photoCaption": "Miami, Florida.",
     "commitments": [
       {
-        "title": "Trust",
-        "body": "We'd rather stay fully honest about what's really available before making any promise."
+        "title": "Everything made easier",
+        "body": "Clear products, pricing, and timelines from the start."
       },
       {
-        "title": "Transparency",
-        "body": "Availability, pricing, and shipping — stated plainly, in writing, before you commit."
+        "title": "Real commitment",
+        "body": "Every detail gets confirmed with you, and every agreement counts."
       },
       {
-        "title": "Thoughtful growth",
-        "body": "We grow only as fast as we can still answer every message ourselves."
+        "title": "Always reachable",
+        "body": "Direct attention from start to finish."
       }
-    ]
+    ],
+    "tagline": "Global Beyond — Beyond buying. A better way to connect."
   },
   "contact": {
     "eyebrow": "Contact",

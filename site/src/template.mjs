@@ -380,11 +380,17 @@ function wholesaleSection({ c, links }) {
 
 function aboutSection({ c, assets }) {
   const people = c.about.people.map((p) => `<li>${esc(p.name)}</li>`).join('\n              ');
+  const peopleRole = c.about.peopleRole
+    ? `<p class="people__role">${esc(c.about.peopleRole)}</p>`
+    : '';
   const commitments = c.about.commitments
     .map(
       (item) => `<li><strong>${esc(item.title)}.</strong> ${esc(item.body)}</li>`
     )
     .join('\n              ');
+  const tagline = c.about.tagline
+    ? `<p class="about__tagline">${esc(c.about.tagline)}</p>`
+    : '';
   return `<section class="section section--light" id="about" aria-labelledby="about-title">
         <div class="shell split">
           <div class="about__figure--sticky" data-reveal>
@@ -409,9 +415,11 @@ function aboutSection({ c, assets }) {
             <ul class="people">
               ${people}
             </ul>
+            ${peopleRole}
             <ul class="commitments">
               ${commitments}
             </ul>
+            ${tagline}
           </div>
         </div>
       </section>`;
