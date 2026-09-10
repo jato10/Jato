@@ -158,13 +158,11 @@ function siteHeader({ c, site, assets, langHrefs }) {
           <ul class="nav__list">
             ${navItems}
           </ul>
-          <a class="btn btn--primary btn--small nav__cta" href="#contact">${esc(c.navCta)}${ARROW_ICON}</a>
         </nav>
         <div class="header__actions">
           <nav class="lang" aria-label="${esc(c.a11y.langNav)}">
             ${langItems}
           </nav>
-          <a class="btn btn--primary btn--small header__cta" href="#contact">${esc(c.navCta)}${ARROW_ICON}</a>
           <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false"
             aria-controls="site-nav" aria-label="${esc(c.a11y.menuOpen)}"
             data-label-open="${esc(c.a11y.menuOpen)}" data-label-close="${esc(c.a11y.menuClose)}">

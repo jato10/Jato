@@ -421,9 +421,6 @@ a, button, input, textarea, select {
 .menu-toggle[aria-expanded="true"] .menu-toggle__bars span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
 .menu-toggle[aria-expanded="true"] .menu-toggle__bars span:nth-child(2) { transform: translateY(-4.5px) rotate(-45deg); }
 
-.header__cta { display: none; }
-@media (min-width: 1080px) { .header__cta { display: inline-flex; } }
-
 /* Mobile navigation panel (progressive enhancement: no JS = inline nav). */
 @media (max-width: 1023px) {
   .js .menu-toggle { display: inline-flex; }
@@ -455,11 +452,8 @@ a, button, input, textarea, select {
     border-bottom: 1px solid var(--line-dark-soft);
   }
   .js .nav__link::after { display: none; }
-  .js .nav__cta { margin-top: 22px; width: 100%; }
   .no-js .nav__list { flex-wrap: wrap; justify-content: flex-end; }
-  .no-js .nav__cta { display: none; }
 }
-@media (min-width: 1024px) { .nav__cta { display: none; } }
 
 /* Dim the page behind the open mobile menu. */
 .nav-scrim {
