@@ -820,6 +820,44 @@ a, button, input, textarea, select {
   color: var(--on-light);
 }
 
+/* ----------------------------------------------- 9b. Mission & purpose */
+.pillars { margin: 0; }
+.pillars__item {
+  display: grid;
+  gap: 12px;
+  padding-block: clamp(26px, 3.2vw, 44px);
+  border-top: 1px solid var(--line-light-soft);
+}
+.pillars__item:last-child { border-bottom: 1px solid var(--line-light-soft); }
+.pillars__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+}
+.pillars__text {
+  margin: 0;
+  font-size: clamp(1rem, 1.25vw, 1.14rem);
+  line-height: 1.6;
+  color: var(--on-light-muted);
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+.pillars__text--lead {
+  font-size: clamp(1.24rem, 2.2vw, 1.85rem);
+  line-height: 1.32;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--on-light);
+  max-width: 30ch;
+  text-wrap: balance;
+}
+@media (min-width: 860px) {
+  .pillars__item { grid-template-columns: minmax(160px, 20%) 1fr; gap: 12px 48px; }
+  .pillars__label { padding-top: 7px; }
+}
+
 /* -------------------------------------------------------- 10. Contact */
 .channels { display: grid; gap: clamp(16px, 2vw, 22px); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
 .channel {

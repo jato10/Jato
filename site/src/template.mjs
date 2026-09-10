@@ -425,6 +425,32 @@ function aboutSection({ c, assets }) {
       </section>`;
 }
 
+function purposeSection({ c }) {
+  /* <dl> rather than a card grid: the three statements differ a lot in
+     length, and term/description keeps the label bound to its statement
+     for screen readers without inventing headings for them. */
+  const pillars = c.purpose.pillars
+    .map(
+      (item, i) => `<div class="pillars__item" data-reveal data-delay="${i}">
+              <dt class="pillars__label">${esc(item.label)}</dt>
+              <dd class="pillars__text${item.lead ? ' pillars__text--lead' : ''}">${esc(item.body)}</dd>
+            </div>`
+    )
+    .join('\n            ');
+
+  return `<section class="section section--light-alt" id="purpose" aria-labelledby="purpose-title">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">${esc(c.purpose.eyebrow)}</p>
+            <h2 class="h-section" id="purpose-title">${esc(c.purpose.title)}</h2>
+          </div>
+          <dl class="pillars">
+            ${pillars}
+          </dl>
+        </div>
+      </section>`;
+}
+
 function contactSection({ c, links, assets }) {
   const ch = c.contact.channels;
   const f = c.contact.form;
@@ -548,6 +574,7 @@ ${head(options)}
       ${catalogSection({ c, links, assets })}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
+      ${purposeSection({ c })}
       ${contactSection({ c, links, assets })}
     </main>
     ${siteFooter({ ...options })}

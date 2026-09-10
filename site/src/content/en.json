@@ -150,6 +150,25 @@
     ],
     "tagline": "Global Beyond — Beyond service. A better way to connect."
   },
+  "purpose": {
+    "eyebrow": "What drives us",
+    "title": "Mission, vision, and purpose.",
+    "pillars": [
+      {
+        "label": "Mission",
+        "body": "Offer carefully selected products that add real value to our customers' lives, through an online shopping experience that stays simple, reliable, and transparent, backed by personal service committed to their satisfaction."
+      },
+      {
+        "label": "Vision",
+        "body": "Build an e-commerce brand that reaches beyond the sale and becomes a trusted reference for its customers, recognized for anticipating their needs, offering relevant solutions, and innovating constantly to create lasting relationships and sustainable growth."
+      },
+      {
+        "label": "Brand purpose",
+        "body": "Help people choose better, buy with confidence, and enjoy an experience that stays simple from start to finish.",
+        "lead": true
+      }
+    ]
+  },
   "contact": {
     "eyebrow": "Contact",
     "title": "Talk to us directly.",
