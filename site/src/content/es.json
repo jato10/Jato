@@ -150,6 +150,25 @@
     ],
     "tagline": "Global Beyond — Más allá del servicio. Una mejor forma de conectar."
   },
+  "purpose": {
+    "eyebrow": "Lo que nos mueve",
+    "title": "Misión, visión y propósito.",
+    "pillars": [
+      {
+        "label": "Misión",
+        "body": "Ofrecer productos cuidadosamente seleccionados que aporten valor real a la vida de nuestros clientes, mediante una experiencia de compra digital sencilla, confiable y transparente, respaldada por un servicio cercano y comprometido con su satisfacción."
+      },
+      {
+        "label": "Visión",
+        "body": "Construir una marca de e-commerce que trascienda la venta y se convierta en una referencia de confianza para sus clientes, reconocida por anticipar sus necesidades, ofrecer soluciones relevantes e innovar constantemente para generar relaciones duraderas y un crecimiento sostenible."
+      },
+      {
+        "label": "Propósito de marca",
+        "body": "Ayudar a las personas a elegir mejor, comprar con confianza y disfrutar una experiencia simple de principio a fin.",
+        "lead": true
+      }
+    ]
+  },
   "contact": {
     "eyebrow": "Contacto",
     "title": "Habla con nosotros directamente.",
