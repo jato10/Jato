@@ -38,11 +38,14 @@
       "label": "About"
     },
     {
+      "id": "purpose",
+      "label": "Purpose"
+    },
+    {
       "id": "contact",
       "label": "Contact"
     }
   ],
-  "navCta": "Request the catalog",
   "hero": {
     "eyebrow": "Miami, Florida — United States",
     "title": "Beyond Borders.<br>Beyond Possibilities.",

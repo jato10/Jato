@@ -38,11 +38,14 @@
       "label": "Nosotros"
     },
     {
+      "id": "purpose",
+      "label": "Propósito"
+    },
+    {
       "id": "contact",
       "label": "Contacto"
     }
   ],
-  "navCta": "Solicitar catálogo",
   "hero": {
     "eyebrow": "Miami, Florida — Estados Unidos",
     "title": "Más allá de las fronteras.<br>Más allá de lo posible.",
