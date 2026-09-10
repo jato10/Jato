@@ -1,0 +1,50 @@
+# SkillSpector baseline — findings listed here are suppressed on future scans.
+# See docs/SUPPRESSION.md (NVIDIA/SkillSpector).
+#
+# Rule-based (not fingerprint-based) suppression: fingerprint hashes were
+# found to be non-reproducible between `skillspector baseline` and a
+# subsequent `skillspector scan --baseline` invocation on this file (3 of 8
+# PE3/EA2/SSRF1/YR4 findings failed to match despite unchanged source), so
+# exact fingerprints are unreliable here. `rules` match by rule id + path
+# instead, which is deterministic and is the mechanism SkillSpector's own
+# docs recommend for a "deliberate, tightly-scoped policy suppression" like
+# this one (an entire finding category doesn't apply to this skill).
+version: 2
+scanner_version: "2.11.2"
+
+rules:
+  - id: "YR4"
+    path: "SKILL.md"
+    reason: >
+      Triaged 2026-09-10: YARA rule 'agent_skill_prompt_injection_hidden_instructions'
+      matched SKILL.md:21, the "Threat Model First" process heading. Manually
+      verified: no exploit code, no pentesting tool references, no hidden
+      instructions present in this skill. Cross-checked with SkillSpector's
+      LLM pass (claude_cli/claude-sonnet-5, properly configured) - identical
+      result to static analysis, confirming this is expected trigger surface
+      for security-hardening documentation, not a scanner bug.
+  - id: "SSRF1"
+    path: "SKILL.md"
+    reason: >
+      Triaged 2026-09-10: SKILL.md:218 references the cloud metadata endpoint
+      169.254.169.254 inside a code sample that BLOCKS access to it (SSRF
+      mitigation via `assertSafeUrl`), not one that accesses it. Manually
+      verified against source. Cross-checked with SkillSpector's LLM pass
+      (claude_cli/claude-sonnet-5) - identical result to static analysis.
+  - id: "PE3"
+    path: "SKILL.md"
+    reason: >
+      Triaged 2026-09-10: SKILL.md:335-342 is a `.env`/`.gitignore` secrets-hygiene
+      diagram (what files to commit vs. never commit), not credential access.
+      Manually verified against source. Cross-checked with SkillSpector's LLM
+      pass (claude_cli/claude-sonnet-5) - identical result to static analysis.
+  - id: "EA2"
+    path: "SKILL.md"
+    reason: >
+      Triaged 2026-09-10: SKILL.md:482 is guidance instructing the agent to
+      require human-in-the-loop confirmation before destructive operations -
+      the opposite of autonomous decision-making. Manually verified against
+      source. Cross-checked with SkillSpector's LLM pass
+      (claude_cli/claude-sonnet-5) - identical result to static analysis.
+
+fingerprints: []
