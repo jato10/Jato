@@ -854,16 +854,22 @@ a, button, input, textarea, select {
 }
 
 /* --------------------------------------------------------- 9. Commitments */
+/* A compact horizontal row, deliberately not the stacked hairline-row layout
+   the purpose section's pillars use just below it — two sections in a row
+   presenting "three things" the same way read as one repeated block. */
 .commitments {
   margin-top: 28px;
   padding-top: 24px;
   border-top: 1px solid var(--line-light-soft);
   display: grid;
-  gap: 12px;
-  max-width: 56ch;
+  gap: 20px;
+  max-width: none;
+}
+@media (min-width: 700px) {
+  .commitments { grid-template-columns: repeat(3, 1fr); gap: 28px; }
 }
 .commitments li { color: var(--on-light-muted); }
-.commitments strong { color: var(--on-light); font-weight: 600; }
+.commitments strong { display: block; margin-bottom: 4px; color: var(--on-light); font-weight: 600; }
 .about__tagline {
   margin-top: 24px;
   font-size: clamp(1rem, 1.3vw, 1.08rem);
