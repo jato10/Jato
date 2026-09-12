@@ -250,7 +250,10 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
 }
 
 /* ------------------------------------------------------------- sections */
-function heroSection({ c }) {
+function heroSection({ c, links }) {
+  /* Same destination as the catalog section's CTA: the fold needs the action
+     to be reachable without hunting for it further down the page. */
+  const href = links.request(c.contact.presets[0].message);
   return `<section class="hero" aria-labelledby="hero-title">
         <div class="hero__bg" aria-hidden="true"></div>
         <div class="hero__glow" aria-hidden="true"></div>
@@ -263,6 +266,10 @@ function heroSection({ c }) {
           <p class="eyebrow hero__eyebrow is-visible-instant" data-reveal>${esc(c.hero.eyebrow)}</p>
           <h1 class="h-display is-visible-instant" id="hero-title" data-reveal>${c.hero.title}</h1>
           <p class="lede is-visible-instant" data-reveal>${esc(c.hero.lede)}</p>
+          <div class="btn-row hero__actions is-visible-instant" data-reveal>
+            <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.hero.ctaPrimary)}${ARROW_ICON}</a>
+            <a class="btn btn--ghost" href="#contact">${esc(c.hero.ctaSecondary)}</a>
+          </div>
           <p class="hero__note is-visible-instant" data-reveal>${esc(c.hero.note)}</p>
         </div>
         <span class="hero__scroll" aria-hidden="true"></span>
@@ -567,7 +574,7 @@ ${head(options)}
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
     ${siteHeader(options)}
     <main id="main">
-      ${heroSection({ c })}
+      ${heroSection({ c, links })}
       ${servicesSection({ c })}
       ${catalogSection({ c, links, assets })}
       ${wholesaleSection({ c, links })}
