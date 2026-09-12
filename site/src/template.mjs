@@ -126,6 +126,7 @@ ${(otherLocales || []).map((l) => `<meta property="og:locale:alternate" content=
 <meta name="twitter:title" content="${esc(c.meta.title)}">
 <meta name="twitter:description" content="${esc(c.meta.description)}">
 <meta name="twitter:image" content="${esc(ogImage)}">
+<link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
 ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ''}`;
 }
@@ -616,6 +617,7 @@ export function renderNotFound({ contents, site, ogImage }) {
     <meta name="color-scheme" content="dark">
     <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
     <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
   </head>
@@ -659,6 +661,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <meta property="og:title" content="${esc(contents[0].meta.title)}">
     <meta property="og:description" content="${esc(contents[0].meta.description)}">
     <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
   </head>
@@ -694,6 +697,7 @@ export function renderSent({ c, site, ogImage, links, path }) {
     <link rel="canonical" href="${esc(site.origin.replace(/\/$/, '') + path)}">
     <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
     <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
   </head>
@@ -755,6 +759,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <meta property="og:description" content="${esc(d.metaDescription)}">
     <meta property="og:url" content="${esc(canonical)}">
     <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
   </head>
