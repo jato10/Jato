@@ -609,6 +609,11 @@ a, button, input, textarea, select {
 }
 
 /* --------------------------------------------------------- 7. Tabs */
+/* Tabs/panel column plus the flow card beside it. Below 900px the flow card
+   simply drops under the tabs — the grid collapses to one column, no extra
+   rules needed for that case. */
+.services-body { display: grid; gap: clamp(36px, 5vw, 64px); align-items: start; }
+@media (min-width: 900px) { .services-body { grid-template-columns: 1.3fr 0.7fr; } }
 .tabs__list {
   display: flex;
   flex-wrap: wrap;
@@ -686,20 +691,27 @@ a, button, input, textarea, select {
 .accordion__item[open] .accordion__icon::after { transform: scaleY(0); }
 .accordion__body { max-width: 62ch; padding-bottom: clamp(22px, 2.6vw, 28px); color: var(--on-dark-muted); }
 
-/* Compact "how it works" flow, folded into the services section */
-.flow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 8px;
-  margin-top: clamp(40px, 5vw, 64px);
-  padding-top: 28px;
-  border-top: 1px solid var(--line-light-soft);
-  color: var(--on-light-muted);
-  font-size: 0.92rem;
+/* "How it works" — a vertical step list docked beside the tabs on desktop,
+   stacked below them once the services-body grid collapses on mobile. */
+.flow-card {
+  padding: clamp(24px, 3vw, 32px);
+  border-radius: 20px;
+  background: var(--paper-200);
 }
-.flow li { display: flex; align-items: baseline; gap: 8px; }
-.flow li:not(:last-child)::after { content: "\2192"; margin-left: 20px; color: var(--slate-400); }
-.flow__num { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; color: var(--slate-500); }
+.flow-card__heading {
+  margin: 0 0 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+}
+.flow { display: grid; color: var(--on-light-muted); font-size: 0.94rem; }
+.flow li { display: flex; align-items: baseline; gap: 14px; padding-block: 16px; }
+.flow li:first-child { padding-top: 0; }
+.flow li:last-child { padding-bottom: 0; }
+.flow li:not(:last-child) { border-bottom: 1px solid var(--line-light-soft); }
+.flow__num { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; color: var(--slate-500); flex: none; }
 
 /* Bulleted feature list */
 .ticks { display: grid; gap: 14px; margin-top: 32px; }
