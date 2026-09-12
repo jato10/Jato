@@ -302,7 +302,7 @@ function servicesSection({ c }) {
 
   const flow = c.services.flow
     .map((step, i) => `<li><span class="flow__num">${String(i + 1).padStart(2, '0')}</span>${esc(step)}</li>`)
-    .join('\n              ');
+    .join('\n                ');
 
   return `<section class="section section--light" id="services" aria-labelledby="services-title">
         <div class="shell">
@@ -311,17 +311,22 @@ function servicesSection({ c }) {
             <h2 class="h-section" id="services-title">${esc(c.services.title)}</h2>
             <p class="lede">${esc(c.services.lede)}</p>
           </div>
-          <div class="tabs" data-tabs>
-            <div class="tabs__list" role="tablist" aria-label="${esc(c.services.tabsLabel)}">
-              ${tabs}
+          <div class="services-body">
+            <div class="tabs" data-tabs>
+              <div class="tabs__list" role="tablist" aria-label="${esc(c.services.tabsLabel)}">
+                ${tabs}
+              </div>
+              <div class="tabs__panels">
+              ${panels}
+              </div>
             </div>
-            <div class="tabs__panels">
-            ${panels}
+            <div class="flow-card" data-reveal data-delay="1">
+              <p class="flow-card__heading" id="services-flow-heading">${esc(c.services.flowLabel)}</p>
+              <ol class="flow" aria-labelledby="services-flow-heading">
+                ${flow}
+              </ol>
             </div>
           </div>
-          <ol class="flow" aria-label="${esc(c.services.flowLabel)}" data-reveal>
-              ${flow}
-          </ol>
         </div>
       </section>`;
 }
