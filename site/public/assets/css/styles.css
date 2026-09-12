@@ -4,6 +4,19 @@
    brushed-steel accents drawn from the brand mark, restrained motion.
    ========================================================================== */
 
+/* --------------------------------------------------------------- 0. Font */
+/* Self-hosted (CSP is font-src 'self', so a CDN link is not an option).
+   One variable file covers every weight the site uses (400/500/600) plus
+   headroom; font-display: swap avoids a blank flash on first paint. */
+@font-face {
+  font-family: "Geist";
+  src: url("/assets/fonts/geist-variable.woff2") format("woff2-variations"),
+    url("/assets/fonts/geist-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ------------------------------------------------------------- 1. Tokens */
 :root {
   --ink-950: #04070e;
@@ -49,7 +62,7 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  --font: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 
@@ -94,6 +107,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 a { color: inherit; text-decoration: none; }
 
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input, textarea, select { font: inherit; }
 
 a, button, input, textarea, select {
   touch-action: manipulation;
