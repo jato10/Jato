@@ -535,6 +535,37 @@ a, button, input, textarea, select {
   line-height: 1.6;
   color: var(--on-dark-dim);
 }
+/* Centred per line, so the buttons stay symmetrical with the rest of the hero
+   once they wrap onto separate rows on narrow screens. */
+.hero__actions { justify-content: center; }
+
+/* The hero stack (logo + headline + lede + actions) is sized in vw, so on a
+   laptop-height viewport it outgrows the fold and pushes the buttons out of
+   sight. Below 900px tall, scale the two biggest offenders — the logo and the
+   block padding — against the height instead, so the actions stay visible.
+   Taller screens keep the original proportions untouched. */
+@media (max-height: 900px) {
+  .hero {
+    padding-block: calc(var(--header-h) + clamp(36px, 5vh, 80px)) clamp(40px, 5vh, 80px);
+  }
+  .hero__logo {
+    width: min(430px, 74vw, 32vh);
+    margin-bottom: clamp(20px, 3.4vh, 40px);
+  }
+  .hero__eyebrow { margin-bottom: clamp(16px, 2.4vh, 26px); }
+}
+
+/* 1366x768 laptops land near 650px of viewport once browser chrome is counted:
+   tighten the remaining vertical gaps so the actions still clear the fold. */
+@media (max-height: 700px) {
+  .hero__logo {
+    width: min(430px, 74vw, 24vh);
+    margin-bottom: clamp(14px, 2.4vh, 28px);
+  }
+  .hero .lede { margin-top: clamp(14px, 2.2vh, 24px); }
+  .hero__actions { margin-top: clamp(20px, 3vh, 32px); }
+}
+
 .hero__scroll {
   position: absolute;
   left: 50%;
