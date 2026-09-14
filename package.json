@@ -5,13 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "jest",
-    "smoke:perplexity": "node scripts/perplexity-router-smoke-test.js"
+    "test": "jest"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.125.0",
-    "jsonwebtoken": "^9.0.3",
-    "openai": "^7.15.0"
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
