@@ -52,6 +52,12 @@ const renderChannelIcon = (key) =>
 const ARROW_ICON =
   '<svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
 
+const STAR_PATH = 'M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z';
+const starIcon = (filled) =>
+  `<svg class="star${filled ? ' star--filled' : ''}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${STAR_PATH}"/></svg>`;
+const starRating = (rating) =>
+  Array.from({ length: 5 }, (_, i) => starIcon(i < rating)).join('');
+
 /* /assets/* is served with a one-year immutable Cache-Control, and every file
    under it keeps a fixed name — so without this, a browser or CDN edge that
    already has the previous bytes would keep serving them for up to a year
@@ -331,8 +337,36 @@ function servicesSection({ c }) {
       </section>`;
 }
 
+function productCard(p) {
+  const priceRow = p.marketPrice
+    ? `<div class="product-card__price-row">
+              <span class="product-card__price-market">${esc(p.marketPrice)}</span>
+              <span class="product-card__price">${esc(p.price)}</span>
+            </div>`
+    : `<div class="product-card__price-row">
+              <span class="product-card__price">${esc(p.price)}</span>
+            </div>`;
+  const note = p.priceNote ? `<p class="product-card__note">${esc(p.priceNote)}</p>` : '';
+  return `<article class="product-card">
+            <h4 class="product-card__name">${esc(p.name)}</h4>
+            <p class="product-card__desc">${esc(p.description)}</p>
+            ${priceRow}
+            ${note}
+          </article>`;
+}
+
 function catalogSection({ c, links, assets }) {
   const href = links.request(c.contact.presets[0].message);
+  const categories = c.catalog.categories
+    .map(
+      (cat) => `<div class="product-category" data-reveal>
+            <p class="product-category__label">${esc(cat.label)}</p>
+            <div class="product-grid">
+              ${cat.products.map((p) => productCard(p)).join('\n              ')}
+            </div>
+          </div>`
+    )
+    .join('\n          ');
   return `<section class="section section--light-alt" id="catalog" aria-labelledby="catalog-title">
         <div class="shell split split--wide-first">
           <div data-reveal>
@@ -351,6 +385,38 @@ function catalogSection({ c, links, assets }) {
               width="1400" height="950" loading="lazy" decoding="async">
             <figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>
           </figure>
+        </div>
+        <div class="shell catalog-products">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">${esc(c.catalog.categoriesEyebrow)}</p>
+            <h3 class="h-card catalog-products__title">${esc(c.catalog.categoriesTitle)}</h3>
+            <p class="lede">${esc(c.catalog.categoriesLede)}</p>
+          </div>
+          ${categories}
+        </div>
+      </section>`;
+}
+
+function reviewsSection({ c }) {
+  const items = c.reviews.items
+    .map(
+      (r, i) => `<article class="review-card" data-reveal data-delay="${i % 3}">
+            <div class="review-card__stars" role="img" aria-label="${r.rating}/5">${starRating(r.rating)}</div>
+            <p class="review-card__body">&ldquo;${esc(r.body)}&rdquo;</p>
+            <p class="review-card__meta"><strong>${esc(r.name)}</strong> · ${esc(r.date)}</p>
+          </article>`
+    )
+    .join('\n          ');
+  return `<section class="section section--dark" id="reviews" aria-labelledby="reviews-title">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">${esc(c.reviews.eyebrow)}</p>
+            <h2 class="h-section" id="reviews-title">${esc(c.reviews.title)}</h2>
+            <p class="lede">${esc(c.reviews.lede)}</p>
+          </div>
+          <div class="reviews-grid">
+            ${items}
+          </div>
         </div>
       </section>`;
 }
@@ -583,6 +649,7 @@ ${head(options)}
       ${heroSection({ c, links })}
       ${servicesSection({ c })}
       ${catalogSection({ c, links, assets })}
+      ${reviewsSection({ c })}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
       ${purposeSection({ c })}

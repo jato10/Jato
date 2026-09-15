@@ -790,6 +790,64 @@ a, button, input, textarea, select {
   color: var(--slate-500);
 }
 
+/* Product categories + cards, shown below the intro split */
+.catalog-products { margin-top: clamp(64px, 8vw, 112px); }
+.product-category { margin-top: clamp(40px, 5vw, 56px); }
+.product-category:first-of-type { margin-top: 0; }
+.product-category__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-light-soft);
+}
+.product-grid {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(20px, 2.4vw, 26px);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-light);
+  background: var(--paper-50);
+}
+.product-card__name { margin: 0; font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
+.product-card__desc { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--on-light-muted); }
+.product-card__price-row { display: flex; align-items: baseline; gap: 10px; margin-top: auto; padding-top: 6px; }
+.product-card__price-market { font-size: 0.85rem; color: var(--slate-500); text-decoration: line-through; }
+.product-card__price { font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
+.product-card__note { margin: 0; font-size: 0.78rem; color: var(--slate-500); }
+
+/* Reviews */
+.reviews-grid {
+  display: grid;
+  gap: 20px;
+  margin-top: clamp(28px, 3.5vw, 40px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(22px, 2.6vw, 28px);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-dark);
+  background: rgba(255, 255, 255, 0.04);
+}
+.review-card__stars { display: flex; gap: 3px; }
+.star { width: 15px; height: 15px; fill: var(--on-dark-dim); }
+.star--filled { fill: #e3c987; }
+.review-card__body { margin: 0; font-size: 0.94rem; line-height: 1.6; color: var(--on-dark-muted); }
+.review-card__meta { margin: 0; font-size: 0.84rem; color: var(--on-dark-dim); }
+.review-card__meta strong { color: var(--on-dark); font-weight: 600; }
+
 /* --------------------------------------------------------- 8. About */
 .about__media {
   position: relative;

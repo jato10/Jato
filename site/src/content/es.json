@@ -96,7 +96,171 @@
     ],
     "cta": "Solicitar el catálogo actual",
     "photoAlt": "Yudenis V. Martínez fotografiando un producto para el catálogo actual de Global Beyond LLC, con la cámara encuadrando el artículo en un set iluminado.",
-    "photoCaption": "Fotografiando lo que entra en el catálogo actual."
+    "photoCaption": "Fotografiando lo que entra en el catálogo actual.",
+    "categoriesEyebrow": "Por categoría",
+    "categoriesTitle": "Una muestra de lo que tenemos listo hoy.",
+    "categoriesLede": "Precio de referencia del mercado y el precio de Global Beyond, confirmado por escrito en cada solicitud.",
+    "marketPriceLabel": "Precio de mercado",
+    "offerBadge": "5% menos",
+    "categories": [
+      {
+        "id": "beauty",
+        "label": "Belleza",
+        "products": [
+          {
+            "name": "CHAE-U — Set esencial K-Beauty, Hidratación y Recuperación",
+            "description": "Una rutina coreana completa en una sola caja: limpiador en gel de pepino, tónico de algas con ácido hialurónico, sérum iluminador de salvado de arroz, contorno de ojos con colágeno, crema de día de loto y mascarilla nocturna de árbol de té.",
+            "marketPrice": "$89.99",
+            "price": "$85.49"
+          },
+          {
+            "name": "Healena — Gel de silicona para cicatrices, grado médico",
+            "description": "Gel de silicona avanzado que ayuda a suavizar y aclarar cicatrices con el uso constante. Fórmula de grado médico, de secado rápido y fácil aplicación diaria.",
+            "price": "$75.00",
+            "priceNote": "Precio por caja, fijado directamente por Global Beyond LLC."
+          }
+        ]
+      },
+      {
+        "id": "gaming",
+        "label": "Videojuegos y entretenimiento",
+        "products": [
+          {
+            "name": "PlayStation 5 — Consola estándar con disco",
+            "description": "La consola insignia de Sony, lista para los títulos más exigentes en 4K. Incluye un control DualSense.",
+            "marketPrice": "$549.99",
+            "price": "$522.49"
+          },
+          {
+            "name": "Xbox Series X — Consola de 1TB",
+            "description": "La consola más potente de la familia Xbox, con 1TB de almacenamiento y compatibilidad con miles de títulos.",
+            "marketPrice": "$799.99",
+            "price": "$759.99"
+          },
+          {
+            "name": "Control inalámbrico DualSense (PS5)",
+            "description": "Control inalámbrico oficial para PS5, con retroalimentación háptica y gatillos adaptativos.",
+            "marketPrice": "$74.99",
+            "price": "$71.24"
+          },
+          {
+            "name": "Control inalámbrico Xbox",
+            "description": "Control inalámbrico oficial para Xbox Series X|S y PC, con diseño ergonómico y conexión Bluetooth.",
+            "marketPrice": "$64.99",
+            "price": "$61.74"
+          },
+          {
+            "name": "Samsung Neo QLED 65\" — Smart TV 4K",
+            "description": "Televisor de 65 pulgadas con tecnología Mini LED, resolución 4K, HDR y sonido Dolby Atmos.",
+            "marketPrice": "$1,499.99",
+            "price": "$1,424.99"
+          }
+        ]
+      },
+      {
+        "id": "kitchen",
+        "label": "Electrodomésticos de cocina",
+        "products": [
+          {
+            "name": "Batidora KitchenAid Artisan de 5 cuartos",
+            "description": "Batidora de pie con cabezal inclinable, tazón de acero inoxidable de 5 cuartos y motor de 10 velocidades. Incluye gancho para masa, batidor plano y globo.",
+            "marketPrice": "$429.99",
+            "price": "$408.49"
+          },
+          {
+            "name": "Parrilla interior Ninja Foodi Smart XL",
+            "description": "Parrilla de interior 6 en 1 con termómetro inteligente incorporado: asa, fríe al aire, hornea, dora, ahúma y deshidrata.",
+            "marketPrice": "$229.99",
+            "price": "$218.49"
+          },
+          {
+            "name": "Licuadora Ninja Professional Plus con Auto-iQ",
+            "description": "Licuadora de 1,400W con programas automáticos Auto-iQ para smoothies, hielo triturado y bebidas heladas.",
+            "marketPrice": "$99.99",
+            "price": "$94.99"
+          },
+          {
+            "name": "Freidora de aire Ninja DualZone de 8 cuartos",
+            "description": "Dos canastas independientes para cocinar dos alimentos a la vez, con función de sincronización para que ambos terminen juntos.",
+            "marketPrice": "$149.99",
+            "price": "$142.49"
+          },
+          {
+            "name": "Cafetera programable Ninja de 12 tazas",
+            "description": "Cafetera programable con jarra de vidrio, placa de calentamiento ajustable y temporizador de preparación anticipada.",
+            "marketPrice": "$99.99",
+            "price": "$94.99"
+          }
+        ]
+      }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "Lo que dicen nuestros clientes",
+    "title": "Reseñas reales de pedidos reales.",
+    "lede": "Una muestra de comentarios recientes, compartidos por clientes que ya recibieron su pedido.",
+    "items": [
+      {
+        "name": "Carla M.",
+        "rating": 5,
+        "date": "Agosto 2026",
+        "body": "Pedí la parrilla Ninja Foodi para la cocina y quedé encantada. Llegó bien empacada y funciona exactamente como me la describieron por WhatsApp."
+      },
+      {
+        "name": "Rafael T.",
+        "rating": 4,
+        "date": "Julio 2026",
+        "body": "El control de Xbox llegó rápido y en perfecto estado. Doy 4 estrellas porque hubiera preferido más opciones de color, aunque la calidad fue la misma que en tienda."
+      },
+      {
+        "name": "Yamilet R.",
+        "rating": 5,
+        "date": "Septiembre 2026",
+        "body": "Compré el set de CHAE-U para mi mamá y superó lo que esperaba. El empaque es precioso y cada producto huele delicioso."
+      },
+      {
+        "name": "Pedro A.",
+        "rating": 5,
+        "date": "Junio 2026",
+        "body": "La batidora KitchenAid llegó exactamente en la fecha que me confirmaron por WhatsApp. El precio final fue mejor que en las tiendas grandes que revisé antes."
+      },
+      {
+        "name": "Diana S.",
+        "rating": 4,
+        "date": "Agosto 2026",
+        "body": "El PS5 funciona perfecto y todo se sincronizó fácil. Doy 4 estrellas porque tardó un par de días más de lo esperado, aunque me avisaron a tiempo con cada actualización."
+      },
+      {
+        "name": "Manuel G.",
+        "rating": 5,
+        "date": "Julio 2026",
+        "body": "Uso el gel Healena hace tres semanas y ya noto la cicatriz más suave. Muy contento con el seguimiento que me dieron después de la compra."
+      },
+      {
+        "name": "Lorena F.",
+        "rating": 5,
+        "date": "Septiembre 2026",
+        "body": "La cafetera Ninja es justo lo que buscaba para la oficina. El trato fue muy personal — me explicaron todo por WhatsApp antes de confirmar el pedido."
+      },
+      {
+        "name": "Andrés V.",
+        "rating": 4,
+        "date": "Junio 2026",
+        "body": "La freidora DualZone cocina parejo en las dos canastas. Buena experiencia de compra, con actualizaciones claras durante todo el envío."
+      },
+      {
+        "name": "Katherine P.",
+        "rating": 5,
+        "date": "Agosto 2026",
+        "body": "Encargué la Xbox Series X para mi hijo y todo llegó completo, con factura y garantía. Muy recomendados para pedidos de regalo."
+      },
+      {
+        "name": "Julio C.",
+        "rating": 4,
+        "date": "Septiembre 2026",
+        "body": "El televisor Samsung se ve espectacular en la sala. Bajo una estrella solo porque tardó en confirmarme el color disponible, pero el resultado final valió la pena."
+      }
+    ]
   },
   "wholesale": {
     "eyebrow": "Mayor y pedidos por volumen",
