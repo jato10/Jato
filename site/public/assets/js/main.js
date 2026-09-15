@@ -75,9 +75,15 @@
       var sweep = function () {
         queued = false;
         var limit = window.innerHeight * 0.92;
+        /* On a short page the last block can sit close enough to the bottom
+           that its top never crosses that 92% line — the page simply can't
+           scroll any further to bring it there. Once the visitor has hit the
+           bottom of the page, reveal whatever is left regardless of rect.top
+           so nothing stays permanently hidden. */
+        var atBottom = window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 2;
         revealables = revealables.filter(function (el) {
           var rect = el.getBoundingClientRect();
-          if (rect.top < limit) {
+          if (atBottom || rect.top < limit) {
             el.classList.add('is-visible');
             return false;
           }

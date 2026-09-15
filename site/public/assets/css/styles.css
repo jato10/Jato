@@ -790,8 +790,7 @@ a, button, input, textarea, select {
   color: var(--slate-500);
 }
 
-/* Product categories + cards, shown below the intro split */
-.catalog-products { margin-top: clamp(64px, 8vw, 112px); }
+/* Product categories + cards, on the dedicated catalog page */
 .product-category { margin-top: clamp(40px, 5vw, 56px); }
 .product-category:first-of-type { margin-top: 0; }
 .product-category__label {

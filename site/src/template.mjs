@@ -355,9 +355,8 @@ function productCard(p) {
           </article>`;
 }
 
-function catalogSection({ c, links, assets }) {
-  const href = links.request(c.contact.presets[0].message);
-  const categories = c.catalog.categories
+function productCategories(c) {
+  return c.catalog.categories
     .map(
       (cat) => `<div class="product-category" data-reveal>
             <p class="product-category__label">${esc(cat.label)}</p>
@@ -367,6 +366,23 @@ function catalogSection({ c, links, assets }) {
           </div>`
     )
     .join('\n          ');
+}
+
+function reviewCards(c) {
+  return c.reviews.items
+    .map(
+      (r, i) => `<article class="review-card" data-reveal data-delay="${i % 3}">
+            <div class="review-card__stars" role="img" aria-label="${r.rating}/5">${starRating(r.rating)}</div>
+            <p class="review-card__body">&ldquo;${esc(r.body)}&rdquo;</p>
+            <p class="review-card__meta"><strong>${esc(r.name)}</strong> · ${esc(r.date)}</p>
+          </article>`
+    )
+    .join('\n          ');
+}
+
+function catalogSection({ c, site, links, assets }) {
+  const href = links.request(c.contact.presets[0].message);
+  const catalogHref = site.catalogPath[c.lang];
   return `<section class="section section--light-alt" id="catalog" aria-labelledby="catalog-title">
         <div class="shell split split--wide-first">
           <div data-reveal>
@@ -378,6 +394,7 @@ function catalogSection({ c, links, assets }) {
             </ul>
             <div class="btn-row">
               <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.catalog.cta)}${ARROW_ICON}</a>
+              <a class="btn btn--ghost" href="${esc(catalogHref)}">${esc(c.catalog.categoriesCta)}${ARROW_ICON}</a>
             </div>
           </div>
           <figure class="catalog__figure catalog__figure--sticky" data-reveal data-delay="1">
@@ -386,27 +403,12 @@ function catalogSection({ c, links, assets }) {
             <figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>
           </figure>
         </div>
-        <div class="shell catalog-products">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.catalog.categoriesEyebrow)}</p>
-            <h3 class="h-card catalog-products__title">${esc(c.catalog.categoriesTitle)}</h3>
-            <p class="lede">${esc(c.catalog.categoriesLede)}</p>
-          </div>
-          ${categories}
-        </div>
       </section>`;
 }
 
-function reviewsSection({ c }) {
-  const items = c.reviews.items
-    .map(
-      (r, i) => `<article class="review-card" data-reveal data-delay="${i % 3}">
-            <div class="review-card__stars" role="img" aria-label="${r.rating}/5">${starRating(r.rating)}</div>
-            <p class="review-card__body">&ldquo;${esc(r.body)}&rdquo;</p>
-            <p class="review-card__meta"><strong>${esc(r.name)}</strong> · ${esc(r.date)}</p>
-          </article>`
-    )
-    .join('\n          ');
+function reviewsTeaserSection({ c, site, links }) {
+  const leaveHref = links.request(c.reviews.leaveMessage);
+  const viewHref = site.reviewsPath[c.lang];
   return `<section class="section section--dark" id="reviews" aria-labelledby="reviews-title">
         <div class="shell">
           <div class="section-head" data-reveal>
@@ -414,8 +416,41 @@ function reviewsSection({ c }) {
             <h2 class="h-section" id="reviews-title">${esc(c.reviews.title)}</h2>
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
+          <div class="btn-row" data-reveal>
+            <a class="btn btn--primary" href="${esc(leaveHref)}"${externalAttrs(links, leaveHref)}>${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
+            <a class="btn btn--ghost" href="${esc(viewHref)}">${esc(c.reviews.viewCta)}</a>
+          </div>
+        </div>
+      </section>`;
+}
+
+function catalogPageBody({ c }) {
+  return `<section class="section section--light-alt">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">${esc(c.catalog.categoriesEyebrow)}</p>
+            <h1 class="h-section">${esc(c.catalog.categoriesTitle)}</h1>
+            <p class="lede">${esc(c.catalog.categoriesLede)}</p>
+          </div>
+          ${productCategories(c)}
+        </div>
+      </section>`;
+}
+
+function reviewsPageBody({ c, links }) {
+  const leaveHref = links.request(c.reviews.leaveMessage);
+  return `<section class="section section--dark">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">${esc(c.reviews.eyebrow)}</p>
+            <h1 class="h-section">${esc(c.reviews.title)}</h1>
+            <p class="lede">${esc(c.reviews.lede)}</p>
+          </div>
+          <div class="btn-row" data-reveal>
+            <a class="btn btn--primary" href="${esc(leaveHref)}"${externalAttrs(links, leaveHref)}>${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
+          </div>
           <div class="reviews-grid">
-            ${items}
+            ${reviewCards(c)}
           </div>
         </div>
       </section>`;
@@ -648,8 +683,8 @@ ${head(options)}
     <main id="main">
       ${heroSection({ c, links })}
       ${servicesSection({ c })}
-      ${catalogSection({ c, links, assets })}
-      ${reviewsSection({ c })}
+      ${catalogSection({ c, site, links, assets })}
+      ${reviewsTeaserSection({ c, site, links })}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
       ${purposeSection({ c })}
@@ -840,6 +875,82 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     ${siteHeader({ c, site, assets, langHrefs })}
     <main id="main" class="legal-page">
       ${legalPage({ c, site, assets, doc })}
+    </main>
+    ${siteFooter({ c, site, assets, links, langHrefs })}
+    <script src="${assetVersion('assets/js/main.js')}" defer></script>
+  </body>
+</html>
+`;
+}
+
+export function renderCatalogPage({ c, site, assets, links, alternates, langHrefs, canonical, ogImage }) {
+  return `<!doctype html>
+<html lang="${c.lang}" dir="${c.dir}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>${esc(c.catalog.pageTitle)}</title>
+    <meta name="description" content="${esc(c.catalog.pageMetaDescription)}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${esc(canonical)}">
+${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
+    <meta name="theme-color" content="#070b14">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
+    <link rel="apple-touch-icon" href="${assetVersion('assets/img/apple-touch-icon.png')}">
+    <link rel="manifest" href="${assets}site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="${esc(c.catalog.pageTitle)}">
+    <meta property="og:description" content="${esc(c.catalog.pageMetaDescription)}">
+    <meta property="og:url" content="${esc(canonical)}">
+    <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
+    <script>${INLINE_BOOT}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
+    ${siteHeader({ c, site, assets, langHrefs })}
+    <main id="main">
+      ${catalogPageBody({ c })}
+    </main>
+    ${siteFooter({ c, site, assets, links, langHrefs })}
+    <script src="${assetVersion('assets/js/main.js')}" defer></script>
+  </body>
+</html>
+`;
+}
+
+export function renderReviewsPage({ c, site, assets, links, alternates, langHrefs, canonical, ogImage }) {
+  return `<!doctype html>
+<html lang="${c.lang}" dir="${c.dir}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>${esc(c.reviews.pageTitle)}</title>
+    <meta name="description" content="${esc(c.reviews.pageMetaDescription)}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${esc(canonical)}">
+${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
+    <meta name="theme-color" content="#070b14">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
+    <link rel="apple-touch-icon" href="${assetVersion('assets/img/apple-touch-icon.png')}">
+    <link rel="manifest" href="${assets}site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="${esc(c.reviews.pageTitle)}">
+    <meta property="og:description" content="${esc(c.reviews.pageMetaDescription)}">
+    <meta property="og:url" content="${esc(canonical)}">
+    <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
+    <script>${INLINE_BOOT}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
+    ${siteHeader({ c, site, assets, langHrefs })}
+    <main id="main">
+      ${reviewsPageBody({ c, links })}
     </main>
     ${siteFooter({ c, site, assets, links, langHrefs })}
     <script src="${assetVersion('assets/js/main.js')}" defer></script>

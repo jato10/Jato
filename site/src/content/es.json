@@ -100,6 +100,9 @@
     "categoriesEyebrow": "Por categoría",
     "categoriesTitle": "Una muestra de lo que tenemos listo hoy.",
     "categoriesLede": "Precio de referencia del mercado y el precio de Global Beyond, confirmado por escrito en cada solicitud.",
+    "categoriesCta": "Ver categorías y precios",
+    "pageTitle": "Catálogo por categoría — Global Beyond LLC",
+    "pageMetaDescription": "Explora la selección actual de Global Beyond LLC por categoría — Belleza, Videojuegos y entretenimiento, y Electrodomésticos de cocina — con precio de referencia del mercado y el precio de Global Beyond.",
     "marketPriceLabel": "Precio de mercado",
     "offerBadge": "5% menos",
     "categories": [
@@ -199,6 +202,11 @@
     "eyebrow": "Lo que dicen nuestros clientes",
     "title": "Reseñas reales de pedidos reales.",
     "lede": "Una muestra de comentarios recientes, compartidos por clientes que ya recibieron su pedido.",
+    "leaveCta": "Dejar mi reseña",
+    "leaveMessage": "Quiero dejar una reseña de mi pedido.",
+    "viewCta": "Ver reseñas de clientes",
+    "pageTitle": "Reseñas de clientes — Global Beyond LLC",
+    "pageMetaDescription": "Reseñas reales compartidas por clientes de Global Beyond LLC, con calificaciones de 4 y 5 estrellas.",
     "items": [
       {
         "name": "Carla M.",
