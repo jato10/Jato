@@ -21,7 +21,7 @@
     <meta property="og:url" content="https://globalbeyondllc.com/en/catalog/healena/">
     <meta property="og:image" content="https://globalbeyondllc.com/assets/img/catalog/healena.webp?v=9b8529d5">
     <link rel="preload" href="/assets/fonts/geist-variable.woff2?v=a369fcf5" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/styles.css?v=97bfdd1d">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=7d30c700">
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
   </head>
   <body>
@@ -34,12 +34,12 @@
         </a>
         <nav class="nav" data-nav aria-label="Primary">
           <ul class="nav__list">
-            <li><a class="nav__link" data-nav-link href="#services">What we do</a></li>
-            <li><a class="nav__link" data-nav-link href="#catalog">Catalog</a></li>
-            <li><a class="nav__link" data-nav-link href="#wholesale">Wholesale</a></li>
-            <li><a class="nav__link" data-nav-link href="#about">About</a></li>
-            <li><a class="nav__link" data-nav-link href="#purpose">Mission &amp; vision</a></li>
-            <li><a class="nav__link" data-nav-link href="#contact">Contact</a></li>
+            <li><a class="nav__link" data-nav-link href="/en/#services">What we do</a></li>
+            <li><a class="nav__link" data-nav-link href="/en/#catalog">Catalog</a></li>
+            <li><a class="nav__link" data-nav-link href="/en/#wholesale">Wholesale</a></li>
+            <li><a class="nav__link" data-nav-link href="/en/#about">About</a></li>
+            <li><a class="nav__link" data-nav-link href="/en/#purpose">Mission &amp; vision</a></li>
+            <li><a class="nav__link" data-nav-link href="/en/#contact">Contact</a></li>
           </ul>
         </nav>
         <div class="header__actions">
@@ -57,7 +57,7 @@
       <span class="nav-scrim" aria-hidden="true"></span>
     </header>
     <main id="main">
-      <section class="section section--light-alt">
+      <section class="section section--dark">
         <div class="shell">
           <div class="btn-row product-detail__back" data-reveal>
             <a class="btn btn--ghost" href="/en/catalog/"><svg class="btn__arrow btn__arrow--back" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 8H3M7 4L3 8l4 4"/></svg>Back to the catalog</a>
@@ -71,17 +71,17 @@
               <p class="eyebrow">Beauty</p>
               <h1 class="h-section product-detail__name">Healena — Medical Grade Scar Treatment Patch</h1>
               <p class="body-text">A reusable, breathable medical-grade silicone sheet designed to soften and fade scars — new and old — with consistent use.</p>
-              <p class="product-detail__price">
-                <span class="product-detail__price-label">Price</span>
-                <span class="product-detail__price-value">$75.00</span>
-              </p>
-              <p class="product-card__note">Price per box, set directly by Global Beyond LLC.</p>
-            </div>
-          </div>
-          <div class="panel product-detail__form" data-reveal data-delay="2">
-            <h2 class="contact-form__heading">Confirm your order</h2>
-            <p class="contact-form__lede">Fill in your details and we'll confirm availability, shipping, and payment in writing — nothing gets charged from this page.</p>
-            <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
+              <div class="buy-box">
+                <p class="product-detail__price">
+                  <span class="product-detail__price-label">Price</span>
+                  <span class="product-detail__price-value">$75.00</span>
+                </p>
+                <p class="buy-box__note">Price per box, set directly by Global Beyond LLC.</p>
+                <details class="buy-box__order">
+                  <summary class="btn btn--primary buy-box__cta">Place the order</summary>
+                  <div class="buy-box__form">
+                    <p class="buy-box__lede">Leave your details and we'll reply with the final details of your order.</p>
+                    <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="en">
               <p class="form__trap" aria-hidden="true">
                 <label>Your name<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
@@ -119,40 +119,54 @@
                 </div>
               </div>
               <div class="form__row">
-                <div class="field">
-                  <span class="field__label">Preferred payment method</span>
+                <fieldset class="field">
+                  <legend class="field__label">Preferred payment method</legend>
                   <div class="payment-options">
                     <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="Bank transfer" checked>
+                <input type="radio" name="paymentMethod" value="PayPal" checked>
+                <span>PayPal</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="Zelle">
+                <span>Zelle</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="Bank transfer">
                 <span>Bank transfer</span>
               </label>
               <label class="payment-option">
                 <input type="radio" name="paymentMethod" value="Cash on delivery">
                 <span>Cash on delivery</span>
               </label>
-              <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="Card (Zelle / PayPal)">
-                <span>Card (Zelle / PayPal)</span>
-              </label>
                   </div>
-                </div>
+                  <p class="payment-links">
+                    <a href="https://www.paypal.me/globalbeyondllc" target="_blank" rel="noopener noreferrer">Pay with PayPal</a>
+                    <span class="payment-links__sep" aria-hidden="true">·</span>
+                    <span>Zelle: <a href="mailto:pagos@globalbeyondllc.com">pagos@globalbeyondllc.com</a></span>
+                  </p>
+                </fieldset>
               </div>
               <div class="form__row">
                 <div class="field">
-                  <label class="field__label" for="pf-message">Your message</label>
-                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="4"
+                  <label class="field__label" for="pf-message">Order notes</label>
+                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="3"
                     required maxlength="4000" aria-describedby="pf-message-error">I'd like to order: Healena — Medical Grade Scar Treatment Patch — $75.00.</textarea>
                   <p class="field__error" id="pf-message-error" data-message="Add a message."></p>
                 </div>
               </div>
               <div class="form__foot">
                 <button class="btn btn--primary" type="submit" data-submit
-                  data-idle="Confirm order" data-busy="Sending…">Confirm order</button>
+                  data-idle="Send order" data-busy="Sending…">Send order</button>
                 <p class="form__privacy">We use what you send only to answer your request. See our <a href="/en/privacy/">Privacy Policy</a>.</p>
               </div>
               <p class="form__status" data-form-status role="status" aria-live="polite"
                 data-success="Message sent. We will reply to the details you left." data-error="Reach us directly on WhatsApp for a faster response." data-invalid="Please add your name, a way to reach you, and a message."></p>
             </form>
+                  </div>
+                </details>
+                <p class="buy-box__note">We confirm availability, shipping, and payment in writing. Payment is arranged with you afterward.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -169,12 +183,14 @@
           <div>
             <h2>Explore</h2>
             <ul class="footer__list">
-            <li><a href="#services">What we do</a></li>
-            <li><a href="#catalog">Catalog</a></li>
-            <li><a href="#wholesale">Wholesale</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#purpose">Mission &amp; vision</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="/en/#services">What we do</a></li>
+            <li><a href="/en/#catalog">Catalog</a></li>
+            <li><a href="/en/#wholesale">Wholesale</a></li>
+            <li><a href="/en/#about">About</a></li>
+            <li><a href="/en/#purpose">Mission &amp; vision</a></li>
+            <li><a href="/en/#contact">Contact</a></li>
+            <li><a href="/en/catalog/">See categories &amp; prices</a></li>
+            <li><a href="/en/reviews/">See customer reviews</a></li>
             </ul>
           </div>
           <div>
@@ -218,6 +234,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=0659a457" defer></script>
+    <script src="/assets/js/main.js?v=67da6dcb" defer></script>
   </body>
 </html>

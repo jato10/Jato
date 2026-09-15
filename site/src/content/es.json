@@ -187,19 +187,24 @@
     "productPage": {
       "backLabel": "Volver al catálogo",
       "priceLabel": "Precio",
-      "formHeading": "Confirma tu pedido",
-      "formLede": "Completa tus datos y te confirmamos disponibilidad, envío y forma de pago por escrito — nadie te cobra nada desde esta página.",
+      "orderCta": "Hacer el pedido",
+      "reassure": "Confirmamos disponibilidad, envío y forma de pago por escrito. El cobro se coordina contigo después.",
+      "formLede": "Déjanos tus datos y te respondemos con los detalles finales de tu pedido.",
       "addressLabel": "Dirección de envío",
       "addressPlaceholder": "Calle, número, ciudad, estado, código postal",
       "addressOptional": "opcional",
       "paymentLabel": "Método de pago preferido",
       "paymentOptions": [
+        "PayPal",
+        "Zelle",
         "Transferencia bancaria",
-        "Efectivo al recibir",
-        "Tarjeta (Zelle / PayPal)"
+        "Efectivo al recibir"
       ],
+      "paypalLinkLabel": "Pagar con PayPal",
+      "zelleLabel": "Zelle",
       "orderMessageTemplate": "Quiero pedir: {product} — {price}.",
-      "submit": "Confirmar pedido",
+      "notesLabel": "Notas del pedido",
+      "submit": "Enviar pedido",
       "sending": "Enviando…"
     }
   },
@@ -208,10 +213,23 @@
     "title": "Reseñas reales de pedidos reales.",
     "lede": "Una muestra de comentarios recientes, compartidos por clientes que ya recibieron su pedido.",
     "leaveCta": "Dejar mi reseña",
-    "leaveMessage": "Quiero dejar una reseña de mi pedido.",
     "viewCta": "Ver reseñas de clientes",
     "pageTitle": "Reseñas de clientes — Global Beyond LLC",
-    "pageMetaDescription": "Reseñas reales compartidas por clientes de Global Beyond LLC, con calificaciones de 4 y 5 estrellas.",
+    "pageMetaDescription": "Reseñas reales compartidas por clientes de Global Beyond LLC.",
+    "form": {
+      "heading": "Deja tu reseña",
+      "lede": "Cuéntanos cómo te fue con tu pedido. Leemos cada reseña y la publicamos aquí después de revisarla.",
+      "ratingLabel": "Tu calificación",
+      "ratingStar": "{n} de 5 estrellas",
+      "comment": "Tu reseña",
+      "commentPlaceholder": "Qué pediste, cómo llegó y cómo fue la atención…",
+      "messagePrefix": "Nueva reseña",
+      "submit": "Enviar mi reseña",
+      "sending": "Enviando…",
+      "success": "Gracias. Recibimos tu reseña y la publicamos aquí después de revisarla.",
+      "invalid": "Falta tu nombre o tu reseña.",
+      "errorComment": "Agrega tu reseña."
+    },
     "items": [
       {
         "name": "Carla M.",
@@ -272,6 +290,18 @@
         "rating": 4,
         "date": "Septiembre 2026",
         "body": "El control DualSense llegó impecable y se siente igual que comprado en tienda. Bajo una estrella solo porque tardó un poco en confirmarme la disponibilidad, pero el resultado final valió la pena."
+      },
+      {
+        "name": "Gustavo M.",
+        "rating": 3.5,
+        "date": "Septiembre 2026",
+        "body": "El PS5 llegó bien y funciona perfecto. Le doy tres estrellas y media porque el envío tardó más de lo que esperaba, aunque me mantuvieron informado todo el tiempo. Para la próxima pediría con más anticipación."
+      },
+      {
+        "name": "Marisol D.",
+        "rating": 3,
+        "date": "Agosto 2026",
+        "body": "La batidora funciona bien y llegó en buen estado. Le doy tres estrellas porque el empaque llegó algo golpeado y me hubiera gustado ver más fotos antes de comprar. La atención por WhatsApp sí fue rápida."
       }
     ]
   },

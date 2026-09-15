@@ -205,41 +205,50 @@
       submit.textContent = submit.getAttribute(isBusy ? 'data-busy' : 'data-idle');
     };
 
-    var fields = {
-      name: form.querySelector('[name="name"]'),
-      email: form.querySelector('[name="email"]'),
-      phone: form.querySelector('[name="phone"]'),
-      message: form.querySelector('[name="message"]'),
+    /* Three forms share this handler — the contact form, a product order form
+       and the review form — so fields are looked up by name and their error
+       slot is found inside the same .field wrapper rather than by a fixed id. */
+    var field = function (name) { return form.querySelector('[name="' + name + '"]'); };
+    var val = function (el) { return el ? el.value.trim() : ''; };
+    var errorFor = function (el) {
+      var wrap = el && el.closest && el.closest('.field');
+      return wrap ? wrap.querySelector('.field__error') : null;
     };
+    /* Only the contact and order forms ask for a way to reply. */
+    var contactError = form.querySelector('[id$="-contact-error"]');
 
-    var errors = {
-      name: form.querySelector('#cf-name-error'),
-      contact: form.querySelector('#cf-contact-error'),
-      message: form.querySelector('#cf-message-error'),
-    };
-
-    var flag = function (field, invalid, errorEl) {
-      if (field) field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+    var flag = function (el, invalid, errorEl) {
+      if (el) el.setAttribute('aria-invalid', invalid ? 'true' : 'false');
       if (errorEl) errorEl.textContent = invalid ? (errorEl.getAttribute('data-message') || '') : '';
     };
 
     form.addEventListener('submit', function (event) {
-      var name = fields.name && fields.name.value.trim();
-      var email = fields.email && fields.email.value.trim();
-      var phone = fields.phone && fields.phone.value.trim();
-      var message = fields.message && fields.message.value.trim();
-      var contactMissing = !email && !phone;
+      var nameEl = field('name');
+      var emailEl = field('email');
+      var phoneEl = field('phone');
+      var messageEl = field('message');
+      var commentEl = field('comment');
+      /* What the visitor actually writes: the review text, or the message box. */
+      var bodyEl = commentEl || messageEl;
 
-      flag(fields.name, !name, errors.name);
-      flag(fields.message, !message, errors.message);
-      flag(fields.email, contactMissing, errors.contact);
-      flag(fields.phone, contactMissing, errors.contact);
+      var name = val(nameEl);
+      var email = val(emailEl);
+      var phone = val(phoneEl);
+      var body = val(bodyEl);
+      var contactMissing = !!contactError && !email && !phone;
 
-      if (!name || !message || (!email && !phone)) {
+      flag(nameEl, !name, errorFor(nameEl));
+      flag(bodyEl, !body, errorFor(bodyEl));
+      if (contactError) {
+        flag(emailEl, contactMissing, contactError);
+        flag(phoneEl, contactMissing, contactError);
+      }
+
+      if (!name || !body || contactMissing) {
         event.preventDefault();
         say('invalid');
         var firstInvalid = form.querySelector('[aria-invalid="true"]');
-        if (firstInvalid) firstInvalid.focus();
+        if (firstInvalid && firstInvalid.focus) firstInvalid.focus();
         return;
       }
 
@@ -247,14 +256,20 @@
       say('');
       busy(true);
 
-      /* Product order forms add these on top of the base contact fields;
-         the plain contact form has neither, so this is a no-op there. */
-      var addressField = form.querySelector('[name="address"]');
-      var paymentField = form.querySelector('[name="paymentMethod"]:checked');
-      var extra = [];
-      if (addressField && addressField.value.trim()) extra.push('Shipping address: ' + addressField.value.trim());
-      if (paymentField) extra.push('Preferred payment method: ' + paymentField.value);
-      var fullMessage = extra.length ? message + '\n\n' + extra.join('\n') : message;
+      /* Each form contributes what it has: the order form an address and a
+         payment preference, the review form a star rating and the review
+         itself. The plain contact form has none of them. */
+      var ratingEl = form.querySelector('[name="rating"]:checked');
+      var addressEl = field('address');
+      var paymentEl = form.querySelector('[name="paymentMethod"]:checked');
+
+      var parts = [];
+      if (val(messageEl)) parts.push(val(messageEl));
+      if (ratingEl) parts.push('Rating: ' + ratingEl.value + '/5');
+      if (commentEl && val(commentEl)) parts.push(val(commentEl));
+      if (addressEl && val(addressEl)) parts.push('Shipping address: ' + val(addressEl));
+      if (paymentEl) parts.push('Preferred payment method: ' + paymentEl.value);
+      var fullMessage = parts.join('\n\n');
 
       fetch(form.getAttribute('action'), {
         method: 'POST',

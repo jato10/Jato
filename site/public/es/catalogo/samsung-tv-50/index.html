@@ -21,7 +21,7 @@
     <meta property="og:url" content="https://globalbeyondllc.com/es/catalogo/samsung-tv-50/">
     <meta property="og:image" content="https://globalbeyondllc.com/assets/img/catalog/samsung-tv-50.webp?v=214c1cf0">
     <link rel="preload" href="/assets/fonts/geist-variable.woff2?v=a369fcf5" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/styles.css?v=97bfdd1d">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=7d30c700">
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
   </head>
   <body>
@@ -34,12 +34,12 @@
         </a>
         <nav class="nav" data-nav aria-label="Principal">
           <ul class="nav__list">
-            <li><a class="nav__link" data-nav-link href="#services">Qué hacemos</a></li>
-            <li><a class="nav__link" data-nav-link href="#catalog">Catálogo</a></li>
-            <li><a class="nav__link" data-nav-link href="#wholesale">Al mayor</a></li>
-            <li><a class="nav__link" data-nav-link href="#about">Nosotros</a></li>
-            <li><a class="nav__link" data-nav-link href="#purpose">Misión y visión</a></li>
-            <li><a class="nav__link" data-nav-link href="#contact">Contacto</a></li>
+            <li><a class="nav__link" data-nav-link href="/es/#services">Qué hacemos</a></li>
+            <li><a class="nav__link" data-nav-link href="/es/#catalog">Catálogo</a></li>
+            <li><a class="nav__link" data-nav-link href="/es/#wholesale">Al mayor</a></li>
+            <li><a class="nav__link" data-nav-link href="/es/#about">Nosotros</a></li>
+            <li><a class="nav__link" data-nav-link href="/es/#purpose">Misión y visión</a></li>
+            <li><a class="nav__link" data-nav-link href="/es/#contact">Contacto</a></li>
           </ul>
         </nav>
         <div class="header__actions">
@@ -57,7 +57,7 @@
       <span class="nav-scrim" aria-hidden="true"></span>
     </header>
     <main id="main">
-      <section class="section section--light-alt">
+      <section class="section section--dark">
         <div class="shell">
           <div class="btn-row product-detail__back" data-reveal>
             <a class="btn btn--ghost" href="/es/catalogo/"><svg class="btn__arrow btn__arrow--back" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 8H3M7 4L3 8l4 4"/></svg>Volver al catálogo</a>
@@ -71,17 +71,17 @@
               <p class="eyebrow">Videojuegos y entretenimiento</p>
               <h1 class="h-section product-detail__name">Samsung Neo QLED 50&quot; QN90D — Smart TV 4K</h1>
               <p class="body-text">Televisor de 50 pulgadas con tecnología Mini LED, resolución 4K, HDR y sonido con Dolby Atmos.</p>
-              <p class="product-detail__price">
-                <span class="product-detail__price-label">Precio</span>
-                <span class="product-detail__price-value">$1,614.99</span>
-              </p>
-              
-            </div>
-          </div>
-          <div class="panel product-detail__form" data-reveal data-delay="2">
-            <h2 class="contact-form__heading">Confirma tu pedido</h2>
-            <p class="contact-form__lede">Completa tus datos y te confirmamos disponibilidad, envío y forma de pago por escrito — nadie te cobra nada desde esta página.</p>
-            <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
+              <div class="buy-box">
+                <p class="product-detail__price">
+                  <span class="product-detail__price-label">Precio</span>
+                  <span class="product-detail__price-value">$1,614.99</span>
+                </p>
+                
+                <details class="buy-box__order">
+                  <summary class="btn btn--primary buy-box__cta">Hacer el pedido</summary>
+                  <div class="buy-box__form">
+                    <p class="buy-box__lede">Déjanos tus datos y te respondemos con los detalles finales de tu pedido.</p>
+                    <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="es">
               <p class="form__trap" aria-hidden="true">
                 <label>Tu nombre<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
@@ -119,40 +119,54 @@
                 </div>
               </div>
               <div class="form__row">
-                <div class="field">
-                  <span class="field__label">Método de pago preferido</span>
+                <fieldset class="field">
+                  <legend class="field__label">Método de pago preferido</legend>
                   <div class="payment-options">
                     <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="Transferencia bancaria" checked>
+                <input type="radio" name="paymentMethod" value="PayPal" checked>
+                <span>PayPal</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="Zelle">
+                <span>Zelle</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="Transferencia bancaria">
                 <span>Transferencia bancaria</span>
               </label>
               <label class="payment-option">
                 <input type="radio" name="paymentMethod" value="Efectivo al recibir">
                 <span>Efectivo al recibir</span>
               </label>
-              <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="Tarjeta (Zelle / PayPal)">
-                <span>Tarjeta (Zelle / PayPal)</span>
-              </label>
                   </div>
-                </div>
+                  <p class="payment-links">
+                    <a href="https://www.paypal.me/globalbeyondllc" target="_blank" rel="noopener noreferrer">Pagar con PayPal</a>
+                    <span class="payment-links__sep" aria-hidden="true">·</span>
+                    <span>Zelle: <a href="mailto:pagos@globalbeyondllc.com">pagos@globalbeyondllc.com</a></span>
+                  </p>
+                </fieldset>
               </div>
               <div class="form__row">
                 <div class="field">
-                  <label class="field__label" for="pf-message">Tu mensaje</label>
-                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="4"
+                  <label class="field__label" for="pf-message">Notas del pedido</label>
+                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="3"
                     required maxlength="4000" aria-describedby="pf-message-error">Quiero pedir: Samsung Neo QLED 50&quot; QN90D — Smart TV 4K — $1,614.99.</textarea>
                   <p class="field__error" id="pf-message-error" data-message="Agrega un mensaje."></p>
                 </div>
               </div>
               <div class="form__foot">
                 <button class="btn btn--primary" type="submit" data-submit
-                  data-idle="Confirmar pedido" data-busy="Enviando…">Confirmar pedido</button>
+                  data-idle="Enviar pedido" data-busy="Enviando…">Enviar pedido</button>
                 <p class="form__privacy">Usamos lo que nos envías únicamente para responder tu solicitud. Consulta nuestra <a href="/es/privacy/">Política de Privacidad</a>.</p>
               </div>
               <p class="form__status" data-form-status role="status" aria-live="polite"
                 data-success="Mensaje enviado. Te responderemos a los datos que dejaste." data-error="Escríbenos directo por WhatsApp para una respuesta más rápida." data-invalid="Falta tu nombre, una forma de contactarte o el mensaje."></p>
             </form>
+                  </div>
+                </details>
+                <p class="buy-box__note">Confirmamos disponibilidad, envío y forma de pago por escrito. El cobro se coordina contigo después.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -169,12 +183,14 @@
           <div>
             <h2>Explorar</h2>
             <ul class="footer__list">
-            <li><a href="#services">Qué hacemos</a></li>
-            <li><a href="#catalog">Catálogo</a></li>
-            <li><a href="#wholesale">Al mayor</a></li>
-            <li><a href="#about">Nosotros</a></li>
-            <li><a href="#purpose">Misión y visión</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="/es/#services">Qué hacemos</a></li>
+            <li><a href="/es/#catalog">Catálogo</a></li>
+            <li><a href="/es/#wholesale">Al mayor</a></li>
+            <li><a href="/es/#about">Nosotros</a></li>
+            <li><a href="/es/#purpose">Misión y visión</a></li>
+            <li><a href="/es/#contact">Contacto</a></li>
+            <li><a href="/es/catalogo/">Ver categorías y precios</a></li>
+            <li><a href="/es/resenas/">Ver reseñas de clientes</a></li>
             </ul>
           </div>
           <div>
@@ -218,6 +234,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=0659a457" defer></script>
+    <script src="/assets/js/main.js?v=67da6dcb" defer></script>
   </body>
 </html>
