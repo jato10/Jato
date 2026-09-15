@@ -187,19 +187,24 @@
     "productPage": {
       "backLabel": "Back to the catalog",
       "priceLabel": "Price",
-      "formHeading": "Confirm your order",
-      "formLede": "Fill in your details and we'll confirm availability, shipping, and payment in writing — nothing gets charged from this page.",
+      "orderCta": "Place the order",
+      "reassure": "We confirm availability, shipping, and payment in writing. Payment is arranged with you afterward.",
+      "formLede": "Leave your details and we'll reply with the final details of your order.",
       "addressLabel": "Shipping address",
       "addressPlaceholder": "Street, number, city, state, ZIP code",
       "addressOptional": "optional",
       "paymentLabel": "Preferred payment method",
       "paymentOptions": [
+        "PayPal",
+        "Zelle",
         "Bank transfer",
-        "Cash on delivery",
-        "Card (Zelle / PayPal)"
+        "Cash on delivery"
       ],
+      "paypalLinkLabel": "Pay with PayPal",
+      "zelleLabel": "Zelle",
       "orderMessageTemplate": "I'd like to order: {product} — {price}.",
-      "submit": "Confirm order",
+      "notesLabel": "Order notes",
+      "submit": "Send order",
       "sending": "Sending…"
     }
   },
@@ -208,10 +213,23 @@
     "title": "Real reviews from real orders.",
     "lede": "A sample of recent comments, shared by customers who already received their order.",
     "leaveCta": "Leave my review",
-    "leaveMessage": "I'd like to leave a review of my order.",
     "viewCta": "See customer reviews",
     "pageTitle": "Customer reviews — Global Beyond LLC",
-    "pageMetaDescription": "Real reviews shared by Global Beyond LLC customers, rated 4 and 5 stars.",
+    "pageMetaDescription": "Real reviews shared by Global Beyond LLC customers.",
+    "form": {
+      "heading": "Leave your review",
+      "lede": "Tell us how your order went. We read every review and publish it here once we've gone through it.",
+      "ratingLabel": "Your rating",
+      "ratingStar": "{n} out of 5 stars",
+      "comment": "Your review",
+      "commentPlaceholder": "What you ordered, how it arrived, and how the service went…",
+      "messagePrefix": "New review",
+      "submit": "Send my review",
+      "sending": "Sending…",
+      "success": "Thank you. We got your review and will publish it here once we've gone through it.",
+      "invalid": "Your name or your review is missing.",
+      "errorComment": "Add your review."
+    },
     "items": [
       {
         "name": "Carla M.",
@@ -272,6 +290,18 @@
         "rating": 4,
         "date": "September 2026",
         "body": "The DualSense controller arrived flawless and feels just like the ones in stores. I'm taking off one star only because confirming availability took a bit longer, but the end result was worth it."
+      },
+      {
+        "name": "Gustavo M.",
+        "rating": 3.5,
+        "date": "September 2026",
+        "body": "The PS5 arrived in good shape and works perfectly. I'm giving it three and a half stars because shipping took longer than I expected, though they kept me posted the whole time. Next time I'd order further ahead."
+      },
+      {
+        "name": "Marisol D.",
+        "rating": 3,
+        "date": "August 2026",
+        "body": "The mixer works well and arrived in good condition. I'm giving it three stars because the packaging showed some wear and I would have liked to see more photos before buying. The WhatsApp support was quick, though."
       }
     ]
   },

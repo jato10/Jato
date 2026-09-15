@@ -798,9 +798,9 @@ a, button, input, textarea, select {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--slate-500);
+  color: var(--on-dark-dim);
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--line-light-soft);
+  border-bottom: 1px solid var(--line-dark);
 }
 .product-grid {
   display: grid;
@@ -846,41 +846,83 @@ a, button, input, textarea, select {
 @media (min-width: 780px) {
   .product-detail { grid-template-columns: minmax(0, 440px) 1fr; align-items: start; }
 }
+/* The photos come on white, so the frame stays light against the dark page
+   instead of boxing a white square inside a dark card. */
 .product-detail__figure {
   margin: 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--line-light);
-  background: var(--paper-200);
+  border: 1px solid var(--line-dark);
+  background: var(--paper-50);
 }
 .product-detail__figure img { width: 100%; height: auto; display: block; }
 .product-detail__name { margin-top: 12px; }
-.product-detail__price { display: flex; align-items: baseline; gap: 12px; margin-top: 20px; }
-.product-detail__price-label { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate-500); }
-.product-detail__price-value { font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
-.product-detail__form { margin-top: clamp(40px, 5vw, 64px); }
+.product-detail__price { display: flex; align-items: baseline; gap: 12px; margin: 0; }
+.product-detail__price-label { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-dark-dim); }
+.product-detail__price-value { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 600; letter-spacing: -0.01em; color: var(--on-dark); }
 
-/* Payment method pills, inside the product order form */
-.payment-options { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+/* Buy box — compact, sits beside the photo, holds the price, the payment
+   options and the order form (collapsed until the visitor opens it). */
+.buy-box {
+  margin-top: clamp(24px, 3vw, 32px);
+  padding: clamp(20px, 2.4vw, 26px);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-dark);
+  background: rgba(255, 255, 255, 0.04);
+  max-width: 460px;
+}
+.buy-box__note { margin: 12px 0 0; font-size: 0.8rem; line-height: 1.5; color: var(--on-dark-dim); }
+.buy-box__order { margin-top: 18px; }
+.buy-box__cta { width: 100%; cursor: pointer; list-style: none; }
+.buy-box__cta::-webkit-details-marker { display: none; }
+.buy-box__order[open] .buy-box__cta { border-radius: var(--radius-md); }
+.buy-box__form { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line-dark); }
+.buy-box__lede { margin: 0 0 18px; font-size: 0.88rem; line-height: 1.55; color: var(--on-dark-muted); }
+.buy-box .form__foot { margin-top: 22px; }
+
+/* Payment method pills */
+.payment-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .payment-option {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid var(--line-light);
-  font-size: 0.88rem;
-  color: var(--on-light-muted);
+  border: 1px solid var(--line-dark);
+  font-size: 0.84rem;
+  color: var(--on-dark-muted);
   cursor: pointer;
   transition: border-color 0.25s var(--ease), color 0.25s var(--ease), background-color 0.25s var(--ease);
 }
 .payment-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .payment-option:has(input:checked) {
-  border-color: var(--slate-900);
-  background: var(--slate-900);
-  color: var(--on-dark);
+  border-color: transparent;
+  background: var(--on-dark);
+  color: var(--ink-900);
+  font-weight: 600;
 }
-.payment-option:has(input:focus-visible) { outline: 2px solid var(--slate-500); outline-offset: 2px; }
+.payment-option:has(input:focus-visible) { outline: 2px solid var(--slate-400); outline-offset: 2px; }
+.payment-links { margin: 12px 0 0; font-size: 0.8rem; color: var(--on-dark-dim); }
+.payment-links a { color: var(--on-dark-muted); text-decoration: underline; text-underline-offset: 3px; }
+.payment-links a:hover { color: var(--on-dark); }
+.payment-links__sep { margin: 0 8px; }
+
+/* Star rating input, on the review form */
+.rating-field { border: 0; padding: 0; margin: 0; min-width: 0; }
+.rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; margin-top: 10px; }
+.rating__star { display: inline-flex; cursor: pointer; padding: 2px; }
+.rating__star input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.rating__star .star { width: 26px; height: 26px; fill: rgba(255, 255, 255, 0.18); transition: fill 0.2s var(--ease); }
+/* Row-reverse puts 5 first in the DOM, so a checked star lights itself and
+   every star that follows it in source order — the ones to its left. */
+.rating__star:has(input:checked) .star,
+.rating__star:has(input:checked) ~ .rating__star .star { fill: #e3c987; }
+.rating:hover .rating__star .star { fill: rgba(255, 255, 255, 0.18); }
+.rating__star:hover .star,
+.rating__star:hover ~ .rating__star .star { fill: #f0dca8; }
+.rating__star:has(input:focus-visible) { outline: 2px solid var(--slate-400); outline-offset: 2px; border-radius: 4px; }
+
+.review-form { margin-bottom: clamp(40px, 5vw, 64px); }
 
 /* Reviews */
 .reviews-grid {
@@ -901,6 +943,8 @@ a, button, input, textarea, select {
 .review-card__stars { display: flex; gap: 3px; }
 .star { width: 15px; height: 15px; fill: var(--on-dark-dim); }
 .star--filled { fill: #e3c987; }
+.star-half { position: relative; display: inline-flex; }
+.star-half__fill { position: absolute; inset: 0; width: 50%; overflow: hidden; display: inline-flex; }
 .review-card__body { margin: 0; font-size: 0.94rem; line-height: 1.6; color: var(--on-dark-muted); }
 .review-card__meta { margin: 0; font-size: 0.84rem; color: var(--on-dark-dim); }
 .review-card__meta strong { color: var(--on-dark); font-weight: 600; }

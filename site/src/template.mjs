@@ -58,8 +58,17 @@ const ARROW_BACK_ICON =
 const STAR_PATH = 'M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z';
 const starIcon = (filled) =>
   `<svg class="star${filled ? ' star--filled' : ''}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${STAR_PATH}"/></svg>`;
+/* Half stars are two stacked copies with the filled one clipped to 50% width,
+   rather than an SVG gradient — a gradient needs an id, and ids repeat once the
+   same rating renders more than once on a page. */
+const halfStarIcon = () =>
+  `<span class="star-half">${starIcon(false)}<span class="star-half__fill">${starIcon(true)}</span></span>`;
 const starRating = (rating) =>
-  Array.from({ length: 5 }, (_, i) => starIcon(i < rating)).join('');
+  Array.from({ length: 5 }, (_, i) => {
+    if (i + 1 <= Math.floor(rating)) return starIcon(true);
+    if (rating - i >= 0.5) return halfStarIcon();
+    return starIcon(false);
+  }).join('');
 
 /* /assets/* is served with a one-year immutable Cache-Control, and every file
    under it keeps a fixed name — so without this, a browser or CDN edge that
@@ -142,10 +151,14 @@ ${jsonLd ? `<script type="application/ld+json">${jsonLd}</script>` : ''}`;
 
 /* ------------------------------------------------------------- header */
 function siteHeader({ c, site, assets, langHrefs }) {
+  /* Absolute rather than a bare "#id": on the catalog, reviews, product and
+     legal pages those sections live on the home page, so a bare fragment
+     would land nowhere and the nav would look broken. Same path on the home
+     page still scrolls without a reload. */
   const navItems = c.nav
     .map(
       (item) =>
-        `<li><a class="nav__link" data-nav-link href="#${item.id}">${esc(item.label)}</a></li>`
+        `<li><a class="nav__link" data-nav-link href="${assets}${c.lang}/#${item.id}">${esc(item.label)}</a></li>`
     )
     .join('\n            ');
 
@@ -187,7 +200,11 @@ function siteHeader({ c, site, assets, langHrefs }) {
 /* ------------------------------------------------------------- footer */
 function siteFooter({ c, site, assets, links, langHrefs }) {
   const navLinks = c.nav
-    .map((item) => `<li><a href="#${item.id}">${esc(item.label)}</a></li>`)
+    .map((item) => `<li><a href="${assets}${c.lang}/#${item.id}">${esc(item.label)}</a></li>`)
+    .concat([
+      `<li><a href="${esc(site.catalogPath[c.lang])}">${esc(c.catalog.categoriesCta)}</a></li>`,
+      `<li><a href="${esc(site.reviewsPath[c.lang])}">${esc(c.reviews.viewCta)}</a></li>`,
+    ])
     .join('\n            ');
 
   const contactLinks = [];
@@ -385,8 +402,7 @@ function reviewCards(c) {
     .join('\n          ');
 }
 
-function catalogSection({ c, site, links, assets }) {
-  const href = links.request(c.contact.presets[0].message);
+function catalogSection({ c, site, assets }) {
   const catalogHref = site.catalogPath[c.lang];
   return `<section class="section section--light-alt" id="catalog" aria-labelledby="catalog-title">
         <div class="shell split split--wide-first">
@@ -398,8 +414,7 @@ function catalogSection({ c, site, links, assets }) {
               ${c.catalog.points.map((p) => `<li>${esc(p)}</li>`).join('\n              ')}
             </ul>
             <div class="btn-row">
-              <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.catalog.cta)}${ARROW_ICON}</a>
-              <a class="btn btn--ghost" href="${esc(catalogHref)}">${esc(c.catalog.categoriesCta)}${ARROW_ICON}</a>
+              <a class="btn btn--primary" href="${esc(catalogHref)}">${esc(c.catalog.categoriesCta)}${ARROW_ICON}</a>
             </div>
           </div>
           <figure class="catalog__figure catalog__figure--sticky" data-reveal data-delay="1">
@@ -411,8 +426,7 @@ function catalogSection({ c, site, links, assets }) {
       </section>`;
 }
 
-function reviewsTeaserSection({ c, site, links }) {
-  const leaveHref = links.request(c.reviews.leaveMessage);
+function reviewsTeaserSection({ c, site }) {
   const viewHref = site.reviewsPath[c.lang];
   return `<section class="section section--dark" id="reviews" aria-labelledby="reviews-title">
         <div class="shell">
@@ -422,7 +436,7 @@ function reviewsTeaserSection({ c, site, links }) {
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
           <div class="btn-row" data-reveal>
-            <a class="btn btn--primary" href="${esc(leaveHref)}"${externalAttrs(links, leaveHref)}>${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
+            <a class="btn btn--primary" href="${esc(viewHref)}#leave-review">${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
             <a class="btn btn--ghost" href="${esc(viewHref)}">${esc(c.reviews.viewCta)}</a>
           </div>
         </div>
@@ -430,7 +444,7 @@ function reviewsTeaserSection({ c, site, links }) {
 }
 
 function catalogPageBody({ c, site }) {
-  return `<section class="section section--light-alt">
+  return `<section class="section section--dark">
         <div class="shell">
           <div class="section-head" data-reveal>
             <p class="eyebrow">${esc(c.catalog.categoriesEyebrow)}</p>
@@ -447,7 +461,7 @@ function catalogPageBody({ c, site }) {
    product and framed as an order. Nothing here charges a card — the payment
    method is a stated preference that rides along in the message, confirmed
    by a person afterward, same as every other request on this site. */
-function productOrderForm({ c, product }) {
+function productOrderForm({ c, site, product }) {
   const f = c.contact.form;
   const pp = c.catalog.productPage;
   const orderMessage = pp.orderMessageTemplate
@@ -500,17 +514,22 @@ function productOrderForm({ c, product }) {
                 </div>
               </div>
               <div class="form__row">
-                <div class="field">
-                  <span class="field__label">${esc(pp.paymentLabel)}</span>
+                <fieldset class="field">
+                  <legend class="field__label">${esc(pp.paymentLabel)}</legend>
                   <div class="payment-options">
                     ${paymentOptions}
                   </div>
-                </div>
+                  <p class="payment-links">
+                    <a href="${esc(site.payments.paypal)}" target="_blank" rel="noopener noreferrer">${esc(pp.paypalLinkLabel)}</a>
+                    <span class="payment-links__sep" aria-hidden="true">·</span>
+                    <span>${esc(pp.zelleLabel)}: <a href="mailto:${esc(site.payments.zelle)}">${esc(site.payments.zelle)}</a></span>
+                  </p>
+                </fieldset>
               </div>
               <div class="form__row">
                 <div class="field">
-                  <label class="field__label" for="pf-message">${esc(f.message)}</label>
-                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="4"
+                  <label class="field__label" for="pf-message">${esc(pp.notesLabel)}</label>
+                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="3"
                     required maxlength="4000" aria-describedby="pf-message-error">${esc(orderMessage)}</textarea>
                   <p class="field__error" id="pf-message-error" data-message="${esc(f.errorMessage)}"></p>
                 </div>
@@ -525,9 +544,12 @@ function productOrderForm({ c, product }) {
             </form>`;
 }
 
+/* The order form sits collapsed inside the buy box rather than sprawling
+   across the page below it — the price and payment options read at a glance,
+   and the fields only appear once the visitor commits to ordering. */
 function productDetailBody({ c, site, product, categoryLabel }) {
   const pp = c.catalog.productPage;
-  return `<section class="section section--light-alt">
+  return `<section class="section section--dark">
         <div class="shell">
           <div class="btn-row product-detail__back" data-reveal>
             <a class="btn btn--ghost" href="${esc(site.catalogPath[c.lang])}">${ARROW_BACK_ICON}${esc(pp.backLabel)}</a>
@@ -541,24 +563,93 @@ function productDetailBody({ c, site, product, categoryLabel }) {
               <p class="eyebrow">${esc(categoryLabel)}</p>
               <h1 class="h-section product-detail__name">${esc(product.name)}</h1>
               <p class="body-text">${esc(product.description)}</p>
-              <p class="product-detail__price">
-                <span class="product-detail__price-label">${esc(pp.priceLabel)}</span>
-                <span class="product-detail__price-value">${esc(product.price)}</span>
-              </p>
-              ${product.priceNote ? `<p class="product-card__note">${esc(product.priceNote)}</p>` : ''}
+              <div class="buy-box">
+                <p class="product-detail__price">
+                  <span class="product-detail__price-label">${esc(pp.priceLabel)}</span>
+                  <span class="product-detail__price-value">${esc(product.price)}</span>
+                </p>
+                ${product.priceNote ? `<p class="buy-box__note">${esc(product.priceNote)}</p>` : ''}
+                <details class="buy-box__order">
+                  <summary class="btn btn--primary buy-box__cta">${esc(pp.orderCta)}</summary>
+                  <div class="buy-box__form">
+                    <p class="buy-box__lede">${esc(pp.formLede)}</p>
+                    ${productOrderForm({ c, site, product })}
+                  </div>
+                </details>
+                <p class="buy-box__note">${esc(pp.reassure)}</p>
+              </div>
             </div>
-          </div>
-          <div class="panel product-detail__form" data-reveal data-delay="2">
-            <h2 class="contact-form__heading">${esc(pp.formHeading)}</h2>
-            <p class="contact-form__lede">${esc(pp.formLede)}</p>
-            ${productOrderForm({ c, product })}
           </div>
         </div>
       </section>`;
 }
 
-function reviewsPageBody({ c, links }) {
-  const leaveHref = links.request(c.reviews.leaveMessage);
+/* The review is written and submitted here rather than handed off to WhatsApp.
+   It posts to the same /api/contact endpoint the rest of the site uses, so it
+   really reaches Global Beyond; it appears below once they publish it, which
+   the copy says plainly rather than implying it goes live on its own. */
+function reviewForm({ c }) {
+  const f = c.contact.form;
+  const rf = c.reviews.form;
+  const stars = [5, 4, 3, 2, 1]
+    .map(
+      (n) => `<label class="rating__star">
+                  <input type="radio" name="rating" value="${n}"${n === 5 ? ' checked' : ''}>
+                  <span class="visually-hidden">${esc(rf.ratingStar.replace('{n}', String(n)))}</span>
+                  ${starIcon(true)}
+                </label>`
+    )
+    .join('\n                ');
+
+  return `<form class="form" action="/api/contact" method="post" data-contact-form novalidate>
+              <input type="hidden" name="lang" value="${c.lang}">
+              <input type="hidden" name="message" value="${esc(rf.messagePrefix)}">
+              <p class="form__trap" aria-hidden="true">
+                <label>${esc(f.name)}<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+              </p>
+              <div class="form__row">
+                <fieldset class="field rating-field">
+                  <legend class="field__label">${esc(rf.ratingLabel)}</legend>
+                  <div class="rating">
+                    ${stars}
+                  </div>
+                </fieldset>
+              </div>
+              <div class="form__row form__row--split">
+                <div class="field">
+                  <label class="field__label" for="rf-name">${esc(f.name)}</label>
+                  <input class="field__input" id="rf-name" name="name" type="text" required
+                    maxlength="120" autocomplete="name" placeholder="${esc(f.namePlaceholder)}"
+                    aria-describedby="rf-name-error">
+                  <p class="field__error" id="rf-name-error" data-message="${esc(f.errorName)}"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="rf-email">${esc(f.email)} <span class="field__hint">${esc(f.optional)}</span></label>
+                  <input class="field__input" id="rf-email" name="email" type="email" spellcheck="false"
+                    maxlength="200" autocomplete="email" placeholder="${esc(f.emailPlaceholder)}">
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="rf-comment">${esc(rf.comment)}</label>
+                  <textarea class="field__input field__input--area" id="rf-comment" name="comment" rows="4"
+                    required maxlength="2000" placeholder="${esc(rf.commentPlaceholder)}"
+                    aria-describedby="rf-comment-error"></textarea>
+                  <p class="field__error" id="rf-comment-error" data-message="${esc(rf.errorComment)}"></p>
+                </div>
+              </div>
+              <div class="form__foot">
+                <button class="btn btn--primary" type="submit" data-submit
+                  data-idle="${esc(rf.submit)}" data-busy="${esc(rf.sending)}">${esc(rf.submit)}</button>
+                <p class="form__privacy">${f.privacy.replace('{href}', `/${c.lang}/privacy/`)}</p>
+              </div>
+              <p class="form__status" data-form-status role="status" aria-live="polite"
+                data-success="${esc(rf.success)}" data-error="${esc(f.error)}" data-invalid="${esc(rf.invalid)}"></p>
+            </form>`;
+}
+
+function reviewsPageBody({ c }) {
+  const rf = c.reviews.form;
   return `<section class="section section--dark">
         <div class="shell">
           <div class="section-head" data-reveal>
@@ -566,8 +657,10 @@ function reviewsPageBody({ c, links }) {
             <h1 class="h-section">${esc(c.reviews.title)}</h1>
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
-          <div class="btn-row" data-reveal>
-            <a class="btn btn--primary" href="${esc(leaveHref)}"${externalAttrs(links, leaveHref)}>${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
+          <div class="panel review-form" id="leave-review" data-reveal>
+            <h2 class="contact-form__heading">${esc(rf.heading)}</h2>
+            <p class="contact-form__lede">${esc(rf.lede)}</p>
+            ${reviewForm({ c })}
           </div>
           <div class="reviews-grid">
             ${reviewCards(c)}
@@ -803,8 +896,8 @@ ${head(options)}
     <main id="main">
       ${heroSection({ c, links })}
       ${servicesSection({ c })}
-      ${catalogSection({ c, site, links, assets })}
-      ${reviewsTeaserSection({ c, site, links })}
+      ${catalogSection({ c, site, assets })}
+      ${reviewsTeaserSection({ c, site })}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
       ${purposeSection({ c })}
@@ -1070,7 +1163,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
     ${siteHeader({ c, site, assets, langHrefs })}
     <main id="main">
-      ${reviewsPageBody({ c, links })}
+      ${reviewsPageBody({ c })}
     </main>
     ${siteFooter({ c, site, assets, links, langHrefs })}
     <script src="${assetVersion('assets/js/main.js')}" defer></script>
