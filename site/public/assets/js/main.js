@@ -8,11 +8,21 @@
   /* ------------------------------------------------------------- header */
   var header = document.querySelector('[data-header]');
   if (header) {
+    var stuckQueued = false;
     var setStuck = function () {
+      stuckQueued = false;
       header.classList.toggle('is-stuck', window.scrollY > 12);
     };
+    /* Through a frame rather than straight off the event: scroll fires far
+       more often than the class can actually change, and this one toggles a
+       backdrop-filtered layer. */
+    var queueStuck = function () {
+      if (stuckQueued) return;
+      stuckQueued = true;
+      window.requestAnimationFrame(setStuck);
+    };
     setStuck();
-    window.addEventListener('scroll', setStuck, { passive: true });
+    window.addEventListener('scroll', queueStuck, { passive: true });
   }
 
   /* -------------------------------------------------------- mobile menu */
