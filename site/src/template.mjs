@@ -309,7 +309,7 @@ function heroSection({ c }) {
       </section>`;
 }
 
-function servicesSection({ c }) {
+function servicesSection({ c, links }) {
   /* Rendered as a tablist only once JS confirms it can drive it (see
      .js .tabs__list in styles.css and the tabs handler in main.js); every
      panel below is plain, visible content by default, so with JavaScript
@@ -322,14 +322,22 @@ function servicesSection({ c }) {
     )
     .join('\n              ');
 
+  /* Only the B2B panel carries an action: retail buyers have the catalog page
+     with prices on it, so asking for a catalog is a business request now. */
   const panels = c.services.items
-    .map(
-      (item, i) => `<article class="tabs__panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="services-panel-${i}"
+    .map((item, i) => {
+      const href = item.cta ? links.request(item.ctaMessage) : '';
+      const cta = item.cta
+        ? `\n              <div class="btn-row tabs__actions">
+                <a class="btn btn--ghost" href="${esc(href)}"${externalAttrs(links, href)}>${esc(item.cta)}${ARROW_ICON}</a>
+              </div>`
+        : '';
+      return `<article class="tabs__panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="services-panel-${i}"
               aria-labelledby="services-tab-${i}" data-panel="${i}" data-reveal data-delay="${i}">
               <h3 class="h-card">${esc(item.title)}</h3>
-              <p>${esc(item.body)}</p>
-            </article>`
-    )
+              <p>${esc(item.body)}</p>${cta}
+            </article>`;
+    })
     .join('\n            ');
 
   const flow = c.services.flow
@@ -935,7 +943,7 @@ ${head(options)}
     ${siteHeader(options)}
     <main id="main">
       ${heroSection({ c })}
-      ${servicesSection({ c })}
+      ${servicesSection({ c, links })}
       ${catalogSection({ c, site, assets })}
       ${reviewsTeaserSection({ c, site })}
       ${wholesaleSection({ c, links })}

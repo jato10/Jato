@@ -58,7 +58,7 @@
     "eyebrow": "What we do",
     "tabsLabel": "Ways to work with us",
     "title": "Three ways to work with us.",
-    "lede": "Retail, wholesale, and catalog requests — each one answered directly by a real person.",
+    "lede": "Retail, wholesale, and the B2B catalog — each one answered directly by a real person.",
     "items": [
       {
         "title": "Retail",
@@ -69,8 +69,10 @@
         "body": "Volume requests reviewed case by case. Share quantities, specifications, and timelines, and we come back with availability and pricing for that request."
       },
       {
-        "title": "Catalog requests",
-        "body": "Our selection changes over time. Ask for the current catalog and you receive genuinely current information, with real availability today."
+        "title": "B2B catalog",
+        "body": "For businesses and resellers: we send the full catalog, with current availability and volume pricing for your operation.",
+        "cta": "Request the B2B catalog",
+        "ctaMessage": "Hi Global Beyond, I represent a business and would like to receive the B2B catalog with volume pricing."
       }
     ],
     "flowLabel": "How it works",

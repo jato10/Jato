@@ -58,7 +58,7 @@
     "eyebrow": "Qué hacemos",
     "tabsLabel": "Formas de trabajar con nosotros",
     "title": "Tres formas de trabajar con nosotros.",
-    "lede": "Detal, mayor y solicitudes de catálogo — cada mensaje lo responde directamente una persona real.",
+    "lede": "Detal, mayor y catálogo B2B — cada mensaje lo responde directamente una persona real.",
     "items": [
       {
         "title": "Detal",
@@ -69,8 +69,10 @@
         "body": "Solicitudes por volumen evaluadas caso por caso. Indícanos cantidades, especificaciones y plazos, y te respondemos con disponibilidad y precios para esa solicitud."
       },
       {
-        "title": "Solicitudes de catálogo",
-        "body": "Nuestra selección cambia con el tiempo. Pide el catálogo actual y recibirás información actualizada, con disponibilidad real de hoy."
+        "title": "Catálogo B2B",
+        "body": "Para negocios y revendedores: te enviamos el catálogo completo, con disponibilidad actual y precios por volumen para tu operación.",
+        "cta": "Solicitar el catálogo B2B",
+        "ctaMessage": "Hola Global Beyond, represento a un negocio y quisiera recibir el catálogo B2B con precios por volumen."
       }
     ],
     "flowLabel": "Cómo funciona",

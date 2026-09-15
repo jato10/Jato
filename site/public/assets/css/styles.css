@@ -646,6 +646,7 @@ a, button, input, textarea, select {
 .tabs__panels { margin-top: clamp(28px, 3.5vw, 40px); }
 .tabs__panel { padding-top: 26px; border-top: 1px solid var(--line-light); max-width: 62ch; }
 .tabs__panel p { margin-top: 14px; color: var(--on-light-muted); }
+.tabs__actions { margin-top: 24px; }
 
 /* No JavaScript: every panel stays visible and the pill tablist (which
    nothing would drive) never renders, so this reads as a plain stacked list. */
