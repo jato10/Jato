@@ -36,6 +36,10 @@
     "en": "/en/reviews/",
     "es": "/es/resenas/"
   },
+  "leaveReviewPath": {
+    "en": "/en/reviews/leave/",
+    "es": "/es/resenas/dejar/"
+  },
   "payments": {
     "paypal": "https://www.paypal.me/globalbeyondllc",
     "zelle": "pagos@globalbeyondllc.com"

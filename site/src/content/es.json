@@ -216,6 +216,11 @@
     "viewCta": "Ver reseñas de clientes",
     "pageTitle": "Reseñas de clientes — Global Beyond LLC",
     "pageMetaDescription": "Reseñas reales compartidas por clientes de Global Beyond LLC.",
+    "leavePageTitle": "Deja tu reseña — Global Beyond LLC",
+    "leavePageMetaDescription": "Comparte cómo te fue con tu pedido de Global Beyond LLC.",
+    "backToReviews": "Ver todas las reseñas",
+    "googleBadge": "Google",
+    "googleBadgeTitle": "Reseña publicada en Google",
     "form": {
       "heading": "Deja tu reseña",
       "lede": "Cuéntanos cómo te fue con tu pedido. Leemos cada reseña y la publicamos aquí después de revisarla.",

@@ -294,6 +294,57 @@
     });
   }
 
+  /* ------------------------------------------------------ google reviews */
+  /* An addition to the reviews already on the page, never a replacement: if
+     the proxy is unconfigured, slow or unreachable, the page keeps the
+     reviews it was served with. Every value from Google is written with
+     textContent or setAttribute — none of it is ever parsed as HTML. */
+  var googleSlot = document.querySelector('[data-google-reviews]');
+  var googleTemplate = document.querySelector('[data-google-review-template]');
+  if (googleSlot && googleTemplate && 'content' in googleTemplate && window.fetch) {
+    var lang = document.documentElement.getAttribute('lang') || 'en';
+
+    var fillStars = function (holder, rating) {
+      var stars = holder.querySelectorAll('.star');
+      var whole = Math.floor(rating);
+      Array.prototype.forEach.call(stars, function (star, i) {
+        if (i < whole) star.classList.add('star--filled');
+      });
+      holder.setAttribute('aria-label', rating + '/5');
+    };
+
+    fetch('/api/google-reviews?lang=' + encodeURIComponent(lang), {
+      headers: { 'X-Requested-With': 'fetch' },
+    })
+      .then(function (response) { return response.ok ? response.json() : null; })
+      .then(function (data) {
+        if (!data || !data.reviews || !data.reviews.length) return;
+        var fragment = document.createDocumentFragment();
+
+        data.reviews.forEach(function (review) {
+          var card = googleTemplate.content.firstElementChild.cloneNode(true);
+          fillStars(card.querySelector('[data-stars]'), Number(review.rating) || 0);
+          card.querySelector('[data-body]').textContent = '“' + review.text + '”';
+          card.querySelector('[data-author]').textContent = review.author;
+          card.querySelector('[data-date]').textContent = review.date || '';
+
+          var link = card.querySelector('[data-link]');
+          /* Only a Google address gets to be the link; anything else stays
+             inert text so a bad url can never become a javascript: target. */
+          if (review.url && /^https:\/\/([a-z0-9-]+\.)*google\.com\//i.test(review.url)) {
+            link.setAttribute('href', review.url);
+          } else {
+            link.removeAttribute('target');
+            link.removeAttribute('rel');
+          }
+          fragment.appendChild(card);
+        });
+
+        googleSlot.appendChild(fragment);
+      })
+      .catch(function () { /* the page already has its own reviews */ });
+  }
+
   /* ---------------------------------------------------------- footer year */
   var year = document.querySelector('[data-year]');
   if (year) year.textContent = String(new Date().getFullYear());

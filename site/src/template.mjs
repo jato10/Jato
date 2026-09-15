@@ -55,6 +55,16 @@ const ARROW_ICON =
 const ARROW_BACK_ICON =
   '<svg class="btn__arrow btn__arrow--back" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 8H3M7 4L3 8l4 4"/></svg>';
 
+/* Google's mark, shown on reviews that come from the business profile — the
+   attribution Google asks for when their reviews appear off-platform. */
+const GOOGLE_ICON =
+  '<svg class="google-mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+  '<path fill="#4285F4" d="M23.04 12.26c0-.81-.07-1.6-.21-2.35H12v4.45h6.19a5.3 5.3 0 0 1-2.3 3.47v2.89h3.72c2.17-2 3.43-4.95 3.43-8.46z"/>' +
+  '<path fill="#34A853" d="M12 23.5c3.1 0 5.7-1.03 7.61-2.78l-3.72-2.89c-1.03.69-2.35 1.1-3.89 1.1-2.99 0-5.52-2.02-6.43-4.74H1.72v2.98A11.5 11.5 0 0 0 12 23.5z"/>' +
+  '<path fill="#FBBC05" d="M5.57 14.19a6.9 6.9 0 0 1 0-4.38V6.83H1.72a11.5 11.5 0 0 0 0 10.34l3.85-2.98z"/>' +
+  '<path fill="#EA4335" d="M12 4.75c1.69 0 3.2.58 4.39 1.72l3.29-3.29C17.7 1.31 15.1.25 12 .25A11.5 11.5 0 0 0 1.72 6.83l3.85 2.98C6.48 7.09 9.01 4.75 12 4.75z"/>' +
+  '</svg>';
+
 const STAR_PATH = 'M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z';
 const starIcon = (filled) =>
   `<svg class="star${filled ? ' star--filled' : ''}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${STAR_PATH}"/></svg>`;
@@ -436,7 +446,7 @@ function reviewsTeaserSection({ c, site }) {
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
           <div class="btn-row" data-reveal>
-            <a class="btn btn--primary" href="${esc(viewHref)}#leave-review">${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
+            <a class="btn btn--primary" href="${esc(site.leaveReviewPath[c.lang])}">${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
             <a class="btn btn--ghost" href="${esc(viewHref)}">${esc(c.reviews.viewCta)}</a>
           </div>
         </div>
@@ -648,8 +658,9 @@ function reviewForm({ c }) {
             </form>`;
 }
 
-function reviewsPageBody({ c }) {
-  const rf = c.reviews.form;
+/* Reading reviews and writing one are two separate pages on purpose: the list
+   stays a list, and the form gets a page of its own. */
+function reviewsPageBody({ c, site }) {
   return `<section class="section section--dark">
         <div class="shell">
           <div class="section-head" data-reveal>
@@ -657,13 +668,46 @@ function reviewsPageBody({ c }) {
             <h1 class="h-section">${esc(c.reviews.title)}</h1>
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
-          <div class="panel review-form" id="leave-review" data-reveal>
-            <h2 class="contact-form__heading">${esc(rf.heading)}</h2>
-            <p class="contact-form__lede">${esc(rf.lede)}</p>
-            ${reviewForm({ c })}
+          <div class="btn-row reviews-actions" data-reveal>
+            <a class="btn btn--ghost" href="${esc(site.leaveReviewPath[c.lang])}">${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
           </div>
-          <div class="reviews-grid">
+          <div class="reviews-grid" data-google-reviews>
             ${reviewCards(c)}
+          </div>
+        </div>
+        ${googleReviewTemplate(c)}
+      </section>`;
+}
+
+/* Cloned by main.js for each review the Google Places proxy returns. Keeping
+   the markup here means the star and logo SVGs stay in one place, and the
+   script only ever sets text — never HTML — from Google's response. */
+function googleReviewTemplate(c) {
+  return `<template data-google-review-template>
+          <article class="review-card review-card--google">
+            <div class="review-card__stars" role="img" data-stars>${starRating(0)}</div>
+            <p class="review-card__body" data-body></p>
+            <p class="review-card__meta"><strong data-author></strong> · <span data-date></span></p>
+            <a class="review-source" data-link target="_blank" rel="noopener noreferrer"
+              title="${esc(c.reviews.googleBadgeTitle)}">${GOOGLE_ICON}<span>${esc(c.reviews.googleBadge)}</span></a>
+          </article>
+        </template>`;
+}
+
+function leaveReviewPageBody({ c, site }) {
+  const rf = c.reviews.form;
+  return `<section class="section section--dark">
+        <div class="shell">
+          <div class="btn-row product-detail__back" data-reveal>
+            <a class="btn btn--ghost" href="${esc(site.reviewsPath[c.lang])}">${ARROW_BACK_ICON}${esc(c.reviews.backToReviews)}</a>
+          </div>
+          <div class="section-head leave-review__head" data-reveal>
+            <p class="eyebrow">${esc(c.reviews.eyebrow)}</p>
+            <h1 class="h-section">${esc(rf.heading)}</h1>
+            <p class="lede">${esc(rf.lede)}</p>
+          </div>
+          <div class="panel review-form" data-reveal data-delay="1">
+            ${reviewForm({ c })}
           </div>
         </div>
       </section>`;
@@ -1163,7 +1207,45 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
     ${siteHeader({ c, site, assets, langHrefs })}
     <main id="main">
-      ${reviewsPageBody({ c })}
+      ${reviewsPageBody({ c, site })}
+    </main>
+    ${siteFooter({ c, site, assets, links, langHrefs })}
+    <script src="${assetVersion('assets/js/main.js')}" defer></script>
+  </body>
+</html>
+`;
+}
+
+export function renderLeaveReviewPage({ c, site, assets, links, alternates, langHrefs, canonical, ogImage }) {
+  return `<!doctype html>
+<html lang="${c.lang}" dir="${c.dir}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>${esc(c.reviews.leavePageTitle)}</title>
+    <meta name="description" content="${esc(c.reviews.leavePageMetaDescription)}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${esc(canonical)}">
+${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
+    <meta name="theme-color" content="#070b14">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
+    <link rel="apple-touch-icon" href="${assetVersion('assets/img/apple-touch-icon.png')}">
+    <link rel="manifest" href="${assets}site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="${esc(c.reviews.leavePageTitle)}">
+    <meta property="og:description" content="${esc(c.reviews.leavePageMetaDescription)}">
+    <meta property="og:url" content="${esc(canonical)}">
+    <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
+    <script>${INLINE_BOOT}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
+    ${siteHeader({ c, site, assets, langHrefs })}
+    <main id="main">
+      ${leaveReviewPageBody({ c, site })}
     </main>
     ${siteFooter({ c, site, assets, links, langHrefs })}
     <script src="${assetVersion('assets/js/main.js')}" defer></script>

@@ -949,6 +949,22 @@ a, button, input, textarea, select {
 .review-card__meta { margin: 0; font-size: 0.84rem; color: var(--on-dark-dim); }
 .review-card__meta strong { color: var(--on-dark); font-weight: 600; }
 
+/* Google-sourced reviews carry their origin, as Google asks. */
+.review-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 4px;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+  color: var(--on-dark-dim);
+}
+a.review-source:hover { color: var(--on-dark-muted); }
+.google-mark { width: 13px; height: 13px; flex: none; }
+.reviews-actions { margin-top: 0; margin-bottom: clamp(28px, 3.5vw, 40px); }
+.leave-review__head { margin-top: clamp(20px, 2.5vw, 32px); }
+
 /* --------------------------------------------------------- 8. About */
 .about__media {
   position: relative;

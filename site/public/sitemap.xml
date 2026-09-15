@@ -68,6 +68,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://globalbeyondllc.com/en/reviews/leave/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://globalbeyondllc.com/es/resenas/dejar/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://globalbeyondllc.com/en/catalog/roundlab-skincare/</loc>
     <lastmod>2026-09-15</lastmod>
     <changefreq>weekly</changefreq>
