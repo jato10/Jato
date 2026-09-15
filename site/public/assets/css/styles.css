@@ -73,9 +73,13 @@
 /* ------------------------------------------------------------- 2. Reset */
 *, *::before, *::after { box-sizing: border-box; }
 
+/* Deliberately no scroll-behavior: smooth. The home page runs to roughly
+   10,000px, and the browser animates an anchor jump across the whole of it
+   while ignoring the visitor's own scrolling until it lands — which reads as
+   the page having frozen. Anchor jumps are instant instead; scroll-padding
+   keeps the fixed header off the target. */
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 16px);
   color-scheme: dark;
 }
@@ -308,8 +312,10 @@ a, button, input, textarea, select {
   height: var(--header-h);
   display: flex;
   align-items: center;
-  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease),
-    backdrop-filter 0.4s var(--ease);
+  /* backdrop-filter is deliberately not transitioned: animating a blur over
+     the whole header is expensive on phones, and the background-color fade
+     already carries the change. */
+  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease);
   border-bottom: 1px solid transparent;
 }
 .header::before {
