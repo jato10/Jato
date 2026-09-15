@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, makeLinks, INLINE_BOOT } from './template.mjs';
+import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, renderCatalogPage, renderReviewsPage, renderProductPage, makeLinks, INLINE_BOOT } from './template.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(here, '..', 'public');
@@ -149,6 +149,74 @@ for (const c of contents) {
   }
 }
 
+/* Catalog and reviews now live on their own page per language, linked from
+   compact teaser sections on the front page rather than embedded there. */
+for (const c of contents) {
+  const catalogPath = site.catalogPath[c.lang];
+  write(
+    `${catalogPath.replace(/^\/|\/$/g, '')}/index.html`,
+    renderCatalogPage({
+      c,
+      site,
+      assets,
+      links,
+      alternates: contents.map((cc) => ({ hreflang: cc.lang, href: `${origin}${site.catalogPath[cc.lang]}` })).concat([
+        { hreflang: 'x-default', href: `${origin}${site.catalogPath[site.defaultLang]}` },
+      ]),
+      langHrefs: Object.fromEntries(contents.map((cc) => [cc.lang, site.catalogPath[cc.lang]])),
+      canonical: `${origin}${catalogPath}`,
+      ogImage,
+    })
+  );
+}
+
+for (const c of contents) {
+  const reviewsPath = site.reviewsPath[c.lang];
+  write(
+    `${reviewsPath.replace(/^\/|\/$/g, '')}/index.html`,
+    renderReviewsPage({
+      c,
+      site,
+      assets,
+      links,
+      alternates: contents.map((cc) => ({ hreflang: cc.lang, href: `${origin}${site.reviewsPath[cc.lang]}` })).concat([
+        { hreflang: 'x-default', href: `${origin}${site.reviewsPath[site.defaultLang]}` },
+      ]),
+      langHrefs: Object.fromEntries(contents.map((cc) => [cc.lang, site.reviewsPath[cc.lang]])),
+      canonical: `${origin}${reviewsPath}`,
+      ogImage,
+    })
+  );
+}
+
+/* One page per product per language, at <catalogPath><product.image>/ — the
+   image key doubles as a stable, shared slug across languages. */
+for (const c of contents) {
+  const catalogPath = site.catalogPath[c.lang];
+  for (const category of c.catalog.categories) {
+    for (const product of category.products) {
+      const productPath = `${catalogPath}${product.image}/`;
+      write(
+        `${productPath.replace(/^\/|\/$/g, '')}/index.html`,
+        renderProductPage({
+          c,
+          site,
+          assets,
+          links,
+          alternates: contents
+            .map((cc) => ({ hreflang: cc.lang, href: `${origin}${site.catalogPath[cc.lang]}${product.image}/` }))
+            .concat([{ hreflang: 'x-default', href: `${origin}${site.catalogPath[site.defaultLang]}${product.image}/` }]),
+          langHrefs: Object.fromEntries(contents.map((cc) => [cc.lang, `${site.catalogPath[cc.lang]}${product.image}/`])),
+          canonical: `${origin}${productPath}`,
+          ogImage,
+          product,
+          categoryLabel: category.label,
+        })
+      );
+    }
+  }
+}
+
 write('index.html', renderGateway({ contents, site, ogImage, alternates }));
 write('404.html', renderNotFound({ contents, site, ogImage }));
 
@@ -215,6 +283,40 @@ ${contents
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>`
+    )
+  )
+  .join('\n')}
+${contents
+  .map(
+    (c) => `  <url>
+    <loc>${origin}${site.catalogPath[c.lang]}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`
+  )
+  .join('\n')}
+${contents
+  .map(
+    (c) => `  <url>
+    <loc>${origin}${site.reviewsPath[c.lang]}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>`
+  )
+  .join('\n')}
+${contents
+  .flatMap((c) =>
+    c.catalog.categories.flatMap((category) =>
+      category.products.map(
+        (product) => `  <url>
+    <loc>${origin}${site.catalogPath[c.lang]}${product.image}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`
+      )
     )
   )
   .join('\n')}

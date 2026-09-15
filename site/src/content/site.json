@@ -27,5 +27,13 @@
   "sentPath": {
     "en": "/en/message-sent/",
     "es": "/es/mensaje-enviado/"
+  },
+  "catalogPath": {
+    "en": "/en/catalog/",
+    "es": "/es/catalogo/"
+  },
+  "reviewsPath": {
+    "en": "/en/reviews/",
+    "es": "/es/resenas/"
   }
 }

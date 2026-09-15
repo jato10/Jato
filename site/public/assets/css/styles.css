@@ -790,8 +790,7 @@ a, button, input, textarea, select {
   color: var(--slate-500);
 }
 
-/* Product categories + cards, shown below the intro split */
-.catalog-products { margin-top: clamp(64px, 8vw, 112px); }
+/* Product categories + cards, on the dedicated catalog page */
 .product-category { margin-top: clamp(40px, 5vw, 56px); }
 .product-category:first-of-type { margin-top: 0; }
 .product-category__label {
@@ -812,18 +811,76 @@ a, button, input, textarea, select {
 .product-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: clamp(20px, 2.4vw, 26px);
   border-radius: var(--radius-md);
   border: 1px solid var(--line-light);
   background: var(--paper-50);
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
 }
-.product-card__name { margin: 0; font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
-.product-card__desc { margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--on-light-muted); }
-.product-card__price-row { display: flex; align-items: baseline; gap: 10px; margin-top: auto; padding-top: 6px; }
-.product-card__price-market { font-size: 0.85rem; color: var(--slate-500); text-decoration: line-through; }
-.product-card__price { font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
+.product-card:hover {
+  border-color: var(--slate-400);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(12, 20, 32, 0.08);
+}
+.product-card__media {
+  display: block;
+  aspect-ratio: 1 / 1;
+  background: var(--paper-200);
+}
+.product-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.product-card__body { display: flex; flex-direction: column; gap: 8px; padding: clamp(18px, 2.2vw, 22px); }
+.product-card__name { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
+.product-card__desc { font-size: 0.9rem; line-height: 1.55; color: var(--on-light-muted); }
+.product-card__price { margin-top: auto; padding-top: 6px; font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
 .product-card__note { margin: 0; font-size: 0.78rem; color: var(--slate-500); }
+
+/* Product detail page */
+.product-detail__back { margin-top: 0; }
+.btn:hover .btn__arrow--back { transform: translateX(-4px); }
+.btn:active .btn__arrow--back { transform: translateX(-2px); }
+.product-detail {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  margin-top: clamp(20px, 2.5vw, 32px);
+}
+@media (min-width: 780px) {
+  .product-detail { grid-template-columns: minmax(0, 440px) 1fr; align-items: start; }
+}
+.product-detail__figure {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line-light);
+  background: var(--paper-200);
+}
+.product-detail__figure img { width: 100%; height: auto; display: block; }
+.product-detail__name { margin-top: 12px; }
+.product-detail__price { display: flex; align-items: baseline; gap: 12px; margin-top: 20px; }
+.product-detail__price-label { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate-500); }
+.product-detail__price-value { font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
+.product-detail__form { margin-top: clamp(40px, 5vw, 64px); }
+
+/* Payment method pills, inside the product order form */
+.payment-options { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.payment-option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line-light);
+  font-size: 0.88rem;
+  color: var(--on-light-muted);
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+.payment-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.payment-option:has(input:checked) {
+  border-color: var(--slate-900);
+  background: var(--slate-900);
+  color: var(--on-dark);
+}
+.payment-option:has(input:focus-visible) { outline: 2px solid var(--slate-500); outline-offset: 2px; }
 
 /* Reviews */
 .reviews-grid {

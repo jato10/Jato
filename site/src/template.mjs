@@ -52,6 +52,9 @@ const renderChannelIcon = (key) =>
 const ARROW_ICON =
   '<svg class="btn__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
 
+const ARROW_BACK_ICON =
+  '<svg class="btn__arrow btn__arrow--back" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 8H3M7 4L3 8l4 4"/></svg>';
+
 const STAR_PATH = 'M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z';
 const starIcon = (filled) =>
   `<svg class="star${filled ? ' star--filled' : ''}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${STAR_PATH}"/></svg>`;
@@ -337,36 +340,54 @@ function servicesSection({ c }) {
       </section>`;
 }
 
-function productCard(p) {
-  const priceRow = p.marketPrice
-    ? `<div class="product-card__price-row">
-              <span class="product-card__price-market">${esc(p.marketPrice)}</span>
-              <span class="product-card__price">${esc(p.price)}</span>
-            </div>`
-    : `<div class="product-card__price-row">
-              <span class="product-card__price">${esc(p.price)}</span>
-            </div>`;
-  const note = p.priceNote ? `<p class="product-card__note">${esc(p.priceNote)}</p>` : '';
-  return `<article class="product-card">
-            <h4 class="product-card__name">${esc(p.name)}</h4>
-            <p class="product-card__desc">${esc(p.description)}</p>
-            ${priceRow}
-            ${note}
-          </article>`;
+function productHref(site, c, product) {
+  return `${site.catalogPath[c.lang]}${product.image}/`;
 }
 
-function catalogSection({ c, links, assets }) {
-  const href = links.request(c.contact.presets[0].message);
-  const categories = c.catalog.categories
+function productCard(site, c, product) {
+  const note = product.priceNote ? `<p class="product-card__note">${esc(product.priceNote)}</p>` : '';
+  return `<a class="product-card" href="${esc(productHref(site, c, product))}">
+            <span class="product-card__media">
+              <img src="${assetVersion(`assets/img/catalog/${product.image}.webp`)}" alt="${esc(product.name)}"
+                width="600" height="600" loading="lazy" decoding="async">
+            </span>
+            <span class="product-card__body">
+              <span class="product-card__name">${esc(product.name)}</span>
+              <span class="product-card__desc">${esc(product.description)}</span>
+              <span class="product-card__price">${esc(product.price)}</span>
+              ${note}
+            </span>
+          </a>`;
+}
+
+function productCategories(site, c) {
+  return c.catalog.categories
     .map(
       (cat) => `<div class="product-category" data-reveal>
             <p class="product-category__label">${esc(cat.label)}</p>
             <div class="product-grid">
-              ${cat.products.map((p) => productCard(p)).join('\n              ')}
+              ${cat.products.map((p) => productCard(site, c, p)).join('\n              ')}
             </div>
           </div>`
     )
     .join('\n          ');
+}
+
+function reviewCards(c) {
+  return c.reviews.items
+    .map(
+      (r, i) => `<article class="review-card" data-reveal data-delay="${i % 3}">
+            <div class="review-card__stars" role="img" aria-label="${r.rating}/5">${starRating(r.rating)}</div>
+            <p class="review-card__body">&ldquo;${esc(r.body)}&rdquo;</p>
+            <p class="review-card__meta"><strong>${esc(r.name)}</strong> · ${esc(r.date)}</p>
+          </article>`
+    )
+    .join('\n          ');
+}
+
+function catalogSection({ c, site, links, assets }) {
+  const href = links.request(c.contact.presets[0].message);
+  const catalogHref = site.catalogPath[c.lang];
   return `<section class="section section--light-alt" id="catalog" aria-labelledby="catalog-title">
         <div class="shell split split--wide-first">
           <div data-reveal>
@@ -378,6 +399,7 @@ function catalogSection({ c, links, assets }) {
             </ul>
             <div class="btn-row">
               <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.catalog.cta)}${ARROW_ICON}</a>
+              <a class="btn btn--ghost" href="${esc(catalogHref)}">${esc(c.catalog.categoriesCta)}${ARROW_ICON}</a>
             </div>
           </div>
           <figure class="catalog__figure catalog__figure--sticky" data-reveal data-delay="1">
@@ -386,27 +408,12 @@ function catalogSection({ c, links, assets }) {
             <figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>
           </figure>
         </div>
-        <div class="shell catalog-products">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.catalog.categoriesEyebrow)}</p>
-            <h3 class="h-card catalog-products__title">${esc(c.catalog.categoriesTitle)}</h3>
-            <p class="lede">${esc(c.catalog.categoriesLede)}</p>
-          </div>
-          ${categories}
-        </div>
       </section>`;
 }
 
-function reviewsSection({ c }) {
-  const items = c.reviews.items
-    .map(
-      (r, i) => `<article class="review-card" data-reveal data-delay="${i % 3}">
-            <div class="review-card__stars" role="img" aria-label="${r.rating}/5">${starRating(r.rating)}</div>
-            <p class="review-card__body">&ldquo;${esc(r.body)}&rdquo;</p>
-            <p class="review-card__meta"><strong>${esc(r.name)}</strong> · ${esc(r.date)}</p>
-          </article>`
-    )
-    .join('\n          ');
+function reviewsTeaserSection({ c, site, links }) {
+  const leaveHref = links.request(c.reviews.leaveMessage);
+  const viewHref = site.reviewsPath[c.lang];
   return `<section class="section section--dark" id="reviews" aria-labelledby="reviews-title">
         <div class="shell">
           <div class="section-head" data-reveal>
@@ -414,8 +421,156 @@ function reviewsSection({ c }) {
             <h2 class="h-section" id="reviews-title">${esc(c.reviews.title)}</h2>
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
+          <div class="btn-row" data-reveal>
+            <a class="btn btn--primary" href="${esc(leaveHref)}"${externalAttrs(links, leaveHref)}>${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
+            <a class="btn btn--ghost" href="${esc(viewHref)}">${esc(c.reviews.viewCta)}</a>
+          </div>
+        </div>
+      </section>`;
+}
+
+function catalogPageBody({ c, site }) {
+  return `<section class="section section--light-alt">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">${esc(c.catalog.categoriesEyebrow)}</p>
+            <h1 class="h-section">${esc(c.catalog.categoriesTitle)}</h1>
+            <p class="lede">${esc(c.catalog.categoriesLede)}</p>
+          </div>
+          ${productCategories(site, c)}
+        </div>
+      </section>`;
+}
+
+/* Looks like a real order form because it is one: it posts to the same
+   /api/contact endpoint as the main contact form, just pre-filled with the
+   product and framed as an order. Nothing here charges a card — the payment
+   method is a stated preference that rides along in the message, confirmed
+   by a person afterward, same as every other request on this site. */
+function productOrderForm({ c, product }) {
+  const f = c.contact.form;
+  const pp = c.catalog.productPage;
+  const orderMessage = pp.orderMessageTemplate
+    .replace('{product}', product.name)
+    .replace('{price}', product.price);
+  const paymentOptions = pp.paymentOptions
+    .map(
+      (label, i) => `<label class="payment-option">
+                <input type="radio" name="paymentMethod" value="${esc(label)}"${i === 0 ? ' checked' : ''}>
+                <span>${esc(label)}</span>
+              </label>`
+    )
+    .join('\n              ');
+
+  return `<form class="form" action="/api/contact" method="post" data-contact-form novalidate>
+              <input type="hidden" name="lang" value="${c.lang}">
+              <p class="form__trap" aria-hidden="true">
+                <label>${esc(f.name)}<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+              </p>
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="pf-name">${esc(f.name)}</label>
+                  <input class="field__input" id="pf-name" name="name" type="text" required
+                    maxlength="120" autocomplete="name" placeholder="${esc(f.namePlaceholder)}"
+                    aria-describedby="pf-name-error">
+                  <p class="field__error" id="pf-name-error" data-message="${esc(f.errorName)}"></p>
+                </div>
+              </div>
+              <div class="form__row form__row--split">
+                <div class="field">
+                  <label class="field__label" for="pf-email">${esc(f.email)}</label>
+                  <input class="field__input" id="pf-email" name="email" type="email" spellcheck="false"
+                    maxlength="200" autocomplete="email" placeholder="${esc(f.emailPlaceholder)}"
+                    aria-describedby="pf-contact-hint pf-contact-error">
+                </div>
+                <div class="field">
+                  <label class="field__label" for="pf-phone">${esc(f.phone)} <span class="field__hint">${esc(f.optional)}</span></label>
+                  <input class="field__input" id="pf-phone" name="phone" type="tel"
+                    maxlength="60" autocomplete="tel" placeholder="${esc(f.phonePlaceholder)}"
+                    aria-describedby="pf-contact-hint pf-contact-error">
+                </div>
+              </div>
+              <p class="field__note" id="pf-contact-hint">${esc(f.contactHint)}</p>
+              <p class="field__error" id="pf-contact-error" data-message="${esc(f.errorContact)}"></p>
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="pf-address">${esc(pp.addressLabel)} <span class="field__hint">${esc(pp.addressOptional)}</span></label>
+                  <input class="field__input" id="pf-address" name="address" type="text"
+                    maxlength="300" autocomplete="street-address" placeholder="${esc(pp.addressPlaceholder)}">
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="field">
+                  <span class="field__label">${esc(pp.paymentLabel)}</span>
+                  <div class="payment-options">
+                    ${paymentOptions}
+                  </div>
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="field">
+                  <label class="field__label" for="pf-message">${esc(f.message)}</label>
+                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="4"
+                    required maxlength="4000" aria-describedby="pf-message-error">${esc(orderMessage)}</textarea>
+                  <p class="field__error" id="pf-message-error" data-message="${esc(f.errorMessage)}"></p>
+                </div>
+              </div>
+              <div class="form__foot">
+                <button class="btn btn--primary" type="submit" data-submit
+                  data-idle="${esc(pp.submit)}" data-busy="${esc(pp.sending)}">${esc(pp.submit)}</button>
+                <p class="form__privacy">${f.privacy.replace('{href}', `/${c.lang}/privacy/`)}</p>
+              </div>
+              <p class="form__status" data-form-status role="status" aria-live="polite"
+                data-success="${esc(f.success)}" data-error="${esc(f.error)}" data-invalid="${esc(f.invalid)}"></p>
+            </form>`;
+}
+
+function productDetailBody({ c, site, product, categoryLabel }) {
+  const pp = c.catalog.productPage;
+  return `<section class="section section--light-alt">
+        <div class="shell">
+          <div class="btn-row product-detail__back" data-reveal>
+            <a class="btn btn--ghost" href="${esc(site.catalogPath[c.lang])}">${ARROW_BACK_ICON}${esc(pp.backLabel)}</a>
+          </div>
+          <div class="product-detail" data-reveal data-delay="1">
+            <figure class="product-detail__figure">
+              <img src="${assetVersion(`assets/img/catalog/${product.image}.webp`)}" alt="${esc(product.name)}"
+                width="900" height="900" decoding="async">
+            </figure>
+            <div class="product-detail__info">
+              <p class="eyebrow">${esc(categoryLabel)}</p>
+              <h1 class="h-section product-detail__name">${esc(product.name)}</h1>
+              <p class="body-text">${esc(product.description)}</p>
+              <p class="product-detail__price">
+                <span class="product-detail__price-label">${esc(pp.priceLabel)}</span>
+                <span class="product-detail__price-value">${esc(product.price)}</span>
+              </p>
+              ${product.priceNote ? `<p class="product-card__note">${esc(product.priceNote)}</p>` : ''}
+            </div>
+          </div>
+          <div class="panel product-detail__form" data-reveal data-delay="2">
+            <h2 class="contact-form__heading">${esc(pp.formHeading)}</h2>
+            <p class="contact-form__lede">${esc(pp.formLede)}</p>
+            ${productOrderForm({ c, product })}
+          </div>
+        </div>
+      </section>`;
+}
+
+function reviewsPageBody({ c, links }) {
+  const leaveHref = links.request(c.reviews.leaveMessage);
+  return `<section class="section section--dark">
+        <div class="shell">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">${esc(c.reviews.eyebrow)}</p>
+            <h1 class="h-section">${esc(c.reviews.title)}</h1>
+            <p class="lede">${esc(c.reviews.lede)}</p>
+          </div>
+          <div class="btn-row" data-reveal>
+            <a class="btn btn--primary" href="${esc(leaveHref)}"${externalAttrs(links, leaveHref)}>${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
+          </div>
           <div class="reviews-grid">
-            ${items}
+            ${reviewCards(c)}
           </div>
         </div>
       </section>`;
@@ -648,8 +803,8 @@ ${head(options)}
     <main id="main">
       ${heroSection({ c, links })}
       ${servicesSection({ c })}
-      ${catalogSection({ c, links, assets })}
-      ${reviewsSection({ c })}
+      ${catalogSection({ c, site, links, assets })}
+      ${reviewsTeaserSection({ c, site, links })}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
       ${purposeSection({ c })}
@@ -840,6 +995,121 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     ${siteHeader({ c, site, assets, langHrefs })}
     <main id="main" class="legal-page">
       ${legalPage({ c, site, assets, doc })}
+    </main>
+    ${siteFooter({ c, site, assets, links, langHrefs })}
+    <script src="${assetVersion('assets/js/main.js')}" defer></script>
+  </body>
+</html>
+`;
+}
+
+export function renderCatalogPage({ c, site, assets, links, alternates, langHrefs, canonical, ogImage }) {
+  return `<!doctype html>
+<html lang="${c.lang}" dir="${c.dir}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>${esc(c.catalog.pageTitle)}</title>
+    <meta name="description" content="${esc(c.catalog.pageMetaDescription)}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${esc(canonical)}">
+${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
+    <meta name="theme-color" content="#070b14">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
+    <link rel="apple-touch-icon" href="${assetVersion('assets/img/apple-touch-icon.png')}">
+    <link rel="manifest" href="${assets}site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="${esc(c.catalog.pageTitle)}">
+    <meta property="og:description" content="${esc(c.catalog.pageMetaDescription)}">
+    <meta property="og:url" content="${esc(canonical)}">
+    <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
+    <script>${INLINE_BOOT}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
+    ${siteHeader({ c, site, assets, langHrefs })}
+    <main id="main">
+      ${catalogPageBody({ c, site })}
+    </main>
+    ${siteFooter({ c, site, assets, links, langHrefs })}
+    <script src="${assetVersion('assets/js/main.js')}" defer></script>
+  </body>
+</html>
+`;
+}
+
+export function renderReviewsPage({ c, site, assets, links, alternates, langHrefs, canonical, ogImage }) {
+  return `<!doctype html>
+<html lang="${c.lang}" dir="${c.dir}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>${esc(c.reviews.pageTitle)}</title>
+    <meta name="description" content="${esc(c.reviews.pageMetaDescription)}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${esc(canonical)}">
+${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
+    <meta name="theme-color" content="#070b14">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
+    <link rel="apple-touch-icon" href="${assetVersion('assets/img/apple-touch-icon.png')}">
+    <link rel="manifest" href="${assets}site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="${esc(c.reviews.pageTitle)}">
+    <meta property="og:description" content="${esc(c.reviews.pageMetaDescription)}">
+    <meta property="og:url" content="${esc(canonical)}">
+    <meta property="og:image" content="${esc(ogImage)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
+    <script>${INLINE_BOOT}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
+    ${siteHeader({ c, site, assets, langHrefs })}
+    <main id="main">
+      ${reviewsPageBody({ c, links })}
+    </main>
+    ${siteFooter({ c, site, assets, links, langHrefs })}
+    <script src="${assetVersion('assets/js/main.js')}" defer></script>
+  </body>
+</html>
+`;
+}
+
+export function renderProductPage({ c, site, assets, links, alternates, langHrefs, canonical, ogImage, product, categoryLabel }) {
+  const title = `${product.name} — ${c.brand.name}`;
+  return `<!doctype html>
+<html lang="${c.lang}" dir="${c.dir}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>${esc(title)}</title>
+    <meta name="description" content="${esc(product.description)}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${esc(canonical)}">
+${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href="${esc(a.href)}">`).join('\n')}
+    <meta name="theme-color" content="#070b14">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="${assetVersion('assets/img/favicon.png')}" type="image/png">
+    <link rel="apple-touch-icon" href="${assetVersion('assets/img/apple-touch-icon.png')}">
+    <link rel="manifest" href="${assets}site.webmanifest">
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="${esc(title)}">
+    <meta property="og:description" content="${esc(product.description)}">
+    <meta property="og:url" content="${esc(canonical)}">
+    <meta property="og:image" content="${esc(site.origin.replace(/\/$/, ''))}${assetVersion(`assets/img/catalog/${product.image}.webp`)}">
+    <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
+    <script>${INLINE_BOOT}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
+    ${siteHeader({ c, site, assets, langHrefs })}
+    <main id="main">
+      ${productDetailBody({ c, site, product, categoryLabel })}
     </main>
     ${siteFooter({ c, site, assets, links, langHrefs })}
     <script src="${assetVersion('assets/js/main.js')}" defer></script>

@@ -75,9 +75,15 @@
       var sweep = function () {
         queued = false;
         var limit = window.innerHeight * 0.92;
+        /* On a short page the last block can sit close enough to the bottom
+           that its top never crosses that 92% line — the page simply can't
+           scroll any further to bring it there. Once the visitor has hit the
+           bottom of the page, reveal whatever is left regardless of rect.top
+           so nothing stays permanently hidden. */
+        var atBottom = window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 2;
         revealables = revealables.filter(function (el) {
           var rect = el.getBoundingClientRect();
-          if (rect.top < limit) {
+          if (atBottom || rect.top < limit) {
             el.classList.add('is-visible');
             return false;
           }
@@ -241,6 +247,15 @@
       say('');
       busy(true);
 
+      /* Product order forms add these on top of the base contact fields;
+         the plain contact form has neither, so this is a no-op there. */
+      var addressField = form.querySelector('[name="address"]');
+      var paymentField = form.querySelector('[name="paymentMethod"]:checked');
+      var extra = [];
+      if (addressField && addressField.value.trim()) extra.push('Shipping address: ' + addressField.value.trim());
+      if (paymentField) extra.push('Preferred payment method: ' + paymentField.value);
+      var fullMessage = extra.length ? message + '\n\n' + extra.join('\n') : message;
+
       fetch(form.getAttribute('action'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'fetch' },
@@ -249,7 +264,7 @@
           name: name,
           email: email,
           phone: phone,
-          message: message,
+          message: fullMessage,
           company: form.querySelector('[name="company"]').value,
         }),
       })
