@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, renderCatalogPage, renderReviewsPage, makeLinks, INLINE_BOOT } from './template.mjs';
+import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, renderCatalogPage, renderReviewsPage, renderProductPage, makeLinks, INLINE_BOOT } from './template.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(here, '..', 'public');
@@ -189,6 +189,34 @@ for (const c of contents) {
   );
 }
 
+/* One page per product per language, at <catalogPath><product.image>/ — the
+   image key doubles as a stable, shared slug across languages. */
+for (const c of contents) {
+  const catalogPath = site.catalogPath[c.lang];
+  for (const category of c.catalog.categories) {
+    for (const product of category.products) {
+      const productPath = `${catalogPath}${product.image}/`;
+      write(
+        `${productPath.replace(/^\/|\/$/g, '')}/index.html`,
+        renderProductPage({
+          c,
+          site,
+          assets,
+          links,
+          alternates: contents
+            .map((cc) => ({ hreflang: cc.lang, href: `${origin}${site.catalogPath[cc.lang]}${product.image}/` }))
+            .concat([{ hreflang: 'x-default', href: `${origin}${site.catalogPath[site.defaultLang]}${product.image}/` }]),
+          langHrefs: Object.fromEntries(contents.map((cc) => [cc.lang, `${site.catalogPath[cc.lang]}${product.image}/`])),
+          canonical: `${origin}${productPath}`,
+          ogImage,
+          product,
+          categoryLabel: category.label,
+        })
+      );
+    }
+  }
+}
+
 write('index.html', renderGateway({ contents, site, ogImage, alternates }));
 write('404.html', renderNotFound({ contents, site, ogImage }));
 
@@ -276,6 +304,20 @@ ${contents
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>`
+  )
+  .join('\n')}
+${contents
+  .flatMap((c) =>
+    c.catalog.categories.flatMap((category) =>
+      category.products.map(
+        (product) => `  <url>
+    <loc>${origin}${site.catalogPath[c.lang]}${product.image}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>`
+      )
+    )
   )
   .join('\n')}
 </urlset>

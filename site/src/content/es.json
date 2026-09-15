@@ -99,28 +99,27 @@
     "photoCaption": "Fotografiando lo que entra en el catálogo actual.",
     "categoriesEyebrow": "Por categoría",
     "categoriesTitle": "Una muestra de lo que tenemos listo hoy.",
-    "categoriesLede": "Precio de referencia del mercado y el precio de Global Beyond, confirmado por escrito en cada solicitud.",
+    "categoriesLede": "Precios confirmados por escrito en cada solicitud.",
     "categoriesCta": "Ver categorías y precios",
     "pageTitle": "Catálogo por categoría — Global Beyond LLC",
-    "pageMetaDescription": "Explora la selección actual de Global Beyond LLC por categoría — Belleza, Videojuegos y entretenimiento, y Electrodomésticos de cocina — con precio de referencia del mercado y el precio de Global Beyond.",
-    "marketPriceLabel": "Precio de mercado",
-    "offerBadge": "5% menos",
+    "pageMetaDescription": "Explora la selección actual de Global Beyond LLC por categoría — Belleza, Videojuegos y entretenimiento, y Electrodomésticos de cocina.",
     "categories": [
       {
         "id": "beauty",
         "label": "Belleza",
         "products": [
           {
-            "name": "CHAE-U — Set esencial K-Beauty, Hidratación y Recuperación",
-            "description": "Una rutina coreana completa en una sola caja: limpiador en gel de pepino, tónico de algas con ácido hialurónico, sérum iluminador de salvado de arroz, contorno de ojos con colágeno, crema de día de loto y mascarilla nocturna de árbol de té.",
-            "marketPrice": "$89.99",
-            "price": "$85.49"
+            "name": "ROUND LAB — 1025 Dokdo Skin Care Basic Set",
+            "description": "Rutina coreana esencial en tres pasos: limpiador, tónico y loción, formulados con agua profunda de la isla de Dokdo para una hidratación suave y calmante — ideal para piel sensible.",
+            "price": "$61.74",
+            "image": "roundlab-skincare"
           },
           {
-            "name": "Healena — Gel de silicona para cicatrices, grado médico",
-            "description": "Gel de silicona avanzado que ayuda a suavizar y aclarar cicatrices con el uso constante. Fórmula de grado médico, de secado rápido y fácil aplicación diaria.",
+            "name": "Healena — Parche de silicona para cicatrices, grado médico",
+            "description": "Lámina de silicona de grado médico, reutilizable y transpirable, diseñada para suavizar y aclarar cicatrices — nuevas y antiguas — con el uso constante.",
             "price": "$75.00",
-            "priceNote": "Precio por caja, fijado directamente por Global Beyond LLC."
+            "priceNote": "Precio por caja, fijado directamente por Global Beyond LLC.",
+            "image": "healena"
           }
         ]
       },
@@ -131,32 +130,38 @@
           {
             "name": "PlayStation 5 — Consola estándar con disco",
             "description": "La consola insignia de Sony, lista para los títulos más exigentes en 4K. Incluye un control DualSense.",
-            "marketPrice": "$549.99",
-            "price": "$522.49"
+            "price": "$522.49",
+            "image": "ps5-console"
           },
           {
             "name": "Xbox Series X — Consola de 1TB",
-            "description": "La consola más potente de la familia Xbox, con 1TB de almacenamiento y compatibilidad con miles de títulos.",
-            "marketPrice": "$799.99",
-            "price": "$759.99"
+            "description": "La consola más potente de la familia Xbox, con 1TB de almacenamiento y compatibilidad con miles de títulos. Incluye un control inalámbrico.",
+            "price": "$759.99",
+            "image": "xbox-series-x"
           },
           {
             "name": "Control inalámbrico DualSense (PS5)",
             "description": "Control inalámbrico oficial para PS5, con retroalimentación háptica y gatillos adaptativos.",
-            "marketPrice": "$74.99",
-            "price": "$71.24"
+            "price": "$71.24",
+            "image": "dualsense-controller"
           },
           {
             "name": "Control inalámbrico Xbox",
             "description": "Control inalámbrico oficial para Xbox Series X|S y PC, con diseño ergonómico y conexión Bluetooth.",
-            "marketPrice": "$64.99",
-            "price": "$61.74"
+            "price": "$61.74",
+            "image": "xbox-controller"
           },
           {
-            "name": "Samsung Neo QLED 65\" — Smart TV 4K",
-            "description": "Televisor de 65 pulgadas con tecnología Mini LED, resolución 4K, HDR y sonido Dolby Atmos.",
-            "marketPrice": "$1,499.99",
-            "price": "$1,424.99"
+            "name": "Samsung Neo QLED 50\" QN90D — Smart TV 4K",
+            "description": "Televisor de 50 pulgadas con tecnología Mini LED, resolución 4K, HDR y sonido con Dolby Atmos.",
+            "price": "$1,614.99",
+            "image": "samsung-tv-50"
+          },
+          {
+            "name": "Samsung OLED 65\" S90D — Smart TV 4K",
+            "description": "Televisor OLED de 65 pulgadas con resolución 4K, negros absolutos y sonido con Dolby Atmos — ideal para cine en casa.",
+            "price": "$1,234.99",
+            "image": "samsung-tv-65"
           }
         ]
       },
@@ -167,36 +172,36 @@
           {
             "name": "Batidora KitchenAid Artisan de 5 cuartos",
             "description": "Batidora de pie con cabezal inclinable, tazón de acero inoxidable de 5 cuartos y motor de 10 velocidades. Incluye gancho para masa, batidor plano y globo.",
-            "marketPrice": "$429.99",
-            "price": "$408.49"
+            "price": "$408.49",
+            "image": "kitchenaid-mixer"
           },
           {
-            "name": "Parrilla interior Ninja Foodi Smart XL",
-            "description": "Parrilla de interior 6 en 1 con termómetro inteligente incorporado: asa, fríe al aire, hornea, dora, ahúma y deshidrata.",
-            "marketPrice": "$229.99",
-            "price": "$218.49"
-          },
-          {
-            "name": "Licuadora Ninja Professional Plus con Auto-iQ",
-            "description": "Licuadora de 1,400W con programas automáticos Auto-iQ para smoothies, hielo triturado y bebidas heladas.",
-            "marketPrice": "$99.99",
-            "price": "$94.99"
-          },
-          {
-            "name": "Freidora de aire Ninja DualZone de 8 cuartos",
-            "description": "Dos canastas independientes para cocinar dos alimentos a la vez, con función de sincronización para que ambos terminen juntos.",
-            "marketPrice": "$149.99",
-            "price": "$142.49"
-          },
-          {
-            "name": "Cafetera programable Ninja de 12 tazas",
-            "description": "Cafetera programable con jarra de vidrio, placa de calentamiento ajustable y temporizador de preparación anticipada.",
-            "marketPrice": "$99.99",
-            "price": "$94.99"
+            "name": "Freidora de aire Ninja Pro XL",
+            "description": "Freidora de aire de 6.5 cuartos con tecnología MaxCrisp: fríe al aire, asa, hornea, recalienta y deshidrata en un solo equipo.",
+            "price": "$142.49",
+            "image": "ninja-air-fryer"
           }
         ]
       }
-    ]
+    ],
+    "productPage": {
+      "backLabel": "Volver al catálogo",
+      "priceLabel": "Precio",
+      "formHeading": "Confirma tu pedido",
+      "formLede": "Completa tus datos y te confirmamos disponibilidad, envío y forma de pago por escrito — nadie te cobra nada desde esta página.",
+      "addressLabel": "Dirección de envío",
+      "addressPlaceholder": "Calle, número, ciudad, estado, código postal",
+      "addressOptional": "opcional",
+      "paymentLabel": "Método de pago preferido",
+      "paymentOptions": [
+        "Transferencia bancaria",
+        "Efectivo al recibir",
+        "Tarjeta (Zelle / PayPal)"
+      ],
+      "orderMessageTemplate": "Quiero pedir: {product} — {price}.",
+      "submit": "Confirmar pedido",
+      "sending": "Enviando…"
+    }
   },
   "reviews": {
     "eyebrow": "Lo que dicen nuestros clientes",
@@ -212,7 +217,7 @@
         "name": "Carla M.",
         "rating": 5,
         "date": "Agosto 2026",
-        "body": "Pedí la parrilla Ninja Foodi para la cocina y quedé encantada. Llegó bien empacada y funciona exactamente como me la describieron por WhatsApp."
+        "body": "Pedí la freidora de aire Ninja para la cocina y quedé encantada. Llegó bien empacada y funciona exactamente como me la describieron por WhatsApp."
       },
       {
         "name": "Rafael T.",
@@ -224,7 +229,7 @@
         "name": "Yamilet R.",
         "rating": 5,
         "date": "Septiembre 2026",
-        "body": "Compré el set de CHAE-U para mi mamá y superó lo que esperaba. El empaque es precioso y cada producto huele delicioso."
+        "body": "Compré el set de ROUND LAB para mi mamá y superó lo que esperaba. El empaque es precioso y cada producto se siente muy suave."
       },
       {
         "name": "Pedro A.",
@@ -242,19 +247,19 @@
         "name": "Manuel G.",
         "rating": 5,
         "date": "Julio 2026",
-        "body": "Uso el gel Healena hace tres semanas y ya noto la cicatriz más suave. Muy contento con el seguimiento que me dieron después de la compra."
+        "body": "Uso el parche Healena hace tres semanas y ya noto la cicatriz más suave. Muy contento con el seguimiento que me dieron después de la compra."
       },
       {
         "name": "Lorena F.",
         "rating": 5,
         "date": "Septiembre 2026",
-        "body": "La cafetera Ninja es justo lo que buscaba para la oficina. El trato fue muy personal — me explicaron todo por WhatsApp antes de confirmar el pedido."
+        "body": "El televisor Samsung de 50 pulgadas se ve increíble en la sala. El trato fue muy personal — me explicaron todo por WhatsApp antes de confirmar el pedido."
       },
       {
         "name": "Andrés V.",
         "rating": 4,
         "date": "Junio 2026",
-        "body": "La freidora DualZone cocina parejo en las dos canastas. Buena experiencia de compra, con actualizaciones claras durante todo el envío."
+        "body": "El televisor Samsung OLED de 65 pulgadas se ve espectacular, los negros son impresionantes. Buena experiencia de compra, con actualizaciones claras durante todo el envío."
       },
       {
         "name": "Katherine P.",
@@ -266,7 +271,7 @@
         "name": "Julio C.",
         "rating": 4,
         "date": "Septiembre 2026",
-        "body": "El televisor Samsung se ve espectacular en la sala. Bajo una estrella solo porque tardó en confirmarme el color disponible, pero el resultado final valió la pena."
+        "body": "El control DualSense llegó impecable y se siente igual que comprado en tienda. Bajo una estrella solo porque tardó un poco en confirmarme la disponibilidad, pero el resultado final valió la pena."
       }
     ]
   },

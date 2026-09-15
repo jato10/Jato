@@ -99,28 +99,27 @@
     "photoCaption": "Photographing what goes into the current catalog.",
     "categoriesEyebrow": "By category",
     "categoriesTitle": "A sample of what's ready today.",
-    "categoriesLede": "Reference market price alongside the Global Beyond price, confirmed in writing with every request.",
+    "categoriesLede": "Prices confirmed in writing with every request.",
     "categoriesCta": "See categories & prices",
     "pageTitle": "Catalog by category — Global Beyond LLC",
-    "pageMetaDescription": "Browse the current Global Beyond LLC selection by category — Beauty, Gaming & Entertainment, and Kitchen Appliances — with reference market price alongside the Global Beyond price.",
-    "marketPriceLabel": "Market price",
-    "offerBadge": "5% less",
+    "pageMetaDescription": "Browse the current Global Beyond LLC selection by category — Beauty, Gaming & Entertainment, and Kitchen Appliances.",
     "categories": [
       {
         "id": "beauty",
         "label": "Beauty",
         "products": [
           {
-            "name": "CHAE-U — Essential K-Beauty Set, Hydration & Recovery",
-            "description": "A complete Korean routine in one box: cucumber water gel cleanser, hyaluronic algae toner, rice bran brightening serum, collagen eye cream, lotus moisturizing day cream, and a tea tree overnight mask.",
-            "marketPrice": "$89.99",
-            "price": "$85.49"
+            "name": "ROUND LAB — 1025 Dokdo Skin Care Basic Set",
+            "description": "An essential three-step Korean routine: cleanser, toner, and lotion, formulated with deep sea water from Dokdo Island for gentle, calming hydration — great for sensitive skin.",
+            "price": "$61.74",
+            "image": "roundlab-skincare"
           },
           {
-            "name": "Healena — Medical Grade Scar Treatment Gel",
-            "description": "Advanced silicone gel that helps soften and fade scars with consistent use. Medical-grade formula, fast-drying and easy to apply daily.",
+            "name": "Healena — Medical Grade Scar Treatment Patch",
+            "description": "A reusable, breathable medical-grade silicone sheet designed to soften and fade scars — new and old — with consistent use.",
             "price": "$75.00",
-            "priceNote": "Price per box, set directly by Global Beyond LLC."
+            "priceNote": "Price per box, set directly by Global Beyond LLC.",
+            "image": "healena"
           }
         ]
       },
@@ -131,32 +130,38 @@
           {
             "name": "PlayStation 5 — Standard disc console",
             "description": "Sony's flagship console, ready for the most demanding titles in 4K. Includes a DualSense controller.",
-            "marketPrice": "$549.99",
-            "price": "$522.49"
+            "price": "$522.49",
+            "image": "ps5-console"
           },
           {
             "name": "Xbox Series X — 1TB console",
-            "description": "The most powerful console in the Xbox family, with 1TB of storage and compatibility with thousands of titles.",
-            "marketPrice": "$799.99",
-            "price": "$759.99"
+            "description": "The most powerful console in the Xbox family, with 1TB of storage and compatibility with thousands of titles. Includes a wireless controller.",
+            "price": "$759.99",
+            "image": "xbox-series-x"
           },
           {
             "name": "DualSense Wireless Controller (PS5)",
             "description": "Official wireless controller for PS5, with haptic feedback and adaptive triggers.",
-            "marketPrice": "$74.99",
-            "price": "$71.24"
+            "price": "$71.24",
+            "image": "dualsense-controller"
           },
           {
             "name": "Xbox Wireless Controller",
             "description": "Official wireless controller for Xbox Series X|S and PC, with an ergonomic design and Bluetooth connectivity.",
-            "marketPrice": "$64.99",
-            "price": "$61.74"
+            "price": "$61.74",
+            "image": "xbox-controller"
           },
           {
-            "name": "Samsung Neo QLED 65\" — 4K Smart TV",
-            "description": "A 65-inch TV with Mini LED technology, 4K resolution, HDR, and Dolby Atmos sound.",
-            "marketPrice": "$1,499.99",
-            "price": "$1,424.99"
+            "name": "Samsung Neo QLED 50\" QN90D — 4K Smart TV",
+            "description": "A 50-inch TV with Mini LED technology, 4K resolution, HDR, and Dolby Atmos sound.",
+            "price": "$1,614.99",
+            "image": "samsung-tv-50"
+          },
+          {
+            "name": "Samsung OLED 65\" S90D — 4K Smart TV",
+            "description": "A 65-inch OLED TV with 4K resolution, perfect blacks, and Dolby Atmos sound — great for a home theater setup.",
+            "price": "$1,234.99",
+            "image": "samsung-tv-65"
           }
         ]
       },
@@ -167,36 +172,36 @@
           {
             "name": "KitchenAid Artisan 5-Quart Stand Mixer",
             "description": "Tilt-head stand mixer with a 5-quart stainless steel bowl and a 10-speed motor. Includes a dough hook, flat beater, and wire whip.",
-            "marketPrice": "$429.99",
-            "price": "$408.49"
+            "price": "$408.49",
+            "image": "kitchenaid-mixer"
           },
           {
-            "name": "Ninja Foodi Smart XL Indoor Grill",
-            "description": "A 6-in-1 indoor grill with a built-in smart thermometer: grills, air fries, bakes, broils, smokes, and dehydrates.",
-            "marketPrice": "$229.99",
-            "price": "$218.49"
-          },
-          {
-            "name": "Ninja Professional Plus Blender with Auto-iQ",
-            "description": "A 1,400-watt blender with automatic Auto-iQ programs for smoothies, crushed ice, and frozen drinks.",
-            "marketPrice": "$99.99",
-            "price": "$94.99"
-          },
-          {
-            "name": "Ninja DualZone 8-Quart Air Fryer",
-            "description": "Two independent baskets for cooking two foods at once, with a sync feature so both finish together.",
-            "marketPrice": "$149.99",
-            "price": "$142.49"
-          },
-          {
-            "name": "Ninja 12-Cup Programmable Coffee Maker",
-            "description": "Programmable coffee maker with a glass carafe, adjustable warming plate, and delay-brew timer.",
-            "marketPrice": "$99.99",
-            "price": "$94.99"
+            "name": "Ninja Air Fryer Pro XL",
+            "description": "A 6.5-quart air fryer with MaxCrisp technology: air fry, roast, bake, reheat, and dehydrate in one appliance.",
+            "price": "$142.49",
+            "image": "ninja-air-fryer"
           }
         ]
       }
-    ]
+    ],
+    "productPage": {
+      "backLabel": "Back to the catalog",
+      "priceLabel": "Price",
+      "formHeading": "Confirm your order",
+      "formLede": "Fill in your details and we'll confirm availability, shipping, and payment in writing — nothing gets charged from this page.",
+      "addressLabel": "Shipping address",
+      "addressPlaceholder": "Street, number, city, state, ZIP code",
+      "addressOptional": "optional",
+      "paymentLabel": "Preferred payment method",
+      "paymentOptions": [
+        "Bank transfer",
+        "Cash on delivery",
+        "Card (Zelle / PayPal)"
+      ],
+      "orderMessageTemplate": "I'd like to order: {product} — {price}.",
+      "submit": "Confirm order",
+      "sending": "Sending…"
+    }
   },
   "reviews": {
     "eyebrow": "What our customers say",
@@ -212,7 +217,7 @@
         "name": "Carla M.",
         "rating": 5,
         "date": "August 2026",
-        "body": "I ordered the Ninja Foodi grill for the kitchen and I'm thrilled with it. It arrived well packed and works exactly as they described over WhatsApp."
+        "body": "I ordered the Ninja air fryer for the kitchen and I'm thrilled with it. It arrived well packed and works exactly as they described over WhatsApp."
       },
       {
         "name": "Rafael T.",
@@ -224,7 +229,7 @@
         "name": "Yamilet R.",
         "rating": 5,
         "date": "September 2026",
-        "body": "I bought the CHAE-U set for my mom and it exceeded what I expected. The packaging is beautiful and every product smells wonderful."
+        "body": "I bought the ROUND LAB set for my mom and it exceeded what I expected. The packaging is beautiful and every product feels really gentle."
       },
       {
         "name": "Pedro A.",
@@ -242,19 +247,19 @@
         "name": "Manuel G.",
         "rating": 5,
         "date": "July 2026",
-        "body": "I've used the Healena gel for three weeks now and the scar already looks smoother. Really happy with the follow-up they gave me after the purchase."
+        "body": "I've used the Healena patch for three weeks now and the scar already looks smoother. Really happy with the follow-up they gave me after the purchase."
       },
       {
         "name": "Lorena F.",
         "rating": 5,
         "date": "September 2026",
-        "body": "The Ninja coffee maker is exactly what I was looking for at the office. The service felt very personal — they walked me through everything over WhatsApp before confirming the order."
+        "body": "The 50-inch Samsung TV looks incredible in the living room. The service felt very personal — they walked me through everything over WhatsApp before confirming the order."
       },
       {
         "name": "Andrés V.",
         "rating": 4,
         "date": "June 2026",
-        "body": "The DualZone air fryer cooks evenly in both baskets. Good buying experience, with clear updates throughout shipping."
+        "body": "The 65-inch Samsung OLED looks spectacular, the blacks are impressive. Good buying experience, with clear updates throughout shipping."
       },
       {
         "name": "Katherine P.",
@@ -266,7 +271,7 @@
         "name": "Julio C.",
         "rating": 4,
         "date": "September 2026",
-        "body": "The Samsung TV looks spectacular in the living room. I'm taking off one star only because confirming the available color took a bit longer, but the end result was worth it."
+        "body": "The DualSense controller arrived flawless and feels just like the ones in stores. I'm taking off one star only because confirming availability took a bit longer, but the end result was worth it."
       }
     ]
   },
