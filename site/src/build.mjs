@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, renderCatalogPage, renderReviewsPage, renderProductPage, makeLinks, INLINE_BOOT } from './template.mjs';
+import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, renderCatalogPage, renderReviewsPage, renderLeaveReviewPage, renderProductPage, makeLinks, INLINE_BOOT } from './template.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(here, '..', 'public');
@@ -189,6 +189,26 @@ for (const c of contents) {
   );
 }
 
+/* Writing a review is its own page, so the reviews page stays a list. */
+for (const c of contents) {
+  const leavePath = site.leaveReviewPath[c.lang];
+  write(
+    `${leavePath.replace(/^\/|\/$/g, '')}/index.html`,
+    renderLeaveReviewPage({
+      c,
+      site,
+      assets,
+      links,
+      alternates: contents.map((cc) => ({ hreflang: cc.lang, href: `${origin}${site.leaveReviewPath[cc.lang]}` })).concat([
+        { hreflang: 'x-default', href: `${origin}${site.leaveReviewPath[site.defaultLang]}` },
+      ]),
+      langHrefs: Object.fromEntries(contents.map((cc) => [cc.lang, site.leaveReviewPath[cc.lang]])),
+      canonical: `${origin}${leavePath}`,
+      ogImage,
+    })
+  );
+}
+
 /* One page per product per language, at <catalogPath><product.image>/ — the
    image key doubles as a stable, shared slug across languages. */
 for (const c of contents) {
@@ -303,6 +323,16 @@ ${contents
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>`
+  )
+  .join('\n')}
+${contents
+  .map(
+    (c) => `  <url>
+    <loc>${origin}${site.leaveReviewPath[c.lang]}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>`
   )
   .join('\n')}
