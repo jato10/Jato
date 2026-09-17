@@ -233,8 +233,9 @@
       "submit": "Send my review",
       "sending": "Sending…",
       "success": "Thank you. We got your review and will publish it here once we've gone through it.",
-      "invalid": "Your name or your review is missing.",
-      "errorComment": "Add your review."
+      "invalid": "Your rating, name or review is missing.",
+      "errorComment": "Add your review.",
+      "errorRating": "Pick your rating."
     },
     "items": [
       {

@@ -75,35 +75,36 @@
                 <label>Tu nombre<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
               </p>
               <div class="form__row">
-                <fieldset class="field rating-field">
+                <fieldset class="field rating-field" aria-describedby="rf-rating-error">
                   <legend class="field__label">Tu calificación</legend>
                   <div class="rating">
                     <label class="rating__star">
-                  <input type="radio" name="rating" value="5" checked>
+                  <input type="radio" name="rating" value="5" required>
                   <span class="visually-hidden">5 de 5 estrellas</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                 <label class="rating__star">
-                  <input type="radio" name="rating" value="4">
+                  <input type="radio" name="rating" value="4" required>
                   <span class="visually-hidden">4 de 5 estrellas</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                 <label class="rating__star">
-                  <input type="radio" name="rating" value="3">
+                  <input type="radio" name="rating" value="3" required>
                   <span class="visually-hidden">3 de 5 estrellas</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                 <label class="rating__star">
-                  <input type="radio" name="rating" value="2">
+                  <input type="radio" name="rating" value="2" required>
                   <span class="visually-hidden">2 de 5 estrellas</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                 <label class="rating__star">
-                  <input type="radio" name="rating" value="1">
+                  <input type="radio" name="rating" value="1" required>
                   <span class="visually-hidden">1 de 5 estrellas</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                   </div>
+                  <p class="field__error" id="rf-rating-error" data-message="Elige tu calificación."></p>
                 </fieldset>
               </div>
               <div class="form__row form__row--split">
@@ -135,7 +136,7 @@
                 <p class="form__privacy">Usamos lo que nos envías únicamente para responder tu solicitud. Consulta nuestra <a href="/es/privacy/">Política de Privacidad</a>.</p>
               </div>
               <p class="form__status" data-form-status role="status" aria-live="polite"
-                data-success="Gracias. Recibimos tu reseña y la publicamos aquí después de revisarla." data-error="Escríbenos directo por WhatsApp para una respuesta más rápida." data-invalid="Falta tu nombre o tu reseña."></p>
+                data-success="Gracias. Recibimos tu reseña y la publicamos aquí después de revisarla." data-error="Escríbenos directo por WhatsApp para una respuesta más rápida." data-invalid="Falta tu calificación, tu nombre o tu reseña."></p>
             </form>
           </div>
         </div>
@@ -204,6 +205,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=c7132e8c" defer></script>
+    <script src="/assets/js/main.js?v=a1f0cef3" defer></script>
   </body>
 </html>

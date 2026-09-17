@@ -244,12 +244,20 @@
       /* What the visitor actually writes: the review text, or the message box. */
       var bodyEl = commentEl || messageEl;
 
+      /* Only the review form has a star rating, and there it is required:
+         nothing is selected up front, so a review with no score would mean the
+         visitor skipped the control rather than that they had no opinion. */
+      var ratingGroup = form.querySelector('[name="rating"]');
+      var ratingEl = form.querySelector('[name="rating"]:checked');
+      var ratingMissing = !!ratingGroup && !ratingEl;
+
       var name = val(nameEl);
       var email = val(emailEl);
       var phone = val(phoneEl);
       var body = val(bodyEl);
       var contactMissing = !!contactError && !email && !phone;
 
+      flag(ratingGroup, ratingMissing, errorFor(ratingGroup));
       flag(nameEl, !name, errorFor(nameEl));
       flag(bodyEl, !body, errorFor(bodyEl));
       if (contactError) {
@@ -257,7 +265,7 @@
         flag(phoneEl, contactMissing, contactError);
       }
 
-      if (!name || !body || contactMissing) {
+      if (ratingMissing || !name || !body || contactMissing) {
         event.preventDefault();
         say('invalid');
         var firstInvalid = form.querySelector('[aria-invalid="true"]');
@@ -272,7 +280,6 @@
       /* Each form contributes what it has: the order form an address and a
          payment preference, the review form a star rating and the review
          itself. The plain contact form has none of them. */
-      var ratingEl = form.querySelector('[name="rating"]:checked');
       var addressEl = field('address');
       var paymentEl = form.querySelector('[name="paymentMethod"]:checked');
 
