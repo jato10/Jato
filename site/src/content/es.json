@@ -233,8 +233,9 @@
       "submit": "Enviar mi reseña",
       "sending": "Enviando…",
       "success": "Gracias. Recibimos tu reseña y la publicamos aquí después de revisarla.",
-      "invalid": "Falta tu nombre o tu reseña.",
-      "errorComment": "Agrega tu reseña."
+      "invalid": "Falta tu calificación, tu nombre o tu reseña.",
+      "errorComment": "Agrega tu reseña.",
+      "errorRating": "Elige tu calificación."
     },
     "items": [
       {

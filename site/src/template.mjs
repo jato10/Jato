@@ -599,6 +599,10 @@ function productDetailBody({ c, site, product, categoryLabel }) {
 }
 
 /* The review is written and submitted here rather than handed off to WhatsApp.
+   No star is chosen up front: a pre-filled 5 makes "they loved it" and "they
+   never touched the control" the same submission, which quietly inflates the
+   average. The rating is required instead, so every review carries a score
+   the customer actually picked.
    It posts to the same /api/contact endpoint the rest of the site uses, so it
    really reaches Global Beyond; it appears below once they publish it, which
    the copy says plainly rather than implying it goes live on its own. */
@@ -608,7 +612,7 @@ function reviewForm({ c }) {
   const stars = [5, 4, 3, 2, 1]
     .map(
       (n) => `<label class="rating__star">
-                  <input type="radio" name="rating" value="${n}"${n === 5 ? ' checked' : ''}>
+                  <input type="radio" name="rating" value="${n}" required>
                   <span class="visually-hidden">${esc(rf.ratingStar.replace('{n}', String(n)))}</span>
                   ${starIcon(true)}
                 </label>`
@@ -622,11 +626,12 @@ function reviewForm({ c }) {
                 <label>${esc(f.name)}<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
               </p>
               <div class="form__row">
-                <fieldset class="field rating-field">
+                <fieldset class="field rating-field" aria-describedby="rf-rating-error">
                   <legend class="field__label">${esc(rf.ratingLabel)}</legend>
                   <div class="rating">
                     ${stars}
                   </div>
+                  <p class="field__error" id="rf-rating-error" data-message="${esc(rf.errorRating)}"></p>
                 </fieldset>
               </div>
               <div class="form__row form__row--split">

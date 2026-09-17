@@ -75,35 +75,36 @@
                 <label>Your name<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
               </p>
               <div class="form__row">
-                <fieldset class="field rating-field">
+                <fieldset class="field rating-field" aria-describedby="rf-rating-error">
                   <legend class="field__label">Your rating</legend>
                   <div class="rating">
                     <label class="rating__star">
-                  <input type="radio" name="rating" value="5" checked>
+                  <input type="radio" name="rating" value="5" required>
                   <span class="visually-hidden">5 out of 5 stars</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                 <label class="rating__star">
-                  <input type="radio" name="rating" value="4">
+                  <input type="radio" name="rating" value="4" required>
                   <span class="visually-hidden">4 out of 5 stars</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                 <label class="rating__star">
-                  <input type="radio" name="rating" value="3">
+                  <input type="radio" name="rating" value="3" required>
                   <span class="visually-hidden">3 out of 5 stars</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                 <label class="rating__star">
-                  <input type="radio" name="rating" value="2">
+                  <input type="radio" name="rating" value="2" required>
                   <span class="visually-hidden">2 out of 5 stars</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                 <label class="rating__star">
-                  <input type="radio" name="rating" value="1">
+                  <input type="radio" name="rating" value="1" required>
                   <span class="visually-hidden">1 out of 5 stars</span>
                   <svg class="star star--filled" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.4l1.98 4.16 4.4.58-3.24 3.11.82 4.55L8 11.6l-3.96 2.2.82-4.55-3.24-3.11 4.4-.58L8 1.4z"/></svg>
                 </label>
                   </div>
+                  <p class="field__error" id="rf-rating-error" data-message="Pick your rating."></p>
                 </fieldset>
               </div>
               <div class="form__row form__row--split">
@@ -135,7 +136,7 @@
                 <p class="form__privacy">We use what you send only to answer your request. See our <a href="/en/privacy/">Privacy Policy</a>.</p>
               </div>
               <p class="form__status" data-form-status role="status" aria-live="polite"
-                data-success="Thank you. We got your review and will publish it here once we've gone through it." data-error="Reach us directly on WhatsApp for a faster response." data-invalid="Your name or your review is missing."></p>
+                data-success="Thank you. We got your review and will publish it here once we've gone through it." data-error="Reach us directly on WhatsApp for a faster response." data-invalid="Your rating, name or review is missing."></p>
             </form>
           </div>
         </div>
@@ -204,6 +205,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=c7132e8c" defer></script>
+    <script src="/assets/js/main.js?v=a1f0cef3" defer></script>
   </body>
 </html>
