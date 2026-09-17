@@ -255,7 +255,6 @@ a, button, input, textarea, select {
   box-shadow: 0 10px 30px rgba(120, 160, 210, 0.18);
 }
 .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(120, 160, 210, 0.28); }
-.btn--primary:active { transform: translateY(0); }
 
 .btn--ghost {
   color: var(--on-dark);
@@ -822,7 +821,7 @@ a, button, input, textarea, select {
   border: 1px solid var(--line-light);
   background: var(--paper-50);
   overflow: hidden;
-  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), scale 0.12s var(--ease-out);
 }
 .product-card:hover {
   border-color: var(--slate-400);
@@ -1105,7 +1104,7 @@ a.review-source:hover { color: var(--on-dark-muted); }
   gap: 10px;
   padding-top: clamp(22px, 2.6vw, 28px);
   border-top: 1px solid var(--line-dark);
-  transition: border-color 0.4s var(--ease);
+  transition: border-color 0.4s var(--ease), scale 0.12s var(--ease-out);
 }
 a.channel:hover { border-color: rgba(255, 255, 255, 0.3); }
 .channel__label { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--on-dark-dim); }
@@ -1344,16 +1343,57 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
 
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
-  transition-delay: calc(var(--reveal-delay, 0) * 90ms);
+  transform: translateY(10px);
+  transition: opacity 0.38s var(--ease-out), transform 0.38s var(--ease-out);
+  transition-delay: calc(var(--reveal-delay, 0) * 40ms);
 }
 .js [data-reveal].is-visible { opacity: 1; transform: none; }
 
 /* Content that's already in view on load (the hero) is revealed on the very
    first frame anyway — see main.js's sweep() — so animating it in only adds
-   a needless ~900ms delay before the page's LCP element visibly paints. */
+   a needless delay before the page's LCP element visibly paints. */
 .js [data-reveal].is-visible-instant { transition: none; }
+
+/* Press feedback. A control has to react on pointer-down, not on release —
+   otherwise a tap (where there is no hover state at all) feels like nothing
+   happened. Every tappable surface dips slightly while it is held.
+   This uses the standalone `scale` property rather than `transform` on
+   purpose: several of these elements also carry a reveal or hover transform,
+   and `scale` composes with those instead of fighting them for specificity. */
+.btn,
+.product-card,
+.tabs__tab,
+.nav__link,
+.lang__item,
+a.channel,
+.payment-option,
+.rating__star,
+.accordion__summary,
+a.review-source,
+.link-arrow,
+.menu-toggle {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active,
+.tabs__tab:active,
+.nav__link:active,
+.lang__item:active,
+.payment-option:active,
+.accordion__summary:active,
+a.review-source:active,
+.link-arrow:active,
+.menu-toggle:active {
+  scale: 0.96;
+}
+
+/* Large surfaces need a smaller dip — the same ratio reads as a lurch. */
+.product-card:active,
+a.channel:active {
+  scale: 0.99;
+}
+
+.rating__star:active .star { scale: 0.88; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

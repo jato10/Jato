@@ -84,9 +84,12 @@
 
       var sweep = function () {
         queued = false;
-        var limit = window.innerHeight * 0.92;
+        /* Start a block a tenth of a screen before it scrolls into view, so
+           by the time the visitor's eyes reach it the motion has already
+           settled and the content is simply there. */
+        var limit = window.innerHeight * 1.1;
         /* On a short page the last block can sit close enough to the bottom
-           that its top never crosses that 92% line — the page simply can't
+           that its top never crosses that line — the page simply can't
            scroll any further to bring it there. Once the visitor has hit the
            bottom of the page, reveal whatever is left regardless of rect.top
            so nothing stays permanently hidden. */
@@ -354,6 +357,12 @@
       })
       .catch(function () { /* the page already has its own reviews */ });
   }
+
+  /* --------------------------------------------------- :active on iOS
+     Safari applies :active to arbitrary elements only once the document
+     carries a touch listener, so taps on cards, tabs and chips would show no
+     press state at all without this empty passive listener. */
+  document.addEventListener('touchstart', function () {}, { passive: true });
 
   /* ---------------------------------------------------------- footer year */
   var year = document.querySelector('[data-year]');
