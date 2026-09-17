@@ -328,11 +328,27 @@ a, button, input, textarea, select {
 }
 .header.is-stuck {
   background: rgba(7, 11, 20, 0.72);
-  border-bottom-color: var(--line-dark-soft);
   -webkit-backdrop-filter: saturate(180%) blur(18px);
   backdrop-filter: saturate(180%) blur(18px);
 }
 .header.is-stuck::before { opacity: 0; }
+
+/* Where the floating header overlaps the content, the separation is a short
+   fade rather than a drawn line, so the bar reads as a layer above the page
+   instead of a box sitting on top of it. The 1px border is kept transparent
+   above and only turned on for the reduced-transparency and high-contrast
+   modes at the end of this file, where a defined edge is the point. */
+.header::after {
+  content: "";
+  position: absolute;
+  inset: 100% 0 auto 0;
+  height: 14px;
+  background: linear-gradient(180deg, rgba(4, 7, 14, 0.45) 0%, rgba(4, 7, 14, 0) 100%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  pointer-events: none;
+}
+.header.is-stuck::after { opacity: 1; }
 
 .header__inner {
   display: flex;
@@ -345,7 +361,7 @@ a, button, input, textarea, select {
   padding-right: max(var(--gutter), env(safe-area-inset-right));
 }
 
-.brand { display: flex; align-items: center; gap: 12px; flex: none; }
+.brand { display: flex; align-items: center; gap: 12px; flex: none; min-height: 44px; }
 .brand img { height: clamp(30px, 3.4vw, 40px); width: auto; }
 .brand__name {
   font-size: 0.82rem;
@@ -403,7 +419,7 @@ a, button, input, textarea, select {
   align-items: center;
   justify-content: center;
   min-width: 44px;
-  min-height: 36px;
+  min-height: 44px;
   padding: 0 10px;
   border-radius: 999px;
   font-size: 0.78rem;
@@ -892,7 +908,8 @@ a, button, input, textarea, select {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 8px 14px;
+  min-height: 44px;
+  padding: 0 16px;
   border-radius: 999px;
   border: 1px solid var(--line-dark);
   font-size: 0.84rem;
@@ -915,8 +932,15 @@ a, button, input, textarea, select {
 
 /* Star rating input, on the review form */
 .rating-field { border: 0; padding: 0; margin: 0; min-width: 0; }
-.rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; margin-top: 10px; }
-.rating__star { display: inline-flex; cursor: pointer; padding: 2px; }
+.rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 0; margin-top: 6px; margin-left: -9px; }
+.rating__star {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  cursor: pointer;
+}
 .rating__star input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .rating__star .star { width: 26px; height: 26px; fill: rgba(255, 255, 255, 0.18); transition: fill 0.2s var(--ease); }
 /* Row-reverse puts 5 first in the DOM, so a checked star lights itself and
@@ -926,7 +950,7 @@ a, button, input, textarea, select {
 .rating:hover .rating__star .star { fill: rgba(255, 255, 255, 0.18); }
 .rating__star:hover .star,
 .rating__star:hover ~ .rating__star .star { fill: #f0dca8; }
-.rating__star:has(input:focus-visible) { outline: 2px solid var(--slate-400); outline-offset: 2px; border-radius: 4px; }
+.rating__star:has(input:focus-visible) { outline: 2px solid var(--slate-400); outline-offset: -4px; border-radius: 10px; }
 
 .review-form { margin-bottom: clamp(40px, 5vw, 64px); }
 
@@ -1260,6 +1284,9 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
 @media (min-width: 860px) { .footer__bottom-right { justify-items: end; text-align: right; } }
 .footer__legalnav { display: flex; gap: 20px; flex-wrap: wrap; }
 .footer__legalnav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: 0.82rem;
   color: var(--on-dark-dim);
   transition: color 0.3s var(--ease);
@@ -1281,7 +1308,7 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
 .footer__list a, .footer__list span {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
+  min-height: 44px;
   color: var(--on-dark-muted);
   transition: color 0.3s var(--ease);
   font-size: 0.95rem;
@@ -1411,6 +1438,57 @@ a.channel:active {
 
 .js [data-reveal] { opacity: 1 !important; transform: none !important; }
   .hero__scroll { display: none; }
+}
+
+/* Some people ask their system for solid surfaces instead of translucent
+   ones. Honour that: the floating chrome becomes opaque, the blur goes away,
+   and the edge that the fade was carrying comes back as a real line. */
+@media (prefers-reduced-transparency: reduce) {
+  .header.is-stuck {
+    background: var(--ink-900);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-bottom-color: var(--line-dark);
+  }
+  .header.is-stuck::after { opacity: 0; }
+}
+@media (prefers-reduced-transparency: reduce) and (max-width: 1023px) {
+  .js .nav {
+    background: var(--ink-900);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* And some ask for more contrast. Muted text stops being muted, every
+   dividing line becomes visible, and translucent chrome goes solid. */
+@media (prefers-contrast: more) {
+  :root {
+    --on-dark-muted: #dde5ee;
+    --on-dark-dim: #c6d2e0;
+    --on-light-muted: #293443;
+    --slate-500: #3c4a5b;
+    --line-dark: rgba(255, 255, 255, 0.34);
+    --line-dark-soft: rgba(255, 255, 255, 0.24);
+    --line-light: rgba(12, 20, 32, 0.34);
+    --line-light-soft: rgba(12, 20, 32, 0.24);
+  }
+  .header.is-stuck {
+    background: var(--ink-900);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-bottom-color: var(--line-dark);
+  }
+  .header.is-stuck::after { opacity: 0; }
+  .btn--ghost { border-width: 2px; }
+  .payment-option { border-width: 2px; }
+}
+@media (prefers-contrast: more) and (max-width: 1023px) {
+  .js .nav {
+    background: var(--ink-900);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 @media print {
