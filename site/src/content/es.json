@@ -492,7 +492,7 @@
           "h": "Qué información recopilamos",
           "p": [
             "La única información personal que recopilamos es la que tú decides darnos: tu nombre, un correo y/o teléfono, y el mensaje que escribes, al enviar el formulario de contacto de este sitio.",
-            "Este sitio no usa cookies, no ejecuta rastreadores de publicidad y no construye un perfil de los visitantes. Para saber qué páginas se visitan más, usamos una medición agregada de Vercel que cuenta visitas sin cookies, sin identificarte y sin seguirte a otros sitios. Lo único que tu navegador guarda localmente es un pequeño indicador técnico que recuerda que ya elegiste un idioma, para no redirigirte dos veces en la misma visita; no contiene información personal y no se nos envía."
+            "Este sitio no usa cookies, no ejecuta rastreadores de publicidad y no construye un perfil de los visitantes. Para saber qué páginas se visitan y con qué rapidez cargan y responden, usamos mediciones agregadas de Vercel que funcionan sin cookies, sin identificarte y sin seguirte a otros sitios. Lo único que tu navegador guarda localmente es un pequeño indicador técnico que recuerda que ya elegiste un idioma, para no redirigirte dos veces en la misma visita; no contiene información personal y no se nos envía."
           ]
         },
         {

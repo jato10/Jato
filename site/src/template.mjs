@@ -940,10 +940,15 @@ function contactSection({ c, links, assets }) {
    the analytics queue before loading the script, and use the standard Web
    Analytics script path. It counts page views without cookies and without
    identifying anyone, which is what the privacy policy now says. */
-const ANALYTICS = `<script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>`;
+export const ANALYTICS_INIT =
+  "window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };";
+export const SPEED_INSIGHTS_INIT =
+  "window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };";
+
+const OBSERVABILITY = `<script>${ANALYTICS_INIT}</script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script>${SPEED_INSIGHTS_INIT}</script>
+    <script defer src="/_vercel/speed-insights/script.js" data-sdkn="@vercel/speed-insights"></script>`;
 
 export const INLINE_BOOT = "document.documentElement.className=document.documentElement.className.replace('no-js','js');";
 
@@ -954,7 +959,7 @@ export function renderPage(options) {
   <head>
 ${head(options)}
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1006,7 +1011,7 @@ export function renderNotFound({ contents, site, ogImage }) {
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <main class="error-page">
@@ -1051,7 +1056,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <main class="gate">
@@ -1088,7 +1093,7 @@ export function renderSent({ c, site, ogImage, links, path }) {
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <main class="error-page">
@@ -1151,7 +1156,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1190,7 +1195,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1229,7 +1234,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1268,7 +1273,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1308,7 +1313,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
-    ${ANALYTICS}
+    ${OBSERVABILITY}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1322,4 +1327,3 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
 </html>
 `;
 }
-

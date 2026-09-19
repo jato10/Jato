@@ -492,7 +492,7 @@
           "h": "Information we collect",
           "p": [
             "The only personal information we collect is what you choose to give us: your name, and an email address and/or phone number, and the message you write, when you submit the contact form on this site.",
-            "This site does not use cookies, does not run advertising trackers, and does not build a profile of visitors. To see which pages get visited most, we use an aggregate measurement from Vercel that counts visits without cookies, without identifying you, and without following you to other sites. The one thing your browser stores locally is a small technical flag that remembers you already chose a language, so you are not redirected twice in the same visit; it contains no personal information and is not sent to us."
+            "This site does not use cookies, does not run advertising trackers, and does not build a profile of visitors. To understand which pages are visited and how quickly they load and respond, we use aggregate measurements from Vercel that work without cookies, without identifying you, and without following you to other sites. The one thing your browser stores locally is a small technical flag that remembers you already chose a language, so you are not redirected twice in the same visit; it contains no personal information and is not sent to us."
           ]
         },
         {

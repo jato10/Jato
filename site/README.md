@@ -1,8 +1,9 @@
 # Global Beyond LLC — website
 
-Static, bilingual (English / Spanish) marketing site. No framework, no runtime
-dependencies, no third-party requests: everything the browser loads is served
-from this folder.
+Static, bilingual (English / Spanish) marketing site. No framework and no
+runtime application dependencies. Page-view and performance measurement use
+Vercel's first-party Analytics and Speed Insights routes on the site's own
+origin.
 
 ```
 site/
@@ -123,8 +124,9 @@ you change it.
 `/en/privacy/`, `/es/privacy/`, `/en/terms/` and `/es/terms/` are real pages, built
 from `legal.privacy` / `legal.terms` in the two content files, listed in the
 footer and linked from the contact form's consent notice. They describe
-exactly what this site does today — no cookies, no analytics, the contact
-form's data going to Resend for delivery only — so if the site's data
+exactly what this site does today — no cookies or advertising trackers,
+aggregate Vercel page-view and performance measurement, and the contact form's
+data going to Resend for delivery only — so if the site's data
 practices change (analytics, a mailing list, a new integration), update these
 pages in the same change. This is not a substitute for legal review; it
 reflects the site's actual behavior, written by an engineer, not a lawyer.
