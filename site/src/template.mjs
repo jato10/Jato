@@ -936,11 +936,14 @@ function contactSection({ c, links, assets }) {
 /* Vercel Web Analytics. Vercel serves this from our own origin, which is why
    it needs no CDN entry in the CSP: script-src 'self' already covers it, and
    the beacon it posts to /_vercel/insights/view is covered by connect-src
-   'self'. The npm package is deliberately not used — this project has no
-   install or build step (see vercel.json), so a bundled dependency would
-   never reach the browser. It counts page views without cookies and without
+   'self'. Following the latest Vercel Web Analytics documentation, we initialize
+   the analytics queue before loading the script, and use the standard Web
+   Analytics script path. It counts page views without cookies and without
    identifying anyone, which is what the privacy policy now says. */
-const ANALYTICS = '<script defer src="/_vercel/insights/script.js"></script>';
+const ANALYTICS = `<script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>`;
 
 export const INLINE_BOOT = "document.documentElement.className=document.documentElement.className.replace('no-js','js');";
 
