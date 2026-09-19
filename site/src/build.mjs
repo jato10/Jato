@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, renderCatalogPage, renderReviewsPage, renderLeaveReviewPage, renderProductPage, makeLinks, INLINE_BOOT } from './template.mjs';
+import { renderPage, renderNotFound, renderGateway, renderSent, renderLegal, renderCatalogPage, renderReviewsPage, renderLeaveReviewPage, renderProductPage, makeLinks, INLINE_BOOT, ANALYTICS_INIT, SPEED_INSIGHTS_INIT } from './template.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(here, '..', 'public');
@@ -355,7 +355,9 @@ ${contents
 );
 
 /* ------------------------------------------------------------ headers */
-const bootHash = crypto.createHash('sha256').update(INLINE_BOOT).digest('base64');
+const inlineScriptHashes = [INLINE_BOOT, ANALYTICS_INIT, SPEED_INSIGHTS_INIT]
+  .map((source) => `'sha256-${crypto.createHash('sha256').update(source).digest('base64')}'`)
+  .join(' ');
 const csp = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -366,7 +368,7 @@ const csp = [
   "style-src 'self'",
   "font-src 'self'",
   "connect-src 'self'",
-  `script-src 'self' 'sha256-${bootHash}'`,
+  `script-src 'self' ${inlineScriptHashes}`,
   'upgrade-insecure-requests',
 ].join('; ');
 
