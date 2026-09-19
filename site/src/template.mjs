@@ -933,6 +933,15 @@ function contactSection({ c, links, assets }) {
 }
 
 /* ---------------------------------------------------------------- pages */
+/* Vercel Web Analytics. Vercel serves this from our own origin, which is why
+   it needs no CDN entry in the CSP: script-src 'self' already covers it, and
+   the beacon it posts to /_vercel/insights/view is covered by connect-src
+   'self'. The npm package is deliberately not used — this project has no
+   install or build step (see vercel.json), so a bundled dependency would
+   never reach the browser. It counts page views without cookies and without
+   identifying anyone, which is what the privacy policy now says. */
+const ANALYTICS = '<script defer src="/_vercel/insights/script.js"></script>';
+
 export const INLINE_BOOT = "document.documentElement.className=document.documentElement.className.replace('no-js','js');";
 
 export function renderPage(options) {
@@ -942,6 +951,7 @@ export function renderPage(options) {
   <head>
 ${head(options)}
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -993,6 +1003,7 @@ export function renderNotFound({ contents, site, ogImage }) {
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <main class="error-page">
@@ -1037,6 +1048,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <main class="gate">
@@ -1073,6 +1085,7 @@ export function renderSent({ c, site, ogImage, links, path }) {
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <main class="error-page">
@@ -1135,6 +1148,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1173,6 +1187,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1211,6 +1226,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1249,6 +1265,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
@@ -1288,6 +1305,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>
+    ${ANALYTICS}
   </head>
   <body>
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>

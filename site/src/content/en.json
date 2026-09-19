@@ -485,14 +485,14 @@
       "title": "Privacy Policy | Global Beyond LLC",
       "metaDescription": "How Global Beyond LLC collects, uses, and protects the information submitted through this website.",
       "heading": "Privacy Policy",
-      "updated": "Last updated: September 2, 2026",
+      "updated": "Last updated: September 19, 2026",
       "intro": "This page explains what information Global Beyond LLC (“we,” “us”) collects through globalbeyondllc.com, why, and what you can do about it. We wrote it to match exactly what this website does — nothing more.",
       "sections": [
         {
           "h": "Information we collect",
           "p": [
-            "The only information we collect is what you choose to give us: your name, and an email address and/or phone number, and the message you write, when you submit the contact form on this site.",
-            "This site does not use cookies, does not run analytics or advertising trackers, and does not build a profile of visitors. The one thing your browser stores locally is a small technical flag that remembers you already chose a language, so you are not redirected twice in the same visit; it contains no personal information and is not sent to us."
+            "The only personal information we collect is what you choose to give us: your name, and an email address and/or phone number, and the message you write, when you submit the contact form on this site.",
+            "This site does not use cookies, does not run advertising trackers, and does not build a profile of visitors. To see which pages get visited most, we use an aggregate measurement from Vercel that counts visits without cookies, without identifying you, and without following you to other sites. The one thing your browser stores locally is a small technical flag that remembers you already chose a language, so you are not redirected twice in the same visit; it contains no personal information and is not sent to us."
           ]
         },
         {
@@ -504,7 +504,8 @@
         {
           "h": "Who else sees it",
           "p": [
-            "Submitting the form sends your message to us by email through Resend, the service that delivers it to our inbox. Resend processes the message only to deliver it and does not use it for its own purposes. We do not share your information with any other third party.",
+            "Submitting the form sends your message to us by email through Resend, the service that delivers it to our inbox. Resend processes the message only to deliver it and does not use it for its own purposes.",
+            "The site is hosted on Vercel, which also provides the aggregate visit measurement described above. Vercel sees requests for each page, as any web server does, and that measurement stays separate from whatever you write in the form. Beyond Resend and Vercel, we do not share your information with any other third party.",
             "If you write to us on WhatsApp or Instagram instead of the form, that conversation is subject to WhatsApp's and Instagram's own privacy practices, not this one — those are Meta products and we do not control how they handle data on their platforms."
           ]
         },
