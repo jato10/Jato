@@ -7,5 +7,8 @@
   "scripts": {
     "build": "node src/build.mjs",
     "serve": "node --run build && python3 -m http.server 8080 --directory public"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }
