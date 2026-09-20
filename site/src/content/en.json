@@ -113,7 +113,8 @@
             "name": "ROUND LAB — 1025 Dokdo Skin Care Basic Set",
             "description": "An essential three-step Korean routine: cleanser, toner, and lotion, formulated with deep sea water from Dokdo Island for gentle, calming hydration — great for sensitive skin.",
             "price": "$61.74",
-            "image": "roundlab-skincare"
+            "image": "roundlab-skincare",
+            "soldOut": true
           },
           {
             "name": "Healena — Medical Grade Scar Treatment Patch",
@@ -156,13 +157,15 @@
             "name": "Samsung Neo QLED 50\" QN90D — 4K Smart TV",
             "description": "A 50-inch TV with Mini LED technology, 4K resolution, HDR, and Dolby Atmos sound.",
             "price": "$1,614.99",
-            "image": "samsung-tv-50"
+            "image": "samsung-tv-50",
+            "soldOut": true
           },
           {
             "name": "Samsung OLED 65\" S90D — 4K Smart TV",
             "description": "A 65-inch OLED TV with 4K resolution, perfect blacks, and Dolby Atmos sound — great for a home theater setup.",
             "price": "$1,234.99",
-            "image": "samsung-tv-65"
+            "image": "samsung-tv-65",
+            "soldOut": true
           }
         ]
       },
@@ -206,7 +209,11 @@
       "orderMessageTemplate": "I'd like to order: {product} — {price}.",
       "notesLabel": "Order notes",
       "submit": "Send order",
-      "sending": "Sending…"
+      "sending": "Sending…",
+      "soldOutBadge": "Sold out",
+      "soldOutMessage": "This one's sold out for now — message us and we'll let you know the moment it's back.",
+      "notifyCta": "Ask to be notified",
+      "notifyMessageTemplate": "Hi, please let me know when {product} is back in stock."
     }
   },
   "reviews": {
