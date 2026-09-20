@@ -131,7 +131,7 @@
           {
             "name": "PlayStation 5 — Standard disc console",
             "description": "Sony's flagship console, ready for the most demanding titles in 4K. Includes a DualSense controller.",
-            "price": "$522.49",
+            "price": "$549.99",
             "image": "ps5-console"
           },
           {
@@ -179,7 +179,7 @@
           {
             "name": "Ninja Air Fryer Pro XL",
             "description": "A 6.5-quart air fryer with MaxCrisp technology: air fry, roast, bake, reheat, and dehydrate in one appliance.",
-            "price": "$142.49",
+            "price": "$179.99",
             "image": "ninja-air-fryer"
           }
         ]
