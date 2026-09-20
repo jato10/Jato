@@ -137,19 +137,19 @@
           {
             "name": "Xbox Series X — Consola de 1TB",
             "description": "La consola más potente de la familia Xbox, con 1TB de almacenamiento y compatibilidad con miles de títulos. Incluye un control inalámbrico.",
-            "price": "$759.99",
+            "price": "$799.99",
             "image": "xbox-series-x"
           },
           {
             "name": "Control inalámbrico DualSense (PS5)",
             "description": "Control inalámbrico oficial para PS5, con retroalimentación háptica y gatillos adaptativos.",
-            "price": "$71.24",
+            "price": "$74.99",
             "image": "dualsense-controller"
           },
           {
             "name": "Control inalámbrico Xbox",
             "description": "Control inalámbrico oficial para Xbox Series X|S y PC, con diseño ergonómico y conexión Bluetooth.",
-            "price": "$61.74",
+            "price": "$69.99",
             "image": "xbox-controller"
           },
           {
@@ -173,7 +173,7 @@
           {
             "name": "Batidora KitchenAid Artisan de 5 cuartos",
             "description": "Batidora de pie con cabezal inclinable, tazón de acero inoxidable de 5 cuartos y motor de 10 velocidades. Incluye gancho para masa, batidor plano y globo.",
-            "price": "$408.49",
+            "price": "$489.00",
             "image": "kitchenaid-mixer"
           },
           {
