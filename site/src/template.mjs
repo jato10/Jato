@@ -377,8 +377,12 @@ function productHref(site, c, product) {
 
 function productCard(site, c, product) {
   const note = product.priceNote ? `<p class="product-card__note">${esc(product.priceNote)}</p>` : '';
+  const badge = product.soldOut
+    ? `<span class="product-card__badge">${esc(c.catalog.productPage.soldOutBadge)}</span>`
+    : '';
   return `<a class="product-card" href="${esc(productHref(site, c, product))}">
             <span class="product-card__media">
+              ${badge}
               <img src="${assetVersion(`assets/img/catalog/${product.image}.webp`)}" alt="${esc(product.name)}"
                 width="600" height="600" loading="lazy" decoding="async">
             </span>
@@ -560,9 +564,30 @@ function productOrderForm({ c, site, product }) {
 
 /* The order form sits collapsed inside the buy box rather than sprawling
    across the page below it — the price and payment options read at a glance,
-   and the fields only appear once the visitor commits to ordering. */
-function productDetailBody({ c, site, product, categoryLabel }) {
+   and the fields only appear once the visitor commits to ordering.
+
+   A sold-out product gets the badge, the sold-out message, and a WhatsApp
+   link pre-filled to ask about restocking, in place of the order form — never
+   a form that would only bounce back once someone tried to place it. */
+function productDetailBody({ c, site, links, product, categoryLabel }) {
   const pp = c.catalog.productPage;
+  const soldOutBadge = product.soldOut
+    ? `<span class="product-card__badge product-detail__badge">${esc(pp.soldOutBadge)}</span>`
+    : '';
+  const notifyHref = product.soldOut
+    ? links.request(pp.notifyMessageTemplate.replace('{product}', product.name))
+    : null;
+  const buyBoxBody = product.soldOut
+    ? `<p class="buy-box__note buy-box__sold-out">${esc(pp.soldOutMessage)}</p>
+                <a class="btn btn--primary buy-box__cta" href="${esc(notifyHref)}"${externalAttrs(links, notifyHref)}>${esc(pp.notifyCta)}</a>`
+    : `<details class="buy-box__order">
+                  <summary class="btn btn--primary buy-box__cta">${esc(pp.orderCta)}</summary>
+                  <div class="buy-box__form">
+                    <p class="buy-box__lede">${esc(pp.formLede)}</p>
+                    ${productOrderForm({ c, site, product })}
+                  </div>
+                </details>
+                <p class="buy-box__note">${esc(pp.reassure)}</p>`;
   return `<section class="section section--dark">
         <div class="shell">
           <div class="btn-row product-detail__back" data-reveal>
@@ -570,6 +595,7 @@ function productDetailBody({ c, site, product, categoryLabel }) {
           </div>
           <div class="product-detail" data-reveal data-delay="1">
             <figure class="product-detail__figure">
+              ${soldOutBadge}
               <img src="${assetVersion(`assets/img/catalog/${product.image}.webp`)}" alt="${esc(product.name)}"
                 width="900" height="900" decoding="async">
             </figure>
@@ -583,14 +609,7 @@ function productDetailBody({ c, site, product, categoryLabel }) {
                   <span class="product-detail__price-value">${esc(product.price)}</span>
                 </p>
                 ${product.priceNote ? `<p class="buy-box__note">${esc(product.priceNote)}</p>` : ''}
-                <details class="buy-box__order">
-                  <summary class="btn btn--primary buy-box__cta">${esc(pp.orderCta)}</summary>
-                  <div class="buy-box__form">
-                    <p class="buy-box__lede">${esc(pp.formLede)}</p>
-                    ${productOrderForm({ c, site, product })}
-                  </div>
-                </details>
-                <p class="buy-box__note">${esc(pp.reassure)}</p>
+                ${buyBoxBody}
               </div>
             </div>
           </div>
@@ -1319,7 +1338,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
     ${siteHeader({ c, site, assets, langHrefs })}
     <main id="main">
-      ${productDetailBody({ c, site, product, categoryLabel })}
+      ${productDetailBody({ c, site, links, product, categoryLabel })}
     </main>
     ${siteFooter({ c, site, assets, links, langHrefs })}
     <script src="${assetVersion('assets/js/main.js')}" defer></script>

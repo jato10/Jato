@@ -863,11 +863,27 @@ a, button, input, textarea, select {
   box-shadow: 0 16px 32px rgba(12, 20, 32, 0.08);
 }
 .product-card__media {
+  position: relative;
   display: block;
   aspect-ratio: 1 / 1;
   background: var(--paper-200);
 }
 .product-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.product-card__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--ink-900);
+  color: var(--on-dark);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+.product-detail__badge { top: 16px; left: 16px; }
 .product-card__body { display: flex; flex-direction: column; gap: 8px; padding: clamp(18px, 2.2vw, 22px); }
 .product-card__name { font-size: var(--fs-body); font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
 .product-card__desc { font-size: var(--fs-detail); line-height: 1.55; color: var(--on-light-muted); }
@@ -889,6 +905,7 @@ a, button, input, textarea, select {
 /* The photos come on white, so the frame stays light against the dark page
    instead of boxing a white square inside a dark card. */
 .product-detail__figure {
+  position: relative;
   margin: 0;
   border-radius: var(--radius-lg);
   overflow: hidden;

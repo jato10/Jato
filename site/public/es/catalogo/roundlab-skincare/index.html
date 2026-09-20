@@ -21,7 +21,7 @@
     <meta property="og:url" content="https://globalbeyondllc.com/es/catalogo/roundlab-skincare/">
     <meta property="og:image" content="https://globalbeyondllc.com/assets/img/catalog/roundlab-skincare.webp?v=b1463068">
     <link rel="preload" href="/assets/fonts/geist-variable.woff2?v=a369fcf5" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/styles.css?v=b58427b9">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=142abe74">
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
@@ -68,6 +68,7 @@
           </div>
           <div class="product-detail" data-reveal data-delay="1">
             <figure class="product-detail__figure">
+              <span class="product-card__badge product-detail__badge">Agotado</span>
               <img src="/assets/img/catalog/roundlab-skincare.webp?v=b1463068" alt="ROUND LAB — 1025 Dokdo Skin Care Basic Set"
                 width="900" height="900" decoding="async">
             </figure>
@@ -81,94 +82,8 @@
                   <span class="product-detail__price-value">$61.74</span>
                 </p>
                 
-                <details class="buy-box__order">
-                  <summary class="btn btn--primary buy-box__cta">Hacer el pedido</summary>
-                  <div class="buy-box__form">
-                    <p class="buy-box__lede">Déjanos tus datos y te respondemos con los detalles finales de tu pedido.</p>
-                    <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
-              <input type="hidden" name="lang" value="es">
-              <p class="form__trap" aria-hidden="true">
-                <label>Tu nombre<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
-              </p>
-              <div class="form__row">
-                <div class="field">
-                  <label class="field__label" for="pf-name">Tu nombre</label>
-                  <input class="field__input" id="pf-name" name="name" type="text" required
-                    maxlength="120" autocomplete="name" placeholder="Nombre y empresa, si la tienes…"
-                    aria-describedby="pf-name-error">
-                  <p class="field__error" id="pf-name-error" data-message="Agrega tu nombre."></p>
-                </div>
-              </div>
-              <div class="form__row form__row--split">
-                <div class="field">
-                  <label class="field__label" for="pf-email">Correo</label>
-                  <input class="field__input" id="pf-email" name="email" type="email" spellcheck="false"
-                    maxlength="200" autocomplete="email" placeholder="tu@ejemplo.com"
-                    aria-describedby="pf-contact-hint pf-contact-error">
-                </div>
-                <div class="field">
-                  <label class="field__label" for="pf-phone">Teléfono o WhatsApp <span class="field__hint">opcional</span></label>
-                  <input class="field__input" id="pf-phone" name="phone" type="tel"
-                    maxlength="60" autocomplete="tel" placeholder="Opcional si dejas un correo…"
-                    aria-describedby="pf-contact-hint pf-contact-error">
-                </div>
-              </div>
-              <p class="field__note" id="pf-contact-hint">Déjanos al menos uno de los dos, para saber por dónde responderte.</p>
-              <p class="field__error" id="pf-contact-error" data-message="Agrega un correo o teléfono."></p>
-              <div class="form__row">
-                <div class="field">
-                  <label class="field__label" for="pf-address">Dirección de envío <span class="field__hint">opcional</span></label>
-                  <input class="field__input" id="pf-address" name="address" type="text"
-                    maxlength="300" autocomplete="street-address" placeholder="Calle, número, ciudad, estado, código postal">
-                </div>
-              </div>
-              <div class="form__row">
-                <fieldset class="field">
-                  <legend class="field__label">Método de pago preferido</legend>
-                  <div class="payment-options">
-                    <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="PayPal" checked>
-                <span>PayPal</span>
-              </label>
-              <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="Zelle">
-                <span>Zelle</span>
-              </label>
-              <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="Transferencia bancaria">
-                <span>Transferencia bancaria</span>
-              </label>
-              <label class="payment-option">
-                <input type="radio" name="paymentMethod" value="Efectivo al recibir">
-                <span>Efectivo al recibir</span>
-              </label>
-                  </div>
-                  <p class="payment-links">
-                    <a href="https://www.paypal.me/globalbeyondllc" target="_blank" rel="noopener noreferrer">Pagar con PayPal</a>
-                    <span class="payment-links__sep" aria-hidden="true">·</span>
-                    <span>Zelle: <a href="mailto:pagos@globalbeyondllc.com">pagos@globalbeyondllc.com</a></span>
-                  </p>
-                </fieldset>
-              </div>
-              <div class="form__row">
-                <div class="field">
-                  <label class="field__label" for="pf-message">Notas del pedido</label>
-                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="3"
-                    required maxlength="4000" aria-describedby="pf-message-error">Quiero pedir: ROUND LAB — 1025 Dokdo Skin Care Basic Set — $61.74.</textarea>
-                  <p class="field__error" id="pf-message-error" data-message="Agrega un mensaje."></p>
-                </div>
-              </div>
-              <div class="form__foot">
-                <button class="btn btn--primary" type="submit" data-submit
-                  data-idle="Enviar pedido" data-busy="Enviando…">Enviar pedido</button>
-                <p class="form__privacy">Usamos lo que nos envías únicamente para responder tu solicitud. Consulta nuestra <a href="/es/privacy/">Política de Privacidad</a>.</p>
-              </div>
-              <p class="form__status" data-form-status role="status" aria-live="polite"
-                data-success="Mensaje enviado. Te responderemos a los datos que dejaste." data-error="Escríbenos directo por WhatsApp para una respuesta más rápida." data-invalid="Falta tu nombre, una forma de contactarte o el mensaje."></p>
-            </form>
-                  </div>
-                </details>
-                <p class="buy-box__note">Confirmamos disponibilidad, envío y forma de pago por escrito. El cobro se coordina contigo después.</p>
+                <p class="buy-box__note buy-box__sold-out">Este está agotado por ahora — escríbenos y te avisamos apenas vuelva.</p>
+                <a class="btn btn--primary buy-box__cta" href="https://wa.me/17863344556?text=Hola%2C%20av%C3%ADsenme%20por%20favor%20cuando%20vuelva%20a%20haber%3A%20ROUND%20LAB%20%E2%80%94%201025%20Dokdo%20Skin%20Care%20Basic%20Set." target="_blank" rel="noopener noreferrer">Pedir que me avisen</a>
               </div>
             </div>
           </div>
