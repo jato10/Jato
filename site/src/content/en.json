@@ -137,19 +137,19 @@
           {
             "name": "Xbox Series X — 1TB console",
             "description": "The most powerful console in the Xbox family, with 1TB of storage and compatibility with thousands of titles. Includes a wireless controller.",
-            "price": "$759.99",
+            "price": "$799.99",
             "image": "xbox-series-x"
           },
           {
             "name": "DualSense Wireless Controller (PS5)",
             "description": "Official wireless controller for PS5, with haptic feedback and adaptive triggers.",
-            "price": "$71.24",
+            "price": "$74.99",
             "image": "dualsense-controller"
           },
           {
             "name": "Xbox Wireless Controller",
             "description": "Official wireless controller for Xbox Series X|S and PC, with an ergonomic design and Bluetooth connectivity.",
-            "price": "$61.74",
+            "price": "$69.99",
             "image": "xbox-controller"
           },
           {
@@ -173,7 +173,7 @@
           {
             "name": "KitchenAid Artisan 5-Quart Stand Mixer",
             "description": "Tilt-head stand mixer with a 5-quart stainless steel bowl and a 10-speed motor. Includes a dough hook, flat beater, and wire whip.",
-            "price": "$408.49",
+            "price": "$489.00",
             "image": "kitchenaid-mixer"
           },
           {
