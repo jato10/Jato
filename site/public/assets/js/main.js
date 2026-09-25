@@ -256,16 +256,26 @@
       var phone = val(phoneEl);
       var body = val(bodyEl);
       var contactMissing = !!contactError && !email && !phone;
+      /* Same rule /api/contact applies, so a typo like "name@gmail" is caught
+         here with its own message instead of bouncing off the server. */
+      var emailBad = !!email && !/^[^\s@<>;,"]+@[^\s@<>;,"]+\.[^\s@<>;,"]+$/.test(email);
 
       flag(ratingGroup, ratingMissing, errorFor(ratingGroup));
       flag(nameEl, !name, errorFor(nameEl));
       flag(bodyEl, !body, errorFor(bodyEl));
       if (contactError) {
-        flag(emailEl, contactMissing, contactError);
+        flag(emailEl, contactMissing || emailBad, contactError);
         flag(phoneEl, contactMissing, contactError);
+        if (emailBad && !contactMissing) {
+          contactError.textContent = contactError.getAttribute('data-message-email') || '';
+        }
+      } else if (emailEl) {
+        /* The review form's email is optional, but a malformed one is still
+           refused by the server, so it gets its own message here. */
+        flag(emailEl, emailBad, errorFor(emailEl));
       }
 
-      if (ratingMissing || !name || !body || contactMissing) {
+      if (ratingMissing || !name || !body || contactMissing || emailBad) {
         event.preventDefault();
         say('invalid');
         var firstInvalid = form.querySelector('[aria-invalid="true"]');

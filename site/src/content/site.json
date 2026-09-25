@@ -43,5 +43,18 @@
   "payments": {
     "paypal": "https://www.paypal.me/globalbeyondllc",
     "zelle": "pagos@globalbeyondllc.com"
+  },
+  "phone": "+1-786-334-4556",
+  "productBrands": {
+    "roundlab-skincare": "ROUND LAB",
+    "healena": "Healena",
+    "ps5-console": "Sony",
+    "xbox-series-x": "Microsoft",
+    "dualsense-controller": "Sony",
+    "xbox-controller": "Microsoft",
+    "samsung-tv-50": "Samsung",
+    "samsung-tv-65": "Samsung",
+    "kitchenaid-mixer": "KitchenAid",
+    "ninja-air-fryer": "Ninja"
   }
 }

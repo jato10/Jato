@@ -212,7 +212,7 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
   const navLinks = c.nav
     .map((item) => `<li><a href="${assets}${c.lang}/#${item.id}">${esc(item.label)}</a></li>`)
     .concat([
-      `<li><a href="${esc(site.catalogPath[c.lang])}">${esc(c.catalog.categoriesCta)}</a></li>`,
+      `<li><a href="${esc(site.catalogPath[c.lang])}">${esc(c.cta.catalog)}</a></li>`,
       `<li><a href="${esc(site.reviewsPath[c.lang])}">${esc(c.reviews.viewCta)}</a></li>`,
     ])
     .join('\n            ');
@@ -286,23 +286,65 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
     </footer>`;
 }
 
+/* Spam trap shared by every form. Bots fill it; people never see it. Its label
+   must never read like a real field: labelled "Your name", browser autofill
+   could put the visitor's own name here, and /api/contact would then drop a
+   genuine message as spam while telling them it was sent. */
+const honeypot = (c) => `<div class="form__trap" aria-hidden="true">
+                <label>${esc(c.contact.form.trapLabel)}<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+              </div>`;
+
 /* ------------------------------------------------------------- sections */
-function heroSection({ c }) {
+/* Featured products are named by image slug in the content (language
+   independent) and resolved here, so a price edited in the catalog shows up
+   in the hero with no second copy to keep in sync. Sold-out items are skipped. */
+function featuredProducts(c, slugs) {
+  const all = c.catalog.categories.flatMap((cat) => cat.products);
+  return slugs
+    .map((slug) => all.find((p) => p.image === slug))
+    .filter((p) => p && !p.soldOut);
+}
+
+function heroSection({ c, site, links }) {
+  const catalogHref = site.catalogPath[c.lang];
+  const waHref = links.whatsapp(c.hero.whatsappMessage);
+  const picks = featuredProducts(c, c.hero.featured)
+    .map(
+      (p) => `<li><a class="hero-pick" href="${esc(productHref(site, c, p))}">
+                <img src="${assetVersion(`assets/img/catalog/thumb/${p.image}.webp`)}" alt="" width="320" height="320"
+                  loading="lazy" decoding="async">
+                <span class="hero-pick__name">${esc(p.name.split(' — ')[0])}</span>
+                <span class="hero-pick__price">${esc(p.price)}</span>
+              </a></li>`
+    )
+    .join('\n              ');
+  /* The big logo only earns its space on wider screens: below 768px it would
+     push the headline and the catalog button out of the first screen. The
+     <picture> source swaps in a 1px transparent image there, so phones skip
+     the download instead of fetching a logo CSS would then hide. */
   return `<section class="hero" aria-labelledby="hero-title">
         <div class="hero__bg" aria-hidden="true"></div>
         <div class="hero__glow" aria-hidden="true"></div>
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="shell hero__inner">
-          <img class="hero__logo is-visible-instant" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
-            srcset="${assetVersion('assets/img/logo-540.webp')} 540w, ${assetVersion('assets/img/logo.webp')} 900w"
-            sizes="(min-width: 581px) 430px, 74vw"
-            alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async" data-reveal>
+          <picture class="hero__logo-wrap">
+            <source media="(max-width: 767px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+            <img class="hero__logo is-visible-instant" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
+              srcset="${assetVersion('assets/img/logo-540.webp')} 540w, ${assetVersion('assets/img/logo.webp')} 900w"
+              sizes="(min-width: 581px) 430px, 74vw"
+              alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async" data-reveal>
+          </picture>
           <p class="eyebrow hero__eyebrow is-visible-instant" data-reveal>${esc(c.hero.eyebrow)}</p>
-          <h1 class="h-display is-visible-instant" id="hero-title" data-reveal>${c.hero.title}</h1>
+          <h1 class="h-display is-visible-instant" id="hero-title" data-reveal>${esc(c.hero.headline)}</h1>
+          <p class="hero__tagline is-visible-instant" data-reveal>${esc(c.hero.titlePlain)}</p>
           <p class="lede is-visible-instant" data-reveal>${esc(c.hero.lede)}</p>
           <div class="btn-row hero__actions is-visible-instant" data-reveal>
-            <a class="btn btn--primary" href="#contact">${esc(c.hero.ctaSecondary)}${ARROW_ICON}</a>
+            <a class="btn btn--primary" href="${esc(catalogHref)}">${esc(c.cta.catalog)}${ARROW_ICON}</a>
+            ${waHref ? `<a class="btn btn--ghost" href="${esc(waHref)}"${externalAttrs(links, waHref)}>${esc(c.cta.whatsapp)}</a>` : ''}
           </div>
+          <ul class="hero-picks is-visible-instant" data-reveal aria-label="${esc(c.hero.featuredLabel)}">
+              ${picks}
+          </ul>
           <p class="hero__note is-visible-instant" data-reveal>${esc(c.hero.note)}</p>
         </div>
         <span class="hero__scroll" aria-hidden="true"></span>
@@ -332,11 +374,11 @@ function servicesSection({ c, links }) {
                 <a class="btn btn--ghost" href="${esc(href)}"${externalAttrs(links, href)}>${esc(item.cta)}${ARROW_ICON}</a>
               </div>`
         : '';
-      return `<article class="tabs__panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="services-panel-${i}"
+      return `<div class="tabs__panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="services-panel-${i}"
               aria-labelledby="services-tab-${i}" data-panel="${i}" data-reveal data-delay="${i}">
               <h3 class="h-card">${esc(item.title)}</h3>
               <p>${esc(item.body)}</p>${cta}
-            </article>`;
+            </div>`;
     })
     .join('\n            ');
 
@@ -401,15 +443,18 @@ function productCategories(site, c) {
       (cat) => `<div class="product-category" data-reveal>
             <p class="product-category__label">${esc(cat.label)}</p>
             <div class="product-grid">
-              ${cat.products.map((p) => productCard(site, c, p)).join('\n              ')}
+              ${[...cat.products]
+                .sort((a, b) => Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)))
+                .map((p) => productCard(site, c, p))
+                .join('\n              ')}
             </div>
           </div>`
     )
     .join('\n          ');
 }
 
-function reviewCards(c) {
-  return c.reviews.items
+function reviewCards(c, items = c.reviews.items) {
+  return items
     .map(
       (r, i) => `<article class="review-card" data-reveal data-delay="${i % 3}">
             <div class="review-card__stars" role="img" aria-label="${r.rating}/5">${starRating(r.rating)}</div>
@@ -432,7 +477,7 @@ function catalogSection({ c, site, assets }) {
               ${c.catalog.points.map((p) => `<li>${esc(p)}</li>`).join('\n              ')}
             </ul>
             <div class="btn-row">
-              <a class="btn btn--primary" href="${esc(catalogHref)}">${esc(c.catalog.categoriesCta)}${ARROW_ICON}</a>
+              <a class="btn btn--primary" href="${esc(catalogHref)}">${esc(c.cta.catalog)}${ARROW_ICON}</a>
             </div>
           </div>
           <figure class="catalog__figure catalog__figure--sticky" data-reveal data-delay="1">
@@ -444,8 +489,12 @@ function catalogSection({ c, site, assets }) {
       </section>`;
 }
 
+/* Three of the reviews already on the reviews page, picked by index in the
+   content (both languages list them in the same order). Nothing here is
+   written for the homepage; the full list stays one click away. */
 function reviewsTeaserSection({ c, site }) {
   const viewHref = site.reviewsPath[c.lang];
+  const featured = c.reviews.featured.map((i) => c.reviews.items[i]).filter(Boolean);
   return `<section class="section section--dark" id="reviews" aria-labelledby="reviews-title">
         <div class="shell">
           <div class="section-head" data-reveal>
@@ -453,9 +502,12 @@ function reviewsTeaserSection({ c, site }) {
             <h2 class="h-section" id="reviews-title">${esc(c.reviews.title)}</h2>
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
+          <div class="reviews-grid">
+            ${reviewCards(c, featured)}
+          </div>
           <div class="btn-row" data-reveal>
-            <a class="btn btn--primary" href="${esc(site.leaveReviewPath[c.lang])}">${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
-            <a class="btn btn--ghost" href="${esc(viewHref)}">${esc(c.reviews.viewCta)}</a>
+            <a class="btn btn--ghost" href="${esc(viewHref)}">${esc(c.reviews.viewCta)}${ARROW_ICON}</a>
+            <a class="btn btn--ghost" href="${esc(site.leaveReviewPath[c.lang])}">${esc(c.reviews.leaveCta)}</a>
           </div>
         </div>
       </section>`;
@@ -496,9 +548,7 @@ function productOrderForm({ c, site, product }) {
 
   return `<form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="${c.lang}">
-              <p class="form__trap" aria-hidden="true">
-                <label>${esc(f.name)}<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
-              </p>
+              ${honeypot(c)}
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="pf-name">${esc(f.name)}</label>
@@ -516,14 +566,15 @@ function productOrderForm({ c, site, product }) {
                     aria-describedby="pf-contact-hint pf-contact-error">
                 </div>
                 <div class="field">
-                  <label class="field__label" for="pf-phone">${esc(f.phone)} <span class="field__hint">${esc(f.optional)}</span></label>
+                  <label class="field__label" for="pf-phone">${esc(f.phone)}</label>
                   <input class="field__input" id="pf-phone" name="phone" type="tel"
                     maxlength="60" autocomplete="tel" placeholder="${esc(f.phonePlaceholder)}"
                     aria-describedby="pf-contact-hint pf-contact-error">
                 </div>
               </div>
               <p class="field__note" id="pf-contact-hint">${esc(f.contactHint)}</p>
-              <p class="field__error" id="pf-contact-error" data-message="${esc(f.errorContact)}"></p>
+              <p class="field__error" id="pf-contact-error" data-message="${esc(f.errorContact)}"
+                data-message-email="${esc(f.errorEmail)}"></p>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="pf-address">${esc(pp.addressLabel)} <span class="field__hint">${esc(pp.addressOptional)}</span></label>
@@ -641,9 +692,7 @@ function reviewForm({ c }) {
   return `<form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="${c.lang}">
               <input type="hidden" name="message" value="${esc(rf.messagePrefix)}">
-              <p class="form__trap" aria-hidden="true">
-                <label>${esc(f.name)}<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
-              </p>
+              ${honeypot(c)}
               <div class="form__row">
                 <fieldset class="field rating-field" aria-describedby="rf-rating-error">
                   <legend class="field__label">${esc(rf.ratingLabel)}</legend>
@@ -664,7 +713,9 @@ function reviewForm({ c }) {
                 <div class="field">
                   <label class="field__label" for="rf-email">${esc(f.email)} <span class="field__hint">${esc(f.optional)}</span></label>
                   <input class="field__input" id="rf-email" name="email" type="email" spellcheck="false"
-                    maxlength="200" autocomplete="email" placeholder="${esc(f.emailPlaceholder)}">
+                    maxlength="200" autocomplete="email" placeholder="${esc(f.emailPlaceholder)}"
+                    aria-describedby="rf-email-error">
+                  <p class="field__error" id="rf-email-error" data-message="${esc(f.errorEmail)}"></p>
                 </div>
               </div>
               <div class="form__row">
@@ -817,35 +868,34 @@ function aboutSection({ c, assets }) {
               ${commitments}
             </ul>
             ${tagline}
+            ${purposeBlock({ c })}
           </div>
         </div>
       </section>`;
 }
 
-function purposeSection({ c }) {
-  /* <dl> rather than a card grid: the three statements differ a lot in
-     length, and term/description keeps the label bound to its statement
-     for screen readers without inventing headings for them. */
+/* Mission, vision and purpose live inside About now, collapsed: they explain
+   who the company is, which is About's job, and as a full section of their own
+   they pushed the contact form further down the homepage. <details> keeps it
+   zero-JS; id="purpose" keeps old #purpose links landing in the right place. */
+function purposeBlock({ c }) {
   const pillars = c.purpose.pillars
     .map(
-      (item, i) => `<div class="pillars__item" data-reveal data-delay="${i}">
-              <dt class="pillars__label">${esc(item.label)}</dt>
-              <dd class="pillars__text${item.lead ? ' pillars__text--lead' : ''}">${esc(item.body)}</dd>
-            </div>`
+      (item) => `<div class="pillars__item">
+                  <dt class="pillars__label">${esc(item.label)}</dt>
+                  <dd class="pillars__text">${esc(item.body)}</dd>
+                </div>`
     )
-    .join('\n            ');
-
-  return `<section class="section section--light-alt" id="purpose" aria-labelledby="purpose-title">
-        <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.purpose.eyebrow)}</p>
-            <h2 class="h-section" id="purpose-title">${esc(c.purpose.title)}</h2>
-          </div>
-          <dl class="pillars">
-            ${pillars}
-          </dl>
-        </div>
-      </section>`;
+    .join('\n                ');
+  return `<details class="about__purpose" id="purpose">
+              <summary class="about__purpose-summary">
+                <span>${esc(c.purpose.title)}</span>
+                <span class="accordion__icon" aria-hidden="true"></span>
+              </summary>
+              <dl class="pillars pillars--compact">
+                ${pillars}
+              </dl>
+            </details>`;
 }
 
 function contactSection({ c, links, assets }) {
@@ -871,9 +921,7 @@ function contactSection({ c, links, assets }) {
      main.js upgrades it to an inline submit when JavaScript is available. */
   const form = `<form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="${c.lang}">
-              <p class="form__trap" aria-hidden="true">
-                <label>${esc(f.name)}<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
-              </p>
+              ${honeypot(c)}
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="cf-name">${esc(f.name)}</label>
@@ -891,14 +939,15 @@ function contactSection({ c, links, assets }) {
                     aria-describedby="cf-contact-hint cf-contact-error">
                 </div>
                 <div class="field">
-                  <label class="field__label" for="cf-phone">${esc(f.phone)} <span class="field__hint">${esc(f.optional)}</span></label>
+                  <label class="field__label" for="cf-phone">${esc(f.phone)}</label>
                   <input class="field__input" id="cf-phone" name="phone" type="tel"
                     maxlength="60" autocomplete="tel" placeholder="${esc(f.phonePlaceholder)}"
                     aria-describedby="cf-contact-hint cf-contact-error">
                 </div>
               </div>
               <p class="field__note" id="cf-contact-hint">${esc(f.contactHint)}</p>
-              <p class="field__error" id="cf-contact-error" data-message="${esc(f.errorContact)}"></p>
+              <p class="field__error" id="cf-contact-error" data-message="${esc(f.errorContact)}"
+                data-message-email="${esc(f.errorEmail)}"></p>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="cf-message">${esc(f.message)}</label>
@@ -984,13 +1033,12 @@ ${head(options)}
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
     ${siteHeader(options)}
     <main id="main">
-      ${heroSection({ c })}
+      ${heroSection({ c, site, links })}
       ${servicesSection({ c, links })}
       ${catalogSection({ c, site, assets })}
       ${reviewsTeaserSection({ c, site })}
       ${wholesaleSection({ c, links })}
       ${aboutSection({ c, assets })}
-      ${purposeSection({ c })}
       ${contactSection({ c, links, assets })}
     </main>
     ${siteFooter({ ...options })}
@@ -1307,7 +1355,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
 `;
 }
 
-export function renderProductPage({ c, site, assets, links, alternates, langHrefs, canonical, ogImage, product, categoryLabel }) {
+export function renderProductPage({ c, site, assets, links, alternates, langHrefs, canonical, ogImage, jsonLd, product, categoryLabel }) {
   const title = `${product.name} — ${c.brand.name}`;
   return `<!doctype html>
 <html lang="${c.lang}" dir="${c.dir}" class="no-js">
@@ -1329,6 +1377,7 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <meta property="og:description" content="${esc(product.description)}">
     <meta property="og:url" content="${esc(canonical)}">
     <meta property="og:image" content="${esc(site.origin.replace(/\/$/, ''))}${assetVersion(`assets/img/catalog/${product.image}.webp`)}">
+    <script type="application/ld+json">${jsonLd}</script>
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>

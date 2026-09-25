@@ -23,6 +23,7 @@ const LANGS = {
     errors: {
       method: 'Method not allowed.',
       missing: 'Please add your name, a way to reach you, and a message.',
+      email: 'Check the email address — it looks incomplete.',
       failed: 'The message could not be sent. Please try WhatsApp instead.',
     },
   },
@@ -33,6 +34,7 @@ const LANGS = {
     errors: {
       method: 'Método no permitido.',
       missing: 'Falta tu nombre, una forma de contactarte o el mensaje.',
+      email: 'Revisa el correo: parece incompleto.',
       failed: 'No se pudo enviar el mensaje. Escríbenos por WhatsApp.',
     },
   },
@@ -94,7 +96,7 @@ module.exports = async function handler(req, res) {
   const message = typeof body.message === 'string' ? body.message.trim().slice(0, LIMITS.message) : '';
 
   if (!name || !message || (!email && !phone)) return fail(400, copy.errors.missing);
-  if (email && !isEmail(email)) return fail(400, copy.errors.missing);
+  if (email && !isEmail(email)) return fail(400, copy.errors.email);
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO;

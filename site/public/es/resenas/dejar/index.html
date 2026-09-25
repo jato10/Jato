@@ -21,7 +21,7 @@
     <meta property="og:url" content="https://globalbeyondllc.com/es/resenas/dejar/">
     <meta property="og:image" content="https://globalbeyondllc.com/assets/img/og.png">
     <link rel="preload" href="/assets/fonts/geist-variable.woff2?v=a369fcf5" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/styles.css?v=142abe74">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=7b145ba1">
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
@@ -42,7 +42,6 @@
             <li><a class="nav__link" data-nav-link href="/es/#catalog">Catálogo</a></li>
             <li><a class="nav__link" data-nav-link href="/es/#wholesale">Al mayor</a></li>
             <li><a class="nav__link" data-nav-link href="/es/#about">Nosotros</a></li>
-            <li><a class="nav__link" data-nav-link href="/es/#purpose">Misión y visión</a></li>
             <li><a class="nav__link" data-nav-link href="/es/#contact">Contacto</a></li>
           </ul>
         </nav>
@@ -75,9 +74,9 @@
             <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="es">
               <input type="hidden" name="message" value="Nueva reseña">
-              <p class="form__trap" aria-hidden="true">
-                <label>Tu nombre<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
-              </p>
+              <div class="form__trap" aria-hidden="true">
+                <label>Deja este campo vacío<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+              </div>
               <div class="form__row">
                 <fieldset class="field rating-field" aria-describedby="rf-rating-error">
                   <legend class="field__label">Tu calificación</legend>
@@ -122,7 +121,9 @@
                 <div class="field">
                   <label class="field__label" for="rf-email">Correo <span class="field__hint">opcional</span></label>
                   <input class="field__input" id="rf-email" name="email" type="email" spellcheck="false"
-                    maxlength="200" autocomplete="email" placeholder="tu@ejemplo.com">
+                    maxlength="200" autocomplete="email" placeholder="tu@ejemplo.com"
+                    aria-describedby="rf-email-error">
+                  <p class="field__error" id="rf-email-error" data-message="Revisa el correo: parece incompleto."></p>
                 </div>
               </div>
               <div class="form__row">
@@ -162,9 +163,8 @@
             <li><a href="/es/#catalog">Catálogo</a></li>
             <li><a href="/es/#wholesale">Al mayor</a></li>
             <li><a href="/es/#about">Nosotros</a></li>
-            <li><a href="/es/#purpose">Misión y visión</a></li>
             <li><a href="/es/#contact">Contacto</a></li>
-            <li><a href="/es/catalogo/">Ver categorías y precios</a></li>
+            <li><a href="/es/catalogo/">Ver catálogo y precios</a></li>
             <li><a href="/es/resenas/">Ver reseñas de clientes</a></li>
             </ul>
           </div>
@@ -209,6 +209,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=a1f0cef3" defer></script>
+    <script src="/assets/js/main.js?v=673fec9e" defer></script>
   </body>
 </html>

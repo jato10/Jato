@@ -30,6 +30,7 @@ function jsonLdFor(c) {
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
+      telephone: site.phone,
       url: `${origin}/${c.lang}/#contact`,
       availableLanguage: ['en', 'es'],
     },
@@ -53,6 +54,7 @@ function jsonLdFor(c) {
       addressCountry: site.foundingLocation.country,
     },
     knowsLanguage: ['en', 'es'],
+    founder: c.about.people.map((p) => ({ '@type': 'Person', name: p.name })),
   };
   if (sameAs.length) organization.sameAs = sameAs;
   if (contactPoint.length) organization.contactPoint = contactPoint;
@@ -70,6 +72,45 @@ function jsonLdFor(c) {
   /* Escaped so a "</script>" ever appearing in the content can never close the
      script element early; JSON.stringify does not escape "<" on its own. */
   return JSON.stringify([organization, website]).replace(/</g, '\\u003c');
+}
+
+/* Product, Offer and BreadcrumbList for one product page. Everything comes
+   from what the page itself shows — name, photo, description, the displayed
+   price, and whether it is marked sold out — so the markup can never claim
+   something the visitor cannot see. No rating or review markup: the reviews
+   on this site are not collected by a third party. */
+function productJsonLd(c, product, canonical) {
+  const catalogUrl = `${origin}${site.catalogPath[c.lang]}`;
+  const navLabel = (id) => (c.nav.find((n) => n.id === id) || {}).label;
+  const productLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    '@id': `${canonical}#product`,
+    name: product.name,
+    image: `${origin}/assets/img/catalog/${product.image}.webp`,
+    description: product.description,
+    sku: product.image,
+    brand: { '@type': 'Brand', name: site.productBrands[product.image] },
+    offers: {
+      '@type': 'Offer',
+      url: canonical,
+      price: product.price.replace(/[^0-9.]/g, ''),
+      priceCurrency: 'USD',
+      availability: product.soldOut ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
+      seller: { '@id': `${origin}/#organization` },
+    },
+  };
+  const breadcrumbs = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: c.brand.name, item: `${origin}/${c.lang}/` },
+      { '@type': 'ListItem', position: 2, name: navLabel('catalog'), item: catalogUrl },
+      { '@type': 'ListItem', position: 3, name: product.name, item: canonical },
+    ],
+  };
+  return JSON.stringify([productLd, breadcrumbs]).replace(/</g, '\\u003c');
 }
 
 /* ------------------------------------------------------------- pages */
@@ -229,6 +270,7 @@ for (const c of contents) {
           langHrefs: Object.fromEntries(contents.map((cc) => [cc.lang, `${site.catalogPath[cc.lang]}${product.image}/`])),
           canonical: `${origin}${productPath}`,
           ogImage,
+          jsonLd: productJsonLd(c, product, `${origin}${productPath}`),
           product,
           categoryLabel: category.label,
         })
