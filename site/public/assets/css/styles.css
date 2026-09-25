@@ -561,6 +561,11 @@ a, button, input, textarea, select {
   pointer-events: none;
 }
 .hero__inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.hero__logo-wrap { display: contents; }
+/* Below 768px the logo gives its space to the headline and the catalog
+   button; the <picture> source already swapped in a 1px image, so nothing
+   is downloaded for it either. */
+@media (max-width: 767px) { .hero__logo-wrap { display: none; } }
 .hero__logo {
   width: min(430px, 74vw);
   margin-bottom: clamp(30px, 4.5vw, 52px);
@@ -572,7 +577,12 @@ a, button, input, textarea, select {
   margin-bottom: 26px;
 }
 .hero__eyebrow::before { display: none; }
+/* The headline now says what the business sells, which runs longer than the
+   old three-word slogan: it takes the title step instead of the display one. */
 .hero h1 {
+  font-size: var(--fs-title);
+  line-height: 1.08;
+  max-width: 22ch;
   background: var(--steel-text);
   -webkit-background-clip: text;
   background-clip: text;
@@ -580,7 +590,62 @@ a, button, input, textarea, select {
   padding-bottom: 0.08em;
 }
 @supports not (background-clip: text) { .hero h1 { color: var(--on-dark); } }
-.hero .lede { margin: clamp(22px, 3vw, 32px) auto 0; text-align: center; }
+.hero__tagline {
+  margin: clamp(12px, 1.6vw, 18px) 0 0;
+  font-size: var(--fs-sub);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--on-dark);
+}
+.hero .lede { margin: clamp(14px, 2vw, 22px) auto 0; text-align: center; }
+
+/* Real products with real prices, right under the button that leads to the
+   rest of them. Two per row on phones, four across from tablets up. */
+.hero-picks {
+  list-style: none;
+  margin: clamp(28px, 4vw, 44px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 760px;
+}
+@media (min-width: 768px) { .hero-picks { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.hero-pick {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  padding: 10px 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line-dark);
+  background: rgba(255, 255, 255, 0.03);
+  text-align: left;
+  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease), scale 0.12s var(--ease-out);
+}
+.hero-pick:hover { border-color: rgba(255, 255, 255, 0.26); background: rgba(255, 255, 255, 0.06); }
+.hero-pick:active { scale: 0.98; }
+.hero-pick img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--paper-50);
+  margin-bottom: 6px;
+}
+.hero-pick__name {
+  font-size: var(--fs-detail);
+  line-height: 1.35;
+  color: var(--on-dark-muted);
+}
+.hero-pick__price {
+  margin-top: auto;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--on-dark);
+}
 .hero__note {
   margin-top: clamp(34px, 5vw, 56px);
   max-width: 52ch;
@@ -1119,6 +1184,36 @@ a.review-source:hover { color: var(--on-dark-muted); }
 
 /* ----------------------------------------------- 9b. Mission & purpose */
 .pillars { margin: 0; }
+
+/* Mission / vision / purpose, folded into About. */
+.about__purpose {
+  margin-top: clamp(28px, 3.4vw, 40px);
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+}
+.about__purpose-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding-block: 14px;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--on-light);
+}
+.about__purpose-summary::-webkit-details-marker { display: none; }
+.about__purpose-summary:focus-visible { outline: 2px solid var(--slate-400); outline-offset: 4px; border-radius: 4px; }
+.about__purpose .accordion__icon::before,
+.about__purpose .accordion__icon::after { background: var(--slate-500); }
+.about__purpose[open] .accordion__icon::after { transform: scaleY(0); }
+.pillars--compact { padding-bottom: 8px; }
+.pillars--compact .pillars__item { padding-block: 18px; grid-template-columns: 1fr; gap: 6px; }
+.pillars--compact .pillars__item:last-child { border-bottom: 0; }
+.pillars--compact .pillars__label { padding-top: 0; }
+.pillars--compact .pillars__text { font-size: var(--fs-body); }
 .pillars__item {
   display: grid;
   gap: 12px;

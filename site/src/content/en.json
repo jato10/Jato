@@ -38,21 +38,28 @@
       "label": "About"
     },
     {
-      "id": "purpose",
-      "label": "Mission & vision"
-    },
-    {
       "id": "contact",
       "label": "Contact"
     }
   ],
   "hero": {
     "eyebrow": "Miami, Florida — United States",
-    "title": "Beyond Borders.<br>Beyond Possibilities.",
+    "headline": "Gaming, kitchen and personal care — retail and wholesale from Miami.",
     "titlePlain": "Beyond Borders. Beyond Possibilities.",
     "lede": "Global Beyond LLC connects products, people, and opportunities — through careful selection and direct, human service.",
-    "ctaSecondary": "Talk to us",
+    "whatsappMessage": "Hello Global Beyond, I am looking for a specific product and would like to check availability and pricing.",
+    "featured": [
+      "ps5-console",
+      "kitchenaid-mixer",
+      "ninja-air-fryer",
+      "healena"
+    ],
+    "featuredLabel": "Featured products",
     "note": "Our selection evolves, so availability, pricing, and shipping details are always confirmed for your specific request."
+  },
+  "cta": {
+    "catalog": "See catalog & prices",
+    "whatsapp": "Chat on WhatsApp"
   },
   "services": {
     "eyebrow": "What we do",
@@ -101,7 +108,6 @@
     "categoriesEyebrow": "By category",
     "categoriesTitle": "A sample of what's ready today.",
     "categoriesLede": "Prices confirmed in writing with every request.",
-    "categoriesCta": "See categories & prices",
     "pageTitle": "Catalog by category — Global Beyond LLC",
     "pageMetaDescription": "Browse the current Global Beyond LLC selection by category — Beauty, Gaming & Entertainment, and Kitchen Appliances.",
     "categories": [
@@ -317,6 +323,11 @@
         "date": "August 2026",
         "body": "The mixer works well and arrived in good condition. I'm giving it three stars because the packaging showed some wear and I would have liked to see more photos before buying. The WhatsApp support was quick, though."
       }
+    ],
+    "featured": [
+      0,
+      1,
+      5
     ]
   },
   "wholesale": {
@@ -457,7 +468,9 @@
       "invalid": "Please add your name, a way to reach you, and a message.",
       "errorName": "Add your name.",
       "errorContact": "Add an email or phone number.",
-      "errorMessage": "Add a message."
+      "errorMessage": "Add a message.",
+      "trapLabel": "Leave this field empty",
+      "errorEmail": "Check the email address — it looks incomplete."
     },
     "channelsHeading": "Or reach us directly"
   },

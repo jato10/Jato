@@ -256,16 +256,26 @@
       var phone = val(phoneEl);
       var body = val(bodyEl);
       var contactMissing = !!contactError && !email && !phone;
+      /* Same rule /api/contact applies, so a typo like "name@gmail" is caught
+         here with its own message instead of bouncing off the server. */
+      var emailBad = !!email && !/^[^\s@<>;,"]+@[^\s@<>;,"]+\.[^\s@<>;,"]+$/.test(email);
 
       flag(ratingGroup, ratingMissing, errorFor(ratingGroup));
       flag(nameEl, !name, errorFor(nameEl));
       flag(bodyEl, !body, errorFor(bodyEl));
       if (contactError) {
-        flag(emailEl, contactMissing, contactError);
+        flag(emailEl, contactMissing || emailBad, contactError);
         flag(phoneEl, contactMissing, contactError);
+        if (emailBad && !contactMissing) {
+          contactError.textContent = contactError.getAttribute('data-message-email') || '';
+        }
+      } else if (emailEl) {
+        /* The review form's email is optional, but a malformed one is still
+           refused by the server, so it gets its own message here. */
+        flag(emailEl, emailBad, errorFor(emailEl));
       }
 
-      if (ratingMissing || !name || !body || contactMissing) {
+      if (ratingMissing || !name || !body || contactMissing || emailBad) {
         event.preventDefault();
         say('invalid');
         var firstInvalid = form.querySelector('[aria-invalid="true"]');
@@ -315,10 +325,12 @@
   }
 
   /* ------------------------------------------------------ google reviews */
-  /* An addition to the reviews already on the page, never a replacement: if
-     the proxy is unconfigured, slow or unreachable, the page keeps the
-     reviews it was served with. Every value from Google is written with
-     textContent or setAttribute — none of it is ever parsed as HTML. */
+  /* Real Google reviews take the place of the reviews written for the site
+     as soon as any arrive (the cards marked data-site-review). If the proxy
+     is unconfigured, slow or unreachable, the page simply keeps what it was
+     served with. The homepage caps the list with data-google-limit. Every
+     value from Google is written with textContent or setAttribute — none of
+     it is ever parsed as HTML. */
   var googleSlot = document.querySelector('[data-google-reviews]');
   var googleTemplate = document.querySelector('[data-google-review-template]');
   if (googleSlot && googleTemplate && 'content' in googleTemplate && window.fetch) {
@@ -340,8 +352,9 @@
       .then(function (data) {
         if (!data || !data.reviews || !data.reviews.length) return;
         var fragment = document.createDocumentFragment();
+        var limit = parseInt(googleSlot.getAttribute('data-google-limit'), 10) || data.reviews.length;
 
-        data.reviews.forEach(function (review) {
+        data.reviews.slice(0, limit).forEach(function (review) {
           var card = googleTemplate.content.firstElementChild.cloneNode(true);
           fillStars(card.querySelector('[data-stars]'), Number(review.rating) || 0);
           card.querySelector('[data-body]').textContent = '“' + review.text + '”';
@@ -360,6 +373,9 @@
           fragment.appendChild(card);
         });
 
+        Array.prototype.forEach.call(googleSlot.querySelectorAll('[data-site-review]'), function (card) {
+          card.parentNode.removeChild(card);
+        });
         googleSlot.appendChild(fragment);
       })
       .catch(function () { /* the page already has its own reviews */ });

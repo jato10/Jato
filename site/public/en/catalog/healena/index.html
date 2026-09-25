@@ -20,8 +20,11 @@
     <meta property="og:description" content="A reusable, breathable medical-grade silicone sheet designed to soften and fade scars — new and old — with consistent use.">
     <meta property="og:url" content="https://globalbeyondllc.com/en/catalog/healena/">
     <meta property="og:image" content="https://globalbeyondllc.com/assets/img/catalog/healena.webp?v=9b8529d5">
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Product","@id":"https://globalbeyondllc.com/en/catalog/healena/#product","name":"Healena — Medical Grade Scar Treatment Patch","image":"https://globalbeyondllc.com/assets/img/catalog/healena.webp","description":"A reusable, breathable medical-grade silicone sheet designed to soften and fade scars — new and old — with consistent use.","sku":"healena","brand":{"@type":"Brand","name":"Healena"},"offers":{"@type":"Offer","url":"https://globalbeyondllc.com/en/catalog/healena/","price":"75.00","priceCurrency":"USD","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://globalbeyondllc.com/#organization"}}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Global Beyond LLC","item":"https://globalbeyondllc.com/en/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://globalbeyondllc.com/en/catalog/"},{"@type":"ListItem","position":3,"name":"Healena — Medical Grade Scar Treatment Patch","item":"https://globalbeyondllc.com/en/catalog/healena/"}]}]</script>
+    <link rel="preload" as="image" href="/assets/img/catalog/healena.webp?v=9b8529d5"
+      imagesrcset="/assets/img/catalog/480/healena.webp?v=bcde4a9e 480w, /assets/img/catalog/720/healena.webp?v=49e66125 720w, /assets/img/catalog/healena.webp?v=9b8529d5 900w" imagesizes="(min-width: 780px) 440px, calc(100vw - 40px)" fetchpriority="high">
     <link rel="preload" href="/assets/fonts/geist-variable.woff2?v=a369fcf5" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/styles.css?v=142abe74">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=7b145ba1">
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
@@ -42,7 +45,6 @@
             <li><a class="nav__link" data-nav-link href="/en/#catalog">Catalog</a></li>
             <li><a class="nav__link" data-nav-link href="/en/#wholesale">Wholesale</a></li>
             <li><a class="nav__link" data-nav-link href="/en/#about">About</a></li>
-            <li><a class="nav__link" data-nav-link href="/en/#purpose">Mission &amp; vision</a></li>
             <li><a class="nav__link" data-nav-link href="/en/#contact">Contact</a></li>
           </ul>
         </nav>
@@ -63,14 +65,15 @@
     <main id="main">
       <section class="section section--dark">
         <div class="shell">
-          <div class="btn-row product-detail__back" data-reveal>
+          <div class="btn-row product-detail__back">
             <a class="btn btn--ghost" href="/en/catalog/"><svg class="btn__arrow btn__arrow--back" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 8H3M7 4L3 8l4 4"/></svg>Back to the catalog</a>
           </div>
-          <div class="product-detail" data-reveal data-delay="1">
+          <div class="product-detail">
             <figure class="product-detail__figure">
               
               <img src="/assets/img/catalog/healena.webp?v=9b8529d5" alt="Healena — Medical Grade Scar Treatment Patch"
-                width="900" height="900" decoding="async">
+                srcset="/assets/img/catalog/480/healena.webp?v=bcde4a9e 480w, /assets/img/catalog/720/healena.webp?v=49e66125 720w, /assets/img/catalog/healena.webp?v=9b8529d5 900w" sizes="(min-width: 780px) 440px, calc(100vw - 40px)"
+                width="900" height="900" fetchpriority="high" decoding="async">
             </figure>
             <div class="product-detail__info">
               <p class="eyebrow">Beauty</p>
@@ -88,9 +91,9 @@
                     <p class="buy-box__lede">Leave your details and we'll reply with the final details of your order.</p>
                     <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="en">
-              <p class="form__trap" aria-hidden="true">
-                <label>Your name<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
-              </p>
+              <div class="form__trap" aria-hidden="true">
+                <label>Leave this field empty<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+              </div>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="pf-name">Your name</label>
@@ -108,14 +111,15 @@
                     aria-describedby="pf-contact-hint pf-contact-error">
                 </div>
                 <div class="field">
-                  <label class="field__label" for="pf-phone">Phone or WhatsApp <span class="field__hint">optional</span></label>
+                  <label class="field__label" for="pf-phone">Phone or WhatsApp</label>
                   <input class="field__input" id="pf-phone" name="phone" type="tel"
                     maxlength="60" autocomplete="tel" placeholder="Optional if you leave an email…"
                     aria-describedby="pf-contact-hint pf-contact-error">
                 </div>
               </div>
               <p class="field__note" id="pf-contact-hint">Leave at least one of the two, so we know where to reply.</p>
-              <p class="field__error" id="pf-contact-error" data-message="Add an email or phone number."></p>
+              <p class="field__error" id="pf-contact-error" data-message="Add an email or phone number."
+                data-message-email="Check the email address — it looks incomplete."></p>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="pf-address">Shipping address <span class="field__hint">optional</span></label>
@@ -144,11 +148,7 @@
                 <span>Cash on delivery</span>
               </label>
                   </div>
-                  <p class="payment-links">
-                    <a href="https://www.paypal.me/globalbeyondllc" target="_blank" rel="noopener noreferrer">Pay with PayPal</a>
-                    <span class="payment-links__sep" aria-hidden="true">·</span>
-                    <span>Zelle: <a href="mailto:pagos@globalbeyondllc.com">pagos@globalbeyondllc.com</a></span>
-                  </p>
+                  
                 </fieldset>
               </div>
               <div class="form__row">
@@ -192,9 +192,8 @@
             <li><a href="/en/#catalog">Catalog</a></li>
             <li><a href="/en/#wholesale">Wholesale</a></li>
             <li><a href="/en/#about">About</a></li>
-            <li><a href="/en/#purpose">Mission &amp; vision</a></li>
             <li><a href="/en/#contact">Contact</a></li>
-            <li><a href="/en/catalog/">See categories &amp; prices</a></li>
+            <li><a href="/en/catalog/">See catalog &amp; prices</a></li>
             <li><a href="/en/reviews/">See customer reviews</a></li>
             </ul>
           </div>
@@ -239,6 +238,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=a1f0cef3" defer></script>
+    <script src="/assets/js/main.js?v=8bea21b5" defer></script>
   </body>
 </html>

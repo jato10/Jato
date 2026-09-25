@@ -38,21 +38,28 @@
       "label": "Nosotros"
     },
     {
-      "id": "purpose",
-      "label": "Misión y visión"
-    },
-    {
       "id": "contact",
       "label": "Contacto"
     }
   ],
   "hero": {
     "eyebrow": "Miami, Florida — Estados Unidos",
-    "title": "Más allá de las fronteras.<br>Más allá de lo posible.",
+    "headline": "Gaming, cocina y cuidado personal, al detal y al mayor desde Miami.",
     "titlePlain": "Más allá de las fronteras. Más allá de lo posible.",
     "lede": "Global Beyond LLC conecta productos, personas y oportunidades — con selección cuidada y atención humana directa.",
-    "ctaSecondary": "Hablar con nosotros",
+    "whatsappMessage": "Hola Global Beyond, estoy buscando un producto específico y quisiera consultar disponibilidad y precio.",
+    "featured": [
+      "ps5-console",
+      "kitchenaid-mixer",
+      "ninja-air-fryer",
+      "healena"
+    ],
+    "featuredLabel": "Productos destacados",
     "note": "Nuestra selección cambia con el tiempo, por eso la disponibilidad, los precios y los detalles de envío siempre se confirman para cada solicitud."
+  },
+  "cta": {
+    "catalog": "Ver catálogo y precios",
+    "whatsapp": "Escríbenos por WhatsApp"
   },
   "services": {
     "eyebrow": "Qué hacemos",
@@ -101,7 +108,6 @@
     "categoriesEyebrow": "Por categoría",
     "categoriesTitle": "Una muestra de lo que tenemos listo hoy.",
     "categoriesLede": "Precios confirmados por escrito en cada solicitud.",
-    "categoriesCta": "Ver categorías y precios",
     "pageTitle": "Catálogo por categoría — Global Beyond LLC",
     "pageMetaDescription": "Explora la selección actual de Global Beyond LLC por categoría — Belleza, Videojuegos y entretenimiento, y Electrodomésticos de cocina.",
     "categories": [
@@ -317,6 +323,11 @@
         "date": "Agosto 2026",
         "body": "La batidora funciona bien y llegó en buen estado. Le doy tres estrellas porque el empaque llegó algo golpeado y me hubiera gustado ver más fotos antes de comprar. La atención por WhatsApp sí fue rápida."
       }
+    ],
+    "featured": [
+      0,
+      1,
+      5
     ]
   },
   "wholesale": {
@@ -457,7 +468,9 @@
       "invalid": "Falta tu nombre, una forma de contactarte o el mensaje.",
       "errorName": "Agrega tu nombre.",
       "errorContact": "Agrega un correo o teléfono.",
-      "errorMessage": "Agrega un mensaje."
+      "errorMessage": "Agrega un mensaje.",
+      "trapLabel": "Deja este campo vacío",
+      "errorEmail": "Revisa el correo: parece incompleto."
     },
     "channelsHeading": "O contáctanos directamente"
   },

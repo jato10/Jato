@@ -20,8 +20,11 @@
     <meta property="og:description" content="La consola más potente de la familia Xbox, con 1TB de almacenamiento y compatibilidad con miles de títulos. Incluye un control inalámbrico.">
     <meta property="og:url" content="https://globalbeyondllc.com/es/catalogo/xbox-series-x/">
     <meta property="og:image" content="https://globalbeyondllc.com/assets/img/catalog/xbox-series-x.webp?v=ec54f7e5">
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Product","@id":"https://globalbeyondllc.com/es/catalogo/xbox-series-x/#product","name":"Xbox Series X — Consola de 1TB","image":"https://globalbeyondllc.com/assets/img/catalog/xbox-series-x.webp","description":"La consola más potente de la familia Xbox, con 1TB de almacenamiento y compatibilidad con miles de títulos. Incluye un control inalámbrico.","sku":"xbox-series-x","brand":{"@type":"Brand","name":"Microsoft"},"offers":{"@type":"Offer","url":"https://globalbeyondllc.com/es/catalogo/xbox-series-x/","price":"799.99","priceCurrency":"USD","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":"https://globalbeyondllc.com/#organization"}}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Global Beyond LLC","item":"https://globalbeyondllc.com/es/"},{"@type":"ListItem","position":2,"name":"Catálogo","item":"https://globalbeyondllc.com/es/catalogo/"},{"@type":"ListItem","position":3,"name":"Xbox Series X — Consola de 1TB","item":"https://globalbeyondllc.com/es/catalogo/xbox-series-x/"}]}]</script>
+    <link rel="preload" as="image" href="/assets/img/catalog/xbox-series-x.webp?v=ec54f7e5"
+      imagesrcset="/assets/img/catalog/480/xbox-series-x.webp?v=384d0f61 480w, /assets/img/catalog/720/xbox-series-x.webp?v=8c9fb3e9 720w, /assets/img/catalog/xbox-series-x.webp?v=ec54f7e5 900w" imagesizes="(min-width: 780px) 440px, calc(100vw - 40px)" fetchpriority="high">
     <link rel="preload" href="/assets/fonts/geist-variable.woff2?v=a369fcf5" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/styles.css?v=142abe74">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=7b145ba1">
     <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
     <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
     <script defer src="/_vercel/insights/script.js"></script>
@@ -42,7 +45,6 @@
             <li><a class="nav__link" data-nav-link href="/es/#catalog">Catálogo</a></li>
             <li><a class="nav__link" data-nav-link href="/es/#wholesale">Al mayor</a></li>
             <li><a class="nav__link" data-nav-link href="/es/#about">Nosotros</a></li>
-            <li><a class="nav__link" data-nav-link href="/es/#purpose">Misión y visión</a></li>
             <li><a class="nav__link" data-nav-link href="/es/#contact">Contacto</a></li>
           </ul>
         </nav>
@@ -63,14 +65,15 @@
     <main id="main">
       <section class="section section--dark">
         <div class="shell">
-          <div class="btn-row product-detail__back" data-reveal>
+          <div class="btn-row product-detail__back">
             <a class="btn btn--ghost" href="/es/catalogo/"><svg class="btn__arrow btn__arrow--back" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 8H3M7 4L3 8l4 4"/></svg>Volver al catálogo</a>
           </div>
-          <div class="product-detail" data-reveal data-delay="1">
+          <div class="product-detail">
             <figure class="product-detail__figure">
               
               <img src="/assets/img/catalog/xbox-series-x.webp?v=ec54f7e5" alt="Xbox Series X — Consola de 1TB"
-                width="900" height="900" decoding="async">
+                srcset="/assets/img/catalog/480/xbox-series-x.webp?v=384d0f61 480w, /assets/img/catalog/720/xbox-series-x.webp?v=8c9fb3e9 720w, /assets/img/catalog/xbox-series-x.webp?v=ec54f7e5 900w" sizes="(min-width: 780px) 440px, calc(100vw - 40px)"
+                width="900" height="900" fetchpriority="high" decoding="async">
             </figure>
             <div class="product-detail__info">
               <p class="eyebrow">Videojuegos y entretenimiento</p>
@@ -88,9 +91,9 @@
                     <p class="buy-box__lede">Déjanos tus datos y te respondemos con los detalles finales de tu pedido.</p>
                     <form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="es">
-              <p class="form__trap" aria-hidden="true">
-                <label>Tu nombre<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
-              </p>
+              <div class="form__trap" aria-hidden="true">
+                <label>Deja este campo vacío<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+              </div>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="pf-name">Tu nombre</label>
@@ -108,14 +111,15 @@
                     aria-describedby="pf-contact-hint pf-contact-error">
                 </div>
                 <div class="field">
-                  <label class="field__label" for="pf-phone">Teléfono o WhatsApp <span class="field__hint">opcional</span></label>
+                  <label class="field__label" for="pf-phone">Teléfono o WhatsApp</label>
                   <input class="field__input" id="pf-phone" name="phone" type="tel"
                     maxlength="60" autocomplete="tel" placeholder="Opcional si dejas un correo…"
                     aria-describedby="pf-contact-hint pf-contact-error">
                 </div>
               </div>
               <p class="field__note" id="pf-contact-hint">Déjanos al menos uno de los dos, para saber por dónde responderte.</p>
-              <p class="field__error" id="pf-contact-error" data-message="Agrega un correo o teléfono."></p>
+              <p class="field__error" id="pf-contact-error" data-message="Agrega un correo o teléfono."
+                data-message-email="Revisa el correo: parece incompleto."></p>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="pf-address">Dirección de envío <span class="field__hint">opcional</span></label>
@@ -144,11 +148,7 @@
                 <span>Efectivo al recibir</span>
               </label>
                   </div>
-                  <p class="payment-links">
-                    <a href="https://www.paypal.me/globalbeyondllc" target="_blank" rel="noopener noreferrer">Pagar con PayPal</a>
-                    <span class="payment-links__sep" aria-hidden="true">·</span>
-                    <span>Zelle: <a href="mailto:pagos@globalbeyondllc.com">pagos@globalbeyondllc.com</a></span>
-                  </p>
+                  
                 </fieldset>
               </div>
               <div class="form__row">
@@ -192,9 +192,8 @@
             <li><a href="/es/#catalog">Catálogo</a></li>
             <li><a href="/es/#wholesale">Al mayor</a></li>
             <li><a href="/es/#about">Nosotros</a></li>
-            <li><a href="/es/#purpose">Misión y visión</a></li>
             <li><a href="/es/#contact">Contacto</a></li>
-            <li><a href="/es/catalogo/">Ver categorías y precios</a></li>
+            <li><a href="/es/catalogo/">Ver catálogo y precios</a></li>
             <li><a href="/es/resenas/">Ver reseñas de clientes</a></li>
             </ul>
           </div>
@@ -239,6 +238,6 @@
         </div>
       </div>
     </footer>
-    <script src="/assets/js/main.js?v=a1f0cef3" defer></script>
+    <script src="/assets/js/main.js?v=8bea21b5" defer></script>
   </body>
 </html>
