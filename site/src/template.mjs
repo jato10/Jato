@@ -456,7 +456,7 @@ function productCategories(site, c) {
 function reviewCards(c, items = c.reviews.items) {
   return items
     .map(
-      (r, i) => `<article class="review-card" data-reveal data-delay="${i % 3}">
+      (r, i) => `<article class="review-card" data-site-review data-reveal data-delay="${i % 3}">
             <div class="review-card__stars" role="img" aria-label="${r.rating}/5">${starRating(r.rating)}</div>
             <p class="review-card__body">&ldquo;${esc(r.body)}&rdquo;</p>
             <p class="review-card__meta"><strong>${esc(r.name)}</strong> · ${esc(r.date)}</p>
@@ -502,9 +502,10 @@ function reviewsTeaserSection({ c, site }) {
             <h2 class="h-section" id="reviews-title">${esc(c.reviews.title)}</h2>
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
-          <div class="reviews-grid">
+          <div class="reviews-grid" data-google-reviews data-google-limit="3">
             ${reviewCards(c, featured)}
           </div>
+          ${googleReviewTemplate(c)}
           <div class="btn-row" data-reveal>
             <a class="btn btn--ghost" href="${esc(viewHref)}">${esc(c.reviews.viewCta)}${ARROW_ICON}</a>
             <a class="btn btn--ghost" href="${esc(site.leaveReviewPath[c.lang])}">${esc(c.reviews.leaveCta)}</a>
@@ -524,6 +525,24 @@ function catalogPageBody({ c, site }) {
           ${productCategories(site, c)}
         </div>
       </section>`;
+}
+
+/* Direct payment links render only once a real account is configured in
+   site.json. Each one is shown only when set: a placeholder handle here
+   would invite a customer to send money to an account that may belong to
+   someone else. Until then the payment method is a preference that rides
+   along with the order and gets settled over WhatsApp. */
+function paymentLinks(site, pp) {
+  const { paypal, zelle } = site.payments || {};
+  const parts = [
+    paypal ? `<a href="${esc(paypal)}" target="_blank" rel="noopener noreferrer">${esc(pp.paypalLinkLabel)}</a>` : '',
+    zelle ? `<span>${esc(pp.zelleLabel)}: <a href="mailto:${esc(zelle)}">${esc(zelle)}</a></span>` : '',
+  ].filter(Boolean);
+  return parts.length
+    ? `<p class="payment-links">
+                    ${parts.join('\n                    <span class="payment-links__sep" aria-hidden="true">·</span>\n                    ')}
+                  </p>`
+    : '';
 }
 
 /* Looks like a real order form because it is one: it posts to the same
@@ -588,11 +607,7 @@ function productOrderForm({ c, site, product }) {
                   <div class="payment-options">
                     ${paymentOptions}
                   </div>
-                  <p class="payment-links">
-                    <a href="${esc(site.payments.paypal)}" target="_blank" rel="noopener noreferrer">${esc(pp.paypalLinkLabel)}</a>
-                    <span class="payment-links__sep" aria-hidden="true">·</span>
-                    <span>${esc(pp.zelleLabel)}: <a href="mailto:${esc(site.payments.zelle)}">${esc(site.payments.zelle)}</a></span>
-                  </p>
+                  ${paymentLinks(site, pp)}
                 </fieldset>
               </div>
               <div class="form__row">
@@ -612,6 +627,18 @@ function productOrderForm({ c, site, product }) {
                 data-success="${esc(f.success)}" data-error="${esc(f.error)}" data-invalid="${esc(f.invalid)}"></p>
             </form>`;
 }
+
+/* The product photo is the largest thing on a product page, so it is what
+   the page's load speed is judged by. It is served at the width the screen
+   needs (480/720/900), asked for first (fetchpriority + a preload in the
+   head), and kept out of the scroll-reveal fade: above the fold, that fade
+   only hid the photo until the script ran. */
+const PRODUCT_PHOTO_SIZES = '(min-width: 780px) 440px, calc(100vw - 40px)';
+const productPhotoSrcset = (product) =>
+  [480, 720]
+    .map((w) => `${assetVersion(`assets/img/catalog/${w}/${product.image}.webp`)} ${w}w`)
+    .concat(`${assetVersion(`assets/img/catalog/${product.image}.webp`)} 900w`)
+    .join(', ');
 
 /* The order form sits collapsed inside the buy box rather than sprawling
    across the page below it — the price and payment options read at a glance,
@@ -641,14 +668,15 @@ function productDetailBody({ c, site, links, product, categoryLabel }) {
                 <p class="buy-box__note">${esc(pp.reassure)}</p>`;
   return `<section class="section section--dark">
         <div class="shell">
-          <div class="btn-row product-detail__back" data-reveal>
+          <div class="btn-row product-detail__back">
             <a class="btn btn--ghost" href="${esc(site.catalogPath[c.lang])}">${ARROW_BACK_ICON}${esc(pp.backLabel)}</a>
           </div>
-          <div class="product-detail" data-reveal data-delay="1">
+          <div class="product-detail">
             <figure class="product-detail__figure">
               ${soldOutBadge}
               <img src="${assetVersion(`assets/img/catalog/${product.image}.webp`)}" alt="${esc(product.name)}"
-                width="900" height="900" decoding="async">
+                srcset="${productPhotoSrcset(product)}" sizes="${PRODUCT_PHOTO_SIZES}"
+                width="900" height="900" fetchpriority="high" decoding="async">
             </figure>
             <div class="product-detail__info">
               <p class="eyebrow">${esc(categoryLabel)}</p>
@@ -1378,6 +1406,8 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <meta property="og:url" content="${esc(canonical)}">
     <meta property="og:image" content="${esc(site.origin.replace(/\/$/, ''))}${assetVersion(`assets/img/catalog/${product.image}.webp`)}">
     <script type="application/ld+json">${jsonLd}</script>
+    <link rel="preload" as="image" href="${assetVersion(`assets/img/catalog/${product.image}.webp`)}"
+      imagesrcset="${productPhotoSrcset(product)}" imagesizes="${PRODUCT_PHOTO_SIZES}" fetchpriority="high">
     <link rel="preload" href="${assetVersion('assets/fonts/geist-variable.woff2')}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="${assetVersion('assets/css/styles.css')}">
     <script>${INLINE_BOOT}</script>

@@ -325,10 +325,12 @@
   }
 
   /* ------------------------------------------------------ google reviews */
-  /* An addition to the reviews already on the page, never a replacement: if
-     the proxy is unconfigured, slow or unreachable, the page keeps the
-     reviews it was served with. Every value from Google is written with
-     textContent or setAttribute — none of it is ever parsed as HTML. */
+  /* Real Google reviews take the place of the reviews written for the site
+     as soon as any arrive (the cards marked data-site-review). If the proxy
+     is unconfigured, slow or unreachable, the page simply keeps what it was
+     served with. The homepage caps the list with data-google-limit. Every
+     value from Google is written with textContent or setAttribute — none of
+     it is ever parsed as HTML. */
   var googleSlot = document.querySelector('[data-google-reviews]');
   var googleTemplate = document.querySelector('[data-google-review-template]');
   if (googleSlot && googleTemplate && 'content' in googleTemplate && window.fetch) {
@@ -350,8 +352,9 @@
       .then(function (data) {
         if (!data || !data.reviews || !data.reviews.length) return;
         var fragment = document.createDocumentFragment();
+        var limit = parseInt(googleSlot.getAttribute('data-google-limit'), 10) || data.reviews.length;
 
-        data.reviews.forEach(function (review) {
+        data.reviews.slice(0, limit).forEach(function (review) {
           var card = googleTemplate.content.firstElementChild.cloneNode(true);
           fillStars(card.querySelector('[data-stars]'), Number(review.rating) || 0);
           card.querySelector('[data-body]').textContent = '“' + review.text + '”';
@@ -370,6 +373,9 @@
           fragment.appendChild(card);
         });
 
+        Array.prototype.forEach.call(googleSlot.querySelectorAll('[data-site-review]'), function (card) {
+          card.parentNode.removeChild(card);
+        });
         googleSlot.appendChild(fragment);
       })
       .catch(function () { /* the page already has its own reviews */ });

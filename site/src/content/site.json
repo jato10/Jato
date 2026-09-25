@@ -41,8 +41,9 @@
     "es": "/es/resenas/dejar/"
   },
   "payments": {
-    "paypal": "https://www.paypal.me/globalbeyondllc",
-    "zelle": "pagos@globalbeyondllc.com"
+    "paypal": "",
+    "zelle": "",
+    "_pending": "[PENDIENTE] Real PayPal.me link and Zelle email. Leave empty to keep the payment links hidden."
   },
   "phone": "+1-786-334-4556",
   "productBrands": {
