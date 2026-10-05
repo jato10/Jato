@@ -312,7 +312,7 @@ function heroSection({ c, site, links }) {
     .map(
       (p) => `<li><a class="hero-pick" href="${esc(productHref(site, c, p))}">
                 <img src="${assetVersion(`assets/img/catalog/thumb/${p.image}.webp`)}" alt="" width="320" height="320"
-                  loading="lazy" decoding="async">
+                  decoding="async">
                 <span class="hero-pick__name">${esc(p.name.split(' — ')[0])}</span>
                 <span class="hero-pick__price">${esc(p.price)}</span>
               </a></li>`
@@ -329,26 +329,43 @@ function heroSection({ c, site, links }) {
         <div class="shell hero__inner">
           <picture class="hero__logo-wrap">
             <source media="(max-width: 767px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-            <img class="hero__logo is-visible-instant" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
+            <img class="hero__logo" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
               srcset="${assetVersion('assets/img/logo-540.webp')} 540w, ${assetVersion('assets/img/logo.webp')} 900w"
               sizes="(min-width: 581px) 430px, 74vw"
-              alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async" data-reveal>
+              alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async">
           </picture>
-          <p class="eyebrow hero__eyebrow is-visible-instant" data-reveal>${esc(c.hero.eyebrow)}</p>
-          <h1 class="h-display is-visible-instant" id="hero-title" data-reveal>${esc(c.hero.headline)}</h1>
-          <p class="hero__tagline is-visible-instant" data-reveal>${esc(c.hero.titlePlain)}</p>
-          <p class="lede is-visible-instant" data-reveal>${esc(c.hero.lede)}</p>
-          <div class="btn-row hero__actions is-visible-instant" data-reveal>
+          <h1 class="h-display" id="hero-title">${esc(c.hero.headline)}</h1>
+          <p class="hero__tagline">${esc(c.hero.titlePlain)}</p>
+          <p class="lede">${esc(c.hero.lede)}</p>
+          <div class="btn-row hero__actions">
             <a class="btn btn--primary" href="${esc(catalogHref)}">${esc(c.cta.catalog)}${ARROW_ICON}</a>
             ${waHref ? `<a class="btn btn--ghost" href="${esc(waHref)}"${externalAttrs(links, waHref)}>${esc(c.cta.whatsapp)}</a>` : ''}
           </div>
-          <ul class="hero-picks is-visible-instant" data-reveal aria-label="${esc(c.hero.featuredLabel)}">
+          <ul class="hero-picks" aria-label="${esc(c.hero.featuredLabel)}">
               ${picks}
           </ul>
-          <p class="hero__note is-visible-instant" data-reveal>${esc(c.hero.note)}</p>
+          <p class="hero__note">${esc(c.hero.note)}</p>
         </div>
-        <span class="hero__scroll" aria-hidden="true"></span>
       </section>`;
+}
+
+/* The fixed phone action bar. Hidden until the hero's own buttons are well out
+   of view (main.js toggles .is-shown), and again while the contact section is
+   on screen or a form field has focus, so it never sits on top of the thing it
+   points to. Without JavaScript it stays hidden: the buttons it repeats are
+   already on the page. Phones only (see styles.css). */
+function actionBar({ c, site, links, kind }) {
+  const wa = links.whatsapp(c.hero.whatsappMessage);
+  if (!wa) return '';
+  const label = c.contact.channels.whatsapp.label;
+  const waAttrs = `href="${esc(wa)}"${externalAttrs(links, wa)}`;
+  const body = kind === 'home'
+    ? `<a class="btn btn--primary" href="${esc(site.catalogPath[c.lang])}">${esc(c.cta.catalog)}${ARROW_ICON}</a>
+          <a class="btn btn--ghost" ${waAttrs}>${esc(label)}</a>`
+    : `<a class="btn btn--primary" ${waAttrs}>${esc(c.cta.whatsapp)}</a>`;
+  return `<div class="action-bar action-bar--${kind}" data-action-bar>
+          ${body}
+        </div>`;
 }
 
 function servicesSection({ c, links }) {
@@ -375,7 +392,7 @@ function servicesSection({ c, links }) {
               </div>`
         : '';
       return `<div class="tabs__panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="services-panel-${i}"
-              aria-labelledby="services-tab-${i}" data-panel="${i}" data-reveal data-delay="${i}">
+              aria-labelledby="services-tab-${i}" data-panel="${i}">
               <h3 class="h-card">${esc(item.title)}</h3>
               <p>${esc(item.body)}</p>${cta}
             </div>`;
@@ -388,8 +405,7 @@ function servicesSection({ c, links }) {
 
   return `<section class="section section--light" id="services" aria-labelledby="services-title">
         <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.services.eyebrow)}</p>
+          <div class="section-head">
             <h2 class="h-section" id="services-title">${esc(c.services.title)}</h2>
             <p class="lede">${esc(c.services.lede)}</p>
           </div>
@@ -402,7 +418,7 @@ function servicesSection({ c, links }) {
               ${panels}
               </div>
             </div>
-            <div class="flow-card" data-reveal data-delay="1">
+            <div class="flow-card">
               <p class="flow-card__heading" id="services-flow-heading">${esc(c.services.flowLabel)}</p>
               <ol class="flow" aria-labelledby="services-flow-heading">
                 ${flow}
@@ -440,8 +456,8 @@ function productCard(site, c, product) {
 function productCategories(site, c) {
   return c.catalog.categories
     .map(
-      (cat) => `<div class="product-category" data-reveal>
-            <p class="product-category__label">${esc(cat.label)}</p>
+      (cat) => `<div class="product-category">
+            <h2 class="product-category__label">${esc(cat.label)}</h2>
             <div class="product-grid">
               ${[...cat.products]
                 .sort((a, b) => Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)))
@@ -456,7 +472,7 @@ function productCategories(site, c) {
 function reviewCards(c, items = c.reviews.items) {
   return items
     .map(
-      (r, i) => `<article class="review-card" data-site-review data-reveal data-delay="${i % 3}">
+      (r, i) => `<article class="review-card" data-site-review>
             <div class="review-card__stars" role="img" aria-label="${r.rating}/5">${starRating(r.rating)}</div>
             <p class="review-card__body">&ldquo;${esc(r.body)}&rdquo;</p>
             <p class="review-card__meta"><strong>${esc(r.name)}</strong> · ${esc(r.date)}</p>
@@ -469,8 +485,7 @@ function catalogSection({ c, site, assets }) {
   const catalogHref = site.catalogPath[c.lang];
   return `<section class="section section--light-alt" id="catalog" aria-labelledby="catalog-title">
         <div class="shell split split--wide-first">
-          <div data-reveal>
-            <p class="eyebrow">${esc(c.catalog.eyebrow)}</p>
+          <div>
             <h2 class="h-section" id="catalog-title">${esc(c.catalog.title)}</h2>
             ${c.catalog.body.map((para) => `<p class="body-text">${esc(para)}</p>`).join('\n            ')}
             <ul class="ticks">
@@ -480,7 +495,7 @@ function catalogSection({ c, site, assets }) {
               <a class="btn btn--primary" href="${esc(catalogHref)}">${esc(c.cta.catalog)}${ARROW_ICON}</a>
             </div>
           </div>
-          <figure class="catalog__figure catalog__figure--sticky" data-reveal data-delay="1">
+          <figure class="catalog__figure catalog__figure--sticky">
             <img class="catalog__photo" src="${assetVersion('assets/img/catalog.webp')}" alt="${esc(c.catalog.photoAlt)}"
               width="1400" height="950" loading="lazy" decoding="async">
             <figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>
@@ -497,8 +512,7 @@ function reviewsTeaserSection({ c, site }) {
   const featured = c.reviews.featured.map((i) => c.reviews.items[i]).filter(Boolean);
   return `<section class="section section--dark" id="reviews" aria-labelledby="reviews-title">
         <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.reviews.eyebrow)}</p>
+          <div class="section-head">
             <h2 class="h-section" id="reviews-title">${esc(c.reviews.title)}</h2>
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
@@ -506,7 +520,7 @@ function reviewsTeaserSection({ c, site }) {
             ${reviewCards(c, featured)}
           </div>
           ${googleReviewTemplate(c)}
-          <div class="btn-row" data-reveal>
+          <div class="btn-row">
             <a class="btn btn--ghost" href="${esc(viewHref)}">${esc(c.reviews.viewCta)}${ARROW_ICON}</a>
             <a class="btn btn--ghost" href="${esc(site.leaveReviewPath[c.lang])}">${esc(c.reviews.leaveCta)}</a>
           </div>
@@ -517,8 +531,7 @@ function reviewsTeaserSection({ c, site }) {
 function catalogPageBody({ c, site }) {
   return `<section class="section section--dark">
         <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.catalog.categoriesEyebrow)}</p>
+          <div class="section-head">
             <h1 class="h-section">${esc(c.catalog.categoriesTitle)}</h1>
             <p class="lede">${esc(c.catalog.categoriesLede)}</p>
           </div>
@@ -679,8 +692,8 @@ function productDetailBody({ c, site, links, product, categoryLabel }) {
                 width="900" height="900" fetchpriority="high" decoding="async">
             </figure>
             <div class="product-detail__info">
-              <p class="eyebrow">${esc(categoryLabel)}</p>
               <h1 class="h-section product-detail__name">${esc(product.name)}</h1>
+              <p class="product-detail__meta">${esc(categoryLabel)}</p>
               <p class="body-text">${esc(product.description)}</p>
               <div class="buy-box">
                 <p class="product-detail__price">
@@ -770,12 +783,11 @@ function reviewForm({ c }) {
 function reviewsPageBody({ c, site }) {
   return `<section class="section section--dark">
         <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.reviews.eyebrow)}</p>
+          <div class="section-head">
             <h1 class="h-section">${esc(c.reviews.title)}</h1>
             <p class="lede">${esc(c.reviews.lede)}</p>
           </div>
-          <div class="btn-row reviews-actions" data-reveal>
+          <div class="btn-row reviews-actions">
             <a class="btn btn--ghost" href="${esc(site.leaveReviewPath[c.lang])}">${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
           </div>
           <div class="reviews-grid" data-google-reviews>
@@ -805,15 +817,14 @@ function leaveReviewPageBody({ c, site }) {
   const rf = c.reviews.form;
   return `<section class="section section--dark">
         <div class="shell">
-          <div class="btn-row product-detail__back" data-reveal>
+          <div class="btn-row product-detail__back">
             <a class="btn btn--ghost" href="${esc(site.reviewsPath[c.lang])}">${ARROW_BACK_ICON}${esc(c.reviews.backToReviews)}</a>
           </div>
-          <div class="section-head leave-review__head" data-reveal>
-            <p class="eyebrow">${esc(c.reviews.eyebrow)}</p>
+          <div class="section-head leave-review__head">
             <h1 class="h-section">${esc(rf.heading)}</h1>
             <p class="lede">${esc(rf.lede)}</p>
           </div>
-          <div class="panel review-form" data-reveal data-delay="1">
+          <div class="panel review-form">
             ${reviewForm({ c })}
           </div>
         </div>
@@ -826,9 +837,8 @@ function wholesaleSection({ c, links }) {
      support and screen-reader semantics included by the browser for free. */
   const items = c.wholesale.items
     .map(
-      (item, i) => `<details class="accordion__item" data-reveal data-delay="${i}"${i === 0 ? ' open' : ''}>
+      (item, i) => `<details class="accordion__item"${i === 0 ? ' open' : ''}>
               <summary class="accordion__summary">
-                <span class="card__index">${String(i + 1).padStart(2, '0')}</span>
                 <span class="h-card accordion__title">${esc(item.title)}</span>
                 <span class="accordion__icon" aria-hidden="true"></span>
               </summary>
@@ -839,15 +849,14 @@ function wholesaleSection({ c, links }) {
 
   return `<section class="section section--darker" id="wholesale" aria-labelledby="wholesale-title">
         <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.wholesale.eyebrow)}</p>
+          <div class="section-head">
             <h2 class="h-section" id="wholesale-title">${esc(c.wholesale.title)}</h2>
             <p class="lede">${esc(c.wholesale.lede)}</p>
           </div>
           <div class="accordion">
             ${items}
           </div>
-          <div class="btn-row" data-reveal>
+          <div class="btn-row">
             <a class="btn btn--primary" href="${esc(href)}"${externalAttrs(links, href)}>${esc(c.wholesale.cta)}${ARROW_ICON}</a>
           </div>
         </div>
@@ -869,7 +878,7 @@ function aboutSection({ c, assets }) {
     : '';
   return `<section class="section section--light" id="about" aria-labelledby="about-title">
         <div class="shell split">
-          <div class="about__figure--sticky" data-reveal>
+          <div class="about__figure--sticky">
             <figure class="about__figure">
               <div class="about__media" data-media>
                 <img src="${assetVersion('assets/img/team.jpg')}" alt="${esc(c.about.photoAlt)}"
@@ -884,8 +893,7 @@ function aboutSection({ c, assets }) {
               <figcaption class="about__caption">${esc(c.about.photoCaption)}</figcaption>
             </figure>
           </div>
-          <div data-reveal data-delay="1">
-            <p class="eyebrow">${esc(c.about.eyebrow)}</p>
+          <div>
             <h2 class="h-section" id="about-title">${esc(c.about.title)}</h2>
             ${c.about.body.map((p) => `<p class="body-text">${esc(p)}</p>`).join('\n            ')}
             <ul class="people">
@@ -936,8 +944,8 @@ function contactSection({ c, links, assets }) {
                 <p>${esc(ch[key].body)}</p>
                 <span class="channel__action">${esc(href ? ch[key].action : c.contact.unconfigured)}</span>`;
     return href
-      ? `<a class="channel" href="${esc(href)}"${externalAttrs(links, href)} data-reveal data-delay="${i}">${inner}</a>`
-      : `<div class="channel channel--pending" data-reveal data-delay="${i}">${inner}</div>`;
+      ? `<a class="channel" href="${esc(href)}"${externalAttrs(links, href)}>${inner}</a>`
+      : `<div class="channel channel--pending">${inner}</div>`;
   };
 
   const cards = [
@@ -996,18 +1004,17 @@ function contactSection({ c, links, assets }) {
 
   return `<section class="section section--dark" id="contact" aria-labelledby="contact-title">
         <div class="shell">
-          <div class="section-head" data-reveal>
-            <p class="eyebrow">${esc(c.contact.eyebrow)}</p>
+          <div class="section-head">
             <h2 class="h-section" id="contact-title">${esc(c.contact.title)}</h2>
             <p class="lede">${esc(c.contact.lede)}</p>
           </div>
           <div class="contact-grid">
-            <div class="panel contact-form" data-reveal>
+            <div class="panel contact-form">
               <h3 class="contact-form__heading">${esc(f.heading)}</h3>
               <p class="contact-form__lede">${esc(f.lede)}</p>
               ${form}
             </div>
-            <div class="contact-aside" data-reveal data-delay="1">
+            <div class="contact-aside">
               <p class="presets__heading">${esc(c.contact.channelsHeading)}</p>
               <div class="channels channels--stacked">
               ${cards}
@@ -1057,7 +1064,7 @@ ${head(options)}
     <script>${INLINE_BOOT}</script>
     ${OBSERVABILITY}
   </head>
-  <body>
+  <body class="has-action-bar">
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
     ${siteHeader(options)}
     <main id="main">
@@ -1070,6 +1077,7 @@ ${head(options)}
       ${contactSection({ c, links, assets })}
     </main>
     ${siteFooter({ ...options })}
+    ${actionBar({ c, site, links, kind: 'home' })}
     <script src="${assetVersion('assets/js/main.js')}" defer></script>
   </body>
 </html>
@@ -1080,7 +1088,6 @@ export function renderNotFound({ contents, site, ogImage }) {
   const blocks = contents
     .map(
       (c) => `<section class="shell error-page__block" lang="${c.lang}">
-        <p class="eyebrow eyebrow--center">${esc(c.brand.name)}</p>
         <h1 class="h-section error-page__title">${esc(c.notFound.title)}</h1>
         <p>${esc(c.notFound.body)}</p>
         <div class="btn-row">
@@ -1292,13 +1299,14 @@ ${alternates.map((a) => `    <link rel="alternate" hreflang="${a.hreflang}" href
     <script>${INLINE_BOOT}</script>
     ${OBSERVABILITY}
   </head>
-  <body>
+  <body class="has-action-bar">
     <a class="skip-link" href="#main">${esc(c.a11y.skip)}</a>
     ${siteHeader({ c, site, assets, langHrefs })}
     <main id="main">
       ${catalogPageBody({ c, site })}
     </main>
     ${siteFooter({ c, site, assets, links, langHrefs })}
+    ${actionBar({ c, site, links, kind: 'catalog' })}
     <script src="${assetVersion('assets/js/main.js')}" defer></script>
   </body>
 </html>
