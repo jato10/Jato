@@ -326,14 +326,9 @@ function heroSection({ c, site, links }) {
         <div class="hero__bg" aria-hidden="true"></div>
         <div class="hero__glow" aria-hidden="true"></div>
         <div class="hero__grid" aria-hidden="true"></div>
+        <link rel="preload" as="image" href="/assets/img/hero-depth.webp" type="image/webp">
+        <div class="hero__depth" aria-hidden="true" data-depth></div>
         <div class="shell hero__inner">
-          <picture class="hero__logo-wrap">
-            <source media="(max-width: 767px)" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-            <img class="hero__logo" src="${assetVersion('assets/img/logo.webp')}" width="900" height="440"
-              srcset="${assetVersion('assets/img/logo-540.webp')} 540w, ${assetVersion('assets/img/logo.webp')} 900w"
-              sizes="(min-width: 581px) 430px, 74vw"
-              alt="${esc(c.brand.name)}" fetchpriority="high" decoding="async">
-          </picture>
           <h1 class="h-display" id="hero-title">${esc(c.hero.headline)}</h1>
           <p class="hero__tagline">${esc(c.hero.titlePlain)}</p>
           <p class="lede">${esc(c.hero.lede)}</p>
