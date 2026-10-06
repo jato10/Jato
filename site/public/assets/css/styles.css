@@ -611,15 +611,33 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
   pointer-events: none;
 }
 .hero__inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.hero__logo-wrap { display: contents; }
-/* Below 768px the logo gives its space to the headline and the catalog
-   button; the <picture> source already swapped in a 1px image, so nothing
-   is downloaded for it either. */
-@media (max-width: 767px) { .hero__logo-wrap { display: none; } }
-.hero__logo {
-  width: min(430px, 74vw);
-  margin-bottom: clamp(30px, 4.5vw, 52px);
-  filter: drop-shadow(0 22px 60px rgba(120, 170, 225, 0.22));
+/* The logo sits behind the content as a layer of depth, not in the flow, so it
+   takes no space on a phone and is never the thing the visitor has to read
+   around. Decorative: the brand name is in the header and the page title. */
+.hero__depth {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  z-index: -1;
+  width: clamp(560px, 130vw, 1240px);
+  aspect-ratio: 1400 / 819;
+  margin-left: calc(clamp(560px, 130vw, 1240px) / -2);
+  margin-top: calc(clamp(560px, 130vw, 1240px) * 819 / 1400 / -2);
+  background: url("/assets/img/hero-depth.webp") center / contain no-repeat;
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mix-blend-mode: screen;
+  opacity: 0.26;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateZ(-60px);
+  transition: transform 0.25s var(--ease-out);
+  pointer-events: none;
+}
+@keyframes depth-drift {
+  from { translate: 0 -6px; scale: 1; }
+  to { translate: 0 8px; scale: 1.025; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero__depth { animation: depth-drift 14s ease-in-out infinite alternate; }
 }
 /* The headline says what the business sells, which runs longer than the old
    three-word slogan, so it takes the title step. Plain on-dark colour: weight
@@ -707,19 +725,11 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
   .hero {
     padding-block: calc(var(--header-h) + clamp(36px, 5vh, 80px)) clamp(40px, 5vh, 80px);
   }
-  .hero__logo {
-    width: min(430px, 74vw, 32vh);
-    margin-bottom: clamp(20px, 3.4vh, 40px);
-  }
 }
 
 /* 1366x768 laptops land near 650px of viewport once browser chrome is counted:
    tighten the remaining vertical gaps so the actions still clear the fold. */
 @media (max-height: 700px) {
-  .hero__logo {
-    width: min(430px, 74vw, 24vh);
-    margin-bottom: clamp(14px, 2.4vh, 28px);
-  }
   .hero .lede { margin-top: clamp(14px, 2.2vh, 24px); }
   .hero__actions { margin-top: clamp(20px, 3vh, 32px); }
 }
@@ -1514,15 +1524,15 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
   to { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .hero__inner > :nth-child(n + 3) {
+  .hero__inner > :nth-child(n + 2) {
     animation: arrive 0.4s var(--ease-out) both;
     animation-delay: calc((var(--i, 0)) * 60ms + 80ms);
   }
-  .hero__inner > :nth-child(3) { --i: 0; }
-  .hero__inner > :nth-child(4) { --i: 1; }
-  .hero__inner > :nth-child(5) { --i: 2; }
-  .hero__inner > :nth-child(6) { --i: 3; }
-  .hero__inner > :nth-child(7) { --i: 4; }
+  .hero__inner > :nth-child(2) { --i: 0; }
+  .hero__inner > :nth-child(3) { --i: 1; }
+  .hero__inner > :nth-child(4) { --i: 2; }
+  .hero__inner > :nth-child(5) { --i: 3; }
+  .hero__inner > :nth-child(6) { --i: 4; }
 }
 
 /* Press feedback. A control has to react on pointer-down, not on release —

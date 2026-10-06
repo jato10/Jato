@@ -363,6 +363,28 @@
      press state at all without this empty passive listener. */
   document.addEventListener('touchstart', function () {}, { passive: true });
 
+  /* ---------------------------------------------------------- hero depth */
+  /* The logo layer leans a few degrees toward the pointer. Fine pointers only,
+     and never with reduced motion; touch screens keep the static layer. */
+  var depth = document.querySelector('[data-depth]');
+  if (depth && window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches) {
+    var hero = depth.parentElement, raf = 0;
+    hero.addEventListener('pointermove', function (e) {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        raf = 0;
+        var r = hero.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        depth.style.setProperty('--tilt-y', (x * 12).toFixed(2) + 'deg');
+        depth.style.setProperty('--tilt-x', (-y * 8).toFixed(2) + 'deg');
+      });
+    });
+    hero.addEventListener('pointerleave', function () {
+      depth.style.setProperty('--tilt-y', '0deg');
+      depth.style.setProperty('--tilt-x', '0deg');
+    });
+  }
+
   /* ---------------------------------------------------------- footer year */
   var year = document.querySelector('[data-year]');
   if (year) year.textContent = String(new Date().getFullYear());
