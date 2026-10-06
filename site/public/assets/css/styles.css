@@ -430,7 +430,7 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
 }
 
 .brand { display: flex; align-items: center; gap: 12px; flex: none; min-height: 44px; }
-.brand img { height: clamp(30px, 3.4vw, 40px); width: auto; }
+.brand img { height: clamp(38px, 4.25vw, 50px); width: auto; }
 .brand__name {
   font-size: var(--fs-label);
   font-weight: 600;
@@ -611,34 +611,6 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
   pointer-events: none;
 }
 .hero__inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
-/* The logo sits behind the content as a layer of depth, not in the flow, so it
-   takes no space on a phone and is never the thing the visitor has to read
-   around. Decorative: the brand name is in the header and the page title. */
-.hero__depth {
-  position: absolute;
-  left: 50%;
-  top: 34%;
-  z-index: -1;
-  width: clamp(560px, 130vw, 1240px);
-  aspect-ratio: 1400 / 819;
-  margin-left: calc(clamp(560px, 130vw, 1240px) / -2);
-  margin-top: calc(clamp(560px, 130vw, 1240px) * 819 / 1400 / -2);
-  background: url("/assets/img/hero-depth.webp") center / contain no-repeat;
-  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
-  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
-  mix-blend-mode: screen;
-  opacity: 0.26;
-  transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateZ(-60px);
-  transition: transform 0.25s var(--ease-out);
-  pointer-events: none;
-}
-@keyframes depth-drift {
-  from { translate: 0 -6px; scale: 1; }
-  to { translate: 0 8px; scale: 1.025; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .hero__depth { animation: depth-drift 14s ease-in-out infinite alternate; }
-}
 /* The headline says what the business sells, which runs longer than the old
    three-word slogan, so it takes the title step. Plain on-dark colour: weight
    and size carry the emphasis, not a gradient. */

@@ -326,8 +326,6 @@ function heroSection({ c, site, links }) {
         <div class="hero__bg" aria-hidden="true"></div>
         <div class="hero__glow" aria-hidden="true"></div>
         <div class="hero__grid" aria-hidden="true"></div>
-        <link rel="preload" as="image" href="/assets/img/hero-depth.webp" type="image/webp">
-        <div class="hero__depth" aria-hidden="true" data-depth></div>
         <div class="shell hero__inner">
           <h1 class="h-display" id="hero-title">${esc(c.hero.headline)}</h1>
           <p class="hero__tagline">${esc(c.hero.titlePlain)}</p>
