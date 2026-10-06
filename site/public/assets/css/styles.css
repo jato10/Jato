@@ -1,7 +1,8 @@
 /* ==========================================================================
    Global Beyond LLC — site styles
-   Design language: cinematic dark/light rhythm, generous whitespace,
-   brushed-steel accents drawn from the brand mark, restrained motion.
+   Design language: navy and silver, hierarchy from size and weight (no
+   ornament), one authored entrance, immediate press feedback. Decisions and
+   verified facts live in /DESIGN.md.
    ========================================================================== */
 
 /* --------------------------------------------------------------- 0. Font */
@@ -47,16 +48,32 @@
   --line-light-soft: rgba(12, 20, 32, 0.06);
 
   --steel: linear-gradient(135deg, #ffffff 0%, #d6e2ee 26%, #97aabd 52%, #eef4fa 74%, #8ea1b5 100%);
-  --steel-text: linear-gradient(180deg, #ffffff 0%, #cfdcea 55%, #93a6ba 100%);
   --halo: radial-gradient(60% 60% at 50% 40%, rgba(150, 190, 235, 0.16) 0%, rgba(7, 11, 20, 0) 70%);
 
   --radius-lg: 24px;
   --radius-md: 16px;
   --radius-sm: 10px;
 
+  /* One spacing scale. Related things sit close (1-3), groups separate (4-6),
+     sections breathe (7-10). */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Two depths, both with an offset and a soft blur. Resting and lifted. */
+  --shadow-1: 0 1px 2px rgba(12, 20, 32, 0.06), 0 10px 24px -8px rgba(12, 20, 32, 0.16);
+  --shadow-2: 0 2px 4px rgba(12, 20, 32, 0.08), 0 18px 36px -10px rgba(12, 20, 32, 0.24);
+
   --shell: 1240px;
   --gutter: clamp(20px, 5vw, 56px);
-  --section-y: clamp(76px, 11vw, 168px);
+  --section-y: clamp(var(--space-8), 9vw, 144px);
   --header-h: 68px;
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -100,6 +117,9 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-h) + 16px);
   color-scheme: dark;
+  /* The scrollbar belongs to the palette too. */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(138, 153, 172, 0.5) var(--ink-950);
 }
 
 body {
@@ -142,7 +162,18 @@ a, button, input, textarea, select {
   border-radius: 4px;
 }
 
-::selection { background: rgba(158, 197, 240, 0.32); }
+::selection { background: rgba(158, 197, 240, 0.34); color: inherit; }
+.section--light ::selection,
+.section--light-alt ::selection { background: rgba(29, 77, 128, 0.22); }
+
+/* Native control chrome, themed: caret, checked radios, text underlines. */
+input, textarea { caret-color: #9ec5f0; accent-color: #9ec5f0; }
+.section--light input, .section--light textarea { caret-color: #1d4d80; }
+p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+
+/* The same ring would vanish on paper (1.7:1); on light grounds it is navy. */
+.section--light :focus-visible,
+.section--light-alt :focus-visible { outline-color: #1d4d80; }
 
 /* ------------------------------------------------------- 3. Primitives */
 .shell {
@@ -190,29 +221,6 @@ a, button, input, textarea, select {
   border: 0;
 }
 
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 22px;
-  font-size: var(--fs-label);
-  font-weight: 600;
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  color: var(--on-dark-dim);
-}
-.eyebrow--center { justify-content: center; }
-.eyebrow::before {
-  content: "";
-  width: 34px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.55;
-  flex: none;
-}
-.section--light .eyebrow,
-.section--light-alt .eyebrow { color: var(--slate-500); }
-
 .h-display {
   font-size: var(--fs-hero);
   letter-spacing: -0.035em;
@@ -245,8 +253,9 @@ a, button, input, textarea, select {
 .section--light .body-text,
 .section--light-alt .body-text { color: var(--on-light-muted); }
 
-.section-head { max-width: 780px; margin-bottom: clamp(44px, 6vw, 76px); }
-.section-head .lede { margin-top: 22px; }
+.section-head { max-width: 780px; margin-bottom: clamp(var(--space-6), 5vw, var(--space-8)); }
+.section-head .lede { margin-top: var(--space-4); }
+.product-card__price, .product-detail__price-value, .hero-pick__price { font-variant-numeric: tabular-nums; }
 
 /* --------------------------------------------------------- 4. Buttons */
 .btn {
@@ -262,9 +271,8 @@ a, button, input, textarea, select {
   font-weight: 600;
   letter-spacing: -0.01em;
   text-align: center;
-  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out),
-    background-color 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
-  will-change: transform;
+  transition: transform 0.25s var(--ease-out), scale 0.12s var(--ease-out), box-shadow 0.25s var(--ease-out),
+    background-color 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
 }
 
 .btn--primary {
@@ -272,14 +280,17 @@ a, button, input, textarea, select {
   background: linear-gradient(180deg, #ffffff 0%, #dbe6f2 55%, #b9c9da 100%);
   box-shadow: 0 10px 30px rgba(120, 160, 210, 0.18);
 }
-.btn--primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(120, 160, 210, 0.28); }
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(120, 160, 210, 0.28); }
+  .btn--ghost:hover { transform: translateY(-2px); }
+}
 
 .btn--ghost {
   color: var(--on-dark);
   border: 1px solid var(--line-dark);
   background: rgba(255, 255, 255, 0.03);
 }
-.btn--ghost:hover { border-color: rgba(255, 255, 255, 0.26); background: rgba(255, 255, 255, 0.07); transform: translateY(-2px); }
+.btn--ghost:hover { border-color: rgba(255, 255, 255, 0.26); background: rgba(255, 255, 255, 0.07); }
 
 .section--light .btn--ghost,
 .section--light-alt .btn--ghost {
@@ -301,9 +312,48 @@ a, button, input, textarea, select {
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
 
-.btn__arrow { width: 16px; height: 16px; flex: none; transition: transform 0.35s var(--ease-out); }
+.btn__arrow { width: 16px; height: 16px; flex: none; transition: transform 0.25s var(--ease-out); }
 .btn:hover .btn__arrow { transform: translateX(4px); }
 .btn:active .btn__arrow { transform: translateX(2px); }
+
+/* Phone action bar (see actionBar() in template.mjs and main.js). Fixed to
+   the bottom, in reach of the thumb; hidden until the hero buttons are behind
+   the visitor, and never on tablets and up where the header carries the way. */
+.action-bar { display: none; }
+@media (max-width: 767px) {
+  .js .action-bar {
+    --btn-h: 48px;
+    display: flex;
+    gap: var(--space-2);
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 90;
+    padding: var(--space-3) max(var(--gutter), env(safe-area-inset-right))
+      calc(var(--space-3) + env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
+    background: rgba(7, 11, 20, 0.9);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    backdrop-filter: saturate(160%) blur(16px);
+    transform: translateY(110%);
+    visibility: hidden;
+    transition: transform 0.28s var(--ease-out), visibility 0s linear 0.28s;
+  }
+  /* A soft fade where the bar meets the page, not a hard rule. */
+  .js .action-bar::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 100% 0;
+    height: var(--space-5);
+    background: linear-gradient(180deg, rgba(7, 11, 20, 0), rgba(7, 11, 20, 0.55));
+    pointer-events: none;
+  }
+  .js .action-bar.is-shown { transform: none; visibility: visible; transition-delay: 0s; }
+  .action-bar .btn { padding-inline: var(--space-4); }
+  .action-bar .btn--primary { flex: 2 1 0; }
+  .action-bar .btn--ghost { flex: 1 1 0; }
+  .action-bar--catalog .btn--primary { flex: 1 1 auto; }
+  /* Room under the footer so the bar never covers its last line. */
+  .js body.has-action-bar { padding-bottom: calc(var(--space-9) + env(safe-area-inset-bottom)); }
+}
 
 .link-arrow {
   display: inline-flex;
@@ -312,7 +362,7 @@ a, button, input, textarea, select {
   min-height: 44px;
   font-weight: 600;
   color: #a9c9ee;
-  transition: gap 0.3s var(--ease-out), color 0.3s var(--ease);
+  transition: gap 0.25s var(--ease-out), color 0.2s var(--ease), scale 0.12s var(--ease-out);
 }
 .link-arrow::after { content: "\2192"; transition: transform 0.3s var(--ease-out); }
 .link-arrow:hover { gap: 12px; color: #cfe2f8; }
@@ -444,7 +494,7 @@ a, button, input, textarea, select {
   font-weight: 600;
   letter-spacing: var(--ls-label);
   color: var(--on-dark-dim);
-  transition: color 0.3s var(--ease), background-color 0.3s var(--ease);
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease), scale 0.12s var(--ease-out);
 }
 .lang__item:hover { color: var(--on-dark); }
 .lang__item[aria-current="page"] { color: #0a1120; background: linear-gradient(180deg, #f3f7fb, #c9d7e6); }
@@ -571,25 +621,16 @@ a, button, input, textarea, select {
   margin-bottom: clamp(30px, 4.5vw, 52px);
   filter: drop-shadow(0 22px 60px rgba(120, 170, 225, 0.22));
 }
-.hero__eyebrow {
-  justify-content: center;
-  color: var(--on-dark-dim);
-  margin-bottom: 26px;
-}
-.hero__eyebrow::before { display: none; }
-/* The headline now says what the business sells, which runs longer than the
-   old three-word slogan: it takes the title step instead of the display one. */
+/* The headline says what the business sells, which runs longer than the old
+   three-word slogan, so it takes the title step. Plain on-dark colour: weight
+   and size carry the emphasis, not a gradient. */
 .hero h1 {
   font-size: var(--fs-title);
   line-height: 1.08;
   max-width: 22ch;
-  background: var(--steel-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--on-dark);
   padding-bottom: 0.08em;
 }
-@supports not (background-clip: text) { .hero h1 { color: var(--on-dark); } }
 .hero__tagline {
   margin: clamp(12px, 1.6vw, 18px) 0 0;
   font-size: var(--fs-sub);
@@ -670,7 +711,6 @@ a, button, input, textarea, select {
     width: min(430px, 74vw, 32vh);
     margin-bottom: clamp(20px, 3.4vh, 40px);
   }
-  .hero__eyebrow { margin-bottom: clamp(16px, 2.4vh, 26px); }
 }
 
 /* 1366x768 laptops land near 650px of viewport once browser chrome is counted:
@@ -684,33 +724,6 @@ a, button, input, textarea, select {
   .hero__actions { margin-top: clamp(20px, 3vh, 32px); }
 }
 
-.hero__scroll {
-  position: absolute;
-  left: 50%;
-  bottom: 26px;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 54px;
-  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  overflow: hidden;
-}
-@media (max-width: 700px) { .hero__scroll { display: none; } }
-.js .hero__scroll::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: 18px;
-  background: rgba(190, 220, 250, 0.9);
-  /* One pass only (under 5s total) — an indefinite loop is autoplaying motion
-     that WCAG 2.2.2 requires a pause/stop control for; a single cue needs none. */
-  animation: scrollHint 2.6s var(--ease) 1;
-}
-@keyframes scrollHint {
-  0% { transform: translateY(-20px); opacity: 0; }
-  40% { opacity: 1; }
-  100% { transform: translateY(56px); opacity: 0; }
-}
 
 /* --------------------------------------------------------- 7. Tabs */
 /* Tabs/panel column plus the flow card beside it. Below 900px the flow card
@@ -728,14 +741,19 @@ a, button, input, textarea, select {
   width: fit-content;
 }
 .tabs__tab {
+  min-height: 44px;
   padding: 10px 22px;
   border-radius: 999px;
   font-size: var(--fs-ui);
   font-weight: 600;
   color: var(--on-light-muted);
-  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease), scale 0.12s var(--ease-out);
 }
-.tabs__tab:hover { color: var(--on-light); }
+@media (hover: hover) and (pointer: fine) { .tabs__tab:hover { color: var(--on-light); } }
+@media (max-width: 520px) {
+  .js .tabs__list { width: 100%; gap: 2px; padding: 4px; }
+  .tabs__tab { flex: 1 1 auto; min-height: 44px; padding: 10px 8px; font-size: var(--fs-detail); white-space: nowrap; text-align: center; }
+}
 .tabs__tab[aria-selected="true"] {
   background: var(--paper-50);
   color: var(--on-light);
@@ -753,15 +771,6 @@ a, button, input, textarea, select {
 .js .tabs__panel { display: none; }
 .js .tabs__panel.is-active { display: block; }
 
-.card__index {
-  display: block;
-  margin-bottom: 18px;
-  font-size: var(--fs-label);
-  font-weight: 600;
-  letter-spacing: var(--ls-label);
-  color: var(--slate-500);
-}
-.accordion .card__index { color: var(--on-dark-dim); }
 
 /* --------------------------------------------------------- 7a. Accordion */
 .accordion { border-top: 1px solid var(--line-dark); }
@@ -775,6 +784,7 @@ a, button, input, textarea, select {
   list-style: none;
 }
 .accordion__summary::-webkit-details-marker { display: none; }
+.accordion__summary, .menu-toggle { transition: scale 0.12s var(--ease-out); }
 .accordion__title { flex: 1; }
 .accordion__icon {
   position: relative;
@@ -899,12 +909,10 @@ a, button, input, textarea, select {
 .product-category { margin-top: clamp(40px, 5vw, 56px); }
 .product-category:first-of-type { margin-top: 0; }
 .product-category__label {
-  font-size: var(--fs-label);
-  font-weight: 600;
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  color: var(--on-dark-dim);
-  padding-bottom: 16px;
+  font-size: var(--fs-head);
+  letter-spacing: -0.022em;
+  color: var(--on-dark);
+  padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--line-dark);
 }
 .product-grid {
@@ -922,11 +930,8 @@ a, button, input, textarea, select {
   overflow: hidden;
   transition: border-color 0.3s var(--ease), transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), scale 0.12s var(--ease-out);
 }
-.product-card:hover {
-  border-color: var(--slate-400);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(12, 20, 32, 0.08);
-}
+.product-card:hover { border-color: var(--slate-400); box-shadow: var(--shadow-2); }
+@media (hover: hover) and (pointer: fine) { .product-card:hover { transform: translateY(-2px); } }
 .product-card__media {
   position: relative;
   display: block;
@@ -978,13 +983,22 @@ a, button, input, textarea, select {
   background: var(--paper-50);
 }
 .product-detail__figure img { width: 100%; height: auto; display: block; }
-.product-detail__name { margin-top: 12px; }
+.product-detail__name { margin-top: 0; }
+.product-detail__meta { margin-top: var(--space-3); font-size: var(--fs-detail); color: var(--on-dark-dim); }
 .product-detail__price { display: flex; align-items: baseline; gap: 12px; margin: 0; }
 .product-detail__price-label { font-size: var(--fs-label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--on-dark-dim); }
 .product-detail__price-value { font-size: var(--fs-head); font-weight: 600; letter-spacing: -0.01em; color: var(--on-dark); }
 
 /* Buy box — compact, sits beside the photo, holds the price, the payment
    options and the order form (collapsed until the visitor opens it). */
+/* On phones the decision comes before the description: name, price and the
+   order button fit in the first screen, the longer text follows. Reading order
+   stays sensible either way — the button is the first focusable thing. */
+@media (max-width: 779px) {
+  .product-detail__info { display: flex; flex-direction: column; }
+  .product-detail__info > .body-text { order: 3; }
+  .product-detail__info > .buy-box { order: 2; margin-top: var(--space-5); }
+}
 .buy-box {
   margin-top: clamp(24px, 3vw, 32px);
   padding: clamp(20px, 2.4vw, 26px);
@@ -1015,7 +1029,7 @@ a, button, input, textarea, select {
   font-size: var(--fs-detail);
   color: var(--on-dark-muted);
   cursor: pointer;
-  transition: border-color 0.25s var(--ease), color 0.25s var(--ease), background-color 0.25s var(--ease);
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease), background-color 0.2s var(--ease), scale 0.12s var(--ease-out);
 }
 .payment-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .payment-option:has(input:checked) {
@@ -1271,10 +1285,10 @@ a.channel:hover { border-color: rgba(255, 255, 255, 0.3); }
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
   color: var(--on-dark);
-  transition: transform 0.4s var(--ease-out), background-color 0.4s var(--ease);
+  transition: background-color 0.25s var(--ease);
 }
 .channel__icon svg { width: 22px; height: 22px; }
-a.channel:hover .channel__icon { transform: scale(1.08) rotate(-6deg); background: rgba(255, 255, 255, 0.12); }
+a.channel:hover .channel__icon { background: rgba(255, 255, 255, 0.12); }
 .channel--pending .channel__icon { opacity: 0.6; }
 .channel h3 { font-size: var(--fs-sub); margin: 0; }
 .channel--pending h3 { color: var(--on-dark); }
@@ -1332,10 +1346,10 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
   letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--on-dark-muted);
-  transition: color 0.3s var(--ease);
+  transition: color 0.2s var(--ease), scale 0.12s var(--ease-out);
 }
 .field:focus-within .field__label { color: #9ec5f0; }
-.field__hint { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--on-dark-dim); }
+.field__hint { font-size: var(--fs-detail); font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--on-dark-dim); }
 .field__note { margin-top: -4px; font-size: var(--fs-detail); color: var(--on-dark-dim); }
 
 .field__input {
@@ -1355,7 +1369,8 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
 .field__input::placeholder { color: #6f7f93; }
 .field__input:hover { border-color: rgba(255, 255, 255, 0.2); }
 .field__input:focus-visible {
-  outline: none;
+  outline: 2px solid #9ec5f0;
+  outline-offset: 2px;
   border-color: #9ec5f0;
   background: rgba(4, 7, 14, 0.72);
   box-shadow: 0 0 0 3px rgba(158, 197, 240, 0.22);
@@ -1419,7 +1434,7 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
   min-height: 44px;
   font-size: var(--fs-detail);
   color: var(--on-dark-dim);
-  transition: color 0.3s var(--ease);
+  transition: color 0.2s var(--ease), scale 0.12s var(--ease-out);
 }
 .footer__legalnav a:hover { color: var(--on-dark); }
 
@@ -1471,10 +1486,7 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
   font-size: var(--fs-display);
   font-weight: 600;
   letter-spacing: -0.04em;
-  background: var(--steel-text);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #cfdcea;
   line-height: 1;
 }
 .error-page img { width: min(300px, 62vw); margin: 0 auto clamp(30px, 5vw, 50px); }
@@ -1492,24 +1504,26 @@ a:hover > .footer__contact-icon { transform: translateY(-2px); }
 .gate__links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 34px; }
 
 /* --------------------------------------------------------- 14. Motion */
-[data-delay="1"] { --reveal-delay: 1; }
-[data-delay="2"] { --reveal-delay: 2; }
-[data-delay="3"] { --reveal-delay: 3; }
-[data-delay="4"] { --reveal-delay: 4; }
-[data-delay="5"] { --reveal-delay: 5; }
-
-.js [data-reveal] {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.38s var(--ease-out), transform 0.38s var(--ease-out);
-  transition-delay: calc(var(--reveal-delay, 0) * 40ms);
+/* One authored moment: the hero's supporting lines and products arrive one
+   after another when the page opens, a short rise from an already-visible
+   layout. The logo and the headline are never animated, so the first thing
+   painted is the first thing read. CSS only — there is nothing for a script
+   to fail at, and `both` only holds the start state during each delay. */
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
-.js [data-reveal].is-visible { opacity: 1; transform: none; }
-
-/* Content that's already in view on load (the hero) is revealed on the very
-   first frame anyway — see main.js's sweep() — so animating it in only adds
-   a needless delay before the page's LCP element visibly paints. */
-.js [data-reveal].is-visible-instant { transition: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero__inner > :nth-child(n + 3) {
+    animation: arrive 0.4s var(--ease-out) both;
+    animation-delay: calc((var(--i, 0)) * 60ms + 80ms);
+  }
+  .hero__inner > :nth-child(3) { --i: 0; }
+  .hero__inner > :nth-child(4) { --i: 1; }
+  .hero__inner > :nth-child(5) { --i: 2; }
+  .hero__inner > :nth-child(6) { --i: 3; }
+  .hero__inner > :nth-child(7) { --i: 4; }
+}
 
 /* Press feedback. A control has to react on pointer-down, not on release —
    otherwise a tap (where there is no hover state at all) feels like nothing
@@ -1552,28 +1566,25 @@ a.channel:active {
 
 .rating__star:active .star { scale: 0.88; }
 
+/* Reduced motion means gentler, not dead: movement goes, colour and opacity
+   changes that help comprehension stay. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  [data-delay="1"] { --reveal-delay: 1; }
-[data-delay="2"] { --reveal-delay: 2; }
-[data-delay="3"] { --reveal-delay: 3; }
-[data-delay="4"] { --reveal-delay: 4; }
-[data-delay="5"] { --reveal-delay: 5; }
-
-.js [data-reveal] { opacity: 1 !important; transform: none !important; }
-  .hero__scroll { display: none; }
+  .btn:hover, .product-card:hover { transform: none; }
+  .js .action-bar { transform: none; opacity: 0; transition: opacity 0.2s linear, visibility 0s linear 0.2s; }
+  .js .action-bar.is-shown { opacity: 1; transition-delay: 0s; }
 }
 
 /* Some people ask their system for solid surfaces instead of translucent
    ones. Honour that: the floating chrome becomes opaque, the blur goes away,
    and the edge that the fade was carrying comes back as a real line. */
 @media (prefers-reduced-transparency: reduce) {
+  .js .action-bar { background: var(--ink-900); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .header.is-stuck {
     background: var(--ink-900);
     -webkit-backdrop-filter: none;
@@ -1593,6 +1604,7 @@ a.channel:active {
 /* And some ask for more contrast. Muted text stops being muted, every
    dividing line becomes visible, and translucent chrome goes solid. */
 @media (prefers-contrast: more) {
+  .js .action-bar { background: var(--ink-900); -webkit-backdrop-filter: none; backdrop-filter: none; border-top: 1px solid var(--line-dark); }
   :root {
     --on-dark-muted: #dde5ee;
     --on-dark-dim: #c6d2e0;
@@ -1622,6 +1634,6 @@ a.channel:active {
 }
 
 @media print {
-  .header, .hero__scroll, .btn-row, .menu-toggle { display: none !important; }
+  .header, .btn-row, .menu-toggle { display: none !important; }
   body { background: #fff; color: #000; }
 }

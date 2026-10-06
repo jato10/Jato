@@ -3,8 +3,6 @@
 (function () {
   'use strict';
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
   /* ------------------------------------------------------------- header */
   var header = document.querySelector('[data-header]');
   if (header) {
@@ -65,68 +63,46 @@
     else if (desktop.addListener) desktop.addListener(syncViewport);
   }
 
-  /* ------------------------------------------------------------ reveals */
-  /* A rect sweep rather than a bare IntersectionObserver: anything at or above
-     the fold — including everything the visitor has already scrolled past — is
-     revealed on the next frame, so no copy can ever be left hidden. */
-  var revealables = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  /* --------------------------------------------------------- action bar */
+  /* The phone action bar appears once the hero's own buttons are well behind
+     the visitor, and steps aside where it would sit on top of its own target:
+     while the contact section is on screen, while a form field has focus
+     (the on-screen keyboard), and while the menu is open. */
+  var actionBar = document.querySelector('[data-action-bar]');
+  if (actionBar) {
+    var pastHero = false;
+    var inContact = false;
+    var typing = false;
+    var barQueued = false;
 
-  var revealAll = function () {
-    revealables.forEach(function (el) { el.classList.add('is-visible'); });
-    revealables = [];
-  };
+    var syncBar = function () {
+      barQueued = false;
+      pastHero = window.scrollY > window.innerHeight * 0.6;
+      var menuOpen = !!(toggle && toggle.getAttribute('aria-expanded') === 'true');
+      actionBar.classList.toggle('is-shown', pastHero && !inContact && !typing && !menuOpen);
+    };
+    var queueBar = function () {
+      if (barQueued) return;
+      barQueued = true;
+      window.requestAnimationFrame(syncBar);
+    };
 
-  if (revealables.length) {
-    if (reduceMotion.matches) {
-      revealAll();
-    } else {
-      var queued = false;
+    window.addEventListener('scroll', queueBar, { passive: true });
+    window.addEventListener('resize', queueBar);
+    if (toggle) toggle.addEventListener('click', queueBar);
 
-      var sweep = function () {
-        queued = false;
-        /* Start a block a tenth of a screen before it scrolls into view, so
-           by the time the visitor's eyes reach it the motion has already
-           settled and the content is simply there. */
-        var limit = window.innerHeight * 1.1;
-        /* On a short page the last block can sit close enough to the bottom
-           that its top never crosses that line — the page simply can't
-           scroll any further to bring it there. Once the visitor has hit the
-           bottom of the page, reveal whatever is left regardless of rect.top
-           so nothing stays permanently hidden. */
-        var atBottom = window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 2;
-        revealables = revealables.filter(function (el) {
-          var rect = el.getBoundingClientRect();
-          if (atBottom || rect.top < limit) {
-            el.classList.add('is-visible');
-            return false;
-          }
-          return true;
-        });
-        if (!revealables.length) detach();
-      };
+    var isField = function (el) { return !!el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName); };
+    document.addEventListener('focusin', function (event) { typing = isField(event.target); queueBar(); });
+    document.addEventListener('focusout', function () { typing = false; queueBar(); });
 
-      var request = function () {
-        if (queued) return;
-        queued = true;
-        window.requestAnimationFrame(sweep);
-      };
-
-      var detach = function () {
-        window.removeEventListener('scroll', request);
-        window.removeEventListener('resize', request);
-        window.removeEventListener('load', request);
-      };
-
-      window.addEventListener('scroll', request, { passive: true });
-      window.addEventListener('resize', request, { passive: true });
-      window.addEventListener('load', request);
-      request();
-
-      /* Honour a mid-session switch to reduced motion. */
-      var onMotionChange = function () { if (reduceMotion.matches) { revealAll(); detach(); } };
-      if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', onMotionChange);
-      else if (reduceMotion.addListener) reduceMotion.addListener(onMotionChange);
+    var contact = document.getElementById('contact');
+    if (contact && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        inContact = entries[0].isIntersecting;
+        queueBar();
+      }, { threshold: 0.1 }).observe(contact);
     }
+    syncBar();
   }
 
   /* -------------------------------------------------- current section nav */
