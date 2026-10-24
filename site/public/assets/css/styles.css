@@ -48,7 +48,8 @@
   --line-light-soft: rgba(12, 20, 32, 0.06);
 
   --steel: linear-gradient(135deg, #ffffff 0%, #d6e2ee 26%, #97aabd 52%, #eef4fa 74%, #8ea1b5 100%);
-  --halo: radial-gradient(60% 60% at 50% 40%, rgba(150, 190, 235, 0.16) 0%, rgba(7, 11, 20, 0) 70%);
+  --halo: radial-gradient(50% 46% at 50% 28%, rgba(150, 190, 235, 0.26) 0%, rgba(7, 11, 20, 0) 72%),
+    radial-gradient(38% 38% at 82% 74%, rgba(110, 150, 210, 0.12) 0%, rgba(7, 11, 20, 0) 72%);
 
   --radius-lg: 24px;
   --radius-md: 16px;
@@ -73,7 +74,7 @@
 
   --shell: 1240px;
   --gutter: clamp(20px, 5vw, 56px);
-  --section-y: clamp(var(--space-8), 9vw, 144px);
+  --section-y: clamp(var(--space-8), 11vw, 176px);
   --header-h: 68px;
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -86,8 +87,8 @@
      hierarchy. The uppercase micro-labels all share one tracking for the same
      reason. */
   --fs-display: clamp(3.4rem, 12vw, 7rem);
-  --fs-hero: clamp(2.2rem, 7.2vw, 5.4rem);
-  --fs-title: clamp(1.85rem, 4.3vw, 3.15rem);
+  --fs-hero: clamp(2.35rem, 6.4vw, 4.8rem);
+  --fs-title: clamp(2rem, 5.2vw, 3.9rem);
   --fs-head: clamp(1.5rem, 2.6vw, 2rem);
   --fs-sub: clamp(1.15rem, 1.6vw, 1.35rem);
   --fs-lede: clamp(1.05rem, 1.35vw, 1.2rem);
@@ -223,17 +224,18 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
 
 .h-display {
   font-size: var(--fs-hero);
-  letter-spacing: -0.035em;
-  line-height: 1.03;
-  font-weight: 600;
+  letter-spacing: -0.042em;
+  line-height: 1.02;
+  font-weight: 650;
   text-wrap: balance;
 }
 
 .h-section {
   font-size: var(--fs-title);
-  letter-spacing: -0.03em;
-  line-height: 1.08;
-  max-width: 20ch;
+  letter-spacing: -0.038em;
+  line-height: 1.04;
+  font-weight: 650;
+  max-width: 18ch;
   text-wrap: balance;
 }
 
@@ -615,9 +617,9 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
    three-word slogan, so it takes the title step. Plain on-dark colour: weight
    and size carry the emphasis, not a gradient. */
 .hero h1 {
-  font-size: var(--fs-title);
-  line-height: 1.08;
-  max-width: 22ch;
+  font-size: var(--fs-hero);
+  line-height: 1.04;
+  max-width: 17ch;
   color: var(--on-dark);
   padding-bottom: 0.08em;
 }
@@ -638,9 +640,9 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
   width: 100%;
-  max-width: 760px;
+  max-width: 900px;
 }
 @media (min-width: 768px) { .hero-picks { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .hero-pick {
@@ -648,26 +650,27 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
   flex-direction: column;
   gap: 4px;
   height: 100%;
-  padding: 10px 10px 12px;
-  border-radius: var(--radius-md);
+  padding: 12px 12px 16px;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--line-dark);
-  background: rgba(255, 255, 255, 0.03);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
   text-align: left;
-  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease), scale 0.12s var(--ease-out);
+  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease), transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), scale 0.12s var(--ease-out);
 }
-.hero-pick:hover { border-color: rgba(255, 255, 255, 0.26); background: rgba(255, 255, 255, 0.06); }
+.hero-pick:hover { border-color: rgba(255, 255, 255, 0.28); box-shadow: 0 24px 48px -20px rgba(120, 170, 235, 0.35); }
+@media (hover: hover) and (pointer: fine) { .hero-pick:hover { transform: translateY(-4px); } }
 .hero-pick:active { scale: 0.98; }
 .hero-pick img {
   width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   background: var(--paper-50);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .hero-pick__name {
-  font-size: var(--fs-detail);
+  font-size: var(--fs-ui);
   line-height: 1.35;
   color: var(--on-dark-muted);
 }
@@ -916,19 +919,23 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
   display: grid;
   gap: 20px;
   margin-top: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
 }
 .product-card {
   display: flex;
   flex-direction: column;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--line-light);
   background: var(--paper-50);
+  box-shadow: var(--shadow-1);
   overflow: hidden;
-  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), scale 0.12s var(--ease-out);
+  transition: border-color 0.3s var(--ease), transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), scale 0.12s var(--ease-out);
 }
 .product-card:hover { border-color: var(--slate-400); box-shadow: var(--shadow-2); }
-@media (hover: hover) and (pointer: fine) { .product-card:hover { transform: translateY(-2px); } }
+@media (hover: hover) and (pointer: fine) { .product-card:hover { transform: translateY(-6px); } }
+.product-card__media { overflow: hidden; }
+.product-card__media img { transition: transform 0.6s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) { .product-card:hover .product-card__media img { transform: scale(1.04); } }
 .product-card__media {
   position: relative;
   display: block;
@@ -951,9 +958,9 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
   text-transform: uppercase;
 }
 .product-detail__badge { top: 16px; left: 16px; }
-.product-card__body { display: flex; flex-direction: column; gap: 8px; padding: clamp(18px, 2.2vw, 22px); }
-.product-card__name { font-size: var(--fs-body); font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
-.product-card__desc { font-size: var(--fs-detail); line-height: 1.55; color: var(--on-light-muted); }
+.product-card__body { display: flex; flex-direction: column; gap: 10px; padding: clamp(22px, 2.6vw, 30px); }
+.product-card__name { font-size: var(--fs-sub); font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
+.product-card__desc { font-size: var(--fs-ui); line-height: 1.55; color: var(--on-light-muted); }
 .product-card__price { margin-top: auto; padding-top: 6px; font-size: var(--fs-sub); font-weight: 600; letter-spacing: -0.01em; color: var(--on-light); }
 .product-card__note { margin: 0; font-size: var(--fs-detail); color: var(--slate-500); }
 
@@ -1637,4 +1644,22 @@ a.channel:active {
 @media print {
   .header, .btn-row, .menu-toggle { display: none !important; }
   body { background: #fff; color: #000; }
+}
+
+/* ----------------------------------------------- 15. Scroll entrance */
+/* Product cards rise into place as they enter the viewport. Pure CSS on a view
+   timeline: where the browser does not support it, or with reduced motion,
+   the cards are simply there. Transform and opacity only. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .product-card {
+      animation: card-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
 }
