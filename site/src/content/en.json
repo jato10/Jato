@@ -5,8 +5,8 @@
   "path": "/en/",
   "meta": {
     "title": "Global Beyond LLC | E-Commerce, Retail & Wholesale in Miami",
-    "description": "Discover Global Beyond LLC and request the latest product catalog, availability, pricing, ordering, and shipping details directly from our team in Miami.",
-    "ogAlt": "Global Beyond LLC — Beyond Borders. Beyond Possibilities."
+    "description": "Global Beyond LLC is an e-commerce company based in Miami, Florida.",
+    "ogAlt": "Global Beyond LLC"
   },
   "brand": {
     "name": "Global Beyond LLC",
@@ -43,10 +43,8 @@
     }
   ],
   "hero": {
-    "eyebrow": "Miami, Florida — United States",
     "headline": "Gaming, kitchen and personal care — retail and wholesale from Miami.",
-    "titlePlain": "Beyond Borders. Beyond Possibilities.",
-    "lede": "Global Beyond LLC connects products, people, and opportunities — through careful selection and direct, human service.",
+    "lede": "Global Beyond LLC is an e-commerce company based in Miami, Florida. It sells its products through third-party e-commerce platforms.",
     "whatsappMessage": "Hello Global Beyond, I am looking for a specific product and would like to check availability and pricing.",
     "featured": [
       "ps5-console",
@@ -54,62 +52,43 @@
       "ninja-air-fryer",
       "healena"
     ],
-    "featuredLabel": "Featured products",
-    "note": "Our selection evolves, so availability, pricing, and shipping details are always confirmed for your specific request."
+    "featuredLabel": "Featured products"
   },
   "cta": {
     "catalog": "See catalog & prices",
     "whatsapp": "Chat on WhatsApp"
   },
   "services": {
-    "eyebrow": "What we do",
     "tabsLabel": "Ways to work with us",
-    "title": "Three ways to work with us.",
-    "lede": "Retail, wholesale, and the B2B catalog — each one answered directly by a real person.",
+    "title": "Retail, wholesale and B2B catalog.",
     "items": [
       {
         "title": "Retail",
-        "body": "Individual orders, handled personally. Tell us what you are looking for and we confirm what is currently available, what it costs, and how it ships."
+        "body": "Individual purchase requests."
       },
       {
         "title": "Wholesale",
-        "body": "Volume requests reviewed case by case. Share quantities, specifications, and timelines, and we come back with availability and pricing for that request."
+        "body": "Volume requests. State quantities and specifications."
       },
       {
         "title": "B2B catalog",
-        "body": "For businesses and resellers: we send the full catalog, with current availability and volume pricing for your operation.",
+        "body": "Catalog for businesses and resellers.",
         "cta": "Request the B2B catalog",
         "ctaMessage": "Hi Global Beyond, I represent a business and would like to receive the B2B catalog with volume pricing."
       }
-    ],
-    "flowLabel": "How it works",
-    "flow": [
-      "Send your request",
-      "We review availability",
-      "You receive the specifics",
-      "We stay with your order"
     ]
   },
   "catalog": {
-    "eyebrow": "The selection",
-    "title": "A catalog that evolves.",
+    "title": "Catalog.",
     "body": [
-      "Our selection is curated and constantly evolving. Ask for the current catalog and we send what's genuinely available today, with pricing and shipping details for your request."
-    ],
-    "points": [
-      "Curated and selective — we choose before we list.",
-      "Availability confirmed at the moment of your request.",
-      "Pricing, ordering, and shipping details in writing.",
-      "One conversation, from question to delivery details."
+      "Global Beyond LLC product catalog. To receive the current catalog, write to us."
     ],
     "cta": "Request the current catalog",
-    "photoAlt": "Yudenis V. Martínez photographing a product for the current Global Beyond LLC catalog, the camera framing the item on a lit set.",
-    "photoCaption": "Photographing what goes into the current catalog.",
+    "photoAlt": "Yudenis V. Martínez photographing a catalog product.",
     "categoriesEyebrow": "By category",
-    "categoriesTitle": "A sample of what's ready today.",
-    "categoriesLede": "Prices confirmed in writing with every request.",
+    "categoriesTitle": "Products.",
     "pageTitle": "Catalog by category — Global Beyond LLC",
-    "pageMetaDescription": "Browse the current Global Beyond LLC selection by category — Beauty, Gaming & Entertainment, and Kitchen Appliances.",
+    "pageMetaDescription": "Global Beyond LLC catalog by category: Beauty, Gaming & Entertainment, and Kitchen Appliances.",
     "categories": [
       {
         "id": "beauty",
@@ -117,16 +96,16 @@
         "products": [
           {
             "name": "ROUND LAB — 1025 Dokdo Skin Care Basic Set",
-            "description": "An essential three-step Korean routine: cleanser, toner, and lotion, formulated with deep sea water from Dokdo Island for gentle, calming hydration — great for sensitive skin.",
+            "description": "Three-step skin care set: cleanser, toner and lotion.",
             "price": "$61.74",
             "image": "roundlab-skincare",
             "soldOut": true
           },
           {
             "name": "Healena — Medical Grade Scar Treatment Patch",
-            "description": "A reusable, breathable medical-grade silicone sheet designed to soften and fade scars — new and old — with consistent use.",
+            "description": "Reusable silicone sheet for scar care.",
             "price": "$75.00",
-            "priceNote": "Price per box, set directly by Global Beyond LLC.",
+            "priceNote": "Price per box.",
             "image": "healena"
           }
         ]
@@ -137,25 +116,25 @@
         "products": [
           {
             "name": "PlayStation 5 — Standard disc console",
-            "description": "Sony's flagship console, ready for the most demanding titles in 4K. Includes a DualSense controller.",
+            "description": "PlayStation 5 console with disc drive. Includes one DualSense controller.",
             "price": "$549.99",
             "image": "ps5-console"
           },
           {
             "name": "Xbox Series X — 1TB console",
-            "description": "The most powerful console in the Xbox family, with 1TB of storage and compatibility with thousands of titles. Includes a wireless controller.",
+            "description": "Xbox Series X console, 1 TB. Includes one wireless controller.",
             "price": "$799.99",
             "image": "xbox-series-x"
           },
           {
             "name": "DualSense Wireless Controller (PS5)",
-            "description": "Official wireless controller for PS5, with haptic feedback and adaptive triggers.",
+            "description": "Wireless controller for PS5 with haptic feedback and adaptive triggers.",
             "price": "$74.99",
             "image": "dualsense-controller"
           },
           {
             "name": "Xbox Wireless Controller",
-            "description": "Official wireless controller for Xbox Series X|S and PC, with an ergonomic design and Bluetooth connectivity.",
+            "description": "Wireless controller for Xbox Series X|S and PC, with Bluetooth connection.",
             "price": "$69.99",
             "image": "xbox-controller"
           },
@@ -168,7 +147,7 @@
           },
           {
             "name": "Samsung OLED 65\" S90D — 4K Smart TV",
-            "description": "A 65-inch OLED TV with 4K resolution, perfect blacks, and Dolby Atmos sound — great for a home theater setup.",
+            "description": "65-inch OLED TV with 4K resolution and Dolby Atmos sound.",
             "price": "$1,234.99",
             "image": "samsung-tv-65",
             "soldOut": true
@@ -197,168 +176,74 @@
     "productPage": {
       "backLabel": "Back to the catalog",
       "priceLabel": "Price",
-      "orderCta": "Place the order",
-      "reassure": "We confirm availability, shipping, and payment in writing. Payment is arranged with you afterward.",
-      "formLede": "Leave your details and we'll reply with the final details of your order.",
-      "addressLabel": "Shipping address",
-      "addressPlaceholder": "Street, number, city, state, ZIP code",
-      "addressOptional": "optional",
-      "paymentLabel": "Preferred payment method",
-      "paymentOptions": [
-        "PayPal",
-        "Zelle",
-        "Bank transfer",
-        "Cash on delivery"
-      ],
-      "paypalLinkLabel": "Pay with PayPal",
-      "zelleLabel": "Zelle",
-      "orderMessageTemplate": "I'd like to order: {product} — {price}.",
-      "notesLabel": "Order notes",
-      "submit": "Send order",
+      "orderCta": "Request this product",
+      "formLede": "Leave your details to send your request.",
+      "orderMessageTemplate": "Request: {product}, {price}.",
+      "notesLabel": "Notes",
+      "submit": "Send request",
       "sending": "Sending…",
       "soldOutBadge": "Sold out",
-      "soldOutMessage": "This one's sold out for now — message us and we'll let you know the moment it's back.",
-      "notifyCta": "Ask to be notified",
-      "notifyMessageTemplate": "Hi, please let me know when {product} is back in stock."
+      "soldOutMessage": "Product currently unavailable.",
+      "notifyCta": "Ask about availability",
+      "notifyMessageTemplate": "Hello, I would like to ask about the availability of: {product}."
     }
   },
   "reviews": {
-    "eyebrow": "What our customers say",
     "title": "Reviews.",
-    "lede": "A sample of recent comments.",
     "leaveCta": "Leave my review",
     "viewCta": "See customer reviews",
     "pageTitle": "Customer reviews — Global Beyond LLC",
     "pageMetaDescription": "Customer reviews of Global Beyond LLC.",
     "leavePageTitle": "Leave your review — Global Beyond LLC",
-    "leavePageMetaDescription": "Share how your Global Beyond LLC order went.",
+    "leavePageMetaDescription": "Write a review about Global Beyond LLC.",
     "backToReviews": "See all reviews",
     "googleBadge": "Google",
     "googleBadgeTitle": "Review posted on Google",
     "form": {
       "heading": "Leave your review",
-      "lede": "Tell us how your order went. We read every review and publish it here once we've gone through it.",
+      "lede": "Write your review here.",
       "ratingLabel": "Your rating",
       "ratingStar": "{n} out of 5 stars",
       "comment": "Your review",
-      "commentPlaceholder": "What you ordered, how it arrived, and how the service went…",
+      "commentPlaceholder": "Write your comment…",
       "messagePrefix": "New review",
       "submit": "Send my review",
       "sending": "Sending…",
-      "success": "Thank you. We got your review and will publish it here once we've gone through it.",
+      "success": "Review received.",
       "invalid": "Your rating, name or review is missing.",
       "errorComment": "Add your review.",
       "errorRating": "Pick your rating."
     },
-    "items": [
-      {
-        "name": "Carla M.",
-        "rating": 5,
-        "date": "August 2026",
-        "body": "I ordered the Ninja air fryer for the kitchen and I'm thrilled with it. It arrived well packed and works exactly as they described over WhatsApp."
-      },
-      {
-        "name": "Rafael T.",
-        "rating": 4,
-        "date": "July 2026",
-        "body": "The Xbox controller arrived quickly and in perfect condition. I give it 4 stars because I would have liked more color options, though the quality matched what you'd find in stores."
-      },
-      {
-        "name": "Yamilet R.",
-        "rating": 5,
-        "date": "September 2026",
-        "body": "I bought the ROUND LAB set for my mom and it exceeded what I expected. The packaging is beautiful and every product feels really gentle."
-      },
-      {
-        "name": "Pedro A.",
-        "rating": 5,
-        "date": "June 2026",
-        "body": "The KitchenAid mixer arrived exactly on the date they confirmed over WhatsApp. The final price beat the big stores I checked beforehand."
-      },
-      {
-        "name": "Diana S.",
-        "rating": 4,
-        "date": "August 2026",
-        "body": "The PS5 works perfectly and everything synced up easily. I give it 4 stars because it took a couple of days longer than expected, though they kept me updated the whole way."
-      },
-      {
-        "name": "Manuel G.",
-        "rating": 5,
-        "date": "July 2026",
-        "body": "I've used the Healena patch for three weeks now and the scar already looks smoother. Really happy with the follow-up they gave me after the purchase."
-      },
-      {
-        "name": "Lorena F.",
-        "rating": 5,
-        "date": "September 2026",
-        "body": "The 50-inch Samsung TV looks incredible in the living room. The service felt very personal — they walked me through everything over WhatsApp before confirming the order."
-      },
-      {
-        "name": "Andrés V.",
-        "rating": 4,
-        "date": "June 2026",
-        "body": "The 65-inch Samsung OLED looks spectacular, the blacks are impressive. Good buying experience, with clear updates throughout shipping."
-      },
-      {
-        "name": "Katherine P.",
-        "rating": 5,
-        "date": "August 2026",
-        "body": "I ordered the Xbox Series X as a gift for my son and everything arrived complete, with invoice and warranty. Highly recommended for gift orders."
-      },
-      {
-        "name": "Julio C.",
-        "rating": 4,
-        "date": "September 2026",
-        "body": "The DualSense controller arrived flawless and feels just like the ones in stores. I'm taking off one star only because confirming availability took a bit longer, but the end result was worth it."
-      },
-      {
-        "name": "Gustavo M.",
-        "rating": 3.5,
-        "date": "September 2026",
-        "body": "The PS5 arrived in good shape and works perfectly. I'm giving it three and a half stars because shipping took longer than I expected, though they kept me posted the whole time. Next time I'd order further ahead."
-      },
-      {
-        "name": "Marisol D.",
-        "rating": 3,
-        "date": "August 2026",
-        "body": "The mixer works well and arrived in good condition. I'm giving it three stars because the packaging showed some wear and I would have liked to see more photos before buying. The WhatsApp support was quick, though."
-      }
-    ],
-    "featured": [
-      0,
-      1,
-      5
-    ]
+    "items": [],
+    "featured": []
   },
   "wholesale": {
-    "eyebrow": "Wholesale & bulk orders",
-    "title": "Larger orders, reviewed properly.",
-    "lede": "Bulk and wholesale requests are quoted individually. For an accurate answer right away, it helps to include:",
+    "title": "Wholesale requests.",
+    "lede": "In a wholesale request, state:",
     "items": [
       {
         "title": "Quantities",
-        "body": "How many units, and whether the volume is one-time or recurring."
+        "body": "Units and order frequency."
       },
       {
         "title": "Specifications",
-        "body": "Products, categories, variants, or references you already have in mind."
+        "body": "Products, categories, variants or references."
       },
       {
         "title": "Timeline",
-        "body": "When you need it, and how flexible those dates are."
+        "body": "Required date."
       },
       {
         "title": "Destination",
-        "body": "Where the order is going, so we can confirm shipping details for it."
+        "body": "Order destination."
       }
     ],
     "cta": "Start a wholesale inquiry"
   },
   "about": {
-    "eyebrow": "The people behind the company",
-    "title": "Global Beyond — beyond service.",
+    "title": "About us.",
     "body": [
-      "Global Beyond LLC was born in Miami, Florida, from a simple idea: doing business in a way that's closer, more responsible, and more personal."
+      "Global Beyond LLC is a company registered in Florida, based in Miami."
     ],
     "people": [
       {
@@ -370,50 +255,15 @@
     ],
     "peopleRole": "Founders of Global Beyond LLC",
     "photoAlt": "Javier Rafael Torres Gil and Yudenis V. Martínez, the founders of Global Beyond LLC, seated in the company's Miami office beneath the Global Beyond logo.",
-    "photoCaption": "Miami, Florida.",
-    "commitments": [
-      {
-        "title": "Everything made easier",
-        "body": "Clear products, pricing, and timelines from the start."
-      },
-      {
-        "title": "Real commitment",
-        "body": "Every detail gets confirmed with you, and every agreement counts."
-      },
-      {
-        "title": "Always reachable",
-        "body": "Direct attention from start to finish."
-      }
-    ],
-    "tagline": "Global Beyond — Beyond service. A better way to connect."
-  },
-  "purpose": {
-    "eyebrow": "What drives us",
-    "title": "Mission, vision, and purpose.",
-    "pillars": [
-      {
-        "label": "Mission",
-        "body": "Offer carefully selected products that add real value to our customers' lives, through an online shopping experience that stays simple, reliable, and transparent, backed by personal service committed to their satisfaction."
-      },
-      {
-        "label": "Vision",
-        "body": "Build an e-commerce brand that reaches beyond the sale and becomes a trusted reference for its customers, recognized for anticipating their needs, offering relevant solutions, and innovating constantly to create lasting relationships and sustainable growth."
-      },
-      {
-        "label": "Brand purpose",
-        "body": "Help people choose better, buy with confidence, and enjoy an experience that stays simple from start to finish.",
-        "lead": true
-      }
-    ]
+    "photoCaption": "Miami, Florida."
   },
   "contact": {
-    "eyebrow": "Contact",
-    "title": "Talk to us directly.",
-    "lede": "Send us your request and we will reply with the current catalog, availability, pricing, ordering, and shipping details for it.",
+    "title": "Contact.",
+    "lede": "Write to us by WhatsApp, email or the form.",
     "channels": {
       "whatsapp": {
         "label": "WhatsApp",
-        "body": "The fastest way to reach us.",
+        "body": "Direct message.",
         "action": "Message us"
       },
       "email": {
@@ -423,14 +273,12 @@
       },
       "instagram": {
         "label": "Instagram",
-        "body": "A look at what we are working on.",
+        "body": "Company profile.",
         "action": "Follow along"
       }
     },
     "locationLabel": "Based in",
     "location": "Miami, Florida, United States",
-    "hoursLabel": "Replies",
-    "hours": "Written personally by our team — usually within one business day.",
     "presetHeading": "Prefer to start with a ready message?",
     "presets": [
       {
@@ -446,10 +294,10 @@
         "message": "Hello Global Beyond, I am looking for a specific product and would like to check availability and pricing."
       }
     ],
-    "unconfigured": "Details coming shortly.",
+    "unconfigured": "Contact details unavailable for now.",
     "form": {
       "heading": "Send us a message",
-      "lede": "Leave your details and a short message. We reply personally, usually within one business day.",
+      "lede": "Leave your details and a short message.",
       "name": "Your name",
       "namePlaceholder": "Name and company, if you have one…",
       "email": "Email",
@@ -463,8 +311,8 @@
       "submit": "Send message",
       "sending": "Sending…",
       "privacy": "We use what you send only to answer your request. See our <a href=\"{href}\">Privacy Policy</a>.",
-      "success": "Message sent. We will reply to the details you left.",
-      "error": "Reach us directly on WhatsApp for a faster response.",
+      "success": "Message sent.",
+      "error": "The message could not be sent. Write to us on WhatsApp.",
       "invalid": "Please add your name, a way to reach you, and a message.",
       "errorName": "Add your name.",
       "errorContact": "Add an email or phone number.",
@@ -475,10 +323,9 @@
     "channelsHeading": "Or reach us directly"
   },
   "footer": {
-    "tagline": "Connecting products, people, and opportunities.",
+    "tagline": "E-commerce from Miami, Florida.",
     "rights": "All rights reserved.",
     "legal": "Global Beyond LLC is a limited liability company registered in the State of Florida, United States.",
-    "disclaimer": "Product availability, pricing, and shipping details are confirmed individually for each request.",
     "navHeading": "Explore",
     "contactHeading": "Contact",
     "langHeading": "Language",
@@ -488,15 +335,15 @@
   },
   "notFound": {
     "code": "404",
-    "title": "This page is beyond our map.",
-    "body": "The page you were looking for has moved. Find everything else one step away.",
+    "title": "Page not found.",
+    "body": "The page does not exist or has moved.",
     "cta": "Back to the homepage",
     "cta2": "Contact us"
   },
   "sent": {
     "title": "Message sent | Global Beyond LLC",
-    "heading": "Your message is on its way.",
-    "body": "Thank you for writing to Global Beyond LLC. We read every message ourselves and will reply to the details you left, usually within one business day.",
+    "heading": "Message sent.",
+    "body": "Thank you for writing to Global Beyond LLC.",
     "cta": "Back to the homepage",
     "cta2": "Message us on WhatsApp"
   },
@@ -505,58 +352,64 @@
       "title": "Privacy Policy | Global Beyond LLC",
       "metaDescription": "How Global Beyond LLC collects, uses, and protects the information submitted through this website.",
       "heading": "Privacy Policy",
-      "updated": "Last updated: September 19, 2026",
-      "intro": "This page explains what information Global Beyond LLC (“we,” “us”) collects through globalbeyondllc.com, why, and what you can do about it. We wrote it to match exactly what this website does — nothing more.",
+      "updated": "Last updated: October 24, 2026",
+      "intro": "This policy describes the information Global Beyond LLC (“the company”) collects through globalbeyondllc.com and how it uses it.",
       "sections": [
         {
           "h": "Information we collect",
           "p": [
-            "The only personal information we collect is what you choose to give us: your name, and an email address and/or phone number, and the message you write, when you submit the contact form on this site.",
-            "This site does not use cookies, does not run advertising trackers, and does not build a profile of visitors. To understand which pages are visited and how quickly they load and respond, we use aggregate measurements from Vercel that work without cookies, without identifying you, and without following you to other sites. The one thing your browser stores locally is a small technical flag that remembers you already chose a language, so you are not redirected twice in the same visit; it contains no personal information and is not sent to us."
+            "The company collects the information the user voluntarily submits through the site's forms: name, email address, phone number and the content of the message or review.",
+            "The site does not use advertising or tracking cookies. It uses aggregate visit and performance measurements provided by Vercel, which work without cookies and without identifying the user. The browser stores locally a technical flag for the chosen language; it contains no personal data and is not sent to the company."
           ]
         },
         {
-          "h": "How we use it",
+          "h": "Use of information",
           "p": [
-            "We use the information you submit for one purpose: to read your message and reply to you — about the catalog, an order, or whatever you wrote to us about. We do not use it for marketing, do not build mailing lists from it, and do not sell or rent it to anyone."
+            "The company uses the information to read and answer the message or review received and to keep a record of the communication. It does not use it for advertising. It does not sell or rent it."
           ]
         },
         {
-          "h": "Who else sees it",
+          "h": "Third parties",
           "p": [
-            "Submitting the form sends your message to us by email through Resend, the service that delivers it to our inbox. Resend processes the message only to deliver it and does not use it for its own purposes.",
-            "The site is hosted on Vercel, which also provides the aggregate visit measurement described above. Vercel sees requests for each page, as any web server does, and that measurement stays separate from whatever you write in the form. Beyond Resend and Vercel, we do not share your information with any other third party.",
-            "If you write to us on WhatsApp or Instagram instead of the form, that conversation is subject to WhatsApp's and Instagram's own privacy practices, not this one — those are Meta products and we do not control how they handle data on their platforms."
+            "Messages are delivered by email through Resend, and the site is hosted on Vercel. These providers process the information to provide their service, under their own terms and policies.",
+            "Links to WhatsApp and Instagram, Meta services, are governed by the policies of those services. The company does not control how they handle data.",
+            "The company may disclose information when required by law or by a competent authority."
           ]
         },
         {
-          "h": "How long we keep it",
+          "h": "Retention",
           "p": [
-            "We keep messages only for as long as we need them to respond to you and, where relevant, to keep a record of an order or request. We do not have an automated retention schedule yet; if you would like your information deleted, contact us and we will remove it."
+            "The company keeps the information for as long as needed to answer the communication, keep records and meet legal obligations."
           ]
         },
         {
-          "h": "Your choices",
+          "h": "User rights",
           "p": [
-            "You can ask us what information we have about you, ask us to correct it, or ask us to delete it, at any time — write to us through the contact form or WhatsApp and we will handle it personally, usually within a business day."
+            "The user may request access to, correction of or deletion of their information by writing through the contact form or on WhatsApp. The company will handle the request in accordance with applicable law."
           ]
         },
         {
-          "h": "Children",
+          "h": "Security",
           "p": [
-            "This site is intended for businesses and individuals seeking retail or wholesale products, not for children. We do not knowingly collect information from anyone under 13."
+            "The company applies reasonable measures to protect the information. No method of transmission or storage over the internet is completely secure."
+          ]
+        },
+        {
+          "h": "Minors",
+          "p": [
+            "The site is not directed to children under 13 and the company does not knowingly collect their information."
           ]
         },
         {
           "h": "Changes to this policy",
           "p": [
-            "If this policy changes, we will update this page and the date above. Continued use of the site after a change means you accept the updated policy."
+            "The company may update this policy. The update date shows the latest revision."
           ]
         },
         {
           "h": "Contact",
           "p": [
-            "Questions about this policy can go to the same place as everything else — the contact form on this site, or WhatsApp."
+            "Questions about this policy are sent through the contact form or on WhatsApp."
           ]
         }
       ]
@@ -565,55 +418,74 @@
       "title": "Terms of Use | Global Beyond LLC",
       "metaDescription": "The terms that apply to using the Global Beyond LLC website.",
       "heading": "Terms of Use",
-      "updated": "Last updated: September 2, 2026",
-      "intro": "These terms cover your use of globalbeyondllc.com, operated by Global Beyond LLC, a limited liability company registered in the State of Florida, United States. By using this site, you agree to them.",
+      "updated": "Last updated: October 24, 2026",
+      "intro": "These terms govern the use of globalbeyondllc.com, operated by Global Beyond LLC, a limited liability company registered in the State of Florida, United States. By using the site, the user accepts these terms. If the user does not agree, they must stop using the site.",
       "sections": [
         {
-          "h": "What this site is",
+          "h": "Nature of the site",
           "p": [
-            "This site presents Global Beyond LLC and lets you request our current product catalog, ask about retail or wholesale orders, and reach us directly. It is not a store: nothing here can be purchased directly through the site, and no order, price, or availability is final until we confirm it to you individually."
+            "This site presents information about Global Beyond LLC and allows inquiries and requests to be sent. It is not a store: no purchases or payments are made on the site.",
+            "The company sells its products through third-party e-commerce platforms. Sales, payments, shipping, returns and after-sales service are governed by the rules of the platform where the purchase is made."
           ]
         },
         {
-          "h": "The information on this site",
+          "h": "Information and prices",
           "p": [
-            "We keep the content on this site accurate to the best of our knowledge, but our product selection changes over time, and pricing, availability, and shipping details are confirmed per request, not published here. Nothing on this site should be treated as a binding offer."
+            "The information on the site, including products, descriptions, prices and availability, is for reference and may change without notice. It is not an offer, a quote or a contract. It may contain errors or omissions."
+          ]
+        },
+        {
+          "h": "Products and brands",
+          "p": [
+            "Product names and brands belong to their respective owners. Their mention on the site does not imply affiliation, sponsorship or authorization by those owners. Descriptions do not replace the manufacturer's information. Personal care products do not replace the guidance of a health professional."
           ]
         },
         {
           "h": "Acceptable use",
           "p": [
-            "Use this site for its intended purpose: learning about Global Beyond LLC and reaching us. Do not attempt to disrupt it, scrape it at scale, submit false or malicious information through the contact form, or use it to distribute unlawful content."
+            "The user agrees not to disrupt the site, not to extract its content in bulk, not to submit false or malicious information and not to use it to distribute illegal content."
           ]
         },
         {
           "h": "Intellectual property",
           "p": [
-            "The Global Beyond LLC name, logo, and the text, photographs, and design on this site belong to Global Beyond LLC or are used with permission. You may view and share this site's pages; you may not reproduce the logo or brand assets for your own use without asking us first."
+            "The name Global Beyond LLC, the logo, and the text, photographs and design of the site belong to Global Beyond LLC or are used with permission. They may not be reproduced for the user's own purposes without prior written authorization."
           ]
         },
         {
-          "h": "Third-party links",
+          "h": "Content submitted by the user",
           "p": [
-            "This site links to WhatsApp and Instagram, both operated by Meta, and to email. Once you leave this site through one of those links, that platform's own terms apply — we are not responsible for their content or practices."
+            "By submitting a review or a message, the user declares that the content is truthful and their own, and that it does not infringe third-party rights. The user authorizes the company to use it to respond and, for reviews, to publish it. The company may decline to publish or remove any content."
           ]
         },
         {
-          "h": "No warranty",
+          "h": "Third-party services",
           "p": [
-            "This site is provided as is. We do our best to keep it accurate and available, but we do not guarantee it will be error-free, uninterrupted, or permanently accessible."
+            "The site links to WhatsApp and Instagram, Meta services, and to email. When leaving the site through those links, the terms of each service apply. The company does not control and is not responsible for their content or practices."
           ]
         },
         {
-          "h": "Governing law",
+          "h": "Disclaimer of warranties",
           "p": [
-            "These terms are governed by the laws of the State of Florida, United States, without regard to conflict-of-law principles."
+            "The site and its content are provided “as is” and “as available”, without warranties of any kind, express or implied, to the extent permitted by law."
+          ]
+        },
+        {
+          "h": "Limitation of liability",
+          "p": [
+            "To the maximum extent permitted by law, Global Beyond LLC and its members are not liable for indirect, incidental, special or consequential damages arising from the use of the site or the inability to use it, or for transactions made on third-party platforms. These terms do not exclude liability that the law does not allow to be excluded."
+          ]
+        },
+        {
+          "h": "Governing law and jurisdiction",
+          "p": [
+            "These terms are governed by the laws of the State of Florida, United States. Any dispute will be submitted to the state or federal courts located in Miami-Dade County, Florida."
           ]
         },
         {
           "h": "Changes to these terms",
           "p": [
-            "We may update these terms as the site and the business evolve. The date above reflects the latest revision."
+            "The company may update these terms. The update date shows the latest revision."
           ]
         }
       ]

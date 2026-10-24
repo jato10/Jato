@@ -5,8 +5,8 @@
   "path": "/es/",
   "meta": {
     "title": "Global Beyond LLC | Comercio, detal y mayor en Miami",
-    "description": "Conoce Global Beyond LLC y solicita a nuestro equipo en Miami el catálogo actual, disponibilidad, precios, pedidos y detalles de envío.",
-    "ogAlt": "Global Beyond LLC — Más allá de las fronteras. Más allá de lo posible."
+    "description": "Global Beyond LLC es una empresa de comercio electrónico con sede en Miami, Florida.",
+    "ogAlt": "Global Beyond LLC"
   },
   "brand": {
     "name": "Global Beyond LLC",
@@ -43,10 +43,8 @@
     }
   ],
   "hero": {
-    "eyebrow": "Miami, Florida — Estados Unidos",
     "headline": "Gaming, cocina y cuidado personal, al detal y al mayor desde Miami.",
-    "titlePlain": "Más allá de las fronteras. Más allá de lo posible.",
-    "lede": "Global Beyond LLC conecta productos, personas y oportunidades — con selección cuidada y atención humana directa.",
+    "lede": "Global Beyond LLC es una empresa de comercio electrónico con sede en Miami, Florida. Vende sus productos a través de plataformas de comercio electrónico de terceros.",
     "whatsappMessage": "Hola Global Beyond, estoy buscando un producto específico y quisiera consultar disponibilidad y precio.",
     "featured": [
       "ps5-console",
@@ -54,62 +52,43 @@
       "ninja-air-fryer",
       "healena"
     ],
-    "featuredLabel": "Productos destacados",
-    "note": "Nuestra selección cambia con el tiempo, por eso la disponibilidad, los precios y los detalles de envío siempre se confirman para cada solicitud."
+    "featuredLabel": "Productos destacados"
   },
   "cta": {
     "catalog": "Ver catálogo y precios",
     "whatsapp": "Escríbenos por WhatsApp"
   },
   "services": {
-    "eyebrow": "Qué hacemos",
     "tabsLabel": "Formas de trabajar con nosotros",
-    "title": "Tres formas de trabajar con nosotros.",
-    "lede": "Detal, mayor y catálogo B2B — cada mensaje lo responde directamente una persona real.",
+    "title": "Detal, mayor y catálogo B2B.",
     "items": [
       {
         "title": "Detal",
-        "body": "Pedidos individuales, atendidos de forma personal. Cuéntanos qué buscas y te confirmamos qué hay disponible, cuánto cuesta y cómo se envía."
+        "body": "Solicitudes de compra individuales."
       },
       {
         "title": "Al mayor",
-        "body": "Solicitudes por volumen evaluadas caso por caso. Indícanos cantidades, especificaciones y plazos, y te respondemos con disponibilidad y precios para esa solicitud."
+        "body": "Solicitudes por volumen. Indica cantidades y especificaciones."
       },
       {
         "title": "Catálogo B2B",
-        "body": "Para negocios y revendedores: te enviamos el catálogo completo, con disponibilidad actual y precios por volumen para tu operación.",
+        "body": "Catálogo para negocios y revendedores.",
         "cta": "Solicitar el catálogo B2B",
         "ctaMessage": "Hola Global Beyond, represento a un negocio y quisiera recibir el catálogo B2B con precios por volumen."
       }
-    ],
-    "flowLabel": "Cómo funciona",
-    "flow": [
-      "Envía tu solicitud",
-      "Revisamos disponibilidad",
-      "Recibes la información",
-      "Acompañamos tu pedido"
     ]
   },
   "catalog": {
-    "eyebrow": "La selección",
-    "title": "Un catálogo que evoluciona.",
+    "title": "Catálogo.",
     "body": [
-      "Actualizamos constantemente nuestra selección curada de productos. Pide el catálogo actual y te enviamos lo que realmente está disponible hoy, con precios y detalles de envío para tu solicitud."
-    ],
-    "points": [
-      "Curado y selectivo: seleccionamos antes de ofrecer.",
-      "Disponibilidad confirmada en el momento de tu solicitud.",
-      "Precios, pedidos y detalles de envío por escrito.",
-      "Una sola conversación, de la pregunta a la entrega."
+      "Catálogo de productos de Global Beyond LLC. Para recibir el catálogo actual, escríbenos."
     ],
     "cta": "Solicitar el catálogo actual",
-    "photoAlt": "Yudenis V. Martínez fotografiando un producto para el catálogo actual de Global Beyond LLC, con la cámara encuadrando el artículo en un set iluminado.",
-    "photoCaption": "Fotografiando lo que entra en el catálogo actual.",
+    "photoAlt": "Yudenis V. Martínez fotografiando un producto del catálogo.",
     "categoriesEyebrow": "Por categoría",
-    "categoriesTitle": "Una muestra de lo que tenemos listo hoy.",
-    "categoriesLede": "Precios confirmados por escrito en cada solicitud.",
+    "categoriesTitle": "Productos.",
     "pageTitle": "Catálogo por categoría — Global Beyond LLC",
-    "pageMetaDescription": "Explora la selección actual de Global Beyond LLC por categoría — Belleza, Videojuegos y entretenimiento, y Electrodomésticos de cocina.",
+    "pageMetaDescription": "Catálogo de Global Beyond LLC por categoría: Belleza, Videojuegos y entretenimiento, y Electrodomésticos de cocina.",
     "categories": [
       {
         "id": "beauty",
@@ -117,16 +96,16 @@
         "products": [
           {
             "name": "ROUND LAB — 1025 Dokdo Skin Care Basic Set",
-            "description": "Rutina coreana esencial en tres pasos: limpiador, tónico y loción, formulados con agua profunda de la isla de Dokdo para una hidratación suave y calmante — ideal para piel sensible.",
+            "description": "Set de cuidado de la piel de tres pasos: limpiador, tónico y loción.",
             "price": "$61.74",
             "image": "roundlab-skincare",
             "soldOut": true
           },
           {
             "name": "Healena — Parche de silicona para cicatrices, grado médico",
-            "description": "Lámina de silicona de grado médico, reutilizable y transpirable, diseñada para suavizar y aclarar cicatrices — nuevas y antiguas — con el uso constante.",
+            "description": "Lámina de silicona reutilizable para el cuidado de cicatrices.",
             "price": "$75.00",
-            "priceNote": "Precio por caja, fijado directamente por Global Beyond LLC.",
+            "priceNote": "Precio por caja.",
             "image": "healena"
           }
         ]
@@ -137,25 +116,25 @@
         "products": [
           {
             "name": "PlayStation 5 — Consola estándar con disco",
-            "description": "La consola insignia de Sony, lista para los títulos más exigentes en 4K. Incluye un control DualSense.",
+            "description": "Consola PlayStation 5 con unidad de disco. Incluye un control DualSense.",
             "price": "$549.99",
             "image": "ps5-console"
           },
           {
             "name": "Xbox Series X — Consola de 1TB",
-            "description": "La consola más potente de la familia Xbox, con 1TB de almacenamiento y compatibilidad con miles de títulos. Incluye un control inalámbrico.",
+            "description": "Consola Xbox Series X de 1 TB. Incluye un control inalámbrico.",
             "price": "$799.99",
             "image": "xbox-series-x"
           },
           {
             "name": "Control inalámbrico DualSense (PS5)",
-            "description": "Control inalámbrico oficial para PS5, con retroalimentación háptica y gatillos adaptativos.",
+            "description": "Control inalámbrico para PS5 con retroalimentación háptica y gatillos adaptativos.",
             "price": "$74.99",
             "image": "dualsense-controller"
           },
           {
             "name": "Control inalámbrico Xbox",
-            "description": "Control inalámbrico oficial para Xbox Series X|S y PC, con diseño ergonómico y conexión Bluetooth.",
+            "description": "Control inalámbrico para Xbox Series X|S y PC, con conexión Bluetooth.",
             "price": "$69.99",
             "image": "xbox-controller"
           },
@@ -168,7 +147,7 @@
           },
           {
             "name": "Samsung OLED 65\" S90D — Smart TV 4K",
-            "description": "Televisor OLED de 65 pulgadas con resolución 4K, negros absolutos y sonido con Dolby Atmos — ideal para cine en casa.",
+            "description": "Televisor OLED de 65 pulgadas con resolución 4K y sonido con Dolby Atmos.",
             "price": "$1,234.99",
             "image": "samsung-tv-65",
             "soldOut": true
@@ -197,168 +176,74 @@
     "productPage": {
       "backLabel": "Volver al catálogo",
       "priceLabel": "Precio",
-      "orderCta": "Hacer el pedido",
-      "reassure": "Confirmamos disponibilidad, envío y forma de pago por escrito. El cobro se coordina contigo después.",
-      "formLede": "Déjanos tus datos y te respondemos con los detalles finales de tu pedido.",
-      "addressLabel": "Dirección de envío",
-      "addressPlaceholder": "Calle, número, ciudad, estado, código postal",
-      "addressOptional": "opcional",
-      "paymentLabel": "Método de pago preferido",
-      "paymentOptions": [
-        "PayPal",
-        "Zelle",
-        "Transferencia bancaria",
-        "Efectivo al recibir"
-      ],
-      "paypalLinkLabel": "Pagar con PayPal",
-      "zelleLabel": "Zelle",
-      "orderMessageTemplate": "Quiero pedir: {product} — {price}.",
-      "notesLabel": "Notas del pedido",
-      "submit": "Enviar pedido",
+      "orderCta": "Solicitar este producto",
+      "formLede": "Déjanos tus datos para enviar tu solicitud.",
+      "orderMessageTemplate": "Solicitud: {product}, {price}.",
+      "notesLabel": "Notas",
+      "submit": "Enviar solicitud",
       "sending": "Enviando…",
       "soldOutBadge": "Agotado",
-      "soldOutMessage": "Este está agotado por ahora — escríbenos y te avisamos apenas vuelva.",
-      "notifyCta": "Pedir que me avisen",
-      "notifyMessageTemplate": "Hola, avísenme por favor cuando vuelva a haber: {product}."
+      "soldOutMessage": "Producto no disponible por ahora.",
+      "notifyCta": "Consultar disponibilidad",
+      "notifyMessageTemplate": "Hola, quisiera consultar la disponibilidad de: {product}."
     }
   },
   "reviews": {
-    "eyebrow": "Lo que dicen nuestros clientes",
     "title": "Reseñas.",
-    "lede": "Una muestra de comentarios recientes.",
     "leaveCta": "Dejar mi reseña",
     "viewCta": "Ver reseñas de clientes",
     "pageTitle": "Reseñas de clientes — Global Beyond LLC",
     "pageMetaDescription": "Reseñas de clientes de Global Beyond LLC.",
     "leavePageTitle": "Deja tu reseña — Global Beyond LLC",
-    "leavePageMetaDescription": "Comparte cómo te fue con tu pedido de Global Beyond LLC.",
+    "leavePageMetaDescription": "Escribe una reseña sobre Global Beyond LLC.",
     "backToReviews": "Ver todas las reseñas",
     "googleBadge": "Google",
     "googleBadgeTitle": "Reseña publicada en Google",
     "form": {
       "heading": "Deja tu reseña",
-      "lede": "Cuéntanos cómo te fue con tu pedido. Leemos cada reseña y la publicamos aquí después de revisarla.",
+      "lede": "Escribe aquí tu reseña.",
       "ratingLabel": "Tu calificación",
       "ratingStar": "{n} de 5 estrellas",
       "comment": "Tu reseña",
-      "commentPlaceholder": "Qué pediste, cómo llegó y cómo fue la atención…",
+      "commentPlaceholder": "Escribe tu comentario…",
       "messagePrefix": "Nueva reseña",
       "submit": "Enviar mi reseña",
       "sending": "Enviando…",
-      "success": "Gracias. Recibimos tu reseña y la publicamos aquí después de revisarla.",
+      "success": "Reseña recibida.",
       "invalid": "Falta tu calificación, tu nombre o tu reseña.",
       "errorComment": "Agrega tu reseña.",
       "errorRating": "Elige tu calificación."
     },
-    "items": [
-      {
-        "name": "Carla M.",
-        "rating": 5,
-        "date": "Agosto 2026",
-        "body": "Pedí la freidora de aire Ninja para la cocina y quedé encantada. Llegó bien empacada y funciona exactamente como me la describieron por WhatsApp."
-      },
-      {
-        "name": "Rafael T.",
-        "rating": 4,
-        "date": "Julio 2026",
-        "body": "El control de Xbox llegó rápido y en perfecto estado. Doy 4 estrellas porque hubiera preferido más opciones de color, aunque la calidad fue la misma que en tienda."
-      },
-      {
-        "name": "Yamilet R.",
-        "rating": 5,
-        "date": "Septiembre 2026",
-        "body": "Compré el set de ROUND LAB para mi mamá y superó lo que esperaba. El empaque es precioso y cada producto se siente muy suave."
-      },
-      {
-        "name": "Pedro A.",
-        "rating": 5,
-        "date": "Junio 2026",
-        "body": "La batidora KitchenAid llegó exactamente en la fecha que me confirmaron por WhatsApp. El precio final fue mejor que en las tiendas grandes que revisé antes."
-      },
-      {
-        "name": "Diana S.",
-        "rating": 4,
-        "date": "Agosto 2026",
-        "body": "El PS5 funciona perfecto y todo se sincronizó fácil. Doy 4 estrellas porque tardó un par de días más de lo esperado, aunque me avisaron a tiempo con cada actualización."
-      },
-      {
-        "name": "Manuel G.",
-        "rating": 5,
-        "date": "Julio 2026",
-        "body": "Uso el parche Healena hace tres semanas y ya noto la cicatriz más suave. Muy contento con el seguimiento que me dieron después de la compra."
-      },
-      {
-        "name": "Lorena F.",
-        "rating": 5,
-        "date": "Septiembre 2026",
-        "body": "El televisor Samsung de 50 pulgadas se ve increíble en la sala. El trato fue muy personal — me explicaron todo por WhatsApp antes de confirmar el pedido."
-      },
-      {
-        "name": "Andrés V.",
-        "rating": 4,
-        "date": "Junio 2026",
-        "body": "El televisor Samsung OLED de 65 pulgadas se ve espectacular, los negros son impresionantes. Buena experiencia de compra, con actualizaciones claras durante todo el envío."
-      },
-      {
-        "name": "Katherine P.",
-        "rating": 5,
-        "date": "Agosto 2026",
-        "body": "Encargué la Xbox Series X para mi hijo y todo llegó completo, con factura y garantía. Muy recomendados para pedidos de regalo."
-      },
-      {
-        "name": "Julio C.",
-        "rating": 4,
-        "date": "Septiembre 2026",
-        "body": "El control DualSense llegó impecable y se siente igual que comprado en tienda. Bajo una estrella solo porque tardó un poco en confirmarme la disponibilidad, pero el resultado final valió la pena."
-      },
-      {
-        "name": "Gustavo M.",
-        "rating": 3.5,
-        "date": "Septiembre 2026",
-        "body": "El PS5 llegó bien y funciona perfecto. Le doy tres estrellas y media porque el envío tardó más de lo que esperaba, aunque me mantuvieron informado todo el tiempo. Para la próxima pediría con más anticipación."
-      },
-      {
-        "name": "Marisol D.",
-        "rating": 3,
-        "date": "Agosto 2026",
-        "body": "La batidora funciona bien y llegó en buen estado. Le doy tres estrellas porque el empaque llegó algo golpeado y me hubiera gustado ver más fotos antes de comprar. La atención por WhatsApp sí fue rápida."
-      }
-    ],
-    "featured": [
-      0,
-      1,
-      5
-    ]
+    "items": [],
+    "featured": []
   },
   "wholesale": {
-    "eyebrow": "Mayor y pedidos por volumen",
-    "title": "Pedidos grandes, evaluados como corresponde.",
-    "lede": "Las solicitudes al mayor se cotizan de forma individual. Para una respuesta precisa desde el primer mensaje, ayuda incluir:",
+    "title": "Pedidos al mayor.",
+    "lede": "En una solicitud al mayor, indica:",
     "items": [
       {
         "title": "Cantidades",
-        "body": "Cuántas unidades y si el volumen es puntual o recurrente."
+        "body": "Unidades y frecuencia del pedido."
       },
       {
         "title": "Especificaciones",
-        "body": "Productos, categorías, variantes o referencias que ya tengas en mente."
+        "body": "Productos, categorías, variantes o referencias."
       },
       {
         "title": "Plazos",
-        "body": "Para cuándo lo necesitas y qué tan flexibles son esas fechas."
+        "body": "Fecha requerida."
       },
       {
         "title": "Destino",
-        "body": "A dónde va el pedido, para confirmarte los detalles de envío correspondientes."
+        "body": "Destino del pedido."
       }
     ],
     "cta": "Iniciar una solicitud al mayor"
   },
   "about": {
-    "eyebrow": "Las personas detrás de la empresa",
-    "title": "Global Beyond — más allá del servicio.",
+    "title": "Nosotros.",
     "body": [
-      "Global Beyond LLC nació en Miami, Florida, de una idea sencilla: hacer negocios de una manera más cercana, responsable y personal."
+      "Global Beyond LLC es una empresa registrada en Florida, con sede en Miami."
     ],
     "people": [
       {
@@ -370,50 +255,15 @@
     ],
     "peopleRole": "Fundadores de Global Beyond LLC",
     "photoAlt": "Javier Rafael Torres Gil y Yudenis V. Martínez, fundadores de Global Beyond LLC, sentados en la oficina de la empresa en Miami bajo el logotipo de Global Beyond.",
-    "photoCaption": "Miami, Florida.",
-    "commitments": [
-      {
-        "title": "Todo más fácil",
-        "body": "Productos, precios y tiempos claros desde el inicio."
-      },
-      {
-        "title": "Compromiso real",
-        "body": "Cada detalle se confirma contigo y cada acuerdo cuenta."
-      },
-      {
-        "title": "Siempre accesibles",
-        "body": "Atención directa de principio a fin."
-      }
-    ],
-    "tagline": "Global Beyond — Más allá del servicio. Una mejor forma de conectar."
-  },
-  "purpose": {
-    "eyebrow": "Lo que nos mueve",
-    "title": "Misión, visión y propósito.",
-    "pillars": [
-      {
-        "label": "Misión",
-        "body": "Ofrecer productos cuidadosamente seleccionados que aporten valor real a la vida de nuestros clientes, mediante una experiencia de compra digital sencilla, confiable y transparente, respaldada por un servicio cercano y comprometido con su satisfacción."
-      },
-      {
-        "label": "Visión",
-        "body": "Construir una marca de e-commerce que trascienda la venta y se convierta en una referencia de confianza para sus clientes, reconocida por anticipar sus necesidades, ofrecer soluciones relevantes e innovar constantemente para generar relaciones duraderas y un crecimiento sostenible."
-      },
-      {
-        "label": "Propósito de marca",
-        "body": "Ayudar a las personas a elegir mejor, comprar con confianza y disfrutar una experiencia simple de principio a fin.",
-        "lead": true
-      }
-    ]
+    "photoCaption": "Miami, Florida."
   },
   "contact": {
-    "eyebrow": "Contacto",
-    "title": "Habla con nosotros directamente.",
-    "lede": "Envíanos tu solicitud y te responderemos con el catálogo actual, la disponibilidad, los precios, la forma de pedido y los detalles de envío.",
+    "title": "Contacto.",
+    "lede": "Escríbenos por WhatsApp, correo o el formulario.",
     "channels": {
       "whatsapp": {
         "label": "WhatsApp",
-        "body": "La forma más rápida de contactarnos.",
+        "body": "Mensaje directo.",
         "action": "Escríbenos"
       },
       "email": {
@@ -423,14 +273,12 @@
       },
       "instagram": {
         "label": "Instagram",
-        "body": "Un vistazo a lo que estamos haciendo.",
+        "body": "Perfil de la empresa.",
         "action": "Seguirnos"
       }
     },
     "locationLabel": "Ubicación",
     "location": "Miami, Florida, Estados Unidos",
-    "hoursLabel": "Respuestas",
-    "hours": "Escritas personalmente por nuestro equipo, normalmente en un día hábil.",
     "presetHeading": "¿Prefieres empezar con un mensaje listo?",
     "presets": [
       {
@@ -446,10 +294,10 @@
         "message": "Hola Global Beyond, estoy buscando un producto específico y quisiera consultar disponibilidad y precio."
       }
     ],
-    "unconfigured": "Detalles muy pronto.",
+    "unconfigured": "Contacto no disponible por ahora.",
     "form": {
       "heading": "Envíanos un mensaje",
-      "lede": "Déjanos tus datos y un mensaje breve. Respondemos personalmente, normalmente en un día hábil.",
+      "lede": "Déjanos tus datos y un mensaje breve.",
       "name": "Tu nombre",
       "namePlaceholder": "Nombre y empresa, si la tienes…",
       "email": "Correo",
@@ -463,8 +311,8 @@
       "submit": "Enviar mensaje",
       "sending": "Enviando…",
       "privacy": "Usamos lo que nos envías únicamente para responder tu solicitud. Consulta nuestra <a href=\"{href}\">Política de Privacidad</a>.",
-      "success": "Mensaje enviado. Te responderemos a los datos que dejaste.",
-      "error": "Escríbenos directo por WhatsApp para una respuesta más rápida.",
+      "success": "Mensaje enviado.",
+      "error": "No se pudo enviar el mensaje. Escríbenos por WhatsApp.",
       "invalid": "Falta tu nombre, una forma de contactarte o el mensaje.",
       "errorName": "Agrega tu nombre.",
       "errorContact": "Agrega un correo o teléfono.",
@@ -475,10 +323,9 @@
     "channelsHeading": "O contáctanos directamente"
   },
   "footer": {
-    "tagline": "Conectamos productos, personas y oportunidades.",
+    "tagline": "Comercio electrónico desde Miami, Florida.",
     "rights": "Todos los derechos reservados.",
     "legal": "Global Beyond LLC es una compañía de responsabilidad limitada registrada en el estado de Florida, Estados Unidos.",
-    "disclaimer": "La disponibilidad, los precios y los detalles de envío se confirman de forma individual para cada solicitud.",
     "navHeading": "Explorar",
     "contactHeading": "Contacto",
     "langHeading": "Idioma",
@@ -488,15 +335,15 @@
   },
   "notFound": {
     "code": "404",
-    "title": "Esta página quedó más allá de nuestro mapa.",
-    "body": "La página que buscabas cambió de lugar. Encuentra todo lo demás a un paso de aquí.",
+    "title": "Página no encontrada.",
+    "body": "La página no existe o cambió de dirección.",
     "cta": "Volver al inicio",
     "cta2": "Contáctanos"
   },
   "sent": {
     "title": "Mensaje enviado | Global Beyond LLC",
-    "heading": "Tu mensaje va en camino.",
-    "body": "Gracias por escribir a Global Beyond LLC. Leemos cada mensaje nosotros mismos y te responderemos a los datos que dejaste, normalmente en un día hábil.",
+    "heading": "Mensaje enviado.",
+    "body": "Gracias por escribir a Global Beyond LLC.",
     "cta": "Volver al inicio",
     "cta2": "Escribirnos por WhatsApp"
   },
@@ -505,58 +352,64 @@
       "title": "Política de Privacidad | Global Beyond LLC",
       "metaDescription": "Cómo Global Beyond LLC recopila, usa y protege la información enviada a través de este sitio web.",
       "heading": "Política de Privacidad",
-      "updated": "Última actualización: 19 de septiembre de 2026",
-      "intro": "Esta página explica qué información recopila Global Beyond LLC (“nosotros”) a través de globalbeyondllc.com, para qué la usamos y qué puedes hacer al respecto. La redactamos para que coincida exactamente con lo que este sitio hace — nada más.",
+      "updated": "Última actualización: 24 de octubre de 2026",
+      "intro": "Esta política describe la información que Global Beyond LLC (“la empresa”) recopila a través de globalbeyondllc.com y cómo la usa.",
       "sections": [
         {
-          "h": "Qué información recopilamos",
+          "h": "Información que recopilamos",
           "p": [
-            "La única información personal que recopilamos es la que tú decides darnos: tu nombre, un correo y/o teléfono, y el mensaje que escribes, al enviar el formulario de contacto de este sitio.",
-            "Este sitio no usa cookies, no ejecuta rastreadores de publicidad y no construye un perfil de los visitantes. Para saber qué páginas se visitan y con qué rapidez cargan y responden, usamos mediciones agregadas de Vercel que funcionan sin cookies, sin identificarte y sin seguirte a otros sitios. Lo único que tu navegador guarda localmente es un pequeño indicador técnico que recuerda que ya elegiste un idioma, para no redirigirte dos veces en la misma visita; no contiene información personal y no se nos envía."
+            "La empresa recopila la información que el usuario envía de forma voluntaria mediante los formularios del sitio: nombre, correo electrónico, teléfono y el contenido del mensaje o de la reseña.",
+            "El sitio no usa cookies de publicidad ni de seguimiento. Usa mediciones agregadas de visitas y de rendimiento ofrecidas por Vercel, que funcionan sin cookies y sin identificar al usuario. El navegador guarda localmente un indicador técnico del idioma elegido; no contiene datos personales y no se envía a la empresa."
           ]
         },
         {
-          "h": "Cómo la usamos",
+          "h": "Uso de la información",
           "p": [
-            "Usamos la información que envías para un solo propósito: leer tu mensaje y responderte — sobre el catálogo, un pedido, o lo que sea que nos escribiste. No la usamos para marketing, no armamos listas de correo con ella, y no la vendemos ni la alquilamos a nadie."
+            "La empresa usa la información para leer y responder el mensaje o la reseña recibidos y para llevar un registro de la comunicación. No la usa para publicidad. No la vende ni la alquila."
           ]
         },
         {
-          "h": "Quién más la ve",
+          "h": "Terceros",
           "p": [
-            "Al enviar el formulario, tu mensaje nos llega por correo a través de Resend, el servicio que lo entrega a nuestra bandeja. Resend procesa el mensaje solo para entregarlo y no lo usa para sus propios fines.",
-            "El sitio está alojado en Vercel, que además nos da la medición agregada de visitas descrita arriba. Vercel ve las solicitudes de cada página, como cualquier servidor web, y esa medición queda separada de lo que escribes en el formulario. Fuera de Resend y Vercel, no compartimos tu información con ningún otro tercero.",
-            "Si nos escribes por WhatsApp o Instagram en lugar del formulario, esa conversación queda sujeta a las propias prácticas de privacidad de WhatsApp e Instagram, no a esta — son productos de Meta y no controlamos cómo manejan los datos en sus plataformas."
+            "Los mensajes se entregan por correo electrónico mediante Resend, y el sitio está alojado en Vercel. Estos proveedores procesan la información para prestar su servicio, conforme a sus propios términos y políticas.",
+            "Los enlaces a WhatsApp e Instagram, servicios de Meta, se rigen por las políticas de esos servicios. La empresa no controla cómo tratan los datos.",
+            "La empresa puede divulgar información cuando una ley o una autoridad competente lo exija."
           ]
         },
         {
-          "h": "Cuánto tiempo la conservamos",
+          "h": "Conservación",
           "p": [
-            "Conservamos los mensajes solo el tiempo que necesitamos para responderte y, cuando aplica, para llevar un registro de un pedido o solicitud. Todavía no tenemos un calendario de retención automatizado; si quieres que eliminemos tu información, escríbenos y la eliminamos."
+            "La empresa conserva la información mientras sea necesaria para responder la comunicación, llevar registros y cumplir obligaciones legales."
           ]
         },
         {
-          "h": "Tus opciones",
+          "h": "Derechos del usuario",
           "p": [
-            "Puedes pedirnos que te digamos qué información tenemos sobre ti, que la corrijamos, o que la eliminemos, en cualquier momento — escríbenos por el formulario de contacto o WhatsApp y lo atendemos personalmente, normalmente en un día hábil."
+            "El usuario puede solicitar acceso, corrección o eliminación de su información escribiendo por el formulario de contacto o por WhatsApp. La empresa atenderá la solicitud conforme a la ley aplicable."
+          ]
+        },
+        {
+          "h": "Seguridad",
+          "p": [
+            "La empresa aplica medidas razonables para proteger la información. Ningún método de transmisión o almacenamiento en internet es completamente seguro."
           ]
         },
         {
           "h": "Menores de edad",
           "p": [
-            "Este sitio está dirigido a empresas y personas que buscan productos al detal o al mayor, no a menores. No recopilamos a sabiendas información de personas menores de 13 años."
+            "El sitio no está dirigido a menores de 13 años y la empresa no recopila información de ellos a sabiendas."
           ]
         },
         {
           "h": "Cambios a esta política",
           "p": [
-            "Si esta política cambia, actualizaremos esta página y la fecha de arriba. Seguir usando el sitio después de un cambio significa que aceptas la política actualizada."
+            "La empresa puede actualizar esta política. La fecha de actualización indica la última revisión."
           ]
         },
         {
           "h": "Contacto",
           "p": [
-            "Las preguntas sobre esta política van al mismo lugar que todo lo demás — el formulario de contacto de este sitio, o WhatsApp."
+            "Las consultas sobre esta política se envían por el formulario de contacto o por WhatsApp."
           ]
         }
       ]
@@ -565,55 +418,74 @@
       "title": "Términos de Uso | Global Beyond LLC",
       "metaDescription": "Los términos que aplican al uso del sitio web de Global Beyond LLC.",
       "heading": "Términos de Uso",
-      "updated": "Última actualización: 2 de septiembre de 2026",
-      "intro": "Estos términos cubren tu uso de globalbeyondllc.com, operado por Global Beyond LLC, una compañía de responsabilidad limitada registrada en el estado de Florida, Estados Unidos. Al usar este sitio, los aceptas.",
+      "updated": "Última actualización: 24 de octubre de 2026",
+      "intro": "Estos términos regulan el uso de globalbeyondllc.com, operado por Global Beyond LLC, compañía de responsabilidad limitada registrada en el estado de Florida, Estados Unidos. Al usar el sitio, el usuario acepta estos términos. Si no está de acuerdo, debe dejar de usarlo.",
       "sections": [
         {
-          "h": "Qué es este sitio",
+          "h": "Naturaleza del sitio",
           "p": [
-            "Este sitio presenta a Global Beyond LLC y te permite solicitar nuestro catálogo actual, consultar sobre pedidos al detal o al mayor, y contactarnos directamente. No es una tienda: nada aquí se puede comprar directamente a través del sitio, y ningún pedido, precio o disponibilidad es definitivo hasta que te lo confirmemos individualmente."
+            "Este sitio presenta información de Global Beyond LLC y permite enviar consultas y solicitudes. No es una tienda: no se realizan compras ni pagos en el sitio.",
+            "La empresa vende sus productos a través de plataformas de comercio electrónico de terceros. Las ventas, los pagos, los envíos, las devoluciones y la atención posventa se rigen por las reglas de la plataforma donde se realice la compra."
           ]
         },
         {
-          "h": "La información en este sitio",
+          "h": "Información y precios",
           "p": [
-            "Mantenemos el contenido de este sitio preciso según nuestro mejor conocimiento, pero nuestra selección de productos cambia con el tiempo, y los precios, la disponibilidad y los detalles de envío se confirman por solicitud, no se publican aquí. Nada en este sitio debe tratarse como una oferta vinculante."
+            "La información del sitio, incluidos productos, descripciones, precios y disponibilidad, es referencial y puede cambiar sin aviso. No constituye una oferta, una cotización ni un contrato. Puede contener errores u omisiones."
+          ]
+        },
+        {
+          "h": "Productos y marcas",
+          "p": [
+            "Los nombres y las marcas de los productos pertenecen a sus respectivos titulares. Su mención en el sitio no implica afiliación, patrocinio ni autorización de esos titulares. Las descripciones no sustituyen la información del fabricante. Los productos de cuidado personal no sustituyen la orientación de un profesional de la salud."
           ]
         },
         {
           "h": "Uso aceptable",
           "p": [
-            "Usa este sitio para su propósito: conocer a Global Beyond LLC y contactarnos. No intentes interrumpirlo, extraer su contenido a gran escala, enviar información falsa o maliciosa a través del formulario de contacto, ni usarlo para distribuir contenido ilegal."
+            "El usuario se obliga a no interrumpir el sitio, no extraer su contenido de forma masiva, no enviar información falsa o maliciosa y no usarlo para distribuir contenido ilegal."
           ]
         },
         {
           "h": "Propiedad intelectual",
           "p": [
-            "El nombre Global Beyond LLC, el logotipo, y el texto, las fotografías y el diseño de este sitio pertenecen a Global Beyond LLC o se usan con permiso. Puedes ver y compartir las páginas de este sitio; no puedes reproducir el logotipo o los materiales de marca para tu propio uso sin pedirnos permiso antes."
+            "El nombre Global Beyond LLC, el logotipo, los textos, las fotografías y el diseño del sitio pertenecen a Global Beyond LLC o se usan con permiso. No pueden reproducirse con fines propios sin autorización previa por escrito."
           ]
         },
         {
-          "h": "Enlaces a terceros",
+          "h": "Contenido enviado por el usuario",
           "p": [
-            "Este sitio enlaza a WhatsApp e Instagram, ambos operados por Meta, y al correo electrónico. Una vez que sales de este sitio por uno de esos enlaces, aplican los términos propios de esa plataforma — no somos responsables de su contenido ni de sus prácticas."
+            "Al enviar una reseña o un mensaje, el usuario declara que el contenido es veraz y de su autoría, y que no infringe derechos de terceros. Autoriza a la empresa a usarlo para responder y, en el caso de las reseñas, a publicarlo. La empresa puede no publicar o retirar cualquier contenido."
           ]
         },
         {
-          "h": "Sin garantía",
+          "h": "Servicios de terceros",
           "p": [
-            "Este sitio se ofrece tal como está. Hacemos lo posible por mantenerlo preciso y disponible, pero no garantizamos que esté libre de errores, ininterrumpido, o accesible de forma permanente."
+            "El sitio enlaza a WhatsApp e Instagram, servicios de Meta, y al correo electrónico. Al salir del sitio por esos enlaces, aplican los términos de cada servicio. La empresa no controla ni es responsable de su contenido ni de sus prácticas."
           ]
         },
         {
-          "h": "Ley aplicable",
+          "h": "Exclusión de garantías",
           "p": [
-            "Estos términos se rigen por las leyes del estado de Florida, Estados Unidos, sin considerar sus principios de conflicto de leyes."
+            "El sitio y su contenido se ofrecen “tal como están” y “según disponibilidad”, sin garantías de ningún tipo, expresas o implícitas, en la medida en que la ley lo permita."
+          ]
+        },
+        {
+          "h": "Limitación de responsabilidad",
+          "p": [
+            "En la máxima medida permitida por la ley, Global Beyond LLC y sus integrantes no responden por daños indirectos, incidentales, especiales o consecuentes derivados del uso del sitio o de la imposibilidad de usarlo, ni por las transacciones realizadas en plataformas de terceros. Estos términos no excluyen la responsabilidad que la ley no permita excluir."
+          ]
+        },
+        {
+          "h": "Ley aplicable y jurisdicción",
+          "p": [
+            "Estos términos se rigen por las leyes del estado de Florida, Estados Unidos. Cualquier controversia se someterá a los tribunales estatales o federales ubicados en el condado de Miami-Dade, Florida."
           ]
         },
         {
           "h": "Cambios a estos términos",
           "p": [
-            "Podemos actualizar estos términos a medida que el sitio y el negocio evolucionan. La fecha de arriba refleja la última revisión."
+            "La empresa puede actualizar estos términos. La fecha de actualización indica la última revisión."
           ]
         }
       ]
