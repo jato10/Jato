@@ -1187,6 +1187,8 @@ a.review-source:hover { color: var(--on-dark-muted); }
   border-top: 1px solid var(--line-light);
   border-bottom: 1px solid var(--line-light);
 }
+.about__purpose--open { padding-top: var(--space-5); }
+.about__purpose--open .h-card { margin: 0 0 var(--space-2); }
 .about__purpose-summary {
   display: flex;
   align-items: center;

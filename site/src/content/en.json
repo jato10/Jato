@@ -490,5 +490,22 @@
         }
       ]
     }
+  },
+  "purpose": {
+    "title": "Mission, vision and values",
+    "pillars": [
+      {
+        "label": "Mission",
+        "body": "Operate an e-commerce company across different marketplaces."
+      },
+      {
+        "label": "Vision",
+        "body": "Grow in e-commerce and create jobs."
+      },
+      {
+        "label": "Values",
+        "body": "Direct. Serious. Consistent."
+      }
+    ]
   }
 }

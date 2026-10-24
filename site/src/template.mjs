@@ -850,10 +850,8 @@ function aboutSection({ c, assets }) {
       </section>`;
 }
 
-/* Mission, vision and purpose live inside About now, collapsed: they explain
-   who the company is, which is About's job, and as a full section of their own
-   they pushed the contact form further down the homepage. <details> keeps it
-   zero-JS; id="purpose" keeps old #purpose links landing in the right place. */
+/* Mission, vision and values sit in About, always visible: the "Nosotros"
+   link in the header lands here. id="purpose" keeps old #purpose links working. */
 function purposeBlock({ c }) {
   const pillars = c.purpose.pillars
     .map(
@@ -863,15 +861,12 @@ function purposeBlock({ c }) {
                 </div>`
     )
     .join('\n                ');
-  return `<details class="about__purpose" id="purpose">
-              <summary class="about__purpose-summary">
-                <span>${esc(c.purpose.title)}</span>
-                <span class="accordion__icon" aria-hidden="true"></span>
-              </summary>
+  return `<div class="about__purpose about__purpose--open" id="purpose">
+              <h3 class="h-card">${esc(c.purpose.title)}</h3>
               <dl class="pillars pillars--compact">
                 ${pillars}
               </dl>
-            </details>`;
+            </div>`;
 }
 
 function contactSection({ c, links, assets }) {

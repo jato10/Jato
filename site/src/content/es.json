@@ -490,5 +490,22 @@
         }
       ]
     }
+  },
+  "purpose": {
+    "title": "Misión, visión y valores",
+    "pillars": [
+      {
+        "label": "Misión",
+        "body": "Operar una empresa de comercio electrónico en distintos marketplaces."
+      },
+      {
+        "label": "Visión",
+        "body": "Crecer en comercio electrónico y generar empleo."
+      },
+      {
+        "label": "Valores",
+        "body": "Directos. Serios. Constantes."
+      }
+    ]
   }
 }
