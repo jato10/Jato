@@ -1006,6 +1006,8 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
 }
 .buy-box__note { margin: 12px 0 0; font-size: var(--fs-detail); line-height: 1.5; color: var(--on-dark-dim); }
 .buy-box__order { margin-top: 18px; }
+.buy-box__note + .buy-box__cta { margin-top: var(--space-4); }
+.buy-box > .buy-box__note:first-child { margin-top: 0; }
 .buy-box__cta { width: 100%; cursor: pointer; list-style: none; }
 .buy-box__cta::-webkit-details-marker { display: none; }
 .buy-box__order[open] .buy-box__cta { border-radius: var(--radius-md); }

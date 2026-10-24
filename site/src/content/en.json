@@ -45,17 +45,17 @@
   "hero": {
     "headline": "Gaming, kitchen and personal care — retail and wholesale from Miami.",
     "lede": "Global Beyond LLC is an e-commerce company based in Miami, Florida. It sells its products through third-party e-commerce platforms.",
-    "whatsappMessage": "Hello Global Beyond, I am looking for a specific product and would like to check availability and pricing.",
+    "whatsappMessage": "Hello Global Beyond, I would like more information.",
     "featured": [
       "ps5-console",
       "kitchenaid-mixer",
       "ninja-air-fryer",
       "healena"
     ],
-    "featuredLabel": "Featured products"
+    "featuredLabel": "Example products"
   },
   "cta": {
-    "catalog": "See catalog & prices",
+    "catalog": "View catalog",
     "whatsapp": "Chat on WhatsApp"
   },
   "services": {
@@ -75,7 +75,7 @@
         "title": "B2B catalog",
         "body": "Catalog for businesses and resellers.",
         "cta": "Request the B2B catalog",
-        "ctaMessage": "Hi Global Beyond, I represent a business and would like to receive the B2B catalog with volume pricing.",
+        "ctaMessage": "Hello Global Beyond, I represent a business and would like information about the B2B catalog.",
         "badge": "Coming soon"
       }
     ]
@@ -83,14 +83,14 @@
   "catalog": {
     "title": "Catalog.",
     "body": [
-      "Global Beyond LLC product catalog. To receive the current catalog, write to us."
+      "Global Beyond LLC example catalog."
     ],
-    "cta": "Request the current catalog",
+    "cta": "View catalog",
     "photoAlt": "Yudenis V. Martínez photographing a catalog product.",
     "categoriesEyebrow": "By category",
-    "categoriesTitle": "Products.",
+    "categoriesTitle": "Example products.",
     "pageTitle": "Catalog by category — Global Beyond LLC",
-    "pageMetaDescription": "Global Beyond LLC catalog by category: Beauty, Gaming & Entertainment, and Kitchen Appliances.",
+    "pageMetaDescription": "Global Beyond LLC example catalog by category: Beauty, Gaming & Entertainment, and Kitchen Appliances.",
     "categories": [
       {
         "id": "beauty",
@@ -99,15 +99,11 @@
           {
             "name": "ROUND LAB — 1025 Dokdo Skin Care Basic Set",
             "description": "Three-step skin care set: cleanser, toner and lotion.",
-            "price": "$61.74",
-            "image": "roundlab-skincare",
-            "soldOut": true
+            "image": "roundlab-skincare"
           },
           {
             "name": "Healena — Medical Grade Scar Treatment Patch",
             "description": "Reusable silicone sheet for scar care.",
-            "price": "$75.00",
-            "priceNote": "Price per box.",
             "image": "healena"
           }
         ]
@@ -119,40 +115,32 @@
           {
             "name": "PlayStation 5 — Standard disc console",
             "description": "PlayStation 5 console with disc drive. Includes one DualSense controller.",
-            "price": "$549.99",
             "image": "ps5-console"
           },
           {
             "name": "Xbox Series X — 1TB console",
             "description": "Xbox Series X console, 1 TB. Includes one wireless controller.",
-            "price": "$799.99",
             "image": "xbox-series-x"
           },
           {
             "name": "DualSense Wireless Controller (PS5)",
             "description": "Wireless controller for PS5 with haptic feedback and adaptive triggers.",
-            "price": "$74.99",
             "image": "dualsense-controller"
           },
           {
             "name": "Xbox Wireless Controller",
             "description": "Wireless controller for Xbox Series X|S and PC, with Bluetooth connection.",
-            "price": "$69.99",
             "image": "xbox-controller"
           },
           {
             "name": "Samsung Neo QLED 50\" QN90D — 4K Smart TV",
             "description": "A 50-inch TV with Mini LED technology, 4K resolution, HDR, and Dolby Atmos sound.",
-            "price": "$1,614.99",
-            "image": "samsung-tv-50",
-            "soldOut": true
+            "image": "samsung-tv-50"
           },
           {
             "name": "Samsung OLED 65\" S90D — 4K Smart TV",
             "description": "65-inch OLED TV with 4K resolution and Dolby Atmos sound.",
-            "price": "$1,234.99",
-            "image": "samsung-tv-65",
-            "soldOut": true
+            "image": "samsung-tv-65"
           }
         ]
       },
@@ -163,13 +151,11 @@
           {
             "name": "KitchenAid Artisan 5-Quart Stand Mixer",
             "description": "Tilt-head stand mixer with a 5-quart stainless steel bowl and a 10-speed motor. Includes a dough hook, flat beater, and wire whip.",
-            "price": "$489.00",
             "image": "kitchenaid-mixer"
           },
           {
             "name": "Ninja Air Fryer Pro XL",
             "description": "A 6.5-quart air fryer with MaxCrisp technology: air fry, roast, bake, reheat, and dehydrate in one appliance.",
-            "price": "$179.99",
             "image": "ninja-air-fryer"
           }
         ]
@@ -177,18 +163,12 @@
     ],
     "productPage": {
       "backLabel": "Back to the catalog",
-      "priceLabel": "Price",
-      "orderCta": "Request this product",
-      "formLede": "Leave your details to send your request.",
-      "orderMessageTemplate": "Request: {product}, {price}.",
-      "notesLabel": "Notes",
-      "submit": "Send request",
-      "sending": "Sending…",
-      "soldOutBadge": "Sold out",
-      "soldOutMessage": "Product currently unavailable.",
-      "notifyCta": "Ask about availability",
-      "notifyMessageTemplate": "Hello, I would like to ask about the availability of: {product}."
-    }
+      "exampleBadge": "Example",
+      "exampleNote": "The products shown are examples. They are not current products and are not for sale on this site.",
+      "contactCta": "Contact us",
+      "contactMessage": "Hello Global Beyond, I would like more information."
+    },
+    "categoriesLede": "The products shown are examples. They are not current products and are not for sale on this site."
   },
   "reviews": {
     "title": "Reviews.",
@@ -285,16 +265,12 @@
     "presetHeading": "Prefer to start with a ready message?",
     "presets": [
       {
-        "label": "Ask for the current catalog",
-        "message": "Hello Global Beyond, I would like to receive your current product catalog."
+        "label": "Ask for information",
+        "message": "Hello Global Beyond, I would like to receive information."
       },
       {
         "label": "Ask about a wholesale order",
         "message": "Hello Global Beyond, I am interested in a wholesale order and would like to discuss quantities and availability."
-      },
-      {
-        "label": "Ask about a specific product",
-        "message": "Hello Global Beyond, I am looking for a specific product and would like to check availability and pricing."
       }
     ],
     "unconfigured": "Contact details unavailable for now.",
@@ -432,9 +408,9 @@
           ]
         },
         {
-          "h": "Information and prices",
+          "h": "Information and example products",
           "p": [
-            "The information on the site, including products, descriptions, prices and availability, is for reference and may change without notice. It is not an offer, a quote or a contract. It may contain errors or omissions."
+            "The products in the catalog are examples. They are not current products and are not for sale on this site. Descriptions and other information on the site are for reference and may change without notice. Nothing on the site is an offer, a quote or a contract. The site may contain errors or omissions."
           ]
         },
         {

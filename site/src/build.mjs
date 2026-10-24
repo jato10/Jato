@@ -91,15 +91,6 @@ function productJsonLd(c, product, canonical) {
     description: product.description,
     sku: product.image,
     brand: { '@type': 'Brand', name: site.productBrands[product.image] },
-    offers: {
-      '@type': 'Offer',
-      url: canonical,
-      price: product.price.replace(/[^0-9.]/g, ''),
-      priceCurrency: 'USD',
-      availability: product.soldOut ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
-      itemCondition: 'https://schema.org/NewCondition',
-      seller: { '@id': `${origin}/#organization` },
-    },
   };
   const breadcrumbs = {
     '@context': 'https://schema.org',

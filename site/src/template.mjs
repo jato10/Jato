@@ -302,7 +302,7 @@ function featuredProducts(c, slugs) {
   const all = c.catalog.categories.flatMap((cat) => cat.products);
   return slugs
     .map((slug) => all.find((p) => p.image === slug))
-    .filter((p) => p && !p.soldOut);
+    .filter(Boolean);
 }
 
 function heroSection({ c, site, links }) {
@@ -314,7 +314,7 @@ function heroSection({ c, site, links }) {
                 <img src="${assetVersion(`assets/img/catalog/thumb/${p.image}.webp`)}" alt="" width="320" height="320"
                   decoding="async">
                 <span class="hero-pick__name">${esc(p.name.split(' — ')[0])}</span>
-                <span class="hero-pick__price">${esc(p.price)}</span>
+                <span class="hero-pick__price">${esc(c.catalog.productPage.exampleBadge)}</span>
               </a></li>`
     )
     .join('\n              ');
@@ -417,10 +417,7 @@ function productHref(site, c, product) {
 }
 
 function productCard(site, c, product) {
-  const note = product.priceNote ? `<p class="product-card__note">${esc(product.priceNote)}</p>` : '';
-  const badge = product.soldOut
-    ? `<span class="product-card__badge">${esc(c.catalog.productPage.soldOutBadge)}</span>`
-    : '';
+  const badge = `<span class="product-card__badge">${esc(c.catalog.productPage.exampleBadge)}</span>`;
   return `<a class="product-card" href="${esc(productHref(site, c, product))}">
             <span class="product-card__media">
               ${badge}
@@ -430,8 +427,6 @@ function productCard(site, c, product) {
             <span class="product-card__body">
               <span class="product-card__name">${esc(product.name)}</span>
               <span class="product-card__desc">${esc(product.description)}</span>
-              <span class="product-card__price">${esc(product.price)}</span>
-              ${note}
             </span>
           </a>`;
 }
@@ -442,8 +437,7 @@ function productCategories(site, c) {
       (cat) => `<div class="product-category">
             <h2 class="product-category__label">${esc(cat.label)}</h2>
             <div class="product-grid">
-              ${[...cat.products]
-                .sort((a, b) => Number(Boolean(a.soldOut)) - Number(Boolean(b.soldOut)))
+              ${cat.products
                 .map((p) => productCard(site, c, p))
                 .join('\n              ')}
             </div>
@@ -525,62 +519,6 @@ function catalogPageBody({ c, site }) {
       </section>`;
 }
 
-/* A product request: it posts to the same /api/contact endpoint as the main
-   contact form, pre-filled with the product. It collects no address and no
-   payment information, and nothing here charges a card. */
-function productOrderForm({ c, site, product }) {
-  const f = c.contact.form;
-  const pp = c.catalog.productPage;
-  const orderMessage = pp.orderMessageTemplate
-    .replace('{product}', product.name)
-    .replace('{price}', product.price);
-  return `<form class="form" action="/api/contact" method="post" data-contact-form novalidate>
-              <input type="hidden" name="lang" value="${c.lang}">
-              ${honeypot(c)}
-              <div class="form__row">
-                <div class="field">
-                  <label class="field__label" for="pf-name">${esc(f.name)}</label>
-                  <input class="field__input" id="pf-name" name="name" type="text" required
-                    maxlength="120" autocomplete="name" placeholder="${esc(f.namePlaceholder)}"
-                    aria-describedby="pf-name-error">
-                  <p class="field__error" id="pf-name-error" data-message="${esc(f.errorName)}"></p>
-                </div>
-              </div>
-              <div class="form__row form__row--split">
-                <div class="field">
-                  <label class="field__label" for="pf-email">${esc(f.email)}</label>
-                  <input class="field__input" id="pf-email" name="email" type="email" spellcheck="false"
-                    maxlength="200" autocomplete="email" placeholder="${esc(f.emailPlaceholder)}"
-                    aria-describedby="pf-contact-hint pf-contact-error">
-                </div>
-                <div class="field">
-                  <label class="field__label" for="pf-phone">${esc(f.phone)}</label>
-                  <input class="field__input" id="pf-phone" name="phone" type="tel"
-                    maxlength="60" autocomplete="tel" placeholder="${esc(f.phonePlaceholder)}"
-                    aria-describedby="pf-contact-hint pf-contact-error">
-                </div>
-              </div>
-              <p class="field__note" id="pf-contact-hint">${esc(f.contactHint)}</p>
-              <p class="field__error" id="pf-contact-error" data-message="${esc(f.errorContact)}"
-                data-message-email="${esc(f.errorEmail)}"></p>
-              <div class="form__row">
-                <div class="field">
-                  <label class="field__label" for="pf-message">${esc(pp.notesLabel)}</label>
-                  <textarea class="field__input field__input--area" id="pf-message" name="message" rows="3"
-                    required maxlength="4000" aria-describedby="pf-message-error">${esc(orderMessage)}</textarea>
-                  <p class="field__error" id="pf-message-error" data-message="${esc(f.errorMessage)}"></p>
-                </div>
-              </div>
-              <div class="form__foot">
-                <button class="btn btn--primary" type="submit" data-submit
-                  data-idle="${esc(pp.submit)}" data-busy="${esc(pp.sending)}">${esc(pp.submit)}</button>
-                <p class="form__privacy">${f.privacy.replace('{href}', `/${c.lang}/privacy/`)}</p>
-              </div>
-              <p class="form__status" data-form-status role="status" aria-live="polite"
-                data-success="${esc(f.success)}" data-error="${esc(f.error)}" data-invalid="${esc(f.invalid)}"></p>
-            </form>`;
-}
-
 /* The product photo is the largest thing on a product page, so it is what
    the page's load speed is judged by. It is served at the width the screen
    needs (480/720/900), asked for first (fetchpriority + a preload in the
@@ -593,32 +531,12 @@ const productPhotoSrcset = (product) =>
     .concat(`${assetVersion(`assets/img/catalog/${product.image}.webp`)} 900w`)
     .join(', ');
 
-/* The order form sits collapsed inside the buy box rather than sprawling
-   across the page below it — the price and payment options read at a glance,
-   and the fields only appear once the visitor commits to ordering.
-
-   A sold-out product gets the badge, the sold-out message, and a WhatsApp
-   link pre-filled to ask about restocking, in place of the order form — never
-   a form that would only bounce back once someone tried to place it. */
+/* Products here are examples, not current stock: each one is labeled as such,
+   shows no price, and offers no order form. The only action is a general
+   contact link. */
 function productDetailBody({ c, site, links, product, categoryLabel }) {
   const pp = c.catalog.productPage;
-  const soldOutBadge = product.soldOut
-    ? `<span class="product-card__badge product-detail__badge">${esc(pp.soldOutBadge)}</span>`
-    : '';
-  const notifyHref = product.soldOut
-    ? links.request(pp.notifyMessageTemplate.replace('{product}', product.name))
-    : null;
-  const buyBoxBody = product.soldOut
-    ? `<p class="buy-box__note buy-box__sold-out">${esc(pp.soldOutMessage)}</p>
-                <a class="btn btn--primary buy-box__cta" href="${esc(notifyHref)}"${externalAttrs(links, notifyHref)}>${esc(pp.notifyCta)}</a>`
-    : `<details class="buy-box__order">
-                  <summary class="btn btn--primary buy-box__cta">${esc(pp.orderCta)}</summary>
-                  <div class="buy-box__form">
-                    <p class="buy-box__lede">${esc(pp.formLede)}</p>
-                    ${productOrderForm({ c, site, product })}
-                  </div>
-                </details>
-                ${pp.reassure ? `<p class="buy-box__note">${esc(pp.reassure)}</p>` : ''}`;
+  const contactHref = links.request(pp.contactMessage);
   return `<section class="section section--dark">
         <div class="shell">
           <div class="btn-row product-detail__back">
@@ -626,7 +544,7 @@ function productDetailBody({ c, site, links, product, categoryLabel }) {
           </div>
           <div class="product-detail">
             <figure class="product-detail__figure">
-              ${soldOutBadge}
+              <span class="product-card__badge product-detail__badge">${esc(pp.exampleBadge)}</span>
               <img src="${assetVersion(`assets/img/catalog/${product.image}.webp`)}" alt="${esc(product.name)}"
                 srcset="${productPhotoSrcset(product)}" sizes="${PRODUCT_PHOTO_SIZES}"
                 width="900" height="900" fetchpriority="high" decoding="async">
@@ -636,12 +554,8 @@ function productDetailBody({ c, site, links, product, categoryLabel }) {
               <p class="product-detail__meta">${esc(categoryLabel)}</p>
               <p class="body-text">${esc(product.description)}</p>
               <div class="buy-box">
-                <p class="product-detail__price">
-                  <span class="product-detail__price-label">${esc(pp.priceLabel)}</span>
-                  <span class="product-detail__price-value">${esc(product.price)}</span>
-                </p>
-                ${product.priceNote ? `<p class="buy-box__note">${esc(product.priceNote)}</p>` : ''}
-                ${buyBoxBody}
+                <p class="buy-box__note">${esc(pp.exampleNote)}</p>
+                <a class="btn btn--primary buy-box__cta" href="${esc(contactHref)}"${externalAttrs(links, contactHref)}>${esc(pp.contactCta)}</a>
               </div>
             </div>
           </div>
