@@ -68,13 +68,15 @@
       },
       {
         "title": "Al mayor",
-        "body": "Solicitudes por volumen. Indica cantidades y especificaciones."
+        "body": "Solicitudes por volumen. Indica cantidades y especificaciones.",
+        "badge": "Próximamente"
       },
       {
         "title": "Catálogo B2B",
         "body": "Catálogo para negocios y revendedores.",
         "cta": "Solicitar el catálogo B2B",
-        "ctaMessage": "Hola Global Beyond, represento a un negocio y quisiera recibir el catálogo B2B con precios por volumen."
+        "ctaMessage": "Hola Global Beyond, represento a un negocio y quisiera recibir el catálogo B2B con precios por volumen.",
+        "badge": "Próximamente"
       }
     ]
   },
@@ -238,7 +240,8 @@
         "body": "Destino del pedido."
       }
     ],
-    "cta": "Iniciar una solicitud al mayor"
+    "cta": "Iniciar una solicitud al mayor",
+    "badge": "Próximamente"
   },
   "about": {
     "title": "Nosotros.",

@@ -386,7 +386,7 @@ function servicesSection({ c, links }) {
         : '';
       return `<div class="tabs__panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="services-panel-${i}"
               aria-labelledby="services-tab-${i}" data-panel="${i}">
-              <h3 class="h-card">${esc(item.title)}</h3>
+              <h3 class="h-card">${esc(item.title)}${item.badge ? ` <span class="coming-soon">${esc(item.badge)}</span>` : ''}</h3>
               <p>${esc(item.body)}</p>${cta}
             </div>`;
     })
@@ -790,7 +790,7 @@ function wholesaleSection({ c, links }) {
   return `<section class="section section--darker" id="wholesale" aria-labelledby="wholesale-title">
         <div class="shell">
           <div class="section-head">
-            <h2 class="h-section" id="wholesale-title">${esc(c.wholesale.title)}</h2>
+            <h2 class="h-section" id="wholesale-title">${esc(c.wholesale.title)}${c.wholesale.badge ? ` <span class="coming-soon">${esc(c.wholesale.badge)}</span>` : ''}</h2>
             <p class="lede">${esc(c.wholesale.lede)}</p>
           </div>
           <div class="accordion">

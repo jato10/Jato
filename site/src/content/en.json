@@ -68,13 +68,15 @@
       },
       {
         "title": "Wholesale",
-        "body": "Volume requests. State quantities and specifications."
+        "body": "Volume requests. State quantities and specifications.",
+        "badge": "Coming soon"
       },
       {
         "title": "B2B catalog",
         "body": "Catalog for businesses and resellers.",
         "cta": "Request the B2B catalog",
-        "ctaMessage": "Hi Global Beyond, I represent a business and would like to receive the B2B catalog with volume pricing."
+        "ctaMessage": "Hi Global Beyond, I represent a business and would like to receive the B2B catalog with volume pricing.",
+        "badge": "Coming soon"
       }
     ]
   },
@@ -238,7 +240,8 @@
         "body": "Order destination."
       }
     ],
-    "cta": "Start a wholesale inquiry"
+    "cta": "Start a wholesale inquiry",
+    "badge": "Coming soon"
   },
   "about": {
     "title": "About us.",

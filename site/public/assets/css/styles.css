@@ -722,6 +722,21 @@ p a, .form__privacy a { text-underline-offset: 0.18em; text-decoration-thickness
   background: rgba(12, 20, 32, 0.04);
   width: fit-content;
 }
+/* A small tag next to a heading for a service that is not open yet. */
+.coming-soon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: var(--space-2);
+  padding: 4px 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  line-height: 1.4;
+  opacity: 0.75;
+}
 .tabs__tab {
   min-height: 44px;
   padding: 10px 22px;
