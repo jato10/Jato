@@ -272,7 +272,7 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
         <div class="footer__bottom">
           <div class="footer__legal">
             <p>${esc(c.footer.legal)}</p>
-            <p>${esc(c.footer.disclaimer)}</p>
+            ${c.footer.disclaimer ? `<p>${esc(c.footer.disclaimer)}</p>` : ''}
           </div>
           <div class="footer__bottom-right">
             <nav class="footer__legalnav" aria-label="${esc(c.footer.legalHeading)}">
@@ -328,7 +328,7 @@ function heroSection({ c, site, links }) {
         <div class="hero__grid" aria-hidden="true"></div>
         <div class="shell hero__inner">
           <h1 class="h-display" id="hero-title">${esc(c.hero.headline)}</h1>
-          <p class="hero__tagline">${esc(c.hero.titlePlain)}</p>
+          ${c.hero.titlePlain ? `<p class="hero__tagline">${esc(c.hero.titlePlain)}</p>` : ''}
           <p class="lede">${esc(c.hero.lede)}</p>
           <div class="btn-row hero__actions">
             <a class="btn btn--primary" href="${esc(catalogHref)}">${esc(c.cta.catalog)}${ARROW_ICON}</a>
@@ -337,7 +337,7 @@ function heroSection({ c, site, links }) {
           <ul class="hero-picks" aria-label="${esc(c.hero.featuredLabel)}">
               ${picks}
           </ul>
-          <p class="hero__note">${esc(c.hero.note)}</p>
+          ${c.hero.note ? `<p class="hero__note">${esc(c.hero.note)}</p>` : ''}
         </div>
       </section>`;
 }
@@ -392,15 +392,11 @@ function servicesSection({ c, links }) {
     })
     .join('\n            ');
 
-  const flow = c.services.flow
-    .map((step, i) => `<li><span class="flow__num">${String(i + 1).padStart(2, '0')}</span>${esc(step)}</li>`)
-    .join('\n                ');
-
   return `<section class="section section--light" id="services" aria-labelledby="services-title">
         <div class="shell">
           <div class="section-head">
             <h2 class="h-section" id="services-title">${esc(c.services.title)}</h2>
-            <p class="lede">${esc(c.services.lede)}</p>
+            ${c.services.lede ? `<p class="lede">${esc(c.services.lede)}</p>` : ''}
           </div>
           <div class="services-body">
             <div class="tabs" data-tabs>
@@ -410,12 +406,6 @@ function servicesSection({ c, links }) {
               <div class="tabs__panels">
               ${panels}
               </div>
-            </div>
-            <div class="flow-card">
-              <p class="flow-card__heading" id="services-flow-heading">${esc(c.services.flowLabel)}</p>
-              <ol class="flow" aria-labelledby="services-flow-heading">
-                ${flow}
-              </ol>
             </div>
           </div>
         </div>
@@ -481,9 +471,11 @@ function catalogSection({ c, site, assets }) {
           <div>
             <h2 class="h-section" id="catalog-title">${esc(c.catalog.title)}</h2>
             ${c.catalog.body.map((para) => `<p class="body-text">${esc(para)}</p>`).join('\n            ')}
-            <ul class="ticks">
+            ${c.catalog.points && c.catalog.points.length
+              ? `<ul class="ticks">
               ${c.catalog.points.map((p) => `<li>${esc(p)}</li>`).join('\n              ')}
-            </ul>
+            </ul>`
+              : ''}
             <div class="btn-row">
               <a class="btn btn--primary" href="${esc(catalogHref)}">${esc(c.cta.catalog)}${ARROW_ICON}</a>
             </div>
@@ -491,7 +483,7 @@ function catalogSection({ c, site, assets }) {
           <figure class="catalog__figure catalog__figure--sticky">
             <img class="catalog__photo" src="${assetVersion('assets/img/catalog.webp')}" alt="${esc(c.catalog.photoAlt)}"
               width="1400" height="950" loading="lazy" decoding="async">
-            <figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>
+            ${c.catalog.photoCaption ? `<figcaption class="catalog__caption">${esc(c.catalog.photoCaption)}</figcaption>` : ''}
           </figure>
         </div>
       </section>`;
@@ -503,11 +495,11 @@ function catalogSection({ c, site, assets }) {
 function reviewsTeaserSection({ c, site }) {
   const viewHref = site.reviewsPath[c.lang];
   const featured = c.reviews.featured.map((i) => c.reviews.items[i]).filter(Boolean);
-  return `<section class="section section--dark" id="reviews" aria-labelledby="reviews-title">
+  return `<section class="section section--dark" id="reviews" aria-labelledby="reviews-title"${featured.length ? '' : ' hidden'}>
         <div class="shell">
           <div class="section-head">
             <h2 class="h-section" id="reviews-title">${esc(c.reviews.title)}</h2>
-            <p class="lede">${esc(c.reviews.lede)}</p>
+            ${c.reviews.lede ? `<p class="lede">${esc(c.reviews.lede)}</p>` : ''}
           </div>
           <div class="reviews-grid" data-google-reviews data-google-limit="3">
             ${reviewCards(c, featured)}
@@ -533,44 +525,15 @@ function catalogPageBody({ c, site }) {
       </section>`;
 }
 
-/* Direct payment links render only once a real account is configured in
-   site.json. Each one is shown only when set: a placeholder handle here
-   would invite a customer to send money to an account that may belong to
-   someone else. Until then the payment method is a preference that rides
-   along with the order and gets settled over WhatsApp. */
-function paymentLinks(site, pp) {
-  const { paypal, zelle } = site.payments || {};
-  const parts = [
-    paypal ? `<a href="${esc(paypal)}" target="_blank" rel="noopener noreferrer">${esc(pp.paypalLinkLabel)}</a>` : '',
-    zelle ? `<span>${esc(pp.zelleLabel)}: <a href="mailto:${esc(zelle)}">${esc(zelle)}</a></span>` : '',
-  ].filter(Boolean);
-  return parts.length
-    ? `<p class="payment-links">
-                    ${parts.join('\n                    <span class="payment-links__sep" aria-hidden="true">·</span>\n                    ')}
-                  </p>`
-    : '';
-}
-
-/* Looks like a real order form because it is one: it posts to the same
-   /api/contact endpoint as the main contact form, just pre-filled with the
-   product and framed as an order. Nothing here charges a card — the payment
-   method is a stated preference that rides along in the message, confirmed
-   by a person afterward, same as every other request on this site. */
+/* A product request: it posts to the same /api/contact endpoint as the main
+   contact form, pre-filled with the product. It collects no address and no
+   payment information, and nothing here charges a card. */
 function productOrderForm({ c, site, product }) {
   const f = c.contact.form;
   const pp = c.catalog.productPage;
   const orderMessage = pp.orderMessageTemplate
     .replace('{product}', product.name)
     .replace('{price}', product.price);
-  const paymentOptions = pp.paymentOptions
-    .map(
-      (label, i) => `<label class="payment-option">
-                <input type="radio" name="paymentMethod" value="${esc(label)}"${i === 0 ? ' checked' : ''}>
-                <span>${esc(label)}</span>
-              </label>`
-    )
-    .join('\n              ');
-
   return `<form class="form" action="/api/contact" method="post" data-contact-form novalidate>
               <input type="hidden" name="lang" value="${c.lang}">
               ${honeypot(c)}
@@ -600,22 +563,6 @@ function productOrderForm({ c, site, product }) {
               <p class="field__note" id="pf-contact-hint">${esc(f.contactHint)}</p>
               <p class="field__error" id="pf-contact-error" data-message="${esc(f.errorContact)}"
                 data-message-email="${esc(f.errorEmail)}"></p>
-              <div class="form__row">
-                <div class="field">
-                  <label class="field__label" for="pf-address">${esc(pp.addressLabel)} <span class="field__hint">${esc(pp.addressOptional)}</span></label>
-                  <input class="field__input" id="pf-address" name="address" type="text"
-                    maxlength="300" autocomplete="street-address" placeholder="${esc(pp.addressPlaceholder)}">
-                </div>
-              </div>
-              <div class="form__row">
-                <fieldset class="field">
-                  <legend class="field__label">${esc(pp.paymentLabel)}</legend>
-                  <div class="payment-options">
-                    ${paymentOptions}
-                  </div>
-                  ${paymentLinks(site, pp)}
-                </fieldset>
-              </div>
               <div class="form__row">
                 <div class="field">
                   <label class="field__label" for="pf-message">${esc(pp.notesLabel)}</label>
@@ -671,7 +618,7 @@ function productDetailBody({ c, site, links, product, categoryLabel }) {
                     ${productOrderForm({ c, site, product })}
                   </div>
                 </details>
-                <p class="buy-box__note">${esc(pp.reassure)}</p>`;
+                ${pp.reassure ? `<p class="buy-box__note">${esc(pp.reassure)}</p>` : ''}`;
   return `<section class="section section--dark">
         <div class="shell">
           <div class="btn-row product-detail__back">
@@ -778,7 +725,7 @@ function reviewsPageBody({ c, site }) {
         <div class="shell">
           <div class="section-head">
             <h1 class="h-section">${esc(c.reviews.title)}</h1>
-            <p class="lede">${esc(c.reviews.lede)}</p>
+            ${c.reviews.lede ? `<p class="lede">${esc(c.reviews.lede)}</p>` : ''}
           </div>
           <div class="btn-row reviews-actions">
             <a class="btn btn--ghost" href="${esc(site.leaveReviewPath[c.lang])}">${esc(c.reviews.leaveCta)}${ARROW_ICON}</a>
@@ -861,7 +808,7 @@ function aboutSection({ c, assets }) {
   const peopleRole = c.about.peopleRole
     ? `<p class="people__role">${esc(c.about.peopleRole)}</p>`
     : '';
-  const commitments = c.about.commitments
+  const commitments = (c.about.commitments || [])
     .map(
       (item) => `<li><strong>${esc(item.title)}.</strong> ${esc(item.body)}</li>`
     )
@@ -893,11 +840,11 @@ function aboutSection({ c, assets }) {
               ${people}
             </ul>
             ${peopleRole}
-            <ul class="commitments">
+            ${commitments ? `<ul class="commitments">
               ${commitments}
-            </ul>
+            </ul>` : ''}
             ${tagline}
-            ${purposeBlock({ c })}
+            ${c.purpose ? purposeBlock({ c }) : ''}
           </div>
         </div>
       </section>`;
@@ -1017,10 +964,10 @@ function contactSection({ c, links, assets }) {
                   <p class="fact__label">${esc(c.contact.locationLabel)}</p>
                   <p class="fact__value">${esc(c.contact.location)}</p>
                 </div>
-                <div>
+                ${c.contact.hours ? `<div>
                   <p class="fact__label">${esc(c.contact.hoursLabel)}</p>
                   <p class="fact__value">${esc(c.contact.hours)}</p>
-                </div>
+                </div>` : ''}
               </div>
             </div>
           </div>

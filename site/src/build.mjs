@@ -46,7 +46,7 @@ function jsonLdFor(c) {
     logo: `${origin}/assets/img/logo.webp`,
     image: ogImage,
     description: c.meta.description,
-    slogan: c.hero.titlePlain,
+    ...(c.hero.titlePlain ? { slogan: c.hero.titlePlain } : {}),
     address: {
       '@type': 'PostalAddress',
       addressLocality: site.foundingLocation.city,

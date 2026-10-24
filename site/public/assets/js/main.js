@@ -353,6 +353,8 @@
           card.parentNode.removeChild(card);
         });
         googleSlot.appendChild(fragment);
+        var hiddenSection = googleSlot.closest('section[hidden]');
+        if (hiddenSection) hiddenSection.hidden = false;
       })
       .catch(function () { /* the page already has its own reviews */ });
   }
