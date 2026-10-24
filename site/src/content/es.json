@@ -45,17 +45,17 @@
   "hero": {
     "headline": "Gaming, cocina y cuidado personal, al detal y al mayor desde Miami.",
     "lede": "Global Beyond LLC es una empresa de comercio electrónico con sede en Miami, Florida. Vende sus productos a través de plataformas de comercio electrónico de terceros.",
-    "whatsappMessage": "Hola Global Beyond, estoy buscando un producto específico y quisiera consultar disponibilidad y precio.",
+    "whatsappMessage": "Hola Global Beyond, quisiera más información.",
     "featured": [
       "ps5-console",
       "kitchenaid-mixer",
       "ninja-air-fryer",
       "healena"
     ],
-    "featuredLabel": "Productos destacados"
+    "featuredLabel": "Productos de ejemplo"
   },
   "cta": {
-    "catalog": "Ver catálogo y precios",
+    "catalog": "Ver catálogo",
     "whatsapp": "Escríbenos por WhatsApp"
   },
   "services": {
@@ -68,27 +68,29 @@
       },
       {
         "title": "Al mayor",
-        "body": "Solicitudes por volumen. Indica cantidades y especificaciones."
+        "body": "Solicitudes por volumen. Indica cantidades y especificaciones.",
+        "badge": "Próximamente"
       },
       {
         "title": "Catálogo B2B",
         "body": "Catálogo para negocios y revendedores.",
         "cta": "Solicitar el catálogo B2B",
-        "ctaMessage": "Hola Global Beyond, represento a un negocio y quisiera recibir el catálogo B2B con precios por volumen."
+        "ctaMessage": "Hola Global Beyond, represento a un negocio y quisiera información sobre el catálogo B2B.",
+        "badge": "Próximamente"
       }
     ]
   },
   "catalog": {
     "title": "Catálogo.",
     "body": [
-      "Catálogo de productos de Global Beyond LLC. Para recibir el catálogo actual, escríbenos."
+      "Catálogo de ejemplo de Global Beyond LLC."
     ],
-    "cta": "Solicitar el catálogo actual",
+    "cta": "Ver catálogo",
     "photoAlt": "Yudenis V. Martínez fotografiando un producto del catálogo.",
     "categoriesEyebrow": "Por categoría",
-    "categoriesTitle": "Productos.",
+    "categoriesTitle": "Productos de ejemplo.",
     "pageTitle": "Catálogo por categoría — Global Beyond LLC",
-    "pageMetaDescription": "Catálogo de Global Beyond LLC por categoría: Belleza, Videojuegos y entretenimiento, y Electrodomésticos de cocina.",
+    "pageMetaDescription": "Catálogo de ejemplo de Global Beyond LLC por categoría: Belleza, Videojuegos y entretenimiento, y Electrodomésticos de cocina.",
     "categories": [
       {
         "id": "beauty",
@@ -97,15 +99,11 @@
           {
             "name": "ROUND LAB — 1025 Dokdo Skin Care Basic Set",
             "description": "Set de cuidado de la piel de tres pasos: limpiador, tónico y loción.",
-            "price": "$61.74",
-            "image": "roundlab-skincare",
-            "soldOut": true
+            "image": "roundlab-skincare"
           },
           {
             "name": "Healena — Parche de silicona para cicatrices, grado médico",
             "description": "Lámina de silicona reutilizable para el cuidado de cicatrices.",
-            "price": "$75.00",
-            "priceNote": "Precio por caja.",
             "image": "healena"
           }
         ]
@@ -117,40 +115,32 @@
           {
             "name": "PlayStation 5 — Consola estándar con disco",
             "description": "Consola PlayStation 5 con unidad de disco. Incluye un control DualSense.",
-            "price": "$549.99",
             "image": "ps5-console"
           },
           {
             "name": "Xbox Series X — Consola de 1TB",
             "description": "Consola Xbox Series X de 1 TB. Incluye un control inalámbrico.",
-            "price": "$799.99",
             "image": "xbox-series-x"
           },
           {
             "name": "Control inalámbrico DualSense (PS5)",
             "description": "Control inalámbrico para PS5 con retroalimentación háptica y gatillos adaptativos.",
-            "price": "$74.99",
             "image": "dualsense-controller"
           },
           {
             "name": "Control inalámbrico Xbox",
             "description": "Control inalámbrico para Xbox Series X|S y PC, con conexión Bluetooth.",
-            "price": "$69.99",
             "image": "xbox-controller"
           },
           {
             "name": "Samsung Neo QLED 50\" QN90D — Smart TV 4K",
             "description": "Televisor de 50 pulgadas con tecnología Mini LED, resolución 4K, HDR y sonido con Dolby Atmos.",
-            "price": "$1,614.99",
-            "image": "samsung-tv-50",
-            "soldOut": true
+            "image": "samsung-tv-50"
           },
           {
             "name": "Samsung OLED 65\" S90D — Smart TV 4K",
             "description": "Televisor OLED de 65 pulgadas con resolución 4K y sonido con Dolby Atmos.",
-            "price": "$1,234.99",
-            "image": "samsung-tv-65",
-            "soldOut": true
+            "image": "samsung-tv-65"
           }
         ]
       },
@@ -161,13 +151,11 @@
           {
             "name": "Batidora KitchenAid Artisan de 5 cuartos",
             "description": "Batidora de pie con cabezal inclinable, tazón de acero inoxidable de 5 cuartos y motor de 10 velocidades. Incluye gancho para masa, batidor plano y globo.",
-            "price": "$489.00",
             "image": "kitchenaid-mixer"
           },
           {
             "name": "Freidora de aire Ninja Pro XL",
             "description": "Freidora de aire de 6.5 cuartos con tecnología MaxCrisp: fríe al aire, asa, hornea, recalienta y deshidrata en un solo equipo.",
-            "price": "$179.99",
             "image": "ninja-air-fryer"
           }
         ]
@@ -175,18 +163,12 @@
     ],
     "productPage": {
       "backLabel": "Volver al catálogo",
-      "priceLabel": "Precio",
-      "orderCta": "Solicitar este producto",
-      "formLede": "Déjanos tus datos para enviar tu solicitud.",
-      "orderMessageTemplate": "Solicitud: {product}, {price}.",
-      "notesLabel": "Notas",
-      "submit": "Enviar solicitud",
-      "sending": "Enviando…",
-      "soldOutBadge": "Agotado",
-      "soldOutMessage": "Producto no disponible por ahora.",
-      "notifyCta": "Consultar disponibilidad",
-      "notifyMessageTemplate": "Hola, quisiera consultar la disponibilidad de: {product}."
-    }
+      "exampleBadge": "Ejemplo",
+      "exampleNote": "Los productos mostrados son ejemplos. No son productos actuales ni están a la venta en este sitio.",
+      "contactCta": "Contactar",
+      "contactMessage": "Hola Global Beyond, quisiera más información."
+    },
+    "categoriesLede": "Los productos mostrados son ejemplos. No son productos actuales ni están a la venta en este sitio."
   },
   "reviews": {
     "title": "Reseñas.",
@@ -238,7 +220,8 @@
         "body": "Destino del pedido."
       }
     ],
-    "cta": "Iniciar una solicitud al mayor"
+    "cta": "Iniciar una solicitud al mayor",
+    "badge": "Próximamente"
   },
   "about": {
     "title": "Nosotros.",
@@ -282,16 +265,12 @@
     "presetHeading": "¿Prefieres empezar con un mensaje listo?",
     "presets": [
       {
-        "label": "Pedir el catálogo actual",
-        "message": "Hola Global Beyond, me gustaría recibir su catálogo de productos actual."
+        "label": "Pedir información",
+        "message": "Hola Global Beyond, quisiera recibir información."
       },
       {
         "label": "Consultar un pedido al mayor",
         "message": "Hola Global Beyond, estoy interesado en un pedido al mayor y quisiera conversar sobre cantidades y disponibilidad."
-      },
-      {
-        "label": "Consultar un producto específico",
-        "message": "Hola Global Beyond, estoy buscando un producto específico y quisiera consultar disponibilidad y precio."
       }
     ],
     "unconfigured": "Contacto no disponible por ahora.",
@@ -429,9 +408,9 @@
           ]
         },
         {
-          "h": "Información y precios",
+          "h": "Información y productos de ejemplo",
           "p": [
-            "La información del sitio, incluidos productos, descripciones, precios y disponibilidad, es referencial y puede cambiar sin aviso. No constituye una oferta, una cotización ni un contrato. Puede contener errores u omisiones."
+            "Los productos del catálogo son ejemplos. No son productos actuales ni están a la venta en este sitio. Las descripciones y demás información del sitio son referenciales y pueden cambiar sin aviso. Nada en el sitio constituye una oferta, una cotización ni un contrato. El sitio puede contener errores u omisiones."
           ]
         },
         {
@@ -490,5 +469,22 @@
         }
       ]
     }
+  },
+  "purpose": {
+    "title": "Misión, visión y valores",
+    "pillars": [
+      {
+        "label": "Misión",
+        "body": "Operar una empresa de comercio electrónico en distintos marketplaces."
+      },
+      {
+        "label": "Visión",
+        "body": "Crecer en comercio electrónico y generar empleo."
+      },
+      {
+        "label": "Valores",
+        "body": "Directos. Serios. Constantes."
+      }
+    ]
   }
 }
