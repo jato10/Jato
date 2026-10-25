@@ -409,10 +409,12 @@ const securityHeaders = {
   'Content-Security-Policy': csp,
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()',
   'X-Frame-Options': 'DENY',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
   'Cross-Origin-Opener-Policy': 'same-origin',
+  'Cross-Origin-Resource-Policy': 'same-origin',
+  'X-Permitted-Cross-Domain-Policies': 'none',
 };
 
 write(

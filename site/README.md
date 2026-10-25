@@ -147,3 +147,20 @@ customer counts — the company confirms those individually per request.
 * Skip link, visible focus rings, ≥44px touch targets, labelled landmarks,
   `aria-current` on the active language, Escape-to-close on the mobile menu.
 * Text contrast is AA or better against its background.
+
+## Security notes
+
+- The site is static: there is no database to extract. The only secrets live in
+  the Vercel project settings (`RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`,
+  `GOOGLE_PLACES_API_KEY`, `GOOGLE_PLACE_ID`), never in the repository.
+- Headers (CSP, HSTS, framing, cross-origin) are set in `vercel.json` and, for
+  other hosts, generated into `site/public/_headers`; `site/test/security.test.mjs`
+  checks that both match.
+- `api/contact.js` rejects cross-site posts, ignores the honeypot field and
+  allows 5 messages per client per 10 minutes per warm instance. That is a
+  best-effort brake: serverless instances do not share memory. For a real limit
+  add a rate-limiting rule in the Vercel dashboard (Firewall) for `POST /api/contact`.
+- Restrict the Google Places API key in Google Cloud to the Places API and, if
+  possible, to the Vercel egress; rotate any key that was ever pasted in chat.
+- Anyone can copy a public page's HTML and CSS. That cannot be prevented
+  technically; the protection is legal (copyright notice, takedown requests).

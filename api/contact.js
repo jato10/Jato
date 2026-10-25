@@ -25,6 +25,7 @@ const LANGS = {
       missing: 'Please add your name, a way to reach you, and a message.',
       email: 'Check the email address — it looks incomplete.',
       failed: 'The message could not be sent. Please try WhatsApp instead.',
+      rate: 'Too many messages in a row. Please try again later.',
     },
   },
   es: {
@@ -36,9 +37,48 @@ const LANGS = {
       missing: 'Falta tu nombre, una forma de contactarte o el mensaje.',
       email: 'Revisa el correo: parece incompleto.',
       failed: 'No se pudo enviar el mensaje. Escríbenos por WhatsApp.',
+      rate: 'Demasiados mensajes seguidos. Inténtalo más tarde.',
     },
   },
 };
+
+/* Abuse limits. Serverless instances do not share memory, so this is a
+   best-effort brake per warm instance, not a substitute for a firewall rule at
+   the edge (see the security notes in the README). */
+const RATE = { windowMs: 10 * 60 * 1000, perClient: 5, perInstance: 60 };
+const hits = new Map();
+
+function tooMany(req) {
+  const now = Date.now();
+  for (const [key, list] of hits) {
+    const fresh = list.filter((time) => now - time < RATE.windowMs);
+    if (fresh.length) hits.set(key, fresh);
+    else hits.delete(key);
+  }
+  const forwarded = String((req.headers && req.headers['x-forwarded-for']) || '').split(',')[0].trim();
+  const client = forwarded || (req.socket && req.socket.remoteAddress) || 'unknown';
+  const mine = hits.get(client) || [];
+  const total = [...hits.values()].reduce((sum, list) => sum + list.length, 0);
+  if (mine.length >= RATE.perClient || total >= RATE.perInstance) return true;
+  mine.push(now);
+  hits.set(client, mine);
+  return false;
+}
+
+/* A browser always names where a form post came from. A post that claims to
+   come from another site is not our form. Requests with no such headers (a
+   script, curl) fall through to the rate limit and the honeypot. */
+function crossSite(req) {
+  const headers = req.headers || {};
+  if (String(headers['sec-fetch-site'] || '') === 'cross-site') return true;
+  const origin = String(headers.origin || '');
+  if (!origin) return false;
+  try {
+    return new URL(origin).host !== String(headers.host || '');
+  } catch (error) {
+    return true;
+  }
+}
 
 const clean = (value, max) =>
   typeof value === 'string' ? value.replace(/\s+/g, ' ').trim().slice(0, max) : '';
@@ -71,6 +111,7 @@ module.exports = async function handler(req, res) {
   const lang = Object.prototype.hasOwnProperty.call(LANGS, body.lang) ? body.lang : 'en';
   const copy = LANGS[lang];
   const json = wantsJson(req);
+  res.setHeader('Cache-Control', 'no-store');
 
   const fail = (status, message) => {
     if (json) return res.status(status).json({ ok: false, error: message });
@@ -82,6 +123,8 @@ module.exports = async function handler(req, res) {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ ok: false, error: copy.errors.method });
   }
+
+  if (crossSite(req)) return res.status(403).json({ ok: false, error: copy.errors.failed });
 
   /* Bots fill hidden fields; people never see this one. */
   if (clean(body.company, 100)) {
@@ -97,6 +140,7 @@ module.exports = async function handler(req, res) {
 
   if (!name || !message || (!email && !phone)) return fail(400, copy.errors.missing);
   if (email && !isEmail(email)) return fail(400, copy.errors.email);
+  if (tooMany(req)) return fail(429, copy.errors.rate);
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO;
