@@ -26,6 +26,8 @@ const attr = (name, value) => (value ? ` ${name}="${esc(value)}"` : '');
    elements, which is invalid HTML and unreliable in some browsers. */
 let instagramIconSeq = 0;
 const CHANNEL_ICONS = {
+  email:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>',
   whatsapp:
     '<svg viewBox="0 0 24 24" fill="#25D366" aria-hidden="true" focusable="false"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.39 1.26 4.81L2 22l5.42-1.36a9.9 9.9 0 0 0 4.62 1.13h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2Zm5.8 14.02c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.66-.6-2.92-1.26-4.83-4.2-4.98-4.4-.15-.19-1.19-1.58-1.19-3.02s.75-2.14 1.02-2.43c.26-.29.57-.36.76-.36h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.54.33.07.13.07.72-.17 1.4Z"/></svg>',
   instagram() {
@@ -101,11 +103,15 @@ export function assetVersion(relPath) {
 export function makeLinks(site) {
   const wa = String(site.channels.whatsapp || '').replace(/[^\d]/g, '');
   const instagram = String(site.channels.instagram || '').trim();
+  const email = String(site.channels.email || '').trim();
 
   return {
     hasWhatsapp: Boolean(wa),
     hasInstagram: Boolean(instagram),
     instagram,
+    hasEmail: Boolean(email),
+    email,
+    mailto: email ? `mailto:${email}` : null,
     whatsapp(message) {
       if (!wa) return null;
       return `https://wa.me/${wa}?text=${encodeURIComponent(message)}`;
@@ -231,6 +237,9 @@ function siteFooter({ c, site, assets, links, langHrefs }) {
         `<span class="footer__contact-icon">${renderChannelIcon('instagram')}</span>` +
         `<span class="visually-hidden">Instagram</span></a></li>`
     );
+  }
+  if (links.hasEmail) {
+    contactLinks.push(`<li><a href="${esc(links.mailto)}">${esc(links.email)}</a></li>`);
   }
   contactLinks.push(`<li><span>${esc(c.contact.location)}</span></li>`);
 
@@ -799,7 +808,8 @@ function contactSection({ c, links, assets }) {
 
   const cards = [
     card('whatsapp', links.whatsapp(c.contact.presets[0].message), 0),
-    card('instagram', links.hasInstagram ? links.instagram : null, 1),
+    card('email', links.mailto, 1),
+    card('instagram', links.hasInstagram ? links.instagram : null, 2),
   ].join('\n              ');
 
   /* Posts to the site's own endpoint, so it works with JavaScript disabled;

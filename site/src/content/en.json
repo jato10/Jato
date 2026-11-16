@@ -251,7 +251,7 @@
       },
       "email": {
         "label": "Email",
-        "body": "For catalogs, wholesale, and detailed requests.",
+        "body": "info@globalbeyondllc.com",
         "action": "Write to us"
       },
       "instagram": {
@@ -331,7 +331,7 @@
       "title": "Privacy Policy | Global Beyond LLC",
       "metaDescription": "How Global Beyond LLC collects, uses, and protects the information submitted through this website.",
       "heading": "Privacy Policy",
-      "updated": "Last updated: October 24, 2026",
+      "updated": "Last updated: November 16, 2026",
       "intro": "This policy describes the information Global Beyond LLC (“the company”) collects through globalbeyondllc.com and how it uses it.",
       "sections": [
         {
@@ -364,13 +364,14 @@
         {
           "h": "User rights",
           "p": [
-            "The user may request access to, correction of or deletion of their information by writing through the contact form or on WhatsApp. The company will handle the request in accordance with applicable law."
+            "The user may request access to, correction of or deletion of their information by writing to info@globalbeyondllc.com, through the contact form or on WhatsApp. Residents of Florida and other states may exercise the rights granted to them by applicable law. The company will handle the request in accordance with that law."
           ]
         },
         {
           "h": "Security",
           "p": [
-            "The company applies reasonable measures to protect the information. No method of transmission or storage over the internet is completely secure."
+            "The company applies reasonable measures to protect the information. No method of transmission or storage over the internet is completely secure.",
+            "If a security incident affects personal information, the company will notify those affected in accordance with applicable law."
           ]
         },
         {
@@ -388,7 +389,7 @@
         {
           "h": "Contact",
           "p": [
-            "Questions about this policy are sent through the contact form or on WhatsApp."
+            "Questions about this policy are sent to info@globalbeyondllc.com, through the contact form or on WhatsApp."
           ]
         }
       ]
@@ -397,7 +398,7 @@
       "title": "Terms of Use | Global Beyond LLC",
       "metaDescription": "The terms that apply to using the Global Beyond LLC website.",
       "heading": "Terms of Use",
-      "updated": "Last updated: October 24, 2026",
+      "updated": "Last updated: November 16, 2026",
       "intro": "These terms govern the use of globalbeyondllc.com, operated by Global Beyond LLC, a limited liability company registered in the State of Florida, United States. By using the site, the user accepts these terms. If the user does not agree, they must stop using the site.",
       "sections": [
         {
@@ -405,6 +406,20 @@
           "p": [
             "This site presents information about Global Beyond LLC and allows inquiries and requests to be sent. It is not a store: no purchases or payments are made on the site.",
             "The company sells its products through third-party e-commerce platforms. Sales, payments, shipping, returns and after-sales service are governed by the rules of the platform where the purchase is made."
+          ]
+        },
+        {
+          "h": "Shipping, returns and refunds",
+          "p": [
+            "The site does not sell or ship products. Purchases of Global Beyond LLC products are made on third-party e-commerce platforms.",
+            "Shipping, delivery times, returns, refunds, cancellations and after-sales service are governed by the rules of the platform where the purchase was made. Questions about an order are directed to that platform."
+          ]
+        },
+        {
+          "h": "Product restrictions",
+          "p": [
+            "The availability of each product, shipping areas and sales restrictions depend on the platform where it is offered and on applicable law. Some products may not be available in all areas.",
+            "Product warranties, where they exist, are those of the manufacturer. Products must be used according to the manufacturer's instructions."
           ]
         },
         {
@@ -465,6 +480,12 @@
           "h": "Changes to these terms",
           "p": [
             "The company may update these terms. The update date shows the latest revision."
+          ]
+        },
+        {
+          "h": "Contact",
+          "p": [
+            "Questions about these terms are sent to info@globalbeyondllc.com."
           ]
         }
       ]

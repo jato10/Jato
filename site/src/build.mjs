@@ -417,6 +417,16 @@ const securityHeaders = {
   'X-Permitted-Cross-Domain-Policies': 'none',
 };
 
+/* How to report a security issue (RFC 9116). Renew the expiry date before it passes. */
+write(
+  '.well-known/security.txt',
+  `Contact: mailto:${site.channels.email}
+Expires: 2027-11-16T00:00:00Z
+Preferred-Languages: es, en
+Canonical: ${origin}/.well-known/security.txt
+`
+);
+
 write(
   '_headers',
   `/*

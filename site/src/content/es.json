@@ -251,7 +251,7 @@
       },
       "email": {
         "label": "Correo",
-        "body": "Para catálogos, mayor y solicitudes detalladas.",
+        "body": "info@globalbeyondllc.com",
         "action": "Enviar correo"
       },
       "instagram": {
@@ -331,7 +331,7 @@
       "title": "Política de Privacidad | Global Beyond LLC",
       "metaDescription": "Cómo Global Beyond LLC recopila, usa y protege la información enviada a través de este sitio web.",
       "heading": "Política de Privacidad",
-      "updated": "Última actualización: 24 de octubre de 2026",
+      "updated": "Última actualización: 16 de noviembre de 2026",
       "intro": "Esta política describe la información que Global Beyond LLC (“la empresa”) recopila a través de globalbeyondllc.com y cómo la usa.",
       "sections": [
         {
@@ -364,13 +364,14 @@
         {
           "h": "Derechos del usuario",
           "p": [
-            "El usuario puede solicitar acceso, corrección o eliminación de su información escribiendo por el formulario de contacto o por WhatsApp. La empresa atenderá la solicitud conforme a la ley aplicable."
+            "El usuario puede solicitar acceso, corrección o eliminación de su información escribiendo a info@globalbeyondllc.com, por el formulario de contacto o por WhatsApp. Los residentes de Florida y de otros estados pueden ejercer los derechos que les reconozca la ley aplicable. La empresa atenderá la solicitud conforme a esa ley."
           ]
         },
         {
           "h": "Seguridad",
           "p": [
-            "La empresa aplica medidas razonables para proteger la información. Ningún método de transmisión o almacenamiento en internet es completamente seguro."
+            "La empresa aplica medidas razonables para proteger la información. Ningún método de transmisión o almacenamiento en internet es completamente seguro.",
+            "Si ocurre un incidente de seguridad que afecte información personal, la empresa notificará a los afectados conforme a la ley aplicable."
           ]
         },
         {
@@ -388,7 +389,7 @@
         {
           "h": "Contacto",
           "p": [
-            "Las consultas sobre esta política se envían por el formulario de contacto o por WhatsApp."
+            "Las consultas sobre esta política se envían a info@globalbeyondllc.com, por el formulario de contacto o por WhatsApp."
           ]
         }
       ]
@@ -397,7 +398,7 @@
       "title": "Términos de Uso | Global Beyond LLC",
       "metaDescription": "Los términos que aplican al uso del sitio web de Global Beyond LLC.",
       "heading": "Términos de Uso",
-      "updated": "Última actualización: 24 de octubre de 2026",
+      "updated": "Última actualización: 16 de noviembre de 2026",
       "intro": "Estos términos regulan el uso de globalbeyondllc.com, operado por Global Beyond LLC, compañía de responsabilidad limitada registrada en el estado de Florida, Estados Unidos. Al usar el sitio, el usuario acepta estos términos. Si no está de acuerdo, debe dejar de usarlo.",
       "sections": [
         {
@@ -405,6 +406,20 @@
           "p": [
             "Este sitio presenta información de Global Beyond LLC y permite enviar consultas y solicitudes. No es una tienda: no se realizan compras ni pagos en el sitio.",
             "La empresa vende sus productos a través de plataformas de comercio electrónico de terceros. Las ventas, los pagos, los envíos, las devoluciones y la atención posventa se rigen por las reglas de la plataforma donde se realice la compra."
+          ]
+        },
+        {
+          "h": "Envíos, devoluciones y reembolsos",
+          "p": [
+            "El sitio no vende ni envía productos. Las compras de productos de Global Beyond LLC se realizan en plataformas de comercio electrónico de terceros.",
+            "Los envíos, los plazos de entrega, las devoluciones, los reembolsos, las cancelaciones y la atención posventa se rigen por las reglas de la plataforma donde se realizó la compra. Las consultas sobre un pedido se dirigen a esa plataforma."
+          ]
+        },
+        {
+          "h": "Restricciones de productos",
+          "p": [
+            "La disponibilidad de cada producto, las zonas de envío y las restricciones de venta dependen de la plataforma donde se ofrezca y de la ley aplicable. Algunos productos pueden no estar disponibles en todas las zonas.",
+            "Las garantías de los productos, cuando existen, son las del fabricante. Los productos deben usarse según las instrucciones del fabricante."
           ]
         },
         {
@@ -465,6 +480,12 @@
           "h": "Cambios a estos términos",
           "p": [
             "La empresa puede actualizar estos términos. La fecha de actualización indica la última revisión."
+          ]
+        },
+        {
+          "h": "Contacto",
+          "p": [
+            "Las consultas sobre estos términos se envían a info@globalbeyondllc.com."
           ]
         }
       ]
