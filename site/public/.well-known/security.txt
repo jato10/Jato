@@ -1,0 +1,4 @@
+Contact: mailto:info@globalbeyondllc.com
+Expires: 2027-11-16T00:00:00Z
+Preferred-Languages: es, en
+Canonical: https://globalbeyondllc.com/.well-known/security.txt
